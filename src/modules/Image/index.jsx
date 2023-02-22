@@ -6,11 +6,12 @@ const Image = ({
   width,
   height,
   src,
+  onClick,
   alt=""
 }) => {
   return (
     <ImgDefault
-      margin={margin} borderRadius={borderRadius} width={width} height={height} src={src} alt={alt} >
+      onClick={onClick} margin={margin} borderRadius={borderRadius} width={width} height={height} src={src} alt={alt} >
     </ImgDefault>
   )
 }
