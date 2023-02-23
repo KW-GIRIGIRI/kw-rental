@@ -8,7 +8,7 @@ export const ProductTitle = styled.p`
   font-size: 24px;
   border-bottom: 1px solid ${(props) => props.theme.color.gray.g1};
   padding-bottom: 15px;
-  margin: 5px 0 25px;
+  margin: 10px 0 25px;
 `;
 
 export const ProductLi = styled.li`
