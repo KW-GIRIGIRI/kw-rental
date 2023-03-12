@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const NavWrap = styled.nav`
   width: 269px;
   height: 100vh;
+  /* min-height: 800px; */
   padding: 80px 0;
   border-radius: 0px 20px 20px 0px;
   box-sizing: border-box;
@@ -20,7 +21,7 @@ export const LogoImg = styled.img`
 `;
 
 export const NavUl = styled.ul`
-  margin-top: -260px;
+  margin-top: -220px;
   width: 100%;
 `;
 
