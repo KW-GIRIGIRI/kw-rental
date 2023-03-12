@@ -4,6 +4,11 @@ import reset from "styled-reset";
 export const GlobalStyle = createGlobalStyle`
   ${reset}
 
+  :root {
+    // 후에 반응형 적용 시, 수정
+    /* min-width: 1280px; */
+  }
+
   button {
     border: none;
     padding: 0;
