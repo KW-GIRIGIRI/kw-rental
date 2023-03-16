@@ -18,7 +18,7 @@ export const BtnDefault = styled.button`
 
   /* gray color button */
   &.sub {
-    background-color: ${(props) => props.theme.color.gray.g1};
-    color: ${(props) => props.theme.color.text.white};
+    border: 1px solid ${(props) => props.theme.color.gray.g3};
+    color: ${(props) => props.theme.color.gray.g3};
   }
 `;
