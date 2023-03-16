@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
     // 후에 반응형 적용 시, 수정
-    /* min-width: 1280px; */
+    min-width: 1000px;
   }
 
   button {

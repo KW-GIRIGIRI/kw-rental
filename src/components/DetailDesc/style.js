@@ -7,8 +7,8 @@ export const ProductSpan = styled.span`
 export const ProductTitle = styled.p`
   font-size: 24px;
   border-bottom: 1px solid ${(props) => props.theme.color.gray.g1};
-  padding-bottom: 15px;
-  margin: 10px 0 25px;
+  padding-bottom: 20px;
+  margin: 5px 0 32px;
 `;
 
 export const ProductLi = styled.li`
@@ -21,22 +21,11 @@ export const ProductLi = styled.li`
   & > span {
     display: inline;
     color: ${(props) => props.theme.color.text.gray};
+    line-height: 25px;
+    word-break: keep-all;
   }
   &:last-child {
     display: flex;
     align-items: center;
-  }
-`;
-
-export const InpDate = styled.input`
-  padding: 3px 8px;
-  font-family: sans-serif;
-  border: 1px solid ${(props) => props.theme.color.gray.g3};
-  border-radius: 5px;
-  &:first-of-type {
-    margin-right: 10px;
-  }
-  &:last-of-type {
-    margin-left: 10px;
   }
 `;
