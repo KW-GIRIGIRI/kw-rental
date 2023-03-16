@@ -1,3 +1,4 @@
+import AddCartEquip from "../../components/AddCartEquip"
 import DetailDesc from "../../components/DetailDesc"
 import WeekPicker from "../../components/WeekPicker"
 import Image from "../../modules/Image"
@@ -33,6 +34,7 @@ export default function EquipmentDetail() {
       <S.SubTitle>대여 현황</S.SubTitle>
       <WeekPicker />
       <S.SubTitle>기자재 담기</S.SubTitle>
+      <AddCartEquip />
     </S.Wrapper>
   )
 }
