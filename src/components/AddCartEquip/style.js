@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import iconCalendar from "../../assets/icon-calendar.svg"
 
 export const Wrapper = styled.div`
   text-align: center;
@@ -36,11 +37,48 @@ export const Select = styled.select`
   border-radius: ${(props) => props.theme.borderRadius.lv1};
 `;
 
-export const InpDate = styled.input`
-  font-family: sans-serif;
-  text-align: center;
+// export const InpDate = styled.input`
+//   font-family: sans-serif;
+//   text-align: center;
+//   border-radius: ${(props) => props.theme.borderRadius.lv1};
+//   border: 1px solid #000;
+//   padding: 5px 10px;
+//   color: ${(props) => props.theme.color.text.black};
+//   &::-webkit-calendar-picker-indicator {
+//     position: absolute;
+//     cursor: pointer;
+//     width: 100%;
+//     background-image: url(${iconCalendar});
+//     padding-right: 10px;
+//   }
+// `; 
+
+export const DateInp = styled.input`
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 130px;
+  padding: 5px 0;
+  cursor: pointer;
+  &::-webkit-calendar-picker-indicator {
+    width: 100%;
+  }
+`;
+
+export const DateImg = styled.img`
+  width: 1rem;
+  vertical-align: text-top;
+  margin-right: 10px;
+`;
+
+export const DateCont = styled.label`
+  position: relative;
+  border: 1px solid #000000;
   border-radius: ${(props) => props.theme.borderRadius.lv1};
-  border: 1px solid #000;
-  padding: 5px 10px;
-  color: ${props => props.theme.color.text.black};
+  box-sizing: border-box;
+  line-height: normal;
+  padding: 7px 0;
+  width: 130px;
+  text-align: center;
 `;

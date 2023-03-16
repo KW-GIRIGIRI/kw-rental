@@ -28,13 +28,19 @@ export const NextBtn = styled.button`
   font-size: 18px;
 `;
 
+export const DateImg = styled.img`
+  width: 1rem;
+  vertical-align: text-top;
+  margin-right: 10px;
+`
+
 export const DateCont = styled.p`
   border: 1px solid #000000;
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   box-sizing: border-box;
   line-height: normal;
   padding: 7px 0;
-  width: 180px;
+  width: 196px;
   text-align: center;
 `;
 
@@ -60,7 +66,17 @@ export const DateTit = styled.p`
 
 export const DateSubTit = styled.p`
   text-align: center;
-  padding: 40px 0;
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0 0 10px 10px;
   border: 0.5px solid ${(props) => props.theme.color.primary.sub};
+  font-size: 1.5rem;
+  &.text {
+    font-size: 1rem;
+  }
+  &.disabled {
+    color: ${(props) => props.theme.color.primary.sub};
+  }
 `;
