@@ -6,7 +6,44 @@ import iconGal from "../../assets/icon-gal.svg"
 import iconListOn from "../../assets/icon-list-on.svg"
 import iconList from "../../assets/icon-list.svg"
 import Button from "../../modules/Button"
+import EquipListWrap from "../../components/EquipListWrap"
 
+// 임시 데이터
+const data = [
+  {
+    "id": 7,
+    "category": "CAMERA",
+    "maker": "sony",
+    "modelName": "modelName",
+    "rentalQuantity": {
+        "totalQuantity": 2,
+        "remainingQuantity": 1
+    },
+    "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  },
+  {
+      "id": 5,
+      "category": "CAMERA",
+      "maker": "sony",
+      "modelName": "modelName",
+      "rentalQuantity": {
+          "totalQuantity": 2,
+          "remainingQuantity": 1
+      },
+      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  },
+  {
+      "id": 6,
+      "category": "CAMERA",
+      "maker": "sony",
+      "modelName": "modelName",
+      "rentalQuantity": {
+          "totalQuantity": 2,
+          "remainingQuantity": 1
+      },
+      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  }
+]
 
 export default function EquipmentList() {
   const handleNextDay = (days) => {
@@ -51,6 +88,7 @@ export default function EquipmentList() {
         <Button className="disable shadow" text="VR 장비" padding="11px 23px" borderRadius="20px"/>
       </S.FilterWrap>
 
+      <EquipListWrap type={'gal'} data={data} />
     </S.Wrapper>
   )
 }
