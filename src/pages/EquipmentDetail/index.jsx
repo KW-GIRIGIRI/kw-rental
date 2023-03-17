@@ -16,7 +16,7 @@ export default function EquipmentDetail() {
 
   return (
     <S.Wrapper>
-      <S.SimpleDesc>기자재 조회  카메라 MIRRORLESS SONY a6600</S.SimpleDesc>
+      <S.SimpleDesc>기자재 조회 {">"} 카메라 MIRRORLESS {">"} SONY a6600</S.SimpleDesc>
       <S.DetailWrapper>
         <Image width="335px" height="335px" borderRadius={props => props.theme.borderRadius.lv2} src={`https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?w=996&t=st=1677078207~exp=1677078807~hmac=7e23a062e9420fadf600079d1364d67e11ff7c59f0c0b70bd40695105217f3aa`} alt="" />
         <DetailDesc />

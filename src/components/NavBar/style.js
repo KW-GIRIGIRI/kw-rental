@@ -8,6 +8,7 @@ export const NavWrap = styled.nav`
   background-color: ${(props) => props.theme.color.primary.main};
   color: ${(props) => props.theme.color.text.white};
   position: fixed;
+  z-index: 10;
 `;
 
 export const LogoImg = styled.img`
