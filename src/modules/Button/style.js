@@ -9,6 +9,7 @@ export const BtnDefault = styled.button`
   height: ${(props) => props.height};
   padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
+  box-shadow: ${(props) => props.boxShadow};
 
   /* main color button */
   &.main {
@@ -20,5 +21,14 @@ export const BtnDefault = styled.button`
   &.sub {
     border: 1px solid ${(props) => props.theme.color.gray.g3};
     color: ${(props) => props.theme.color.gray.g3};
+  }
+
+  &.disable {
+    border: 1px solid ${(props) => props.theme.color.primary.sub};
+    color: ${(props) => props.theme.color.gray.g3};
+  }
+
+  &.shadow {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   }
 `;

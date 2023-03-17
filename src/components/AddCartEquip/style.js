@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import iconCalendar from "../../assets/icon-calendar.svg"
 
 export const Wrapper = styled.div`
   text-align: center;
@@ -36,22 +35,6 @@ export const Select = styled.select`
   padding: 5px 0;
   border-radius: ${(props) => props.theme.borderRadius.lv1};
 `;
-
-// export const InpDate = styled.input`
-//   font-family: sans-serif;
-//   text-align: center;
-//   border-radius: ${(props) => props.theme.borderRadius.lv1};
-//   border: 1px solid #000;
-//   padding: 5px 10px;
-//   color: ${(props) => props.theme.color.text.black};
-//   &::-webkit-calendar-picker-indicator {
-//     position: absolute;
-//     cursor: pointer;
-//     width: 100%;
-//     background-image: url(${iconCalendar});
-//     padding-right: 10px;
-//   }
-// `; 
 
 export const DateInp = styled.input`
   position: absolute;

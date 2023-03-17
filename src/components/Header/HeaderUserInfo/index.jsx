@@ -1,12 +1,11 @@
-import IconNoti from "../../../assets/icon-notification.svg"
+import iconDownArrow from "../../../assets/icon-downArrow.svg"
 import * as S from "./style"
 
 export default function HeaderUserInfo( { classNum } ) {
   return (
     <S.Wrapper>
-      <S.NotiIcon src={IconNoti} alt="" />
       <S.ClassNumP>{classNum}</S.ClassNumP>
-      <S.CircleSpan></S.CircleSpan>
+      <S.NotiIcon src={iconDownArrow} alt="" />
     </S.Wrapper>
   )
 }

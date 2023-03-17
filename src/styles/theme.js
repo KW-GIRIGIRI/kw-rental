@@ -19,6 +19,6 @@ export const theme = {
   borderRadius: {
     lv1: "5px",
     lv2: "10px",
-    circle: "50%",
+    circle: "50px",
   },
 };
