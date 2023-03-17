@@ -42,6 +42,39 @@ const data = [
           "remainingQuantity": 1
       },
       "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  },
+  {
+      "id": 62,
+      "category": "CAMERA",
+      "maker": "sony",
+      "modelName": "modelName",
+      "rentalQuantity": {
+          "totalQuantity": 2,
+          "remainingQuantity": 1
+      },
+      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  },
+  {
+      "id": 6232,
+      "category": "CAMERA",
+      "maker": "sony",
+      "modelName": "modelName",
+      "rentalQuantity": {
+          "totalQuantity": 2,
+          "remainingQuantity": 1
+      },
+      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
+  },
+  {
+      "id": 12,
+      "category": "CAMERA",
+      "maker": "sony",
+      "modelName": "modelName",
+      "rentalQuantity": {
+          "totalQuantity": 2,
+          "remainingQuantity": 1
+      },
+      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
   }
 ]
 

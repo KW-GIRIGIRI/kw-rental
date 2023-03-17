@@ -2,7 +2,6 @@ import Image from "../../../modules/Image"
 import * as S from "./style"
 
 export default function ListType({ data }) {
-  console.log(data)
   return (
     <S.ListUl>
       <S.ListLi>
