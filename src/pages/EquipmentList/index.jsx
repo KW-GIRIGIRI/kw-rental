@@ -7,6 +7,8 @@ import iconListOn from "../../assets/icon-list-on.svg"
 import iconList from "../../assets/icon-list.svg"
 import Button from "../../modules/Button"
 import EquipListWrap from "../../components/EquipListWrap"
+import iconPageArrow from "../../assets/icon-pageArrow.svg"
+import { useState } from "react"
 
 // 임시 데이터
 const data = [
@@ -79,6 +81,8 @@ const data = [
 ]
 
 export default function EquipmentList() {
+  const [viewMode, setViewMode] = useState('gal')
+
   const handleNextDay = (days) => {
     let today = new Date();
     today.setDate(today.getDate() + days)
@@ -104,16 +108,16 @@ export default function EquipmentList() {
         </S.FilterWrap>
 
         <S.FilterWrap>
-          <S.TypeBtn>
-            <img src={iconGal} alt="" />
+          <S.TypeBtn onClick={() => setViewMode('gal')}>
+            <img src={viewMode==='gal' ? iconGalOn : iconGal} alt="" />
           </S.TypeBtn>
-          <S.TypeBtn>
-            <img src={iconList} alt="" />
+          <S.TypeBtn onClick={() => setViewMode('list')}>
+            <img src={viewMode==='list' ? iconListOn : iconList} alt="" />
           </S.TypeBtn>
         </S.FilterWrap>
       </S.FilterWrap>
 
-      <S.FilterWrap className="type">
+      <S.FilterWrap className="mode">
         <Button className="main shadow" text="전체" padding="11px 23px" borderRadius="20px" />
         <Button className="disable shadow" text="카메라" padding="11px 23px" borderRadius="20px"/>
         <Button className="disable shadow" text="녹음 장비" padding="11px 23px" borderRadius="20px"/>
@@ -121,7 +125,19 @@ export default function EquipmentList() {
         <Button className="disable shadow" text="VR 장비" padding="11px 23px" borderRadius="20px"/>
       </S.FilterWrap>
 
-      <EquipListWrap type={'gal'} data={data} />
+      <EquipListWrap type={viewMode} data={data} />
+
+      <S.PageBtnWrap>
+        <button>
+          <img src={iconPageArrow} alt="이전 페이지" />
+        </button>
+        <button className="on">1</button>
+        <button>2</button>
+        <button>
+          <img src={iconPageArrow} alt="다음 페이지" />
+        </button>
+      </S.PageBtnWrap>
+      
     </S.Wrapper>
   )
 }

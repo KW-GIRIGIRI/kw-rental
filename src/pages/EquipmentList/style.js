@@ -9,14 +9,14 @@ export const Wrapper = styled.section`
 
 export const FilterWrap = styled.div`
   display: flex;
-  &:first-of-type{
+  &:first-of-type {
     justify-content: space-between;
   }
-  &.type {
+  &.mode {
     margin: 32px 0;
     gap: 12px;
   }
-`
+`;
 
 export const SearchCont = styled.label`
   position: relative;
@@ -82,5 +82,33 @@ export const TypeBtn = styled.button`
   &:last-of-type {
     border-radius: 0 5px 5px 0;
     margin-left: -1px;
+  }
+`;
+
+export const PageBtnWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  & > button {
+    color: ${(props) => props.theme.color.primary.main};
+    border: 1px solid ${(props) => props.theme.color.primary.sub};
+    width: 40px;
+    height: 40px;
+    margin-right: -1px;
+    & > img {
+      vertical-align: middle;
+    }
+    &:first-of-type {
+      border-radius: 0 5px 5px 0;
+      transform: rotate(180deg);
+    }
+    &:last-of-type {
+      border-radius: 0 5px 5px 0;
+    }
+    &.on {
+      background-color: ${(props) => props.theme.color.primary.main};
+      color: ${(props) => props.theme.color.text.white};
+    }
   }
 `;
