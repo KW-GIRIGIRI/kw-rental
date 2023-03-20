@@ -16,7 +16,7 @@ const data = [
     "id": 7,
     "category": "CAMERA",
     "maker": "sony",
-    "modelName": "modelName",
+    "modelName": "modelNamemodelNamemodelName",
     "rentalQuantity": {
         "totalQuantity": 2,
         "remainingQuantity": 1
