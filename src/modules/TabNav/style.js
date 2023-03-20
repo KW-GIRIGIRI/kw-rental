@@ -1,15 +1,18 @@
 import styled from "styled-components";
 
 export const TabButton = styled.button`
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: 600;
-  padding-top: 10px;
-  width: 133px;
+  position: relative;
+  padding: 0 9px 15px;
+  margin-right: 20px;
   &.on::after {
     content: "";
-    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     height: 5px;
-    margin-top: 9px;
+    width: 100%;
     border-radius: 10px;
     background-color: ${(props) => props.theme.color.primary.main};
   }
