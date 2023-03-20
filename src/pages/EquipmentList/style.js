@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   padding-top: 28px;
+  border-top: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
 
 export const FilterWrap = styled.div`

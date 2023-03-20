@@ -25,7 +25,7 @@ export default function DetailDesc() {
         </S.ProductLi>
         <S.ProductLi>
           <p>총 개수</p>
-          <span>2EA</span>
+          <span>2대</span>
         </S.ProductLi>
         <S.ProductLi>
           <p>대여장소</p>

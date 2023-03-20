@@ -4,7 +4,7 @@ export const NavWrap = styled.nav`
   background-color: ${(props) => props.theme.color.primary.main};
   color: ${(props) => props.theme.color.text.white};
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 export const NavUl = styled.ul`

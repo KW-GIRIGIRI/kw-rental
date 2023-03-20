@@ -33,8 +33,9 @@ export const GalLi = styled.li`
 
 export const Count = styled.span`
   position: absolute;
-  padding: 4px 10px;
+  padding: 4px 0;
   margin: 15px;
+  width: 60px;
   background-color: #fff;
   text-align: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);

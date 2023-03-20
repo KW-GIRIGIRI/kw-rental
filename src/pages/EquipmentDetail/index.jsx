@@ -11,14 +11,17 @@ const noticeList = [
   '디지털영상촬영및편집 수업 사용 기자재'
 ]
 
-
 export default function EquipmentDetail() {
 
   return (
     <S.Wrapper>
-      <S.SimpleDesc>기자재 조회 {">"} 카메라 {">"} MIRRORLESS SONY a6600</S.SimpleDesc>
+      <S.SimpleDesc>
+        <span>기자재 조회</span> 
+        <span>카메라</span> 
+        <span>MIRRORLESS SONY a6600</span>
+      </S.SimpleDesc>
       <S.DetailWrapper>
-        <Image width="335px" height="335px" borderRadius={props => props.theme.borderRadius.lv2} src={`https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?w=996&t=st=1677078207~exp=1677078807~hmac=7e23a062e9420fadf600079d1364d67e11ff7c59f0c0b70bd40695105217f3aa`} alt="" />
+        <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={`https://img.freepik.com/free-photo/peak-bamboo-lijiang-rural-mist_1417-410.jpg?w=996&t=st=1677078207~exp=1677078807~hmac=7e23a062e9420fadf600079d1364d67e11ff7c59f0c0b70bd40695105217f3aa`} alt="" />
         <DetailDesc />
       </S.DetailWrapper>
       <S.SubTitle>안내사항</S.SubTitle>
