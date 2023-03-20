@@ -10,6 +10,7 @@ export const BtnDefault = styled.button`
   padding: ${(props) => props.padding};
   font-size: ${(props) => props.fontSize};
   box-shadow: ${(props) => props.boxShadow};
+  line-height: 1;
 
   /* main color button */
   &.main {
@@ -25,7 +26,7 @@ export const BtnDefault = styled.button`
 
   &.disable {
     border: 1px solid ${(props) => props.theme.color.primary.sub};
-    color: ${(props) => props.theme.color.gray.g3};
+    color: ${(props) => props.theme.color.gray.g5};
   }
 
   &.shadow {

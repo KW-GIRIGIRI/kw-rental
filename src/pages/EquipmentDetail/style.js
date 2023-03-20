@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section` 
-  min-width: fit-content;
-  border: 1px solid ${(props) => props.theme.color.gray.g4};
-  border-radius: ${(props) => props.theme.borderRadius.lv2};
-  padding: 15px 57px 44px;
 `;
 
 export const DetailWrapper = styled.div`
