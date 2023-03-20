@@ -11,7 +11,7 @@ export const ListLi = styled.li`
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
   text-align: center;
-  border: 1px solid ${props => props.theme.color.primary.sub};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
   padding: 15px 20px;
   &:first-of-type {
     padding: 20px;

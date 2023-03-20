@@ -101,16 +101,17 @@ export default function WeekPicker() {
     return (
         <S.DateLi key={num}>
           <S.DateTit>{gMonth}월 {gDate}일({gDay})</S.DateTit>
-        <S.DateSubTit className={gStringDay > today ? false : 'disabled'}>
+        <S.DateSubTit className={gStringDay >= today ? false : 'disabled'}>
             {num} {/* 대여 가능 개수 */}
           </S.DateSubTit>
         </S.DateLi>
       )
-    }
-
+  }
+  
   useEffect(() => {
     let today = new Date()
-    today = today.getDay() >= 4 ? new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000) : new Date()
+    if (today.getDay() === 4 || today.getDay() === 5) today = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+    else if (today.getDay() === 6 || today.getDay() === 0) today = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000)
     
     const todayWeekNo = handleWeekNumberByThurFnc(today)
     const week = handleGetNumberOfWeek(today)

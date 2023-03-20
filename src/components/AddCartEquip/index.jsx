@@ -2,6 +2,7 @@ import Button from "../../modules/Button";
 import iconCalendar from "../../assets/icon-calendar.svg"
 import * as S from "./style"
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddCartEquip() {
   const [date, setDate] = useState({
@@ -10,6 +11,7 @@ export default function AddCartEquip() {
     cDayText: null
   })
   const [week, setWeek] = useState(null)
+  const navigate = useNavigate();
   
   // 년도 기준 주차 계산 함수
   const handleGetNumberOfWeek = (pDate) => {
@@ -115,7 +117,7 @@ export default function AddCartEquip() {
         </S.InpWrapper>
       </S.Form>
       <Button onClick={handleAddCart} className="main" text="기자재 담기" padding="15px 23px" borderRadius="10px" fontSize="1rem" margin="0 13px 0 0"/>
-      <Button className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="1rem"/>
+      <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="1rem"/>
     </S.Wrapper>
   )
 }

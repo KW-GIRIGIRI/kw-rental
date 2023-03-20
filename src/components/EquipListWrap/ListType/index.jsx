@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom"
 import Image from "../../../modules/Image"
 import * as S from "./style"
 
 export default function ListType({ data }) {
+  const navigate = useNavigate()
   return (
     <S.ListUl>
       <S.ListLi>
@@ -12,13 +14,13 @@ export default function ListType({ data }) {
       {
         data.map((item) => {
           return (
-            <S.ListLi key={item.id}>
-              <Image width="80px" height="80px" borderRadius="10px" src={item.imgUrl} alt="" />
-              <S.ItemWrap>
-                <p>{item.category}</p>
-                <p>{item.modelName}</p>
-              </S.ItemWrap>
-              <p>{item.rentalQuantity.remainingQuantity} / {item.rentalQuantity.totalQuantity}</p>
+            <S.ListLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>
+                <Image width="80px" height="80px" borderRadius="10px" src={item.imgUrl} alt={`${item.modelName} 이미지`} />
+                <S.ItemWrap>
+                  <p>{item.category}</p>
+                  <p>{item.modelName}</p>
+                </S.ItemWrap>
+                <p>{item.rentalQuantity.remainingQuantity} / {item.rentalQuantity.totalQuantity}</p>
             </S.ListLi>
           )
         })
