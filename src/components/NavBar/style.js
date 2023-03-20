@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const NavWrap = styled.nav`
+  max-width: 269px;
   height: 100%;
   padding: 80px 60px;
   border-radius: 0px 20px 20px 0px;
