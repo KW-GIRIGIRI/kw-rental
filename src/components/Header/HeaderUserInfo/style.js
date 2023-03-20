@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.button`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 `;
 
 export const NotiIcon = styled.img`
@@ -12,5 +12,5 @@ export const NotiIcon = styled.img`
 
 export const ClassNumP = styled.span`
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 14px;
 `;

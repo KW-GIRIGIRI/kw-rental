@@ -15,7 +15,7 @@ export default function ListType({ data }) {
         data.map((item) => {
           return (
             <S.ListLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>
-                <Image width="80px" height="80px" borderRadius="10px" src={item.imgUrl} alt={`${item.modelName} 이미지`} />
+                <Image width="72px" height="72px" borderRadius="10px" src={item.imgUrl} alt={`${item.modelName} 이미지`} />
                 <S.ItemWrap>
                   <p>{item.category}</p>
                   <p>{item.modelName}</p>

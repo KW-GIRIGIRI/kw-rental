@@ -6,7 +6,7 @@ import * as S from "./style"
 
 export default function WeekPicker() {
   const [date, setDate] = useState({
-    cYear: null,
+    cYear: '',
     cMonth: null,
     cWeek: null,
     cWeekNo: null,
@@ -136,7 +136,7 @@ export default function WeekPicker() {
           <>
             <S.DateCont>
               <S.DateImg src={iconCalendar} alt="" />
-              {date.cYear}년 {date.cMonth}월 {date.cWeekNo}째 주
+              {date.cYear.toString().slice(2)}년 {date.cMonth}월 {date.cWeekNo}째 주
             </S.DateCont>
           </>
         }

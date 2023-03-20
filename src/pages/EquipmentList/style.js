@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.section`
-  min-width: fit-content;
-  border: 1px solid ${(props) => props.theme.color.gray.g4};
-  border-radius: ${(props) => props.theme.borderRadius.lv2};
-  padding: 27px 39px 40px;
+  padding-top: 28px;
+  border-top: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
 
 export const FilterWrap = styled.div`
@@ -13,7 +11,7 @@ export const FilterWrap = styled.div`
     justify-content: space-between;
   }
   &.mode {
-    margin: 32px 0;
+    margin: 24px 0 28px;
     gap: 12px;
   }
 `;
@@ -24,17 +22,23 @@ export const SearchCont = styled.label`
 `
 
 export const SearchInp = styled.input`
-  width: 356px;
-  padding: 11px 16px;
+  width: 294px;
+  padding: 8px 34px 8px 14px;
   border-radius: ${(props) => props.theme.borderRadius.circle};
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid ${(props) => props.theme.color.gray.g3};
+  box-sizing: border-box;
+  &::placeholder{
+    font-size: 13px;
+    color: ${props => props.theme.color.text.gray};
+  }
 `;
 
 export const SearchImg = styled.img`
   position: absolute;
   right: 16px;
-  top: 10px;
+  top: 8px;
+  width: 1rem;
 `
 
 export const DateInp = styled.input`
@@ -42,23 +46,16 @@ export const DateInp = styled.input`
   top: 0;
   left: 0;
   opacity: 0;
-  width: 136px;
-  padding: 5px 0;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  width: 128px;
+  padding: 7px 0;
   &::-webkit-calendar-picker-indicator {
     width: 100%;
   }
 `;
 
-export const DateImg = styled.img`
-  margin-right: 9px;
-  width: 1rem;
-`;
-
 export const DateCont = styled.label`
   position: relative;
-  margin-right: 13px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,16 +63,27 @@ export const DateCont = styled.label`
   color: ${(props) => props.theme.color.primary.main};
   border-radius: ${(props) => props.theme.borderRadius.circle};
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 7px 0;
+  padding: 5px 0;
   box-sizing: border-box;
-  width: 136px;
+  width: 128px;
+  & > span {
+    font-size: 13px;
+  }
+  & > img {
+    width: 14px;
+    margin: 0 9px 3px 0;
+  }
 `;
 
 export const TypeBtn = styled.button`
   border: 1px solid ${(props) => props.theme.color.gray.g4};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-  width: 40px;
-  height: 40px;
+  padding: 8px 10px;
+  & > img {
+    max-width: 12px;
+    max-height: 11px;
+    vertical-align: middle;
+  }
   &:first-of-type {
     border-radius: 5px 0 0 5px;
   }

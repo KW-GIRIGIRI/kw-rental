@@ -16,7 +16,7 @@ const data = [
     "id": 7,
     "category": "CAMERA",
     "maker": "sony",
-    "modelName": "modelName",
+    "modelName": "modelNamemodelNamemodelName",
     "rentalQuantity": {
         "totalQuantity": 2,
         "remainingQuantity": 1
@@ -98,8 +98,8 @@ export default function EquipmentList() {
             <S.SearchImg src={iconSearch} alt="" />
           </S.SearchCont>
           <S.DateCont>
-            <S.DateImg src={iconCalendar} alt="" />
-            3월 12일(화)
+            <img src={iconCalendar} alt="" />
+            <span>3월 12일(화)</span>
             <S.DateInp type="date"
               min={handleNextDay(1)}
               max={handleNextDay(31)}
@@ -118,11 +118,12 @@ export default function EquipmentList() {
       </S.FilterWrap>
 
       <S.FilterWrap className="mode">
-        <Button className="main shadow" text="전체" padding="11px 23px" borderRadius="20px" />
-        <Button className="disable shadow" text="카메라" padding="11px 23px" borderRadius="20px"/>
-        <Button className="disable shadow" text="녹음 장비" padding="11px 23px" borderRadius="20px"/>
-        <Button className="disable shadow" text="촬영보조 장비" padding="11px 23px" borderRadius="20px"/>
-        <Button className="disable shadow" text="VR 장비" padding="11px 23px" borderRadius="20px"/>
+        <Button className="main shadow" text="전체" padding="10px 21px" borderRadius="20px" />
+        <Button className="disable shadow" text="카메라" padding="10px 21px" borderRadius="20px"/>
+        <Button className="disable shadow" text="녹음 장비" padding="10px 21px" borderRadius="20px"/>
+        <Button className="disable shadow" text="촬영보조 장비" padding="10px 21px" borderRadius="20px"/>
+        <Button className="disable shadow" text="VR 장비" padding="10px 21px" borderRadius="20px" />
+        <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px"/>
       </S.FilterWrap>
 
       <EquipListWrap type={viewMode} data={data} />

@@ -73,6 +73,8 @@ export default function AddCartEquip() {
     const day = today.getDay()
     if (day === 5 || day === 6 || day === 0) {
       today = handleSetMon(today, day)
+    } else {
+      today = new Date(handleNextDay(1))
     }
     const dayText = handleDateChangeText(today)
     setDate({
@@ -100,6 +102,7 @@ export default function AddCartEquip() {
             {date.cDayText}
             <S.DateInp type="date"
               onChange={handleDate}
+              defaultValue={handleNextDay(1)}
               min={handleNextDay(1)}
               max={handleNextDay(31)}
             />
@@ -108,16 +111,16 @@ export default function AddCartEquip() {
           <S.DateCont>
             {date.cDayText}
             <S.DateInp type="date"
-              disabled // 최대 대여 가능 일수가 1 이상일 때 false
-              defaultValue={handleNextDay(1)}
-              min={handleNextDay(1)}
-              max={handleNextDay(1)}
+              // disabled // 최대 대여 가능 일수가 1 이상일 때 false
+              defaultValue={handleNextDay(2)}
+              min={handleNextDay(2)}
+              max={handleNextDay(2)}
               />
           </S.DateCont>
         </S.InpWrapper>
       </S.Form>
-      <Button onClick={handleAddCart} className="main" text="기자재 담기" padding="15px 23px" borderRadius="10px" fontSize="1rem" margin="0 13px 0 0"/>
-      <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="1rem"/>
+      <Button onClick={handleAddCart} className="main" text="기자재 담기" padding="15px 23px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
+      <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="15px"/>
     </S.Wrapper>
   )
 }

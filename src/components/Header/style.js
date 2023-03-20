@@ -4,5 +4,6 @@ export const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin: 65px auto 15px;
+  width: 880px;
 `;
