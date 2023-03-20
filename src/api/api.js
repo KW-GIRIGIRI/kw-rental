@@ -9,7 +9,8 @@ const instanceUtil = axios.create({
   },
 });
 
-export const getProductList = async () => {
+// mockAPI
+export const getProduct = async () => {
   try {
     const response = await instanceUtil.get("/ProductList");
 
@@ -19,3 +20,27 @@ export const getProductList = async () => {
     return err;
   }
 };
+
+export const getProductList = async ({ size, keyword, category, date }) => {
+  try {
+    const response = await instanceUtil.get(
+      `/equipments?size=${size}&keyword=${keyword}&category=${category}&date=${date}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const getProductDetail = async ({ id }) => {
+  try {
+    const response = await instanceUtil.get(`/equipments/${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}
