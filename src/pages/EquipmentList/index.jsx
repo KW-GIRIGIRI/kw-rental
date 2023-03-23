@@ -10,6 +10,7 @@ import EquipListWrap from "../../components/EquipListWrap"
 import iconPageArrow from "../../assets/icon-pageArrow.svg"
 import { useEffect, useState } from "react"
 import { getProductList } from "../../api/api"
+import SearchError from "../../components/Modal/SearchError"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -17,6 +18,7 @@ export default function EquipmentList() {
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
   const [searchKeyword, setSearchKeyword] = useState('')
+  const [modal, setModal] = useState(true)
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
@@ -60,6 +62,7 @@ export default function EquipmentList() {
             <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
             <S.SearchImg onClick={handleSearch} src={iconSearch} alt="" />
           </S.SearchCont>
+          <SearchError modal={modal} setModal={setModal} />
           <S.DateCont>
             <img src={iconCalendar} alt="" />
             <span>3월 12일(화)</span>
