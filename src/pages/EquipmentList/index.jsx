@@ -18,12 +18,16 @@ export default function EquipmentList() {
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
   const [searchKeyword, setSearchKeyword] = useState('')
-  const [modal, setModal] = useState(true)
+  const [modal, setModal] = useState(false)
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
-      getProduct()
-      setPage(0)
+      if(searchKeyword.includes('\\')) alert('유효한 값을 입력하세요')
+      else if (searchKeyword.length < 2) setModal(true)
+      else {
+        getProduct()
+        setPage(0)
+      }
     }
   }
 
