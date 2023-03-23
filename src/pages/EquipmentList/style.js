@@ -104,6 +104,7 @@ export const PageBtnWrap = styled.div`
     width: 40px;
     height: 40px;
     margin-right: -1px;
+    cursor: pointer;
     & > img {
       vertical-align: middle;
     }
@@ -117,6 +118,7 @@ export const PageBtnWrap = styled.div`
     &.on {
       background-color: ${(props) => props.theme.color.primary.main};
       color: ${(props) => props.theme.color.text.white};
+      transform: revert;
     }
   }
 `;
