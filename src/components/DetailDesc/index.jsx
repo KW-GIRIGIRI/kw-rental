@@ -2,7 +2,7 @@ import * as S from "./style";
 
 export default function DetailDesc({product}) {
   return (
-    <div>
+    <S.Div>
       <S.ProductSpan>{product.category}</S.ProductSpan>
       <S.ProductTitle>{product.modelName}</S.ProductTitle>
       <ol>
@@ -35,6 +35,6 @@ export default function DetailDesc({product}) {
           <span>1일</span>
         </S.ProductLi>
       </ol>
-    </div>
+    </S.Div>
   )
 }

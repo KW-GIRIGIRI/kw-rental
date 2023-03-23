@@ -16,7 +16,14 @@ export default function EquipmentList() {
   const [productList, setProductList] = useState([])
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
+  const [searchKeyword, setSearchKeyword] = useState('')
 
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' || e.type === "click") {
+      getProduct()
+      setPage(0)
+    }
+  }
 
   const handleNextDay = (days) => {
     let today = new Date();
@@ -25,13 +32,16 @@ export default function EquipmentList() {
   }
 
   const getProduct = async () => {
-    const response =
-      await getProductList({
-        size: viewMode==='gal' ? 16 : 10,
-        keyword: '',
-        category: '',
-        page: page
-      });
+    const response = await getProductList({
+      size: viewMode==='gal' ? 16 : 10,
+      keyword: searchKeyword,
+      category: '',
+      page: page
+    });
+    
+    window.scrollTo({
+      top: 0,
+    })
 
     setPageArray(response.endPoints)
     setProductList(response.items)
@@ -46,8 +56,9 @@ export default function EquipmentList() {
       <S.FilterWrap>
         <S.FilterWrap>
           <S.SearchCont>
-            <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요."/>
-            <S.SearchImg src={iconSearch} alt="" />
+            {/* search inp 분리 */}
+            <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
+            <S.SearchImg onClick={handleSearch} src={iconSearch} alt="" />
           </S.SearchCont>
           <S.DateCont>
             <img src={iconCalendar} alt="" />

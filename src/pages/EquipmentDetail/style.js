@@ -9,7 +9,6 @@ export const Wrapper = styled.section`
 export const DetailWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 34px;
   margin: 30px 0 55px;
   padding-bottom: 36px;
