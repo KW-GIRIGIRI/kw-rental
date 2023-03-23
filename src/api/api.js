@@ -35,7 +35,7 @@ export const getProductList = async ({ size, keyword, category, page, date }) =>
   }
 };
 
-export const getProductDetail = async ({ id }) => {
+export const getProductDetail = async (id) => {
   try {
     const response = await instanceUtil.get(`/equipments/${id}`);
 

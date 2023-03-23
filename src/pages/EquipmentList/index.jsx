@@ -35,7 +35,7 @@ export default function EquipmentList() {
 
     setPageArray(response.endPoints)
     setProductList(response.items)
-    }
+  }
     
   useEffect(() => {
     getProduct()
@@ -97,7 +97,6 @@ export default function EquipmentList() {
           <img src={iconPageArrow} alt="다음 페이지" />
         </button>
       </S.PageBtnWrap>
-      
     </S.Wrapper>
   )
 }
