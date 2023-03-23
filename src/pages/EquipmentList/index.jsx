@@ -8,94 +8,57 @@ import iconList from "../../assets/icon-list.svg"
 import Button from "../../modules/Button"
 import EquipListWrap from "../../components/EquipListWrap"
 import iconPageArrow from "../../assets/icon-pageArrow.svg"
-import { useState } from "react"
-
-// 임시 데이터
-const data = [
-  {
-    "id": 7,
-    "category": "CAMERA",
-    "maker": "sony",
-    "modelName": "modelNamemodelNamemodelName",
-    "rentalQuantity": {
-        "totalQuantity": 2,
-        "remainingQuantity": 1
-    },
-    "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  },
-  {
-      "id": 5,
-      "category": "CAMERA",
-      "maker": "sony",
-      "modelName": "modelName",
-      "rentalQuantity": {
-          "totalQuantity": 2,
-          "remainingQuantity": 1
-      },
-      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  },
-  {
-      "id": 6,
-      "category": "CAMERA",
-      "maker": "sony",
-      "modelName": "modelName",
-      "rentalQuantity": {
-          "totalQuantity": 2,
-          "remainingQuantity": 1
-      },
-      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  },
-  {
-      "id": 62,
-      "category": "CAMERA",
-      "maker": "sony",
-      "modelName": "modelName",
-      "rentalQuantity": {
-          "totalQuantity": 2,
-          "remainingQuantity": 1
-      },
-      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  },
-  {
-      "id": 6232,
-      "category": "CAMERA",
-      "maker": "sony",
-      "modelName": "modelName",
-      "rentalQuantity": {
-          "totalQuantity": 2,
-          "remainingQuantity": 1
-      },
-      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  },
-  {
-      "id": 12,
-      "category": "CAMERA",
-      "maker": "sony",
-      "modelName": "modelName",
-      "rentalQuantity": {
-          "totalQuantity": 2,
-          "remainingQuantity": 1
-      },
-      "imgUrl": "https://cdn.pixabay.com/photo/2018/01/28/21/14/lens-3114729_1280.jpg"
-  }
-]
+import { useEffect, useState } from "react"
+import { getProductList } from "../../api/api"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
+  const [productList, setProductList] = useState([])
+  const [page, setPage] = useState(0)
+  const [pageArray, setPageArray] = useState([])
+  const [searchKeyword, setSearchKeyword] = useState('')
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' || e.type === "click") {
+      getProduct()
+      setPage(0)
+    }
+  }
 
   const handleNextDay = (days) => {
     let today = new Date();
     today.setDate(today.getDate() + days)
     return today.toISOString().split('T')[0];
   }
-  
+
+  const getProduct = async () => {
+    const response = await getProductList({
+      size: viewMode==='gal' ? 16 : 10,
+      keyword: searchKeyword,
+      category: '',
+      page: page
+    });
+    
+    window.scrollTo({
+      top: 0,
+    })
+
+    setPageArray(response.endPoints)
+    setProductList(response.items)
+  }
+    
+  useEffect(() => {
+    getProduct()
+  }, [page, viewMode])
+
   return (
     <S.Wrapper>
       <S.FilterWrap>
         <S.FilterWrap>
           <S.SearchCont>
-            <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요."/>
-            <S.SearchImg src={iconSearch} alt="" />
+            {/* search inp 분리 */}
+            <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
+            <S.SearchImg onClick={handleSearch} src={iconSearch} alt="" />
           </S.SearchCont>
           <S.DateCont>
             <img src={iconCalendar} alt="" />
@@ -126,19 +89,25 @@ export default function EquipmentList() {
         <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px"/>
       </S.FilterWrap>
 
-      <EquipListWrap type={viewMode} data={data} />
+      <EquipListWrap type={viewMode} data={productList} />
 
       <S.PageBtnWrap>
-        <button>
+        <button onClick={() => setPage(page - 1)} disabled={page === 0}>
           <img src={iconPageArrow} alt="이전 페이지" />
         </button>
-        <button className="on">1</button>
-        <button>2</button>
-        <button>
+        {
+          pageArray.map((_, index) => {
+            return (
+              <button key={index} onClick={() => setPage(index)} className={page===index  ? 'on' : null}>
+                {index + 1}
+              </button>
+            )
+          })
+        }
+        <button onClick={() => setPage(page + 1)} disabled={page + 1 === pageArray.length}>
           <img src={iconPageArrow} alt="다음 페이지" />
         </button>
       </S.PageBtnWrap>
-      
     </S.Wrapper>
   )
 }

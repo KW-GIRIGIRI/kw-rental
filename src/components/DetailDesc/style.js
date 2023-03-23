@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const Div = styled.div`
+  width: 100%;
+`
+
 export const ProductSpan = styled.span`
   color: ${(props) => props.theme.color.primary.main};
   font-size: 14px;
@@ -8,9 +12,11 @@ export const ProductSpan = styled.span`
 export const ProductTitle = styled.p`
   font-size: 20px;
   font-weight: 500;
+  width: 100%;
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   padding-bottom: 20px;
   margin: 6px 0 30px;
+ 
 `;
 
 export const ProductLi = styled.li`

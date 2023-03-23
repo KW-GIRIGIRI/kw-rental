@@ -21,10 +21,11 @@ export const getProduct = async () => {
   }
 };
 
-export const getProductList = async ({ size, keyword, category, date }) => {
+// date 설정 예정
+export const getProductList = async ({ size, keyword, category, page, date }) => {
   try {
     const response = await instanceUtil.get(
-      `/equipments?size=${size}&keyword=${keyword}&category=${category}&date=${date}`
+      `/equipments?size=${size}&keyword=${keyword}&category=${category}&page=${page}`
     );
 
     return response.data;
@@ -34,7 +35,7 @@ export const getProductList = async ({ size, keyword, category, date }) => {
   }
 };
 
-export const getProductDetail = async ({ id }) => {
+export const getProductDetail = async (id) => {
   try {
     const response = await instanceUtil.get(`/equipments/${id}`);
 
