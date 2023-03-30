@@ -36,10 +36,13 @@ export default function EquipmentDetail() {
               <span>{product.category}</span> 
               <span>{product.modelName}</span>
             </S.SimpleDesc>
-            <div>
-              <button onClick={() => navigate('/equipment/edit')}>수정</button>
-              <button>삭제</button>
-            </div>
+            {
+              isAuth ? 
+              <div>
+                <button onClick={() => navigate('/equipment/edit', { state: {id : params.id} })}>수정</button>
+                <button>삭제</button>
+              </div> : <></>
+            }
           </S.NavDiv>
           <S.DetailWrapper>
             <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product.imgUrl} alt="" />

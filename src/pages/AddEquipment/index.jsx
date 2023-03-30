@@ -8,37 +8,22 @@ import Textarea from "../../modules/Textarea"
 import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Image from "../../modules/Image"
-
-export const product = {
-  category: 'camera',
-  modelName: 'DSLR SONY 6600',
-  maker: "SONY",
-  components: '줌렌즈, 단렌즈 20mm, 충전기 포함',
-  purpose: '동영상 촬영',
-  rentalQuantity: {
-    totalQuantity: 10
-  },
-  rentalPlace: '한울관 B119호',
-  imgUrl : "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
-}
+import { getProductDetail } from "../../api/api"
 
 export default function AddEquipment() {
   const location = useLocation()
   const [isEdit, setIsEdit] = useState(false)
+  const [product, setProduct] = useState(null)
 
+  const handleGetProduct = async (id) => {
+    const response = await getProductDetail(id);
 
-
-
-  const handleGetProduct = () => {
-    // location.state.id로 api 요청
-
-    // 이전 페이지에서 수정 버튼 누를 시 state.id로 전달
+    setProduct(response)
     setIsEdit(true)
   }
   
-  
   useEffect(() => {
-    if (location.pathname.includes('edit')) handleGetProduct()
+    if (location.pathname.includes('edit')) handleGetProduct(location.state?.id)
   }, [])
 
   return (
@@ -63,7 +48,7 @@ export default function AddEquipment() {
         <DetailDescInput product={product} />
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
-      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="" id="" rows="6" count="500" />
+      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="" id="" rows="6" count="500" defaultValue={product?.description} />
       {
         isEdit ?
           <>

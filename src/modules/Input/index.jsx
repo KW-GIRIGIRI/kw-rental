@@ -1,9 +1,9 @@
 import useInput from "../../hook/useInput"
 import { InputStyle } from './style'
 
-export default function Input({ placeholder, type, maxLen, className }) {
+export default function Input({ placeholder, type, maxLen, className, defaultValue }) {
   const maxLenFunc = value => value.length <= maxLen
-  const inputEl = useInput('', maxLenFunc)
+  const inputEl = useInput(defaultValue || "", maxLenFunc)
 
   return (
     <InputStyle

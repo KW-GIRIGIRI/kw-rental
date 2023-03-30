@@ -45,8 +45,6 @@ export default function EquipmentList() {
   const getProduct = async () => {
     const response = await getProductList({
       size: viewMode==='gal' ? 16 : 10,
-      keyword: searchKeyword,
-      category: '',
       page: page
     });
     

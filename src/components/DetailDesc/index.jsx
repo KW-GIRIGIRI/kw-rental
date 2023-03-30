@@ -20,7 +20,7 @@ export default function DetailDesc({product}) {
         </S.ProductLi>
         <S.ProductLi>
           <p>총 개수</p>
-          <span>{product.rentalQuantity.totalQuantity}대</span>
+          <span>{product.totalQauntity}대</span>
         </S.ProductLi>
         <S.ProductLi>
           <p>대여장소</p>
