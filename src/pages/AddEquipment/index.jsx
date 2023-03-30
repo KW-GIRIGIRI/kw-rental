@@ -3,6 +3,7 @@ import { Wrapper, DetailWrapper, SubTitle } from "../EquipmentDetail/style"
 import Button from "../../modules/Button"
 import IconFileImg from "../../assets/icon-fileImg.svg"
 import DetailDescInput from "../../components/DetailDesc/DetailDescInput"
+import ItemManagerWrap from "../../components/ItemManagerWrap"
 import iconFileImgWhite from "../../assets/icon-fileImg-white.svg"
 import Textarea from "../../modules/Textarea"
 import { useLocation } from "react-router-dom"
@@ -19,7 +20,7 @@ export const product = {
     totalQuantity: 10
   },
   rentalPlace: '한울관 B119호',
-  imgUrl : "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
+  imgUrl: "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
 }
 
 export default function AddEquipment() {
@@ -35,8 +36,8 @@ export default function AddEquipment() {
     // 이전 페이지에서 수정 버튼 누를 시 state.id로 전달
     setIsEdit(true)
   }
-  
-  
+
+
   useEffect(() => {
     if (location.pathname.includes('edit')) handleGetProduct()
   }, [])
@@ -54,11 +55,11 @@ export default function AddEquipment() {
                 <input type="file" />
               </S.FileBtn>
             </>
-          : <S.FileLabel>
-            <img src={IconFileImg} alt="" />
-            <p>사진 추가</p>
-            <input type="file" />
-          </S.FileLabel>
+            : <S.FileLabel>
+              <img src={IconFileImg} alt="" />
+              <p>사진 추가</p>
+              <input type="file" />
+            </S.FileLabel>
         }
         <DetailDescInput product={product} />
       </DetailWrapper>
@@ -68,17 +69,17 @@ export default function AddEquipment() {
         isEdit ?
           <>
             <SubTitle>품목 수정 및 추가</SubTitle>
-            {/* 품목관리 컴포넌트 */}
+            <ItemManagerWrap />
           </>
           :
           <>
             <SubTitle>품목관리</SubTitle>
-            {/* 품목관리 컴포넌트 */}
+            <ItemManagerWrap />
           </>
       }
       <S.BtnWrap>
-        <Button className="main" text="저장하기" padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
-        <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px"/>
+        <Button className="main" text="저장하기" padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0" />
+        <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px" />
       </S.BtnWrap>
     </Wrapper>
   )

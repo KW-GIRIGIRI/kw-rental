@@ -4,6 +4,7 @@ import { getProductDetail } from "../../api/api"
 import AddCartEquip from "../../components/AddCartEquip"
 import DetailDesc from "../../components/DetailDesc"
 import WeekPicker from "../../components/WeekPicker"
+import ItemListWrap from "../../components/ItemListWrap"
 import { AuthContext } from "../../context/Context"
 import Button from "../../modules/Button"
 import Image from "../../modules/Image"
@@ -20,7 +21,7 @@ export default function EquipmentDetail() {
     const response = await getProductDetail(params.id);
     setProduct(response)
   }
-  
+
   useEffect(() => {
     getProduct()
   }, [])
@@ -32,8 +33,8 @@ export default function EquipmentDetail() {
         <>
           <S.NavDiv>
             <S.SimpleDesc>
-              <span>기자재 조회</span> 
-              <span>{product.category}</span> 
+              <span>기자재 조회</span>
+              <span>{product.category}</span>
               <span>{product.modelName}</span>
             </S.SimpleDesc>
             <div>
@@ -63,9 +64,9 @@ export default function EquipmentDetail() {
                 {/* 월별 캘린더로 수정 */}
                 <WeekPicker />
                 <S.SubTitle>품목 관리</S.SubTitle>
-                {/* 품목 관리 컴포넌트 */}
+                <ItemListWrap />
                 <BtnWrap>
-                  <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px"/> 
+                  <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
                 </BtnWrap>
               </>
               :
