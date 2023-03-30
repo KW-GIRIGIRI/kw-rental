@@ -11,8 +11,19 @@ export const FilterWrap = styled.div`
     justify-content: space-between;
   }
   &.mode {
+    align-items: center;
     margin: 24px 0 28px;
     gap: 12px;
+    & > button.add {
+      background-color: ${(props) => props.theme.color.primary.third};
+      border-radius: ${(props) => props.theme.borderRadius.circle};
+      width: 24px;
+      height: 24px;
+      & > img {
+        padding: 6px;
+        width: 12px;
+      }
+    }
   }
 `;
 
@@ -74,6 +85,20 @@ export const DateCont = styled.label`
     margin: 0 9px 3px 0;
   }
 `;
+
+export const addBtn = styled.button`
+  background-color: ${props => props.theme.color.primary.main};
+  border-radius: ${props => props.theme.borderRadius.lv1};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 12px;
+  gap: 6px;
+  & > p {
+    line-height: 1;
+    color: ${props => props.theme.color.text.white};
+  }
+`
 
 export const TypeBtn = styled.button`
   border: 1px solid ${(props) => props.theme.color.gray.g4};

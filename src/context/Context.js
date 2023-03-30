@@ -6,8 +6,8 @@ export const AuthContext = createContext({
 });
 
 export const AuthStore = (props) => {
-  const [isAuth, setIsAuth] = useState('admin')
-  // user || admin
+  const [isAuth, setIsAuth] = useState(true)
+  // user(false) || admin(true)
 
   return (
     <AuthContext.Provider value={{ isAuth, setIsAuth }}>

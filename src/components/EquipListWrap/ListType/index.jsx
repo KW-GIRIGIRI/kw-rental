@@ -1,15 +1,19 @@
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../../../context/Context"
 import Image from "../../../modules/Image"
 import * as S from "./style"
 
 export default function ListType({ data }) {
   const navigate = useNavigate()
+  const { isAuth } = useContext(AuthContext)
+
   return (
     <S.ListUl>
       <S.ListLi>
         <p>사진</p>
         <p>기자재명</p>
-        <p>대여 가능 / 총 개수</p>
+        <p>{isAuth ? '총 개수' : '대여 가능 / 총 개수'}</p>
       </S.ListLi>
       {
         data.map((item) => {
@@ -20,7 +24,10 @@ export default function ListType({ data }) {
                   <p>{item.category}</p>
                   <p>{item.modelName}</p>
                 </S.ItemWrap>
-                <p>{item.rentalQuantity.remainingQuantity} / {item.rentalQuantity.totalQuantity}</p>
+              <p>
+                {isAuth ? item.rentalQuantity.totalQuantity
+                  : `${item.rentalQuantity.remainingQuantity} / ${item.rentalQuantity.totalQuantity}`}
+              </p>
             </S.ListLi>
           )
         })

@@ -11,7 +11,7 @@ export default function Header({ text, classNum }) {
     <Wrapper>
       <h1 className='ir'>광운대학교 강의실 및 기자재 대여 페이지</h1>
       <ImgLogo src={Logo} alt="로고" />
-      { isAuth === 'admin' ? <Desc>관리자용</Desc> : <></> }
+      { isAuth ? <Desc>관리자용</Desc> : <></> }
       <HeaderUserInfo classNum={classNum} />
     </Wrapper>
   )

@@ -26,6 +26,9 @@ export const DateInp = styled.input`
 export const NextBtn = styled.button`
   color: #0e2b5a;
   font-size: 18px;
+  & > img {
+    margin-top: 4px;
+  }
 `;
 
 export const DateImg = styled.img`
