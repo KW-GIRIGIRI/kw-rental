@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { getProductDetail } from "../../api/api"
 import AddCartEquip from "../../components/AddCartEquip"
 import DetailDesc from "../../components/DetailDesc"
 import WeekPicker from "../../components/WeekPicker"
+import { AuthContext } from "../../context/Context"
+import Button from "../../modules/Button"
 import Image from "../../modules/Image"
+import { BtnWrap } from "../AddEquipment/style"
 import * as S from "./style"
 
 export default function EquipmentDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null)
+  const navigate = useNavigate()
+  const { isAuth } = useContext(AuthContext)
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);
@@ -25,11 +30,17 @@ export default function EquipmentDetail() {
       {
         product &&
         <>
-          <S.SimpleDesc>
-            <span>기자재 조회</span> 
-            <span>{product.category}</span> 
-            <span>{product.modelName}</span>
-          </S.SimpleDesc>
+          <S.NavDiv>
+            <S.SimpleDesc>
+              <span>기자재 조회</span> 
+              <span>{product.category}</span> 
+              <span>{product.modelName}</span>
+            </S.SimpleDesc>
+            <div>
+              <button>수정</button>
+              <button>삭제</button>
+            </div>
+          </S.NavDiv>
           <S.DetailWrapper>
             <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product.imgUrl} alt="" />
             <DetailDesc product={product} />
@@ -45,10 +56,26 @@ export default function EquipmentDetail() {
             } */}
             <S.NoticeLi>{product.description}</S.NoticeLi>
           </S.NoticeUl>
-          <S.SubTitle>대여 현황</S.SubTitle>
-          <WeekPicker />
-          <S.SubTitle>기자재 담기</S.SubTitle>
-          <AddCartEquip />
+          {
+            isAuth ?
+              <>
+                <S.SubTitle>품목 대여 현황</S.SubTitle>
+                {/* 월별 캘린더로 수정 */}
+                <WeekPicker />
+                <S.SubTitle>품목 관리</S.SubTitle>
+                {/* 품목 관리 컴포넌트 */}
+                <BtnWrap>
+                  <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px"/> 
+                </BtnWrap>
+              </>
+              :
+              <>
+                <S.SubTitle>대여 현황</S.SubTitle>
+                <WeekPicker />
+                <S.SubTitle>기자재 담기</S.SubTitle>
+                <AddCartEquip />
+              </>
+          }
         </>
       }
     </S.Wrapper>

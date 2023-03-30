@@ -45,3 +45,17 @@ export const SubTitle = styled.p`
   font-weight: 500;
   margin-bottom: 25px;
 `;
+
+export const NavDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > div > button {
+    &:first-of-type {
+      color: ${(props) => props.theme.color.primary.main};
+    }
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+`;

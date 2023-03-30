@@ -14,7 +14,7 @@ export default function NavBar() {
           <p >공지사항</p>
         </S.NavLi>
         <S.NavLi
-          className={ location.pathname === '/equipment' ? 'on' : 'off' }
+          className={ location.pathname.includes('equipment') ? 'on' : 'off' }
           onClick={() => navigate('/equipment')}>
           <p>기자재 대여</p>
         </S.NavLi>
