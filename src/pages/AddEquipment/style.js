@@ -30,10 +30,6 @@ export const BtnWrap = styled.div`
   text-align: center;
 `
 
-export const ImgWrap = styled.div`
-  /* position: relative; */
-`
-
 export const FileBtn = styled.label`
   position: absolute;
   padding: 6px;

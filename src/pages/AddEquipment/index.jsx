@@ -9,23 +9,24 @@ import { useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import Image from "../../modules/Image"
 
+export const product = {
+  category: 'camera',
+  modelName: 'DSLR SONY 6600',
+  maker: "SONY",
+  components: '줌렌즈, 단렌즈 20mm, 충전기 포함',
+  purpose: '동영상 촬영',
+  rentalQuantity: {
+    totalQuantity: 10
+  },
+  rentalPlace: '한울관 B119호',
+  imgUrl : "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
+}
+
 export default function AddEquipment() {
   const location = useLocation()
   const [isEdit, setIsEdit] = useState(false)
 
 
-  const product = {
-    category: 'camera',
-    modelName: 'DSLR SONY 6600',
-    maker: "SONY",
-    components: '줌렌즈, 단렌즈 20mm, 충전기 포함',
-    purpose: '동영상 촬영',
-    rentalQuantity: {
-      totalQuantity: 10
-    },
-    rentalPlace: '한울관 B119호',
-    imgUrl : "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
-  }
 
 
   const handleGetProduct = () => {
