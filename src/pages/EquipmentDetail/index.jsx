@@ -37,7 +37,7 @@ export default function EquipmentDetail() {
               <span>{product.modelName}</span>
             </S.SimpleDesc>
             <div>
-              <button>수정</button>
+              <button onClick={() => navigate('/equipment/edit')}>수정</button>
               <button>삭제</button>
             </div>
           </S.NavDiv>

@@ -3,28 +3,16 @@ import Input from "../../../modules/Input";
 import Textarea from "../../../modules/Textarea";
 import * as S from "../style";
 
-export default function DetailDescInput() {
+export default function DetailDescInput({product}) {
   const selectRef = useRef()
-
-  const product = {
-    category: 'camera',
-    modelName: 'DSLR SONY 6600',
-    maker: "SONY",
-    components: '줌렌즈, 단렌즈 20mm, 충전기 포함',
-    purpose: '동영상 촬영',
-    rentalQuantity: {
-      totalQuantity: 10
-    },
-    rentalPlace: '한울관 B119호'
-  }
   
- const category = [
+  const category = [
     { value: "카메라", label: "카메라" },
     { value: "녹음 장비", label: "녹음 장비" },
     { value: "촬영보조 장비", label: "촬영보조 장비" },
     { value: "VR 장비", label: "VR 장비" },
     { value: "기타", label: "기타" },
- ];
+  ];
   
   const handleSelectWidth = (e) => {
     e.target.style.padding = `5px ${selectRef.current.value.length * 4}px 5px ${selectRef.current.value.length * 3}px`
