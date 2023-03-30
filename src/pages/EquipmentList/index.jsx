@@ -13,6 +13,7 @@ import { useContext, useEffect, useState } from "react"
 import { getProductList } from "../../api/api"
 import SearchError from "../../components/Modal/SearchError"
 import { AuthContext } from "../../context/Context"
+import { useNavigate } from "react-router-dom"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -22,6 +23,7 @@ export default function EquipmentList() {
   const [searchKeyword, setSearchKeyword] = useState('')
   const [modal, setModal] = useState(false)
   const { isAuth } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
@@ -83,7 +85,7 @@ export default function EquipmentList() {
 
         {
           isAuth ?
-            <S.addBtn>
+            <S.addBtn onClick={() => navigate('/equipment/add')}>
               <img src={iconPlus} alt="" />
               <p>기자재 추가</p>
             </S.addBtn>
@@ -106,8 +108,7 @@ export default function EquipmentList() {
         <Button className="disable shadow" text="VR 장비" padding="10px 21px" borderRadius="20px" />
         <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px" />
         {
-          isAuth ?
-            <button className="add"><img src={iconPlus} alt="기자재 카테고리 추가" /></button> : <></>
+          isAuth ? <button className="add"><img src={iconPlus} alt="기자재 카테고리 추가" /></button> : <></>
         }
       </S.FilterWrap>
 
