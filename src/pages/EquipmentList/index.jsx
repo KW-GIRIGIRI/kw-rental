@@ -5,12 +5,15 @@ import iconGalOn from "../../assets/icon-gal-on.svg"
 import iconGal from "../../assets/icon-gal.svg"
 import iconListOn from "../../assets/icon-list-on.svg"
 import iconList from "../../assets/icon-list.svg"
+import iconPlus from "../../assets/icon-plus.svg"
 import Button from "../../modules/Button"
 import EquipListWrap from "../../components/EquipListWrap"
 import iconPageArrow from "../../assets/icon-pageArrow.svg"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getProductList } from "../../api/api"
 import SearchError from "../../components/Modal/SearchError"
+import { AuthContext } from "../../context/Context"
+import { useNavigate } from "react-router-dom"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -19,6 +22,8 @@ export default function EquipmentList() {
   const [pageArray, setPageArray] = useState([])
   const [searchKeyword, setSearchKeyword] = useState('')
   const [modal, setModal] = useState(false)
+  const { isAuth } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
@@ -55,6 +60,7 @@ export default function EquipmentList() {
     
   useEffect(() => {
     getProduct()
+    if (isAuth) setViewMode('list')
   }, [page, viewMode])
 
   return (
@@ -77,14 +83,21 @@ export default function EquipmentList() {
           </S.DateCont>
         </S.FilterWrap>
 
-        <S.FilterWrap>
-          <S.TypeBtn onClick={() => setViewMode('gal')}>
-            <img src={viewMode==='gal' ? iconGalOn : iconGal} alt="" />
-          </S.TypeBtn>
-          <S.TypeBtn onClick={() => setViewMode('list')}>
-            <img src={viewMode==='list' ? iconListOn : iconList} alt="" />
-          </S.TypeBtn>
-        </S.FilterWrap>
+        {
+          isAuth ?
+            <S.addBtn onClick={() => navigate('/equipment/add')}>
+              <img src={iconPlus} alt="" />
+              <p>기자재 추가</p>
+            </S.addBtn>
+          : <S.FilterWrap>
+              <S.TypeBtn onClick={() => setViewMode('gal')}>
+                <img src={viewMode==='gal' ? iconGalOn : iconGal} alt="" />
+              </S.TypeBtn>
+              <S.TypeBtn onClick={() => setViewMode('list')}>
+                <img src={viewMode==='list' ? iconListOn : iconList} alt="" />
+              </S.TypeBtn>
+            </S.FilterWrap>
+        }
       </S.FilterWrap>
 
       <S.FilterWrap className="mode">
@@ -93,7 +106,10 @@ export default function EquipmentList() {
         <Button className="disable shadow" text="녹음 장비" padding="10px 21px" borderRadius="20px"/>
         <Button className="disable shadow" text="촬영보조 장비" padding="10px 21px" borderRadius="20px"/>
         <Button className="disable shadow" text="VR 장비" padding="10px 21px" borderRadius="20px" />
-        <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px"/>
+        <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px" />
+        {
+          isAuth ? <button className="add"><img src={iconPlus} alt="기자재 카테고리 추가" /></button> : <></>
+        }
       </S.FilterWrap>
 
       <EquipListWrap type={viewMode} data={productList} />

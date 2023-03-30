@@ -7,10 +7,6 @@ export default function DetailDesc({product}) {
       <S.ProductTitle>{product.modelName}</S.ProductTitle>
       <ol>
         <S.ProductLi>
-          <p>모델</p>
-          <span>{product.modelName}</span>
-        </S.ProductLi>
-        <S.ProductLi>
           <p>제조사</p>
           <span>{product.maker}</span>
         </S.ProductLi>

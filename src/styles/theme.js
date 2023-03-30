@@ -3,6 +3,7 @@ export const theme = {
     primary: {
       main: "#0E2B5A",
       sub: "#E0E4E9",
+      third: "#8B95A1",
       accent: "#FEB045",
     },
     gray: {
