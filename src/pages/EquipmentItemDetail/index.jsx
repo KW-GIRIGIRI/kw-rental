@@ -3,6 +3,7 @@ import { product } from "../AddEquipment"
 import { BtnWrap } from "../AddEquipment/style"
 import Button from "../../modules/Button"
 import { useNavigate } from "react-router-dom"
+import ItemReserveHist from "../../components/ItemReserveHist"
 
 const itemList = [1, 2, 3]
 
@@ -13,8 +14,8 @@ export default function EquipmentItemDetail() {
     <S.Wrapper>
       <S.NavDiv>
         <S.SimpleDesc>
-          <span>기자재 조회</span> 
-          <span>{product.category}</span> 
+          <span>기자재 조회</span>
+          <span>{product.category}</span>
           <span>{product.modelName}</span>
           <span>품목 1</span>
         </S.SimpleDesc>
@@ -36,8 +37,9 @@ export default function EquipmentItemDetail() {
         자산번호 수정
       </div>
       <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
+      <ItemReserveHist />
       <BtnWrap>
-        <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="60px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px"/> 
+        <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="60px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
       </BtnWrap>
     </S.Wrapper>
   )
