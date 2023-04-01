@@ -20,5 +20,5 @@ export default function useInput(initialValue, validator) {
       setValue(value);
     }
   }
-  return { value, onChange }
+  return { value, onChange };
 }

@@ -25,7 +25,6 @@ export const getProductList = async ({ size, page }) => {
 export const getProductDetail = async (id) => {
   try {
     const response = await instanceUtil.get(`/equipments/${id}`);
-    console.log(response.data)
 
     return response.data;
   } catch (err) {
@@ -33,3 +32,14 @@ export const getProductDetail = async (id) => {
     return err;
   }
 }
+
+export const addEquipment = async (data) => {
+  try {
+    const response = await instanceUtil.post(`/admin/equipments`, data);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
