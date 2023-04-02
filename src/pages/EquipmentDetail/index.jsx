@@ -14,6 +14,7 @@ import * as S from "./style"
 export default function EquipmentDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(null)
   const navigate = useNavigate()
   const { isAuth } = useContext(AuthContext)
@@ -24,9 +25,15 @@ export default function EquipmentDetail() {
   }
 
   const getItem = async () => {
-    const response = await getItemList(params.id);
-    setItem(response)
-  }
+    try {
+      const response = await getItemList(params.id);
+      setItem(response);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(true);
+    }
+  };
 
   const handleDeleteProduct = async () => {
     console.log(params.id)
@@ -83,7 +90,11 @@ export default function EquipmentDetail() {
                 {/* 월별 캘린더로 수정 */}
                 <WeekPicker />
                 <S.SubTitle>품목 관리</S.SubTitle>
-                <ItemListWrap item={item} />
+                {loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <ItemListWrap item={item} />
+                )}
                 <BtnWrap>
                   <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
                 </BtnWrap>
