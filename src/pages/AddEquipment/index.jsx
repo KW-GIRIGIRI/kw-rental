@@ -27,6 +27,7 @@ export default function AddEquipment() {
 
     setProduct(response)
     setItem(responseId)
+
     setIsEdit(true)
   }
 
