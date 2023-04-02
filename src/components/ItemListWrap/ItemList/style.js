@@ -8,6 +8,10 @@ export const ItemWrap = styled.div`
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  &:hover {
+      outline: 1px solid ${(props) => props.theme.color.primary.main};
+      outline-offset: -1px;
+  }
 `
 
 export const ItemId = styled.p`
