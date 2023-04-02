@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { getProductDetail } from "../../api/api"
+import { deleteEquipment, getProductDetail } from "../../api/api"
 import AddCartEquip from "../../components/AddCartEquip"
 import DetailDesc from "../../components/DetailDesc"
 import WeekPicker from "../../components/WeekPicker"
@@ -22,6 +22,12 @@ export default function EquipmentDetail() {
     setProduct(response)
   }
 
+  const handleDeleteProduct = async () => {
+    console.log(params.id)
+    const response = await deleteEquipment(params.id)
+    console.log(response)
+  }
+  
   useEffect(() => {
     getProduct()
   }, [])
@@ -37,10 +43,13 @@ export default function EquipmentDetail() {
               <span>{product.category}</span>
               <span>{product.modelName}</span>
             </S.SimpleDesc>
-            <div>
-              <button onClick={() => navigate('/equipment/edit')}>수정</button>
-              <button>삭제</button>
-            </div>
+            {
+              isAuth ? 
+              <div>
+                <button onClick={() => navigate('/equipment/edit', { state: {id : params.id} })}>수정</button>
+                <button onClick={handleDeleteProduct}>삭제</button>
+              </div> : <></>
+            }
           </S.NavDiv>
           <S.DetailWrapper>
             <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product.imgUrl} alt="" />

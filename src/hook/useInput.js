@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue)
+
+  useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
 
   const onChange = event => {
     const {
@@ -16,5 +20,5 @@ export default function useInput(initialValue, validator) {
       setValue(value);
     }
   }
-  return { value, onChange }
+  return { value, onChange };
 }
