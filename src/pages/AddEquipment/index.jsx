@@ -3,6 +3,7 @@ import { Wrapper, DetailWrapper, SubTitle } from "../EquipmentDetail/style"
 import Button from "../../modules/Button"
 import IconFileImg from "../../assets/icon-fileImg.svg"
 import DetailDescInput from "../../components/DetailDesc/DetailDescInput"
+import ItemManagerWrap from "../../components/ItemManagerWrap"
 import iconFileImgWhite from "../../assets/icon-fileImg-white.svg"
 import Textarea from "../../modules/Textarea"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -54,7 +55,7 @@ export default function AddEquipment() {
     const response = await addEquipment(JSON.stringify(data));
     !response?.message && navigate('/equipment')
   }
-  
+
   useEffect(() => {
     if (location.pathname.includes('edit')) handleGetProduct(location.state?.id)
   }, [])
@@ -73,7 +74,6 @@ export default function AddEquipment() {
               </S.FileBtn>
             </>
             : <S.FileLabel>
-              <img src={imgPreview} alt="" />
               <img src={IconFileImg} alt="" />
               <p>사진 추가</p>
               <input type="file" accept="image/*" ref={el => addEqRef.current.imgUrl = el} onChange={handleImgFile} />
@@ -87,12 +87,12 @@ export default function AddEquipment() {
         isEdit ?
           <>
             <SubTitle>품목 수정 및 추가</SubTitle>
-            {/* 품목관리 컴포넌트 */}
+            <ItemManagerWrap />
           </>
           :
           <>
             <SubTitle>품목관리</SubTitle>
-            {/* 품목관리 컴포넌트 */}
+            <ItemManagerWrap />
           </>
       }
       <S.BtnWrap>
