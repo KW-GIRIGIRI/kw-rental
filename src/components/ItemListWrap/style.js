@@ -8,7 +8,7 @@ export const Div = styled.div`
 export const ItemUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 23px 28px;
+  gap: 23px 27px;
 `;
 
 export const ItemLi = styled.li`
