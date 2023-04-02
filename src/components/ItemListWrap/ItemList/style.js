@@ -14,6 +14,16 @@ export const ItemWrap = styled.div`
   }
 `
 
+export const ItemWrapEdit = styled.div`
+  width: 244px;
+  background-color: ${(props) => props.theme.color.text.white};
+  box-sizing: border-box;
+  padding: 16px 13px;
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+`
+
 export const ItemId = styled.p`
   font-size: 15px;
 `

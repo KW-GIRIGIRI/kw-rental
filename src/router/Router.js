@@ -18,7 +18,7 @@ export default function Router() {
             <Route path="/equipment/:id" element={<EquipmentDetail />} />
             <Route path="/equipment/edit" element={<AddEquipment />} />
             <Route path="/equipment/add" element={<AddEquipment />} />
-            <Route path='/equipment/item/:id' element={<EquipmentItemDetail />} />
+            <Route path='/equipment/item' element={<EquipmentItemDetail />} />
           </Route>
         </Route>
       </Routes>
