@@ -43,3 +43,25 @@ export const addEquipment = async (data) => {
     return err;
   }
 };
+
+export const deleteEquipment = async (id) => {
+  try {
+    const response = await instanceUtil.delete(`/admin/equipments/${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const modifyEquipment = async (id) => {
+  try {
+    const response = await instanceUtil.put(`/admin/equipments/${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
