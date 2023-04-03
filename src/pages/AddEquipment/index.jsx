@@ -47,23 +47,17 @@ export default function AddEquipment() {
 
   const handleAddEquipment = async (e) => {
     const data = {
-      equipment : { 
-      rentalPlace : addEqRef.current?.rentalPlace.value,
-      modelName : addEqRef.current?.modelName.value, 
-      category : addEqRef.current?.category.value, 
-      maker : addEqRef.current?.maker.value, 
-      imgUrl :  imgFile, 
-      components : addEqRef.current?.components.value,  
-      purpose : addEqRef.current?.purpose.value, 
-      description : addEqRef.current?.description.value, 
-      maxRentalDays : addEqRef.current?.maxRentalDays.value, 
-      // totalQuantity : addEqRef.current?.totalQuantity.value, // 품목 연결하고 수정
-      totalQuantity : 1, 
+       equipment : { 
+        // imgUrl: imgFile, 
+        imgUrl: 'https://kw-girigiri-release.s3.ap-northeast-2.amazonaws.com/7c7b723d-22f0-43fb-9ad7-b70c8aa0a5b3.jpg', 
     }, "items": [{
-      propertyNumber : 16
+      propertyNumber: 17
+      // 품목 파트 적용 후 수정
       }]
     }
     
+    addEqRef.current.map(eq => data.equipment[eq.name] = eq.value)
+
     const response = await addEquipment(JSON.stringify(data));
     // navigate(`/equipment/${response.split("/")[3]}`)
   }
@@ -82,19 +76,19 @@ export default function AddEquipment() {
               <S.FileBtn>
                 <img src={iconFileImgWhite} alt="" />
                 <p>사진 변경</p>
-                <input type="file" accept="image/*" ref={el => addEqRef.current.imgUrl = el} onChange={handleImgFile}/>
+                <input type="file" accept="image/*" onChange={handleImgFile}/>
               </S.FileBtn>
             </>
             : <S.FileLabel>
               <img src={IconFileImg} alt="" />
               <p>사진 추가</p>
-              <input type="file" accept="image/*" ref={el => addEqRef.current.imgUrl = el} onChange={handleImgFile} />
+              <input type="file" accept="image/*" onChange={handleImgFile} />
           </S.FileLabel>
         }
         <DetailDescInput product={product} ref={addEqRef} />
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
-      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current.description = el} />
+      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[8] = el} />
       {
         isEdit ?
           <>
