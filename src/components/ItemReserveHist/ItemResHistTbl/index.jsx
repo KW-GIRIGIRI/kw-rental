@@ -17,7 +17,7 @@ export default function ItemResHistTbl({ data }) {
       <tbody>
         {data.map(i => {
           return (
-            <tr>
+            <tr key={i.id}>
               <td>{i.returnStatus}</td>
               <td>{i.pickupDate}</td>
               <td>{i.returnDate}</td>

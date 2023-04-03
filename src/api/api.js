@@ -65,3 +65,14 @@ export const modifyEquipment = async (id) => {
     return err;
   }
 };
+
+export const getItemList = async (id) => {
+  try {
+    const response = await instanceUtil.get(`/items?equipmentId=${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}
