@@ -14,7 +14,6 @@ import * as S from "./style"
 export default function EquipmentDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null)
-  const [loading, setLoading] = useState(true)
   const [item, setItem] = useState(null)
   const navigate = useNavigate()
   const { isAuth } = useContext(AuthContext)
@@ -25,20 +24,14 @@ export default function EquipmentDetail() {
   }
 
   const getItem = async () => {
-    try {
-      const response = await getItemList(params.id);
-      setItem(response);
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(true);
-    }
+    const response = await getItemList(params.id);
+    setItem(response)
   };
 
   const handleDeleteProduct = async () => {
-    console.log(params.id)
+    // console.log(params.id)
     const response = await deleteEquipment(params.id)
-    console.log(response)
+    // console.log(response)
   }
 
   useEffect(() => {
@@ -90,11 +83,11 @@ export default function EquipmentDetail() {
                 {/* 월별 캘린더로 수정 */}
                 <WeekPicker />
                 <S.SubTitle>품목 관리</S.SubTitle>
-                {loading ? (
-                  <div>Loading...</div>
-                ) : (
-                  <ItemListWrap item={item} />
-                )}
+                {
+                  item ?
+                    <ItemListWrap item={item.items} isEdit={false} />
+                    : <div>loading...</div>
+                }
                 <BtnWrap>
                   <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
                 </BtnWrap>
