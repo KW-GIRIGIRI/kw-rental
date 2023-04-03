@@ -3,6 +3,7 @@ import { BtnWrap } from "../AddEquipment/style"
 import Button from "../../modules/Button"
 import { useNavigate } from "react-router-dom"
 import ItemReserveHist from "../../components/ItemReserveHist"
+import { useState } from "react"
 
 const itemList = [1, 2, 3]
 
@@ -17,11 +18,12 @@ export const product = {
     totalQuantity: 10
   },
   rentalPlace: '한울관 B119호',
-  imgUrl : "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
+  imgUrl: "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
 }
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
+  const [editNum, setEditNum] = useState(false);
 
   return (
     <S.Wrapper>
@@ -46,9 +48,13 @@ export default function EquipmentItemDetail() {
         캘린더
       </div>
       <S.SubTitle>자산번호 관리</S.SubTitle>
-      <div>
-        자산번호 수정
-      </div>
+      <S.numEditBtn onClick={() => { setEditNum(!editNum) }}><p>수정</p></S.numEditBtn>
+      {
+        editNum ? <S.Input type="text" maxlength="14" placeholder="20190500260004"></S.Input>
+          : <S.ItemNumDiv>
+            <p>20190500260004</p>
+          </S.ItemNumDiv>
+      }
       <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
       <ItemReserveHist />
       <BtnWrap>

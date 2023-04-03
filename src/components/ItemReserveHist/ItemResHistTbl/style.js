@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
-  border-top-left-radius: ${props => props.theme.borderRadius.lv2};
-  width: 100%;
-  height: 100%;
-`
-
 export const HistTable = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -39,10 +33,10 @@ export const HistTable = styled.table`
 
   & td {
     text-align: center;
+    padding: 0 20px;
+  }
 
-    &:nth-child(2), &:nth-child(3) {
-      text-align: left;
-      padding-left: 35px;
-    }
+  & td:nth-child(5) {
+    text-align: left;
   }
 `
