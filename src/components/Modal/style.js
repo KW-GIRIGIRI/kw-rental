@@ -26,6 +26,13 @@ export const Div = styled.div`
     font-size: 14px;
     margin: 30px 0 20px;
   }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 export const CloseBtn = styled.button`
