@@ -9,7 +9,7 @@ import Textarea from "../../modules/Textarea"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
-import { addEquipment, getProductDetail } from "../../api/api"
+import { addEquipment, getProductDetail, postImage } from "../../api/api"
 import useModal from "../../hook/useModal"
 
 export default function AddEquipment() {
@@ -29,17 +29,21 @@ export default function AddEquipment() {
     setIsEdit(true)
   }
 
-  const handleImgFile = e => {
-    setImgPreview(URL.createObjectURL(e.target.files[0]));
-    setImgFile(e.target.files[0])
+  const handleImgFile = async e => {
+    const image = e.target.files[0]
+    setImgPreview(URL.createObjectURL(image));
+
+    const formData = new FormData()
+    formData.append('file', image);
+
+    const response = await postImage(formData)
+    setImgFile(response)
   }
 
   const handleWriteCancel = () => {
     // 값이 있을 경우 modal open
     open()
   }
-
-  console.log(addEqRef)
 
   const handleAddEquipment = async (e) => {
     const data = {
@@ -48,21 +52,20 @@ export default function AddEquipment() {
       modelName : addEqRef.current?.modelName.value, 
       category : addEqRef.current?.category.value, 
       maker : addEqRef.current?.maker.value, 
-      imgUrl :  imgFile, // 이미지 서버 생성 후, 수정
-      // imgUrl: 'https://cdn.pixabay.com/photo/2012/04/14/13/15/digital-camera-33879_1280.png', // 임시 이미지
+      imgUrl :  imgFile, 
       components : addEqRef.current?.components.value,  
       purpose : addEqRef.current?.purpose.value, 
       description : addEqRef.current?.description.value, 
       maxRentalDays : addEqRef.current?.maxRentalDays.value, 
       // totalQuantity : addEqRef.current?.totalQuantity.value, // 품목 연결하고 수정
       totalQuantity : 1, 
-    },
-      "items": [{
-      propertyNumber : 15
-      },
-    ]}
+    }, "items": [{
+      propertyNumber : 16
+      }]
+    }
+    
     const response = await addEquipment(JSON.stringify(data));
-    !response?.message && navigate('/equipment')
+    // navigate(`/equipment/${response.split("/")[3]}`)
   }
 
   useEffect(() => {
@@ -112,7 +115,7 @@ export default function AddEquipment() {
         <p>작성중인 내용이 있습니다. 나가시겠습니까?</p>
         <div>
           <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
-          <Button text='나가기'className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" />
+          <Button text='나가기'className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={() => navigate('/equipment')} />
         </div>
       </Modal>
     </Wrapper>

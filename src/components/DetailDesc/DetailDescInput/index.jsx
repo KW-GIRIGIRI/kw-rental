@@ -18,7 +18,7 @@ const DetailDescInput = forwardRef(({product}, addEqRef) => {
   const location = useLocation()
 
   const handleSelectWidth = (e) => {
-    e.target.style.padding = `5px ${selectRef.current.value.length * 3}px 5px ${selectRef.current.value.length * 2}px`
+    e.target.style.padding = `5px ${selectRef.current.value.length + 10}px 5px ${selectRef.current.value.length + 5}px`
   }
 
   return (
