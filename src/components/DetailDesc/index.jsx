@@ -28,7 +28,7 @@ export default function DetailDesc({product}) {
         </S.ProductLi>
         <S.ProductLi>
           <p>최대 대여 가능일</p>
-          <span>1일</span>
+          <span>{product.maxRentalDays}일</span>
         </S.ProductLi>
       </ol>
     </S.Div>

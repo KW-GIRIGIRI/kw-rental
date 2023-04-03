@@ -26,7 +26,7 @@ export default function EquipmentDetail() {
 
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id)
-    !response && navigate('/equipments')
+    !response && navigate('/equipment')
   }
   
   useEffect(() => {
@@ -64,16 +64,9 @@ export default function EquipmentDetail() {
             <DetailDesc product={product} />
           </S.DetailWrapper>
           <S.SubTitle>안내사항</S.SubTitle>
-          <S.NoticeUl>
-            {/* {
-              productDesc?.map((text, index) => {
-                return (
-                  <S.NoticeLi key={index}>{text}</S.NoticeLi>
-                )
-              })
-            } */}
-            <S.NoticeLi>{product.description}</S.NoticeLi>
-          </S.NoticeUl>
+          <S.NoticeWrap>
+            <S.NoticeText>{product.description}</S.NoticeText>
+          </S.NoticeWrap>
           {
             isAuth ?
               <>
