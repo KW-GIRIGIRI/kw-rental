@@ -11,6 +11,7 @@ export const BtnDefault = styled.button`
   font-size: ${(props) => props.fontSize};
   box-shadow: ${(props) => props.boxShadow};
   line-height: 1;
+  float: ${props => props.float};
 
   /* main color button */
   &.main {

@@ -10,11 +10,13 @@ import Button from "../../modules/Button"
 import Image from "../../modules/Image"
 import { BtnWrap } from "../AddEquipment/style"
 import * as S from "./style"
+import useModal from "../../hook/useModal"
 
 export default function EquipmentDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null)
   const navigate = useNavigate()
+  const { Modal, open, close } = useModal()
   const { isAuth } = useContext(AuthContext)
 
   const getProduct = async () => {
@@ -23,9 +25,8 @@ export default function EquipmentDetail() {
   }
 
   const handleDeleteProduct = async () => {
-    console.log(params.id)
     const response = await deleteEquipment(params.id)
-    console.log(response)
+    !response && navigate('/equipments')
   }
   
   useEffect(() => {
@@ -47,9 +48,16 @@ export default function EquipmentDetail() {
               isAuth ? 
               <div>
                 <button onClick={() => navigate('/equipment/edit', { state: {id : params.id} })}>수정</button>
-                <button onClick={handleDeleteProduct}>삭제</button>
+                <button onClick={() =>open()}>삭제</button>
               </div> : <></>
             }
+            <Modal>
+              <p>정말 삭제하시겠습니까?</p>
+              <div>
+                <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
+                <Button text='삭제'className='main' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={handleDeleteProduct} />
+              </div>
+            </Modal>
           </S.NavDiv>
           <S.DetailWrapper>
             <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product.imgUrl} alt="" />

@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
 import { addEquipment, getProductDetail } from "../../api/api"
+import useModal from "../../hook/useModal"
 
 export default function AddEquipment() {
   const location = useLocation()
@@ -18,6 +19,7 @@ export default function AddEquipment() {
   const [product, setProduct] = useState(null)
   const [imgFile, setImgFile] = useState('')
   const [imgPreview, setImgPreview] = useState('')
+  const { Modal, open, close} = useModal()
   const addEqRef = useRef([])
 
   const handleGetProduct = async (id) => {
@@ -32,6 +34,13 @@ export default function AddEquipment() {
     setImgFile(e.target.files[0])
   }
 
+  const handleWriteCancel = () => {
+    // 값이 있을 경우 modal open
+    open()
+  }
+
+  console.log(addEqRef)
+
   const handleAddEquipment = async (e) => {
     const data = {
       equipment : { 
@@ -39,8 +48,8 @@ export default function AddEquipment() {
       modelName : addEqRef.current?.modelName.value, 
       category : addEqRef.current?.category.value, 
       maker : addEqRef.current?.maker.value, 
-      // imgUrl :  imgFile, // 이미지 서버 생성 후, 수정
-      imgUrl: 'https://cdn.pixabay.com/photo/2012/04/14/13/15/digital-camera-33879_1280.png', // 임시 이미지
+      imgUrl :  imgFile, // 이미지 서버 생성 후, 수정
+      // imgUrl: 'https://cdn.pixabay.com/photo/2012/04/14/13/15/digital-camera-33879_1280.png', // 임시 이미지
       components : addEqRef.current?.components.value,  
       purpose : addEqRef.current?.purpose.value, 
       description : addEqRef.current?.description.value, 
@@ -97,8 +106,15 @@ export default function AddEquipment() {
       }
       <S.BtnWrap>
         <Button onClick={handleAddEquipment} className="main" text="저장하기" padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
-        <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px"/>
+        <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px" onClick={handleWriteCancel}/>
       </S.BtnWrap>
+      <Modal>
+        <p>작성중인 내용이 있습니다. 나가시겠습니까?</p>
+        <div>
+          <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
+          <Button text='나가기'className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" />
+        </div>
+      </Modal>
     </Wrapper>
   )
 }
