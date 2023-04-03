@@ -13,12 +13,13 @@ const Button = ({
   boxShadow,
   fontSize,
   className,
+  float,
   onClick
 }) => {
   return (
     <BtnDefault
-      margin={margin} color={color} boxShadow={boxShadow} backgroundColor={backgroundColor} width={width} height={height} fontWeight={fontWeight} fontSize={fontSize} className={className} onClick={onClick} padding={padding} borderRadius={borderRadius}>
-      {text}
+      margin={margin} color={color} boxShadow={boxShadow} backgroundColor={backgroundColor} width={width} height={height} fontWeight={fontWeight} fontSize={fontSize} className={className} onClick={onClick} padding={padding} borderRadius={borderRadius} float={float}>
+      {text} 
     </BtnDefault>
   )
 }

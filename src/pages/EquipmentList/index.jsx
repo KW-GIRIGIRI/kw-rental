@@ -11,9 +11,9 @@ import EquipListWrap from "../../components/EquipListWrap"
 import iconPageArrow from "../../assets/icon-pageArrow.svg"
 import { useContext, useEffect, useState } from "react"
 import { getProductList } from "../../api/api"
-import SearchError from "../../components/Modal/SearchError"
 import { AuthContext } from "../../context/Context"
 import { useNavigate } from "react-router-dom"
+import useModal from "../../hook/useModal"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -21,14 +21,14 @@ export default function EquipmentList() {
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
   const [searchKeyword, setSearchKeyword] = useState('')
-  const [modal, setModal] = useState(false)
   const { isAuth } = useContext(AuthContext)
+  const { Modal, open, close } = useModal();
   const navigate = useNavigate()
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
       if(searchKeyword.includes('\\')) alert('유효한 값을 입력하세요')
-      else if (searchKeyword.length < 2) setModal(true)
+      else if (searchKeyword.length < 2) open()
       else {
         getProduct()
         setPage(0)
@@ -70,7 +70,10 @@ export default function EquipmentList() {
             <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
             <S.SearchImg onClick={handleSearch} src={iconSearch} alt="" />
           </S.SearchCont>
-          <SearchError modal={modal} setModal={setModal} />
+          <Modal>
+            <p>최소 2자 이상의 검색어를 입력해주세요.</p>
+            <Button text='확인'className='main' padding="10px 20px" borderRadius="5px" fontSize="14px" onClick={close} float='right' />
+          </Modal>
           <S.DateCont>
             <img src={iconCalendar} alt="" />
             <span>3월 12일(화)</span>
