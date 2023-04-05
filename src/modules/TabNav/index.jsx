@@ -1,8 +1,8 @@
 import * as S from "./style"
 
-export default function TabNav({ text, className }) {
+export default function TabNav({ text, className, onClick }) {
   return (
-    <S.TabButton className={className}>
+    <S.TabButton onClick={onClick} className={className}>
       {text}
     </S.TabButton>
   )

@@ -14,8 +14,10 @@ const useModal = ({ useBlur = true } = {}) => {
 
   return {
     Modal: isOpen
-      ? ({ children }) => (
-          <Modal onClose={useBlur ? close : null}>{children}</Modal>
+      ? ({ children, className }) => (
+          <Modal className={className} onClose={useBlur ? close : null}>
+            {children}
+          </Modal>
         )
       : () => null,
     open,
