@@ -12,6 +12,10 @@ export const SimpleDesc = styled.div`
   & > span:not(:last-child)::after {
     content: " > ";
   }
+  & :first-child {
+    color: ${(props) => props.theme.color.primary.main};
+    font-weight: 600;
+  }
 `;
 
 export const Div = styled.div`
