@@ -3,13 +3,14 @@ import { Wrapper, DetailWrapper, SubTitle } from "../EquipmentDetail/style"
 import Button from "../../modules/Button"
 import IconFileImg from "../../assets/icon-fileImg.svg"
 import DetailDescInput from "../../components/DetailDesc/DetailDescInput"
-import ItemManagerWrap from "../../components/ItemManagerWrap"
+import ItemListWrap from "../../components/ItemListWrap"
 import iconFileImgWhite from "../../assets/icon-fileImg-white.svg"
 import Textarea from "../../modules/Textarea"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
-import { addEquipment, getProductDetail, postImage } from "../../api/api"
+import { addEquipment, getProductDetail, postImage, getItemList } from "../../api/api"
+import { addEquipment, getProductDetail, getItemList } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 
@@ -20,15 +21,19 @@ export default function AddEquipment() {
   const [product, setProduct] = useState(null)
   const [imgFile, setImgFile] = useState('')
   const [imgPreview, setImgPreview] = useState('')
-  const { Modal, open, close} = useModal()
+  const [item, setItem] = useState(null)
+  const { Modal, open, close } = useModal()
   const addEqRef = useRef([])
   const { Toggle, state } = useToggle()
 
 
   const handleGetProduct = async (id) => {
     const response = await getProductDetail(id);
+    const responseId = await getItemList(id);
 
     setProduct(response)
+    setItem(responseId)
+
     setIsEdit(true)
   }
 
@@ -97,15 +102,16 @@ export default function AddEquipment() {
           isEdit ?
             <>
               <SubTitle>품목 수정 및 추가</SubTitle>
-              <ItemManagerWrap />
+              { item ? <ItemListWrap item={item.items} isEdit={isEdit} isAdd={false} /> : <></> }
             </>
             :
             <>
               <SubTitle>품목관리</SubTitle>
-              <ItemManagerWrap />
+              <ItemListWrap item={[{ id: 1, propertyNumber: null }]} isEdit={isEdit} isAdd={true} />
             </>
           : <></>
       }
+
       <S.BtnWrap>
         <Button onClick={handleAddEquipment} className="main" text="저장하기" padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
         <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px" onClick={open}/>

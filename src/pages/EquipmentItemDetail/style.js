@@ -49,3 +49,50 @@ export const SelectItem = styled.select`
   -moz-appearance: none;
   -webkit-appearance: none;
 `;
+
+export const ItemNumDiv = styled.div`
+  width: 150px;
+  height: 30px;
+  box-sizing: border-box;
+  background: ${props => props.theme.color.primary.sub};
+  border: 1px solid ${props => props.theme.color.gray.g3};
+  border-radius: ${props => props.theme.borderRadius.lv1};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > p {
+    font-size: 15px;
+    color: ${props => props.theme.color.gray.g5};
+  }
+`;
+
+export const numEditBtn = styled.button`
+  margin-left: 10px;
+  width: 30px;
+  height: 20px;
+  background: ${props => props.theme.color.primary.main};
+  color: ${props => props.theme.color.text.white};
+  border-radius: ${props => props.theme.borderRadius.lv1};
+  font-size: 12px;
+
+  & > p {
+    line-height: 20px;
+  }
+`
+
+export const Input = styled.input`
+  width: 150px;
+  height: 30px;
+  box-sizing: border-box;
+  background: ${props => props.theme.color.text.white};
+  color: ${props => props.theme.color.text.black};
+  border-radius: ${props => props.theme.borderRadius.lv1};
+  display: block;
+  font-size: 15px;
+  text-align: left;
+  padding: 0 14px;
+  &::placeholder {
+    font-size: 15px;
+    text-align: center;
+    }
+`

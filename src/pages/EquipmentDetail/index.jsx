@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { deleteEquipment, getProductDetail } from "../../api/api"
+import { deleteEquipment, getProductDetail, getItemList } from "../../api/api"
 import AddCartEquip from "../../components/AddCartEquip"
 import DetailDesc from "../../components/DetailDesc"
 import WeekPicker from "../../components/WeekPicker"
@@ -16,6 +16,7 @@ import { category } from "../../data/category"
 export default function EquipmentDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null)
+  const [item, setItem] = useState(null)
   const navigate = useNavigate()
   const { Modal, open, close } = useModal()
   const { isAuth } = useContext(AuthContext)
@@ -25,13 +26,22 @@ export default function EquipmentDetail() {
     setProduct(response)
   }
 
+  const getItem = async () => {
+    const response = await getItemList(params.id);
+    setItem(response)
+  };
+
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id)
     !response && navigate('/equipment')
   }
-  
+
   useEffect(() => {
-    getProduct()
+    getProduct();
+  }, [])
+
+  useEffect(() => {
+    getItem();
   }, [])
 
   return (
@@ -46,17 +56,17 @@ export default function EquipmentDetail() {
               <span>{product.modelName}</span>
             </S.SimpleDesc>
             {
-              isAuth ? 
-              <div>
-                <button onClick={() => navigate('/equipment/edit', { state: {id : params.id} })}>수정</button>
-                <button onClick={() =>open()}>삭제</button>
-              </div> : <></>
+              isAuth ?
+                <div>
+                  <button onClick={() => navigate('/equipment/edit', { state: { id: params.id } })}>수정</button>
+                  <button onClick={() => open()}>삭제</button>
+                </div> : <></>
             }
             <Modal>
               <p>정말 삭제하시겠습니까?</p>
               <div>
                 <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
-                <Button text='삭제'className='main' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={handleDeleteProduct} />
+                <Button text='삭제' className='main' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={handleDeleteProduct} />
               </div>
             </Modal>
           </S.NavDiv>
@@ -75,7 +85,11 @@ export default function EquipmentDetail() {
                 {/* 월별 캘린더로 수정 */}
                 <WeekPicker />
                 <S.SubTitle>품목 관리</S.SubTitle>
-                <ItemListWrap />
+                {
+                  item ?
+                    <ItemListWrap item={item.items} isEdit={false} />
+                    : <div>loading...</div>
+                }
                 <BtnWrap>
                   <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="120px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
                 </BtnWrap>

@@ -72,6 +72,17 @@ export const modifyEquipment = async (id) => {
   }
 };
 
+export const getItemList = async (id) => {
+  try {
+    const response = await instanceUtil.get(`/items?equipmentId=${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
 export const postImage = async (formData) => {
   try {
     const response = await instancForm.post(`/admin/equipments/images`, formData);
