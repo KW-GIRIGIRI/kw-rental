@@ -10,13 +10,13 @@ export default function EquipmentRental() {
 
   return (
     <>
-      <TabNav onClick={() => navigate('/equipment')} text="기자재 조회" className={location.pathname.includes('/box') ? false : "on"} />
+      <TabNav onClick={() => navigate('/equipment')} text="기자재 조회" className={location.pathname.includes('/inventory') ? false : "on"} />
       {
         isAuth ?
-          <TabNav className={location.pathname.includes('/box') ? "on" : false} text="대여 현황" /> :
-          <TabNav className={location.pathname.includes('/box') ? "on" : false} onClick={() => navigate('/equipment/box')}  text="담은 기자재(2)" />
+          <TabNav className={location.pathname.includes('/inventory') ? "on" : false} text="대여 현황" /> :
+          <TabNav className={location.pathname.includes('/inventory') ? "on" : false} onClick={() => navigate('/equipment/inventory')} text="담은 기자재(2)" />
       }
-      <Outlet /> 
+      <Outlet />
     </>
   )
 }

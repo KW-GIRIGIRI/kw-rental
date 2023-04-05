@@ -8,6 +8,7 @@ import EquipmentList from '../pages/EquipmentList';
 import EquipmentRental from '../pages/EquipmentRental';
 import Notice from '../pages/Notice';
 import RentalSuccess from '../pages/RentalSuccess';
+import RentalApplication from '../pages/RentalApplication';
 
 export default function Router() {
   return (
@@ -21,8 +22,9 @@ export default function Router() {
             <Route path="/equipment/edit" element={<AddEquipment />} />
             <Route path="/equipment/add" element={<AddEquipment />} />
             <Route path="/equipment/item" element={<EquipmentItemDetail />} />
-            <Route path="/equipment/box" element={<EquipmentBox />} />
-            <Route path="/equipment/success" element={<RentalSuccess />} />
+            <Route path="/equipment/inventory" element={<EquipmentBox />} />
+            <Route path="/equipment/inventory/application" element={<RentalApplication />} />
+            <Route path="/equipment/inventory/success" element={<RentalSuccess />} />
           </Route>
         </Route>
       </Routes>

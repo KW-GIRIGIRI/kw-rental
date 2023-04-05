@@ -18,7 +18,7 @@ export default function EquipCartList() {
         <p>기자재</p>
         <p>개수</p>
         <p>수령일</p>
-        <p>반닙일</p>
+        <p>반납일</p>
         <p> </p>
       </S.ListLi>
       <S.ListLi>
@@ -27,8 +27,8 @@ export default function EquipCartList() {
           {/* <p>{category.map(value => 
               value.value === item.category && value.label
             )}</p> */}
-            <p>카메라</p>
-            <p>MIRRORLESS SONY a6600</p>
+          <p>카메라</p>
+          <p>MIRRORLESS SONY a6600</p>
         </S.ItemWrap>
         <p>1</p>
         <p>23년 3월 1일(수)</p>
