@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
 import { addEquipment, getProductDetail, postImage, getItemList } from "../../api/api"
-import { addEquipment, getProductDetail, getItemList } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 
