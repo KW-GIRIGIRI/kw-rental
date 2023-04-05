@@ -33,6 +33,28 @@ export const Div = styled.div`
     align-items: center;
     gap: 10px;
   }
+
+  &.modify {
+    width: 461px;
+    font-size: 14px;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 30px 40px;
+
+    & > p {
+      margin: 26px 0 15px 0;
+      font-weight: 600;
+      &:first-of-type {
+        margin: 0 0 25px;
+      }
+    }
+
+    & > div.item {
+      display: flex;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+  }
 `;
 
 export const CloseBtn = styled.button`

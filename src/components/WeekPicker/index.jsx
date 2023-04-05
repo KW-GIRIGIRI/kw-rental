@@ -4,7 +4,7 @@ import iconRightArrow from "../../assets/icon-rightArrow.svg"
 import iconCalendar from "../../assets/icon-calendar.svg"
 import * as S from "./style"
 
-export default function WeekPicker() {
+export default function WeekPicker({modify}) {
   const [date, setDate] = useState({
     cYear: '',
     cMonth: null,
@@ -99,9 +99,9 @@ export default function WeekPicker() {
     const today = parseInt(handleNextDay(0).split('-').join('')) 
     
     return (
-        <S.DateLi key={num}>
-          <S.DateTit>{gMonth}월 {gDate}일({gDay})</S.DateTit>
-        <S.DateSubTit className={gStringDay >= today ? false : 'disabled'}>
+        <S.DateLi modify={modify} key={num}>
+          <S.DateTit modify={modify}>{gMonth}월 {gDate}일({gDay})</S.DateTit>
+          <S.DateSubTit modify={modify} className={gStringDay >= today ? false : 'disabled'}>
             {num} {/* 대여 가능 개수 */}
           </S.DateSubTit>
         </S.DateLi>
@@ -125,8 +125,8 @@ export default function WeekPicker() {
 
   return (
     <>
-      <S.DateWrap>
-        <S.NextBtn
+      <S.DateWrap modify={modify}>
+        <S.NextBtn  modify={modify} 
           disabled={date.cWeek === handleGetNumberOfWeek(new Date())}
           onClick={() => handleDate(-1)}>
           <img src={iconLeftArrow} alt="이전 주 보기" />
@@ -134,29 +134,32 @@ export default function WeekPicker() {
         {
           date &&
           <>
-            <S.DateCont>
-              <S.DateImg src={iconCalendar} alt="" />
+            <S.DateCont modify={modify}>
+              <S.DateImg modify={modify} src={iconCalendar} alt="" />
               {date.cYear.toString().slice(2)}년 {date.cMonth}월 {date.cWeekNo}째 주
             </S.DateCont>
           </>
         }
-        <S.DateInp type="date" name="" id="" 
+        <S.DateInp modify={modify} type="date" name="" id="" 
           value={new Date(date.cYear, 0, 3 + (date.cWeek -1 )* 7).toISOString().split('T')[0]}
           onChange={handleDate}
           min={handleNextDay(1)}
           max={handleNextDay(31)}
         />
-        <S.NextBtn
+        <S.NextBtn modify={modify} 
           disabled={date.cWeek  === handleGetNumberOfWeek(new Date(handleNextDay(31)))}
           onClick={() => handleDate(1)}>
           <img src={iconRightArrow} alt="다음 주 보기" />
         </S.NextBtn>
       </S.DateWrap>
-      <S.DateUl>
-        <S.DateLi>
-          <S.DateTit>날짜</S.DateTit>
-          <S.DateSubTit className="text">대여 가능 개수</S.DateSubTit>
-        </S.DateLi>
+      <S.DateUl modify={modify}>
+        {
+          modify ? <></> :
+          <S.DateLi>
+            <S.DateTit>날짜</S.DateTit>
+            <S.DateSubTit className="text">대여 가능 개수</S.DateSubTit>
+          </S.DateLi>
+        }
         {
           [...Array(4)].map((v,i) => i+1).map(i => handleWeekPrint(i))
         }
