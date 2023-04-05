@@ -11,6 +11,7 @@ import Image from "../../modules/Image"
 import { BtnWrap } from "../AddEquipment/style"
 import * as S from "./style"
 import useModal from "../../hook/useModal"
+import { category } from "../../data/category"
 
 export default function EquipmentDetail() {
   const params = useParams();
@@ -41,7 +42,7 @@ export default function EquipmentDetail() {
           <S.NavDiv>
             <S.SimpleDesc>
               <span>기자재 조회</span>
-              <span>{product.category}</span>
+              <span>{category.map(value => value.value === product.category && value.label )}</span>
               <span>{product.modelName}</span>
             </S.SimpleDesc>
             {

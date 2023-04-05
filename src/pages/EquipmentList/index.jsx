@@ -14,6 +14,7 @@ import { getProductList } from "../../api/api"
 import { AuthContext } from "../../context/Context"
 import { useNavigate } from "react-router-dom"
 import useModal from "../../hook/useModal"
+import { category } from "../../data/category"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -22,6 +23,7 @@ export default function EquipmentList() {
   const [pageArray, setPageArray] = useState([])
   const [searchKeyword, setSearchKeyword] = useState('')
   const { isAuth } = useContext(AuthContext)
+  const [isCategory, setIsCategory] = useState(0)
   const { Modal, open, close } = useModal();
   const navigate = useNavigate()
 
@@ -36,20 +38,28 @@ export default function EquipmentList() {
     }
   }
 
+  const handleCategory = (e) => {
+    setIsCategory(parseInt(e.target.value))
+    setPage(0)
+  }
+
   const handleNextDay = (days) => {
     let today = new Date();
     today.setDate(today.getDate() + days)
     return today.toISOString().split('T')[0];
   }
 
-  const getProduct = async () => {
-    const response = await getProductList({
-      size: viewMode==='gal' ? 16 : 10,
-      page: page
-    });
+
+  const getProduct = async() => {
+    const reqSize = viewMode === 'gal' ? 16 : 10
+    const reqKeyword = searchKeyword ? `&keyword=${searchKeyword}` : ''
+    const reqCategory = isCategory ? `&category=${category.filter((_, i) => i + 1 === isCategory)[0]?.value}` : ''
     
+    const reqUrl = `size=${reqSize}&page=${page}${reqKeyword + reqCategory}`
+    const response = await getProductList(reqUrl);
+
     window.scrollTo({
-      top: 0,
+      top: 0, 
     })
 
     setPageArray(response.endPoints)
@@ -59,7 +69,7 @@ export default function EquipmentList() {
   useEffect(() => {
     getProduct()
     if (isAuth) setViewMode('list')
-  }, [page, viewMode])
+  }, [page, viewMode, isCategory])
 
   return (
     <S.Wrapper>
@@ -102,12 +112,12 @@ export default function EquipmentList() {
       </S.FilterWrap>
 
       <S.FilterWrap className="mode">
-        <Button className="main shadow" text="전체" padding="10px 21px" borderRadius="20px" />
-        <Button className="disable shadow" text="카메라" padding="10px 21px" borderRadius="20px"/>
-        <Button className="disable shadow" text="녹음 장비" padding="10px 21px" borderRadius="20px"/>
-        <Button className="disable shadow" text="촬영보조 장비" padding="10px 21px" borderRadius="20px"/>
-        <Button className="disable shadow" text="VR 장비" padding="10px 21px" borderRadius="20px" />
-        <Button className="disable shadow" text="기타" padding="10px 21px" borderRadius="20px" />
+        <Button className={isCategory ? 'disable shadow' : 'main shadow'} text="전체" padding="10px 21px" borderRadius="20px" onClick={handleCategory} value="0" />
+        {
+          category.map((item, index) => 
+            <Button value={index + 1} key={index} className={isCategory === index + 1 ? `main shadow` : 'disable shadow'} text={item.label} padding="10px 21px" borderRadius="20px" onClick={handleCategory}/>
+          )
+        }
         {
           isAuth ? <button className="add"><img src={iconPlus} alt="기자재 카테고리 추가" /></button> : <></>
         }

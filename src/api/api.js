@@ -17,11 +17,9 @@ const instancForm = axios.create({
 });
 
 
-export const getProductList = async ({ size, page }) => {
+export const getProductList = async (url) => {
   try {
-    const response = await instanceUtil.get(
-      `/equipments?size=${size}&page=${page}&sort=id,DESC`
-    );
+    const response = await instanceUtil.get(`/equipments?${url}`);
 
     return response.data;
   } catch (err) {
