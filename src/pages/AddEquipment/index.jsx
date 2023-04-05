@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
 import { addEquipment, getProductDetail, postImage, getItemList } from "../../api/api"
-import { addEquipment, getProductDetail, getItemList } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 
@@ -98,7 +97,7 @@ export default function AddEquipment() {
       <SubTitle>안내사항</SubTitle>
       <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[8] = el} />
       {
-        state ? 
+        state || item ? 
           isEdit ?
             <>
               <SubTitle>품목 수정 및 추가</SubTitle>
