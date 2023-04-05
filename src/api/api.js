@@ -9,11 +9,17 @@ const instanceUtil = axios.create({
   },
 });
 
-export const getProductList = async ({ size, page }) => {
+const instancForm = axios.create({
+  baseURL,
+  headers: {
+    "Content-type": "multipart/form-data",
+  },
+});
+
+
+export const getProductList = async (url) => {
   try {
-    const response = await instanceUtil.get(
-      `/equipments?size=${size}&page=${page}&sort=id,DESC`
-    );
+    const response = await instanceUtil.get(`/equipments?${url}`);
 
     return response.data;
   } catch (err) {
@@ -37,7 +43,7 @@ export const addEquipment = async (data) => {
   try {
     const response = await instanceUtil.post(`/admin/equipments`, data);
 
-    return response.data;
+    return response.headers.get("Location");
   } catch (err) {
     console.error(err.message);
     return err;
@@ -75,4 +81,15 @@ export const getItemList = async (id) => {
     console.error(err.message);
     return err;
   }
-}
+};
+
+export const postImage = async (formData) => {
+  try {
+    const response = await instancForm.post(`/admin/equipments/images`, formData);
+
+    return response.headers.get("Location");
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../../context/Context"
 import Image from "../../../modules/Image"
+import { category } from "../../../data/category"
 import * as S from "./style"
 
 export default function ListType({ data }) {
@@ -21,7 +22,9 @@ export default function ListType({ data }) {
             <S.ListLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>
                 <Image width="72px" height="72px" borderRadius="10px" src={item.imgUrl} alt={`${item.modelName} 이미지`} />
                 <S.ItemWrap>
-                  <p>{item.category}</p>
+                <p>{category.map(value => 
+                    value.value === item.category && value.label
+                  )}</p>
                   <p>{item.modelName}</p>
                 </S.ItemWrap>
               <p>

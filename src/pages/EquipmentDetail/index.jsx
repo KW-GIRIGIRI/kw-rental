@@ -11,6 +11,7 @@ import Image from "../../modules/Image"
 import { BtnWrap } from "../AddEquipment/style"
 import * as S from "./style"
 import useModal from "../../hook/useModal"
+import { category } from "../../data/category"
 
 export default function EquipmentDetail() {
   const params = useParams();
@@ -32,7 +33,7 @@ export default function EquipmentDetail() {
 
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id)
-    !response && navigate('/equipments')
+    !response && navigate('/equipment')
   }
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function EquipmentDetail() {
           <S.NavDiv>
             <S.SimpleDesc>
               <span>기자재 조회</span>
-              <span>{product.category}</span>
+              <span>{category.map(value => value.value === product.category && value.label )}</span>
               <span>{product.modelName}</span>
             </S.SimpleDesc>
             {
@@ -74,16 +75,9 @@ export default function EquipmentDetail() {
             <DetailDesc product={product} />
           </S.DetailWrapper>
           <S.SubTitle>안내사항</S.SubTitle>
-          <S.NoticeUl>
-            {/* {
-              productDesc?.map((text, index) => {
-                return (
-                  <S.NoticeLi key={index}>{text}</S.NoticeLi>
-                )
-              })
-            } */}
-            <S.NoticeLi>{product.description}</S.NoticeLi>
-          </S.NoticeUl>
+          <S.NoticeWrap>
+            <S.NoticeText>{product.description}</S.NoticeText>
+          </S.NoticeWrap>
           {
             isAuth ?
               <>

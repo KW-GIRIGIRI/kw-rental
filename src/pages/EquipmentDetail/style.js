@@ -26,14 +26,14 @@ export const SimpleDesc = styled.div`
   }
 `;
 
-export const NoticeUl = styled.ul`
+export const NoticeWrap = styled.div`
   padding: 30px;
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: 10px;
   margin-bottom: 40px;
 `;
 
-export const NoticeLi = styled.li`
+export const NoticeText = styled.p`
   list-style: inside;
   margin: 15px 0;
   font-size: 14px;

@@ -57,3 +57,10 @@ export const ProductOl = styled.ol`
   border-top: 1px solid ${(props) => props.theme.color.primary.sub};
   padding-top: 17px;
 `;
+
+
+export const DisabledInp = styled.input`
+  color: ${props => props.theme.color.text.gray};
+  border: none;
+  background-color: inherit;
+`
