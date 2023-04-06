@@ -7,8 +7,13 @@ import iconCalendar from "../../../assets/icon-calendar-black.svg"
 import * as S from "./style"
 import { DateInp, InpWrapper } from "../../AddCartEquip/style"
 
-export default function ModifyModal({modal}) {
+export default function ModifyModal({modal, setModal}) {
   const { Modal, open, close } = useModal()
+
+  const handleClose = () => {
+    close()
+    setModal(false)
+  }
 
   useEffect(() => {
     modal && open()
@@ -49,8 +54,8 @@ export default function ModifyModal({modal}) {
         <p>대여 현황</p>
         <WeekPicker modify='true'/>
           <div>
-          <Button text='수정하기' className='sub' padding="10px 24px" borderRadius="5px" fontSize="14px" onClick={close} />
-          <Button text='취소하기'className='main' padding="10px 24px" borderRadius="5px" fontSize="14px" />
+          <Button text='수정하기' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px"/>
+          <Button text='취소하기'className='sub' padding="10px 24px" borderRadius="5px" fontSize="14px" onClick={handleClose}  />
         </div>
       </Modal>
   )

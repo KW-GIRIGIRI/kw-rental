@@ -6,10 +6,6 @@ import * as S from "./style"
 export default function EquipCartList() {
   const [modal, setModal] = useState(false)
 
-  const handleModify = () => {
-    setModal(true)
-  }
-
   return (
     <S.ListUl>
       <ModifyModal modal={modal} setModal={setModal} />
@@ -34,7 +30,7 @@ export default function EquipCartList() {
         <p>23년 3월 1일(수)</p>
         <p>23년 3월 1일(수)</p>
         <S.BtnWrap>
-          <button onClick={handleModify}>수정</button>
+          <button onClick={() => setModal(true)}>수정</button>
           <button>삭제</button>
         </S.BtnWrap>
       </S.ListLi>

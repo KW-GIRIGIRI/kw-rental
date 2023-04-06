@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainWrapper from '../layouts/MainWrapper';
 import AddEquipment from '../pages/AddEquipment';
-import EquipmentBox from '../pages/EquipmentBox';
+import EquipmentBox from '../pages/EquipmentCart/EquipmentBox';
 import EquipmentDetail from '../pages/EquipmentDetail';
 import EquipmentItemDetail from '../pages/EquipmentItemDetail';
 import EquipmentList from '../pages/EquipmentList';

@@ -1,9 +1,10 @@
 import * as S from "./style"
-import Button from "../../modules/Button"
-import { category } from "../../data/category"
+import Button from "../../../modules/Button"
+import { category } from "../../../data/category"
 import { useNavigate } from "react-router-dom"
+import EquipCartList from "../../../components/EquipCartList"
 
-import EquipCartList from "../../components/EquipCartList"
+// 다른 페이지 Cart 폴더 내부로 이동 
 
 export default function EquipmentBox() {
   const navigate = useNavigate()
