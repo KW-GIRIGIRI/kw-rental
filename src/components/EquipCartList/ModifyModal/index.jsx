@@ -5,13 +5,11 @@ import Image from "../../../modules/Image"
 import WeekPicker from "../../WeekPicker"
 import iconCalendar from "../../../assets/icon-calendar-black.svg"
 import * as S from "./style"
-import { DateCont, DateImg, DateInp, InpWrapper } from "../../AddCartEquip/style"
+import { DateInp, InpWrapper } from "../../AddCartEquip/style"
 
 export default function ModifyModal({modal}) {
   const { Modal, open, close } = useModal()
 
-  console.log(modal)
-  
   useEffect(() => {
     modal && open()
   }, [modal])

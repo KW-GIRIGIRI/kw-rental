@@ -5,7 +5,6 @@ import ApplicationForm from "./ApplicationForm";
 export default function Application() {
   return (
     <S.Div>
-      <h1>대여하기</h1>
       <h2>[필수] 이용약관 동의</h2>
       <ToS />
       <h2>대여신청서 작성</h2>

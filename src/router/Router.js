@@ -9,6 +9,7 @@ import EquipmentRental from '../pages/EquipmentRental';
 import Notice from '../pages/Notice';
 import RentalSuccess from '../pages/RentalSuccess';
 import RentalApplication from '../pages/RentalApplication';
+import EquipmentCart from '../pages/EquipmentCart';
 
 export default function Router() {
   return (
@@ -16,15 +17,17 @@ export default function Router() {
       <Routes>
         <Route element={<MainWrapper />}>
           <Route path="/" element={<Notice />} />
-          <Route element={<EquipmentRental />}>
-            <Route path="/equipment" element={<EquipmentList />} />
-            <Route path="/equipment/:id" element={<EquipmentDetail />} />
-            <Route path="/equipment/edit" element={<AddEquipment />} />
-            <Route path="/equipment/add" element={<AddEquipment />} />
-            <Route path="/equipment/item" element={<EquipmentItemDetail />} />
-            <Route path="/equipment/inventory" element={<EquipmentBox />} />
-            <Route path="/equipment/inventory/application" element={<RentalApplication />} />
-            <Route path="/equipment/inventory/success" element={<RentalSuccess />} />
+          <Route path="/equipment/*" element={<EquipmentRental />}>
+            <Route path="" element={<EquipmentList />} />
+            <Route path=":id" element={<EquipmentDetail />} />
+            <Route path="edit" element={<AddEquipment />} />
+            <Route path="add" element={<AddEquipment />} />
+            <Route path="item" element={<EquipmentItemDetail />} />
+            <Route path="inventory/*" element={<EquipmentCart />}>
+              <Route path="" element={<EquipmentBox />} />
+              <Route path="application" element={<RentalApplication />} />
+              <Route path="success" element={<RentalSuccess />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
