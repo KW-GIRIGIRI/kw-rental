@@ -15,10 +15,10 @@ const useModal = ({ useBlur = true } = {}) => {
   return {
     Modal: isOpen
       ? ({ children, className }) => (
-          <Modal className={className} onClose={useBlur ? close : null}>
-            {children}
-          </Modal>
-        )
+        <Modal className={className} onClose={useBlur ? close : null} btnClose={close}>
+          {children}
+        </Modal>
+      )
       : () => null,
     open,
     close,

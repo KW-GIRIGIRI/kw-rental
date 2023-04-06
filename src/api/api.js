@@ -104,3 +104,14 @@ export const addCartEquip = async (data) => {
     return err;
   }
 };
+
+export const getCartEquip = async (data) => {
+  try {
+    const response = await instanceUtil.get(`/inventories`, data);
+
+    return response.data.inventories;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

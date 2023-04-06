@@ -8,7 +8,7 @@ import * as S from "./style"
 import { DateInp, InpWrapper } from "../../AddCartEquip/style"
 
 export default function ModifyModal({modal, setModal}) {
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal({ useBlur : false })
 
   const handleClose = () => {
     close()

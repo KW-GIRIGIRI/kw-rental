@@ -1,12 +1,26 @@
+import { useEffect } from "react"
 import { useState } from "react"
+import { getCartEquip } from "../../api/api"
+import { category } from "../../data/category"
 import Image from "../../modules/Image"
 import ModifyModal from "./ModifyModal"
 import * as S from "./style"
 
 export default function EquipCartList() {
   const [modal, setModal] = useState(false)
+  const [cart, setCart] = useState([])
+
+  const handleGetCart = async () => {
+    const response = await getCartEquip()
+    setCart(response)
+  }
+
+  useEffect(() => {
+    handleGetCart()
+  }, [])
 
   return (
+    cart ? 
     <S.ListUl>
       <ModifyModal modal={modal} setModal={setModal} />
       <S.ListLi>
@@ -17,23 +31,27 @@ export default function EquipCartList() {
         <p>반납일</p>
         <p> </p>
       </S.ListLi>
-      <S.ListLi>
-        <Image width="72px" height="72px" borderRadius="10px" src='https://cdn.pixabay.com/photo/2014/08/29/14/53/camera-431119_1280.jpg' alt='' />
-        <S.ItemWrap>
-          {/* <p>{category.map(value => 
-              value.value === item.category && value.label
-            )}</p> */}
-          <p>카메라</p>
-          <p>MIRRORLESS SONY a6600</p>
-        </S.ItemWrap>
-        <p>1</p>
-        <p>23년 3월 1일(수)</p>
-        <p>23년 3월 1일(수)</p>
-        <S.BtnWrap>
-          <button onClick={() => setModal(true)}>수정</button>
-          <button>삭제</button>
-        </S.BtnWrap>
-      </S.ListLi>
-    </S.ListUl>
+      {
+        cart.map((item, index) => 
+          <S.ListLi key={index}>
+            <Image width="72px" height="72px" borderRadius="10px" src={item.imgUrl} alt='' />
+            <S.ItemWrap>
+              <p>{category.map(value => 
+                  value.value === item.category && value.label
+                )}</p>
+              <p>{item.modelName}</p>
+            </S.ItemWrap>
+            <p>1</p>
+            <p>{item.rentalStartDate}</p>
+            <p>{item.rentalEndDate}</p>
+            <S.BtnWrap>
+              <button onClick={() => setModal(true)}>수정</button>
+              <button>삭제</button>
+            </S.BtnWrap>
+          </S.ListLi>
+        )
+      }
+      </S.ListUl>
+      : <p>담은 기자재가 없습니다.</p>
   )
 }
