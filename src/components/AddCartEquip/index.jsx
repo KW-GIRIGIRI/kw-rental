@@ -2,7 +2,10 @@ import Button from "../../modules/Button";
 import iconCalendar from "../../assets/icon-calendar.svg"
 import * as S from "./style"
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { addCartEquip } from "../../api/api";
+import { useRef } from "react";
+import useModal from "../../hook/useModal";
 
 export default function AddCartEquip() {
   const [date, setDate] = useState({
@@ -11,8 +14,11 @@ export default function AddCartEquip() {
     cDayText: null
   })
   const [week, setWeek] = useState(null)
+  const cartRef = useRef([])
   const navigate = useNavigate();
-  
+  const params = useParams()
+  const { Modal, open } = useModal()
+
   // 년도 기준 주차 계산 함수
   const handleGetNumberOfWeek = (pDate) => {
     const pickDate = new Date(pDate)
@@ -23,15 +29,27 @@ export default function AddCartEquip() {
   }
 
   // 장바구니 추가 함수
-  const handleAddCart = () => {
-    handleGetNumberOfWeek(date.cDate)
+  const handleAddCart = async () => {
+    handleGetNumberOfWeek(date.cDate) // 서버 전송 필요 없으면 삭제
+
+    const data = {
+      "equipmentId" : parseInt(params.id),
+      "rentalStartDate" : cartRef.current.rentalStartDate.value.split('-').map(i => parseInt(i)),
+      // "rentalEndDate": cartRef.current.rentalEndDate.value.split('-').map(i => parseInt(i)),
+      "rentalEndDate" : handleNextDay(1, date.cDate).split("-").map(i => parseInt(i)),
+      "amount" : parseInt(cartRef.current.amount.value)
+    }
+
+
+    const response = await addCartEquip(JSON.stringify(data))
+    response.includes('/inventories') && open()
   }
 
   // inp min-max 관리 함수
-  const handleNextDay = (days) => {
-    let today = new Date();
-    today.setDate(today.getDate() + days)
-    return today.toISOString().split('T')[0];
+  const handleNextDay = (days, today = new Date()) => {
+    let nextDate = new Date(today);
+    nextDate.setDate(nextDate.getDate() + days)
+    return nextDate.toISOString().split('T')[0];
   }
 
   // day -> text 변환 함수
@@ -89,7 +107,7 @@ export default function AddCartEquip() {
       <S.Form>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>
-          <S.Select name="equipCount" id="">
+          <S.Select name="equipCount" id="" ref={el => cartRef.current.amount = el}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -101,6 +119,7 @@ export default function AddCartEquip() {
             <S.DateImg src={iconCalendar} alt="" />
             {date.cDayText}
             <S.DateInp type="date"
+              ref={el => cartRef.current.rentalStartDate = el}
               onChange={handleDate}
               defaultValue={handleNextDay(1)}
               min={handleNextDay(1)}
@@ -109,18 +128,22 @@ export default function AddCartEquip() {
           </S.DateCont>
           <span>~</span>
           <S.DateCont>
-            {date.cDayText}
-            <S.DateInp type="date"
+            {handleDateChangeText(handleNextDay(1, date.cDate))}
+            <S.DateInp type="date" ref={el => cartRef.current.rentalEndDate = el}
               // disabled // 최대 대여 가능 일수가 1 이상일 때 false
-              defaultValue={handleNextDay(2)}
-              min={handleNextDay(2)}
-              max={handleNextDay(2)}
+              defaultValue={handleNextDay(1, date.cDate)}
+              min={handleNextDay(1, date.cDate)}
+              max={handleNextDay(1, date.cDate)}
               />
           </S.DateCont>
         </S.InpWrapper>
       </S.Form>
       <Button onClick={handleAddCart} className="main" text="기자재 담기" padding="15px 23px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
-      <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="15px"/>
+      <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="15px" />
+      <Modal>
+        <p>기자재가 ‘담은 기자재’에 담겼습니다.</p>
+        <Button text='담은 기자재 페이지로 이동하기 >' borderRadius='5px' padding='10px 16px' className='main' margin='0 0 10px 0' onClick={()=> navigate('/equipment/inventory')}/>
+      </Modal>
     </S.Wrapper>
   )
 }

@@ -93,3 +93,14 @@ export const postImage = async (formData) => {
     return err;
   }
 };
+
+export const addCartEquip = async (data) => {
+  try {
+    const response = await instanceUtil.post(`/inventories`, data);
+
+    return response.headers.get("Location");
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
