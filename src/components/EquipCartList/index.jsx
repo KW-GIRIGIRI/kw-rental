@@ -1,23 +1,11 @@
-import { useEffect } from "react"
 import { useState } from "react"
-import { getCartEquip } from "../../api/api"
 import { category } from "../../data/category"
 import Image from "../../modules/Image"
 import ModifyModal from "./ModifyModal"
 import * as S from "./style"
 
-export default function EquipCartList() {
+export default function EquipCartList({cart}) {
   const [modal, setModal] = useState(false)
-  const [cart, setCart] = useState([])
-
-  const handleGetCart = async () => {
-    const response = await getCartEquip()
-    setCart(response)
-  }
-
-  useEffect(() => {
-    handleGetCart()
-  }, [])
 
   return (
     cart ? 
@@ -33,12 +21,12 @@ export default function EquipCartList() {
       </S.ListLi>
       {
         cart.map((item, index) => 
-          <S.ListLi key={index}>
+        <S.ListLi key={index}>
             <Image width="72px" height="72px" borderRadius="10px" src={item.imgUrl} alt='' />
             <S.ItemWrap>
               <p>{category.map(value => 
                   value.value === item.category && value.label
-                )}</p>
+                  )}</p>
               <p>{item.modelName}</p>
             </S.ItemWrap>
             <p>1</p>

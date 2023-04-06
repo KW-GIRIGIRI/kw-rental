@@ -9,3 +9,10 @@ export const MainBtnWrap = styled.div`
   text-align: center;
   margin-top: 50px;
 `
+
+export const DescText = styled.p`
+  text-align: center;
+  color: ${props => props.theme.color.text.gray};
+  font-size: 14px;
+  margin: 50px 0 10px;
+`

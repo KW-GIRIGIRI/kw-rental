@@ -115,3 +115,15 @@ export const getCartEquip = async (data) => {
     return err;
   }
 };
+
+export const deleteAllCartEquip = async () => {
+try {
+  const response = await instanceUtil.delete(`/inventories`);
+
+  return response.data.inventories;
+} catch (err) {
+  console.error(err.message);
+  return err;
+}
+};
+
