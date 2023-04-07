@@ -7,8 +7,8 @@ import EquipmentItemDetail from '../pages/EquipmentItemDetail';
 import EquipmentList from '../pages/EquipmentList';
 import EquipmentRental from '../pages/EquipmentRental';
 import Notice from '../pages/Notice';
-import RentalSuccess from '../pages/RentalSuccess';
-import RentalApplication from '../pages/RentalApplication';
+import RentalSuccess from "../pages/EquipmentCart/RentalSuccess";
+import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 
 export default function Router() {

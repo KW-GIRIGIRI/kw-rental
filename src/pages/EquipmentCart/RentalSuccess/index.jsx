@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import iconCheck from "../../assets/icon-check-fill.svg"
-import Button from "../../modules/Button"
+import iconCheck from "../../../assets/icon-check-fill.svg"
+import Button from "../../../modules/Button"
 import * as S from "./style"
 
 export default function RentalSuccess() {

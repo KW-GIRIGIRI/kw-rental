@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { deleteCartEquip } from "../../../api/api"
 import { category } from "../../../data/category"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"

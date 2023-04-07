@@ -1,6 +1,6 @@
 import * as S from "./style";
-import Application from "../../components/Application";
-import Button from "../../modules/Button"
+import Application from "../../../components/Application";
+import Button from "../../../modules/Button"
 import { useNavigate } from "react-router-dom"
 
 export default function RentalApplication() {

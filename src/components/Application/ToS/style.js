@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import iconCheckWhite from "../../../assets/icon-check-white.svg"
+import iconCheckGray from "../../../assets/icon-check-gray.svg";
+
 
 export const ToSWrap = styled.ul`
   height: 82px;
@@ -18,30 +21,24 @@ export const ToSText = styled.li`
   line-height: 17px;
 `;
 
-export const AgreeWrap = styled.div`
-  align-content: right;
-  float: right;
-  display: flex;
-  align-items:center;
-  & > span {
-    font-size: 14px;
-  }
-`
-
 export const Check = styled.input`
-  /* display: none; */
-
-  &:checked + label{
-    padding-left: 23px; 
-    background-repeat: no-repeat;
-    background-image: url(${props => props.on});
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
+  border: 2px solid ${(props) => props.theme.color.primary.main};
+  background: url(${iconCheckGray}) no-repeat center / 80%;
+  &:checked {
+    background: url(${iconCheckWhite}) no-repeat center / 80% ${props => props.theme.color.primary.main};
   }
-`
+`;
 
 export const Label = styled.label`
-  padding-left: 23px; 
-  background-repeat: no-repeat;
-  background-image: url(${props => props.off});
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  font-size: 14px;
+  line-height: normal;
 `
 
 export const Exclam = styled.div`

@@ -16,4 +16,12 @@ export const InputStyle = styled.input`
     font-weight: 500;
     margin: 7px 0;
   }
+
+  &.rentalUser {
+    width: 115px;
+    height: 27px;
+    text-align: center;
+    font-size: 14px;
+    color: ${(props) => props.theme.color.gray.g3};
+  }
 `;
