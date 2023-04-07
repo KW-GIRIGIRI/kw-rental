@@ -138,3 +138,14 @@ export const deleteCartEquip = async (id) => {
   }
 };
 
+export const modifyCartEquip = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(`/inventories/${id}`, data);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+

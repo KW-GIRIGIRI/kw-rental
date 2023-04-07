@@ -2,7 +2,7 @@ import * as S from "./style"
 import Button from "../../../modules/Button"
 import { useNavigate } from "react-router-dom"
 import EquipCartList from "../../../components/EquipCartList"
-import { deleteAllCartEquip, deleteCartEquip, getCartEquip } from "../../../api/api"
+import { deleteAllCartEquip, deleteCartEquip, getCartEquip, modifyCartEquip } from "../../../api/api"
 import { useEffect, useState } from "react"
 import useModal from "../../../hook/useModal"
 
@@ -28,6 +28,11 @@ export default function EquipmentBox() {
     response === 204 && handleGetCart()
   }
 
+  const handleModifyCartEquip = async (id, data) => {
+    await modifyCartEquip(id, data)
+    handleGetCart()
+  }
+
   useEffect(() => {
     handleGetCart()
   }, [])
@@ -40,7 +45,7 @@ export default function EquipmentBox() {
             <S.Div>
               <Button onClick={open} text='전체 삭제' className='sub shadow' padding='7px 10px' borderRadius='50px' />
             </S.Div>
-            <EquipCartList cart={cart} handleDeleteInventory={handleDeleteInventory} />
+            <EquipCartList cart={cart} handleDeleteInventory={handleDeleteInventory} handleModifyCartEquip={handleModifyCartEquip} />
             <S.MainBtnWrap>
               <Button onClick={() => navigate('/equipment/inventory/application')} className="main" text="대여하기" padding="16px 36px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0" />
               <Button onClick={() => navigate('/equipment')} className="sub" text="목록보기" padding="16px 36px" borderRadius="10px" fontSize="15px" />

@@ -8,13 +8,13 @@ import Image from "../../../modules/Image"
 import ModifyModal from "../ModifyModal"
 import * as S from "./style"
 
-export default function ListItem({ item, handleDeleteInventory }) {
+export default function ListItem({ item, handleDeleteInventory, handleModifyCartEquip }) {
   const [modal, setModal] = useState(false)
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal() 
 
   return (
     <S.ListLi>
-      <ModifyModal modal={modal} setModal={setModal} />
+      <ModifyModal handleModifyCartEquip={handleModifyCartEquip} item={item} modal={modal} setModal={setModal} />
       <Modal>
         <p>정말 삭제하시겠습니까?</p>
         <div>
@@ -30,7 +30,7 @@ export default function ListItem({ item, handleDeleteInventory }) {
             )}</p>
         <p>{item.modelName}</p>
       </S.ItemWrap>
-      <p>1</p>
+      <p>{item.amount}</p>
       <p>{item.rentalStartDate}</p>
       <p>{item.rentalEndDate}</p>
       <S.BtnWrap>
