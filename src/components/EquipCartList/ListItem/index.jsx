@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { deleteCartEquip } from "../../../api/api"
 import { category } from "../../../data/category"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
@@ -6,14 +8,10 @@ import Image from "../../../modules/Image"
 import ModifyModal from "../ModifyModal"
 import * as S from "./style"
 
-export default function ListItem({ item }) {
+export default function ListItem({ item, handleDeleteInventory }) {
   const [modal, setModal] = useState(false)
   const { Modal, open, close } = useModal()
 
-  const handleDeleteInventory = async (id) => {
-  console.log(id)
-  }
-  
   return (
     <S.ListLi>
       <ModifyModal modal={modal} setModal={setModal} />

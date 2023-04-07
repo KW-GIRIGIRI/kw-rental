@@ -120,10 +120,21 @@ export const deleteAllCartEquip = async () => {
 try {
   const response = await instanceUtil.delete(`/inventories`);
 
-  return response.data.inventories;
+  return response;
 } catch (err) {
   console.error(err.message);
   return err;
 }
+};
+
+export const deleteCartEquip = async (id) => {
+  try {
+    const response = await instanceUtil.delete(`/inventories/${id}`);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
 };
 

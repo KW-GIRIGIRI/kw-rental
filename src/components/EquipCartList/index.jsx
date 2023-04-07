@@ -2,7 +2,7 @@ import ListItem from "./ListItem"
 import { ListLi } from "./ListItem/style"
 import * as S from "./style"
 
-export default function EquipCartList({cart}) {
+export default function EquipCartList({ cart, handleDeleteInventory }) {
   return (
     cart && 
     <S.ListUl>
@@ -16,7 +16,7 @@ export default function EquipCartList({cart}) {
       </ListLi>
       {
         cart.map((item) => 
-          <ListItem item={item} key={item.id} />)
+          <ListItem handleDeleteInventory={handleDeleteInventory} item={item} key={item.id} />)
       }
     </S.ListUl>
   )
