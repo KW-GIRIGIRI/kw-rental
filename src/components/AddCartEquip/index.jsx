@@ -17,7 +17,7 @@ export default function AddCartEquip({productCount}) {
   const cartRef = useRef([])
   const navigate = useNavigate();
   const params = useParams()
-  const { Modal, open } = useModal()
+  const { Modal, open, close } = useModal()
 
   // 년도 기준 주차 계산 함수
   const handleGetNumberOfWeek = (pDate) => {
@@ -144,7 +144,7 @@ export default function AddCartEquip({productCount}) {
       <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" padding="15px 23px" borderRadius="10px" fontSize="15px" />
       <Modal>
         <p>기자재가 ‘담은 기자재’에 담겼습니다.</p>
-        <Button text='담은 기자재 페이지로 이동하기 >' borderRadius='5px' padding='10px 16px' className='main' margin='0 0 10px 0' onClick={()=> navigate('/equipment/inventory')}/>
+        <Button text='담은 기자재 페이지로 이동하기 >' borderRadius='5px' padding='10px 16px' className='main' margin='0 0 10px 0' onClick={()=> {close(); navigate('/equipment/inventory')}}/>
       </Modal>
     </S.Wrapper>
   )
