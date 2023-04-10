@@ -7,7 +7,7 @@ import { addCartEquip } from "../../api/api";
 import { useRef } from "react";
 import useModal from "../../hook/useModal";
 
-export default function AddCartEquip() {
+export default function AddCartEquip({productCount}) {
   const [date, setDate] = useState({
     cYear: null,
     cDate: null,
@@ -108,9 +108,11 @@ export default function AddCartEquip() {
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>
           <S.Select name="equipCount" id="" ref={el => cartRef.current.amount = el}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            {
+              Array(productCount).fill().map((_, i) => 
+                <option key={i} value={i+1}>{i+1}</option>
+              )
+            }
           </S.Select> 대
         </S.InpWrapper>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>

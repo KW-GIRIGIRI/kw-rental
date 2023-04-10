@@ -6,16 +6,18 @@ const useModal = ({ useBlur = true } = {}) => {
 
   const open = useCallback(() => {
     setIsOpen(() => true);
+    document.body.style.overflow = "hidden";
   }, []);
 
   const close = useCallback(() => {
     setIsOpen(() => false);
+    document.body.style.overflow = "unset";
   }, []);
 
   return {
     Modal: isOpen
       ? ({ children, className }) => (
-        <Modal className={className} onClose={useBlur ? close : null} btnClose={close}>
+        <Modal className={className} onClose={useBlur ? close : null}>
           {children}
         </Modal>
       )

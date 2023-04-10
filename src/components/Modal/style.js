@@ -40,13 +40,15 @@ export const Div = styled.div`
     font-size: 14px;
     text-align: left;
     box-sizing: border-box;
-    padding: 30px 40px;
+    padding: 29px 27px;
 
     & > p {
       margin: 26px 0 15px 0;
+      font-size: 13px;
       font-weight: 600;
       &:first-of-type {
-        margin: 0 0 25px;
+        margin: 0 0 22px;
+        font-size: 14px;
       }
     }
 

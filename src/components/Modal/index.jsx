@@ -5,13 +5,9 @@ export default function Modal({ onClose, children, className }) {
   return (
     <ModalSection onClick={onClose} >
       <Div className={className} onClick={(e) => e.stopPropagation()}>
-        {
-          onClose ?
-          <CloseBtn onClick={onClose}>
-            <img src={iconClose} alt="" />
-          </CloseBtn>
-          : <></>
-        }
+        <CloseBtn onClick={onClose}>
+          <img src={iconClose} alt="" />
+        </CloseBtn>
         {children}
       </Div>
     </ModalSection>

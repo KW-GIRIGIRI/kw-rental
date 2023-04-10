@@ -38,9 +38,6 @@ export default function EquipmentDetail() {
 
   useEffect(() => {
     getProduct();
-  }, [])
-
-  useEffect(() => {
     getItem();
   }, [])
 
@@ -99,7 +96,7 @@ export default function EquipmentDetail() {
                 <S.SubTitle>대여 현황</S.SubTitle>
                 <WeekPicker />
                 <S.SubTitle>기자재 담기</S.SubTitle>
-                <AddCartEquip />
+                <AddCartEquip productCount={product.totalQuantity} />
               </>
           }
         </>

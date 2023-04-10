@@ -6,8 +6,6 @@ import { deleteAllCartEquip, deleteCartEquip, getCartEquip, modifyCartEquip } fr
 import { useEffect, useState } from "react"
 import useModal from "../../../hook/useModal"
 
-// 다른 페이지 Cart 폴더 내부로 이동 
-
 export default function EquipmentBox() {
   const [cart, setCart] = useState([])
   const navigate = useNavigate()
@@ -15,7 +13,8 @@ export default function EquipmentBox() {
 
   const handleDeleteCart = async () => {
     const response = await deleteAllCartEquip()
-    !response && handleGetCart()
+    response === 204 && close()
+    handleGetCart()
   }
 
   const handleGetCart = async () => {

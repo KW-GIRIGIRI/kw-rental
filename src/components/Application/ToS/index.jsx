@@ -3,6 +3,7 @@ import iconExclamation from "../../../assets/icon-exclamation-circle.svg";
 import { useState } from "react";
 
 export default function ToS() {
+  // 유효성 검사
   const [isChecked, setIsChecked] = useState(false);
   function handleCheckboxChange(e) {
     setIsChecked(e.target.checked);
