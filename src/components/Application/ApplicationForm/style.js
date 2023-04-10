@@ -26,7 +26,10 @@ export const Info = styled.div`
 export const Purpose = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  & > li {
+    margin-right: 20px;
+    flex-basis: 10%;
+  }
 `
 
 export const LiWrap = styled.div`
@@ -36,9 +39,9 @@ export const LiWrap = styled.div`
 
 export const FormLi = styled.li`
   list-style: disc;
-  list-style-position : inside;
+  list-style-position: inside;
   font-size: 14px;
-  color: ${props => props.theme.color.text.black};
+  color: ${(props) => props.theme.color.text.black};
   line-height: 17px;
   margin-right: 33px;
 `;
@@ -54,25 +57,6 @@ export const P = styled.p`
   align-items:center;
 `
 
-export const Input = styled.input`
-  width: 115px;
-  height: 27px;
-  text-align: center;
-  font-size: 14px;
-  color: ${props => props.theme.color.gray.g3};
-`;
-
-export const Textarea = styled.textarea`
-  width: 700px;
-  height: 101px;
-  resize: none;
-  padding: 12px 20px;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 export const Exclam = styled.div`
   margin-top:10px;
 
@@ -87,5 +71,5 @@ export const Exclam = styled.div`
 `
 
 export const TextareaWrap = styled.div`
-  
+  width: 100%;
 `

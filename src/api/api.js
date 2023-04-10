@@ -93,3 +93,59 @@ export const postImage = async (formData) => {
     return err;
   }
 };
+
+export const addCartEquip = async (data) => {
+  try {
+    const response = await instanceUtil.post(`/inventories`, data);
+
+    return response.headers.get("Location");
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const getCartEquip = async (data) => {
+  try {
+    const response = await instanceUtil.get(`/inventories`, data);
+
+    return response.data.inventories;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const deleteAllCartEquip = async () => {
+try {
+  const response = await instanceUtil.delete(`/inventories`);
+
+  return response.status;
+} catch (err) {
+  console.error(err.message);
+  return err;
+}
+};
+
+export const deleteCartEquip = async (id) => {
+  try {
+    const response = await instanceUtil.delete(`/inventories/${id}`);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const modifyCartEquip = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(`/inventories/${id}`, data);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+

@@ -35,6 +35,7 @@ export const Select = styled.select`
   font-size: 14px;
   text-align: center;
   border: 1px solid #000;
+  outline: none;
   padding: 3px 0;
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   appearance: none;

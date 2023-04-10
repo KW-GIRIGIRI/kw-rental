@@ -8,23 +8,17 @@ export const Wrapper = styled.section`
 
 export const SimpleDesc = styled.div`
   font-size: 13px;
-  margin-bottom: 29px;
   & > span:not(:last-child)::after {
     content: " > ";
   }
-  & :first-child {
+  & > span.on {
     color: ${(props) => props.theme.color.primary.main};
     font-weight: 600;
   }
 `;
 
-export const Div = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-`
-
-export const MainBtnWrap = styled.div`
-  text-align: center;
-  margin-top: 50px;
-`
+export const SubTitle = styled.h2`
+  font-size: 20px;
+  font-weight: 500;
+  margin: 29px 0 25px 10px;
+`;

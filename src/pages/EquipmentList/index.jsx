@@ -130,7 +130,7 @@ export default function EquipmentList() {
           <img src={iconPageArrow} alt="이전 페이지" />
         </button>
         {
-          pageArray.map((_, index) => {
+          pageArray?.map((_, index) => {
             return (
               <button key={index} onClick={() => setPage(index)} className={page===index  ? 'on' : null}>
                 {index + 1}
