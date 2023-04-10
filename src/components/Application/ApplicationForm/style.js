@@ -87,5 +87,5 @@ export const Exclam = styled.div`
 `
 
 export const TextareaWrap = styled.div`
-  
+  width: 725px;
 `
