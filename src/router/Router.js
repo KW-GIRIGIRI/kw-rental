@@ -10,6 +10,7 @@ import Notice from '../pages/Notice';
 import RentalSuccess from "../pages/EquipmentCart/RentalSuccess";
 import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
+import RentalStatus from "../pages/RentalStatus";
 
 export default function Router() {
   return (
@@ -23,6 +24,7 @@ export default function Router() {
             <Route path="edit" element={<AddEquipment />} />
             <Route path="add" element={<AddEquipment />} />
             <Route path="item" element={<EquipmentItemDetail />} />
+            <Route path="status" element={<RentalStatus />} />
             <Route path="inventory/*" element={<EquipmentCart />}>
               <Route path="" element={<EquipmentBox />} />
               <Route path="application" element={<RentalApplication />} />
