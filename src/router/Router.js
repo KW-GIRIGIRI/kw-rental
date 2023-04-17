@@ -9,6 +9,7 @@ import EquipmentRental from '../pages/EquipmentRental';
 import Notice from '../pages/Notice';
 import RentalSuccess from '../pages/RentalSuccess';
 import RentalApplication from '../pages/RentalApplication';
+import RentalStatus from "../pages/RentalStatus";
 
 export default function Router() {
   return (
@@ -25,6 +26,7 @@ export default function Router() {
             <Route path="/equipment/inventory" element={<EquipmentBox />} />
             <Route path="/equipment/inventory/application" element={<RentalApplication />} />
             <Route path="/equipment/inventory/success" element={<RentalSuccess />} />
+            <Route path="/equipment/status" element={<RentalStatus />} />
           </Route>
         </Route>
       </Routes>
