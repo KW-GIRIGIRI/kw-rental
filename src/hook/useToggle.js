@@ -6,8 +6,14 @@ const useToggle = () => {
   const toggle = useCallback(() => setState((state) => !state), []);
 
   return {
-    Toggle: ({ on, off }) => (
-      <Toggle state={state} toggle={toggle} on={on} off={off}></Toggle>
+    Toggle: ({ className, on, off }) => (
+      <Toggle
+        className={className}
+        state={state}
+        toggle={toggle}
+        on={on}
+        off={off}
+      ></Toggle>
     ),
     state,
     toggle,

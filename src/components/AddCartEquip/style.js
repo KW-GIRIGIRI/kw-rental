@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   text-align: center;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   display: grid;
   font-size: 1rem;
   grid-template-columns: 1fr 2fr;
@@ -43,26 +43,13 @@ export const Select = styled.select`
   background-size: 10px;
 `;
 
-export const DateInp = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 115px;
-  padding: 4px 0;
-  cursor: pointer;
-  &::-webkit-calendar-picker-indicator {
-    width: 100%;
-  }
-`;
-
 export const DateImg = styled.img`
   width: 1rem;
   vertical-align: text-top;
   margin-right: 10px;
 `;
 
-export const DateCont = styled.label`
+export const DateCont = styled.div`
   position: relative;
   border: 1px solid #000000;
   font-size: 14px;

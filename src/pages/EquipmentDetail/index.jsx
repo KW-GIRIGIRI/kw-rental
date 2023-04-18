@@ -12,6 +12,7 @@ import { BtnWrap } from "../AddEquipment/style"
 import * as S from "./style"
 import useModal from "../../hook/useModal"
 import { category } from "../../data/category"
+import ItemCalendar from "../../components/ItemCalendar"
 
 export default function EquipmentDetail() {
   const params = useParams();
@@ -79,8 +80,7 @@ export default function EquipmentDetail() {
             isAuth ?
               <>
                 <S.SubTitle>품목 대여 현황</S.SubTitle>
-                {/* 월별 캘린더로 수정 */}
-                <WeekPicker />
+                <ItemCalendar />
                 <S.SubTitle>품목 관리</S.SubTitle>
                 {
                   item ?

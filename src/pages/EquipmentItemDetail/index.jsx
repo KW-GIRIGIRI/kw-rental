@@ -3,9 +3,11 @@ import { BtnWrap } from "../AddEquipment/style"
 import Button from "../../modules/Button"
 import { useNavigate } from "react-router-dom"
 import ItemReserveHist from "../../components/ItemReserveHist"
+import useToggle from "../../hook/useToggle"
 import { useState } from "react"
+import Input from "../../modules/Input"
 
-const itemList = [1, 2, 3]
+const itemList = [20190500260004, 2011231231004, 201905002123123]
 
 // mock data
 export const product = {
@@ -23,6 +25,7 @@ export const product = {
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
+   const { Toggle, state } = useToggle()
   const [editNum, setEditNum] = useState(false);
 
   return (
@@ -32,30 +35,38 @@ export default function EquipmentItemDetail() {
           <span>기자재 조회</span>
           <span>{product.category}</span>
           <span>{product.modelName}</span>
-          <span>품목 1</span>
+          <span>자산번호</span>
         </S.SimpleDesc>
         <div>
           <button>삭제</button>
         </div>
       </S.NavDiv>
-      <S.SubTitle>품목 현황</S.SubTitle>
-      <S.SelectItem name="" id="">
+      <S.Div>
+        <S.SubTitle>품목 현황</S.SubTitle>
+        <S.SelectItem name="" id="">
         {
-          itemList.map(item => <option key={item} value="">품목 {item}</option>)
+          itemList.map(item => <option key={item} value="">{item}</option>)
         }
-      </S.SelectItem>
-      <div>
-        캘린더
-      </div>
-      <S.SubTitle>자산번호 관리</S.SubTitle>
-      <S.numEditBtn onClick={() => { setEditNum(!editNum) }}><p>수정</p></S.numEditBtn>
+        </S.SelectItem>
+      </S.Div>
+      <S.Div>
+        <S.SubTitle>품목 대여 ON/OFF</S.SubTitle>
+      </S.Div>
+      <Toggle className='rental' on='대여 가능' off='대여 불가' />
+      <S.Div>
+        <S.SubTitle>자산번호 관리</S.SubTitle>
+        <S.numEditBtn onClick={() => { setEditNum(!editNum) }}><p>수정</p></S.numEditBtn>
+      </S.Div>
       {
-        editNum ? <S.Input type="text" maxlength="14" placeholder="20190500260004"></S.Input>
+        editNum ?
+          <Input name="propertyNum" placeholder="20190500260004" maxLen="14" className="propertyNum" />
           : <S.ItemNumDiv>
             <p>20190500260004</p>
           </S.ItemNumDiv>
       }
-      <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
+      <S.Div>
+        <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
+      </S.Div>
       <ItemReserveHist />
       <BtnWrap>
         <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="60px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />

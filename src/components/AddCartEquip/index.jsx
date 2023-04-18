@@ -1,113 +1,89 @@
 import Button from "../../modules/Button";
 import iconCalendar from "../../assets/icon-calendar.svg"
 import * as S from "./style"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { addCartEquip } from "../../api/api";
-import { useRef } from "react";
 import useModal from "../../hook/useModal";
+import dayjs from "dayjs"
+import updateLocale from "dayjs/plugin/updateLocale"
+import toArray from "dayjs/plugin/toArray"
+import DatePicker from "../DatePicker";
+
+dayjs.extend(updateLocale)
+dayjs.extend(toArray)
+
+dayjs.updateLocale('en', {
+  weekdays: [
+    "일", "월", "화", "수", "목", "금", "토"
+  ]
+})
 
 export default function AddCartEquip({productCount}) {
-  const [date, setDate] = useState({
-    cYear: null,
-    cDate: null,
-    cDayText: null
-  })
-  const [week, setWeek] = useState(null)
-  const cartRef = useRef([])
+  const amountRef = useRef()
   const navigate = useNavigate();
   const params = useParams()
   const { Modal, open, close } = useModal()
+  const [calendar, setCalendar] = useState({
+    visible: false,
+    top: 0,
+    left: 0,
+    date: dayjs().add(1, 'days')
+  })
 
-  // 년도 기준 주차 계산 함수
-  const handleGetNumberOfWeek = (pDate) => {
-    const pickDate = new Date(pDate)
-    const firstDayOfYear = new Date(date.cYear, 0, 1);
-    const pastDaysOfYear = (pickDate - firstDayOfYear) / 86400000;
-    const week = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7)
-    setWeek(week)
+  const handleGetDatePicker = e => {
+    e.preventDefault()
+    const position = e.target.getBoundingClientRect()
+    const top = position.top + position.height, left = position.left
+    setCalendar(prev => ({
+      ...prev,
+      visible: true,
+      top: top,
+      left: left,
+    }))
   }
 
-  // 장바구니 추가 함수
   const handleAddCart = async () => {
-    handleGetNumberOfWeek(date.cDate) // 서버 전송 필요 없으면 삭제
-
-    const data = {
+     const data = {
       "equipmentId" : parseInt(params.id),
-      "rentalStartDate" : cartRef.current.rentalStartDate.value.split('-').map(i => parseInt(i)),
-      // "rentalEndDate": cartRef.current.rentalEndDate.value.split('-').map(i => parseInt(i)),
-      "rentalEndDate" : handleNextDay(1, date.cDate).split("-").map(i => parseInt(i)),
-      "amount" : parseInt(cartRef.current.amount.value)
-    }
-
+      "rentalStartDate" : dayjs(calendar.date).format('YYYY-MM-DD').split('-').map(i => parseInt(i)),
+      "rentalEndDate" : dayjs(calendar.date).add(1, 'days').format('YYYY-MM-DD').split("-").map(i => parseInt(i)),
+      "amount" : parseInt(amountRef.current.value)
+     }
 
     const response = await addCartEquip(JSON.stringify(data))
     response.includes('/inventories') && open()
   }
 
-  // inp min-max 관리 함수
-  const handleNextDay = (days, today = new Date()) => {
-    let nextDate = new Date(today);
-    nextDate.setDate(nextDate.getDate() + days)
-    return nextDate.toISOString().split('T')[0];
+  const handleSetMon = (num) => {
+    setCalendar(prev => ({
+      ...calendar,
+      date : calendar.date.add(num, 'days')
+    }))
   }
 
-  // day -> text 변환 함수
-  const handleDateChangeText = (date = new Date()) => {
-    const days = ["일", "월", "화", "수", "목", "금", "토"];
-    const pDate = new Date(date)
-
-    return `${pDate.getMonth() + 1}월 ${pDate.getDate()}일(${days[pDate.getDay()]})`
-  }
-
-  // inp date 관리 함수
-  const handleDate = (e) => {
-    let pickDate = e.target.value
-    const year = new Date(pickDate).getFullYear()
-    const day = new Date(pickDate).getDay()
-    if (day === 5 || day === 6 || day === 0) {
-      alert('대여 불가능한 요일입니다.')
-      pickDate = handleSetMon(pickDate, day)
-    }
-    const dayText = handleDateChangeText(pickDate)
-    setDate({
-      cYear: year,
-      cDate: pickDate,
-      cDayText: dayText
-    })
-  }
-
-  const handleSetMon = (date, num) => {
-    const returnDate = new Date(date)
-    if (num === 5) returnDate.setDate(returnDate.getDate() + 3)
-    else if (num === 6) returnDate.setDate(returnDate.getDate() + 2)
-    else if (num === 0) returnDate.setDate(returnDate.getDate() + 1)
-
-    return returnDate
-  }
-  
   useEffect(() => {
-    let today = new Date()
-    const day = today.getDay()
-    if (day === 5 || day === 6 || day === 0) {
-      today = handleSetMon(today, day)
-    } else {
-      today = new Date(handleNextDay(1))
+    switch (calendar.date.day()) {
+      case 5:
+        handleSetMon(3);
+        break;
+      case 6: 
+        handleSetMon(2);
+        break;
+      case 0: 
+        handleSetMon(1);
+        break;
+      default:
+        break;
     }
-    const dayText = handleDateChangeText(today)
-    setDate({
-      cYear: today.getFullYear(),
-      cDate: today,
-      cDayText: dayText
-    })
   }, [])
-
+  
   return (
     <S.Wrapper>
       <S.Form>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>
-          <S.Select name="equipCount" id="" ref={el => cartRef.current.amount = el}>
+          <S.Select name="equipCount" id="" ref={amountRef}>
             {
               Array(productCount).fill().map((_, i) => 
                 <option key={i} value={i+1}>{i+1}</option>
@@ -117,26 +93,14 @@ export default function AddCartEquip({productCount}) {
         </S.InpWrapper>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
-          <S.DateCont>
+          <S.DateCont onClick={handleGetDatePicker}>
             <S.DateImg src={iconCalendar} alt="" />
-            {date.cDayText}
-            <S.DateInp type="date"
-              ref={el => cartRef.current.rentalStartDate = el}
-              onChange={handleDate}
-              defaultValue={handleNextDay(1)}
-              min={handleNextDay(1)}
-              max={handleNextDay(31)}
-            />
+             {dayjs(calendar.date).format('M월 D일(dd)')}
           </S.DateCont>
+          {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
           <span>~</span>
           <S.DateCont>
-            {handleDateChangeText(handleNextDay(1, date.cDate))}
-            <S.DateInp type="date" ref={el => cartRef.current.rentalEndDate = el}
-              // disabled // 최대 대여 가능 일수가 1 이상일 때 false
-              defaultValue={handleNextDay(1, date.cDate)}
-              min={handleNextDay(1, date.cDate)}
-              max={handleNextDay(1, date.cDate)}
-              />
+            {dayjs(calendar.date).add(1, 'days').format('M월 D일(dd)')}
           </S.DateCont>
         </S.InpWrapper>
       </S.Form>
