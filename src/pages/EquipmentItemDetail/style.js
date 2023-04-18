@@ -21,6 +21,12 @@ export const NavDiv = styled.div`
   }
 `;
 
+export const Div = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 40px 0 20px;
+`
+
 export const SimpleDesc = styled.div`
   font-size: 13px;
   margin-left: -25px;
@@ -32,14 +38,10 @@ export const SimpleDesc = styled.div`
 export const SubTitle = styled.p`
   font-size: 18px;
   font-weight: 500;
-  margin: 40px 0 25px;
-  margin-bottom: 25px;
-  display: inline-block;
 `;
 
 export const SelectItem = styled.select`
-  display: inline-block;
-  width: 98px;
+  width: 160px;
   padding: 5px 0;
   text-align: center;
   outline: none;
