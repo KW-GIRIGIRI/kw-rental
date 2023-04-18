@@ -24,4 +24,14 @@ export const InputStyle = styled.input`
     font-size: 14px;
     color: ${(props) => props.theme.color.gray.g3};
   }
+
+  &.propertyNum {
+    width: 150px;
+    font-size: 15px;
+    height: 30px;
+    border-radius: 5px;
+    &::placeholder{
+      text-align: center;
+    }
+  }
 `;

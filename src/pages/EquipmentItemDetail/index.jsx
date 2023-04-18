@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import ItemReserveHist from "../../components/ItemReserveHist"
 import useToggle from "../../hook/useToggle"
 import { useState } from "react"
+import Input from "../../modules/Input"
 
 const itemList = [20190500260004, 2011231231004, 201905002123123]
 
@@ -56,9 +57,9 @@ export default function EquipmentItemDetail() {
         <S.SubTitle>자산번호 관리</S.SubTitle>
         <S.numEditBtn onClick={() => { setEditNum(!editNum) }}><p>수정</p></S.numEditBtn>
       </S.Div>
-        
       {
-        editNum ? <S.Input type="text" maxlength="14" placeholder="20190500260004"></S.Input>
+        editNum ?
+          <Input name="propertyNum" placeholder="20190500260004" maxLen="14" className="propertyNum" />
           : <S.ItemNumDiv>
             <p>20190500260004</p>
           </S.ItemNumDiv>

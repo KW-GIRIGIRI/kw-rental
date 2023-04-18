@@ -81,20 +81,3 @@ export const numEditBtn = styled.button`
     line-height: 20px;
   }
 `
-
-export const Input = styled.input`
-  width: 150px;
-  height: 30px;
-  box-sizing: border-box;
-  background: ${props => props.theme.color.text.white};
-  color: ${props => props.theme.color.text.black};
-  border-radius: ${props => props.theme.borderRadius.lv1};
-  display: block;
-  font-size: 15px;
-  text-align: left;
-  padding: 0 14px;
-  &::placeholder {
-    font-size: 15px;
-    text-align: center;
-    }
-`

@@ -1,20 +1,39 @@
 import * as S from "./style"
-import iconExcel from "../../assets/icon-excel.svg";
 import ItemResHistTbl from "./ItemResHistTbl";
 import iconCalendar from "../../assets/icon-calendar-black.svg"
 import { useState } from "react";
+import dayjs from "dayjs"
+import updateLocale from "dayjs/plugin/updateLocale"
+import DatePicker from "../DatePicker";
 
-// 품목 예약/사용 이력 컴포넌트
+dayjs.extend(updateLocale)
+
+dayjs.updateLocale('en', {
+  weekdays: [
+    "일", "월", "화", "수", "목", "금", "토"
+  ]
+})
+
 export default function ItemReserveHist() {
-  const handleNextDay = (days) => {
-    let today = new Date();
-    today.setDate(today.getDate() + days)
-    return today.toISOString().split('T')[0];
+  const [calendar, setCalendar] = useState({
+    visible: false,
+    top: 0,
+    left: 0,
+    date: dayjs().add(1, 'days')
+  })
+
+  const handleGetDatePicker = e => {
+    e.preventDefault()
+    const position = e.target.getBoundingClientRect()
+    const top = position.top + position.height, left = position.left
+    setCalendar(prev => ({
+      ...prev,
+      visible: true,
+      top: top,
+      left: left,
+    }))
   }
-
-  // 추후 수정
-  const [date, setDate] = useState(handleNextDay(0))
-
+  
   const 가짜품목대여이력데이터 = [
     {
       id: 1,
@@ -50,26 +69,18 @@ export default function ItemReserveHist() {
     },
   ]
   return (
-    <S.Div>
-      <S.DateCont>
+    <>
+      <S.DateCont onClick={handleGetDatePicker}>
         <img src={iconCalendar} alt="" />
-        <span>3월 12일(화)</span>
-        <S.DateInp type="date"
-          min={handleNextDay(1)}
-          max={handleNextDay(0)}
-        />
+        <span>{calendar.date.format('M월 D일(dd)')}</span>
       </S.DateCont>
-      <span> ~ </span>
-      <S.DateCont>
+      <span>~</span>
+      <S.DateCont  onClick={handleGetDatePicker}>
         <img src={iconCalendar} alt="" />
-        <span>3월 12일(화)</span>
-        <S.DateInp type="date"
-          // min={handleNextDay(1)}
-          max={handleNextDay(0)}
-        />
+        <span>{calendar.date.add(7, 'days').format('M월 D일(dd)')}</span>
       </S.DateCont>
-      <S.button onClick={() => { }}><S.img src={iconExcel} /></S.button>
       <ItemResHistTbl data={가짜품목대여이력데이터} />
-    </S.Div>
+      {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
+    </>
   )
 }
