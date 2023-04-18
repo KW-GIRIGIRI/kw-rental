@@ -43,19 +43,6 @@ export const Select = styled.select`
   background-size: 10px;
 `;
 
-export const DateInp = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 115px;
-  padding: 4px 0;
-  cursor: pointer;
-  &::-webkit-calendar-picker-indicator {
-    width: 100%;
-  }
-`;
-
 export const DateImg = styled.img`
   width: 1rem;
   vertical-align: text-top;
