@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Container = styled.section`
+  z-index: 1;
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -33,6 +34,7 @@ export const Header = styled.div`
   & > button {
     background-color: inherit;
     border: none;
+    width: 20px;
   }
 `;
 

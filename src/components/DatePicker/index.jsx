@@ -66,11 +66,15 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
   const renderHeader = () =>{
     return (
       <S.Header>
-        <button onClick={() => prevMonth()}>
+        <button
+          disabled={currentMonth.month() === dayjs().month()}
+          onClick={() => prevMonth()}>
           <img src={iconLeftArrow} alt="이전 달 보기" />
         </button>
         <span>{currentMonth.format('YY년 MM월')}</span>
-        <button onClick={() => nextMonth()}>
+        <button
+          disabled={currentMonth.month() === dayjs().month() + 1}
+          onClick={() => nextMonth()}>
           <img src={iconRightArrow} alt="다음 달 보기" />
         </button>
       </S.Header>

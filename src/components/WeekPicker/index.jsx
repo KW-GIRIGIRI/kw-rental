@@ -73,7 +73,7 @@ export default function WeekPicker({ modify }) {
     
     return (
       <S.DateLi modify={modify} key={num}>
-      <S.DateTit modify={modify}>{pDate.format('M월 DD일(dd)')}</S.DateTit>
+      <S.DateTit modify={modify}>{pDate.format('M월 D일(dd)')}</S.DateTit>
         <S.DateSubTit modify={modify} className={pDate >= dayjs() ? false : 'disabled'}>
           {num} {/* 대여 가능 개수 */}
         </S.DateSubTit>
