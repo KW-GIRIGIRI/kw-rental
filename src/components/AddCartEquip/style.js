@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   text-align: center;
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   display: grid;
   font-size: 1rem;
   grid-template-columns: 1fr 2fr;
@@ -62,7 +62,7 @@ export const DateImg = styled.img`
   margin-right: 10px;
 `;
 
-export const DateCont = styled.label`
+export const DateCont = styled.div`
   position: relative;
   border: 1px solid #000000;
   font-size: 14px;

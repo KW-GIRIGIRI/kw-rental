@@ -47,7 +47,7 @@ export default function ModifyModal({modal, setModal, item, handleModifyCartEqui
     equip &&
     <Modal className="modify">
       <p>담은 기자재 수정</p>
-      <S.Div>
+      <S.Div className="item">
         <Image width="54px" height="54px" borderRadius="10px" src={equip.imgUrl} alt='' />
         <S.ItemWrap>
           <p>{category.map(value => 
