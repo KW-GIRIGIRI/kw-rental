@@ -16,7 +16,7 @@ const instancForm = axios.create({
   },
 });
 
-
+// 기자재 관련 
 export const getProductList = async (url) => {
   try {
     const response = await instanceUtil.get(`/equipments?${url}`);
@@ -72,17 +72,6 @@ export const modifyEquipment = async (id) => {
   }
 };
 
-export const getItemList = async (id) => {
-  try {
-    const response = await instanceUtil.get(`/items?equipmentId=${id}`);
-
-    return response.data;
-  } catch (err) {
-    console.error(err.message);
-    return err;
-  }
-};
-
 export const postImage = async (formData) => {
   try {
     const response = await instancForm.post(`/admin/equipments/images`, formData);
@@ -94,6 +83,7 @@ export const postImage = async (formData) => {
   }
 };
 
+// 담은 기자재 관련 
 export const addCartEquip = async (data) => {
   try {
     const response = await instanceUtil.post(`/inventories`, data);
@@ -149,3 +139,67 @@ export const modifyCartEquip = async (id, data) => {
   }
 };
 
+// 품목 관련
+export const getItemList = async (id) => {
+  try {
+    const response = await instanceUtil.get(`/items?equipmentId=${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const getItem = async (id) => {
+  try {
+    const response = await instanceUtil.get(`/items/${id}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const changeItemState = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/items/${id}/rentalAvailable`,
+      data
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const changePropertyNum = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/items/${id}/propertyNumber`,
+      data
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+export const changeItems = async (id, data) => {
+  try {
+    const response = await instanceUtil.put(
+      `/admin/items?equipmentId=${id}`,
+      data
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
