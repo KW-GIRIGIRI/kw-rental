@@ -1,13 +1,13 @@
 import * as S from "./style"
 import { BtnWrap } from "../AddEquipment/style"
 import Button from "../../modules/Button"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import ItemReserveHist from "../../components/ItemReserveHist"
 import useToggle from "../../hook/useToggle"
 import { useState } from "react"
 import Input from "../../modules/Input"
-
-const itemList = [20190500260004, 2011231231004, 201905002123123]
+import { getItem, getItemList, getProductDetail } from "../../api/api"
+import { useEffect } from "react"
 
 // mock data
 export const product = {
@@ -25,17 +25,42 @@ export const product = {
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
-   const { Toggle, state } = useToggle()
+  const { Toggle, toggle, state } = useToggle()
   const [editNum, setEditNum] = useState(false);
+  const [itemList, setitemList] = useState([])
+  const [equip, setEquip] = useState(null)
+  const [item, setItem] = useState(null)
+  const location = useLocation()
+
+  const handleGetEquip = async () => {
+    const response = await getProductDetail(location.state.id)
+    setEquip(response)
+  }
+
+  const handleGetItemList = async () => {
+    const response = await getItemList(location.state.id)
+    setitemList(response.items)
+  }
+
+  const handleGetItem = async () => {
+    const response = await getItem(location.state.id)
+    response.rentalAvailable && toggle()
+    setItem(response)
+  }
+
+  useEffect(() => {
+    Promise.all([handleGetItemList(), handleGetItem(), handleGetEquip()])
+  }, [])
 
   return (
+    equip && itemList && item &&
     <S.Wrapper>
       <S.NavDiv>
         <S.SimpleDesc>
           <span>기자재 조회</span>
-          <span>{product.category}</span>
-          <span>{product.modelName}</span>
-          <span>자산번호</span>
+          <span>{equip.category}</span>
+          <span>{equip.modelName}</span>
+          <span>{item.propertyNumber}</span>
         </S.SimpleDesc>
         <div>
           <button>삭제</button>
@@ -45,7 +70,7 @@ export default function EquipmentItemDetail() {
         <S.SubTitle>품목 현황</S.SubTitle>
         <S.SelectItem name="" id="">
         {
-          itemList.map(item => <option key={item} value="">{item}</option>)
+          itemList.map(item => <option key={item.propertyNumber} value="">{item.propertyNumber}</option>)
         }
         </S.SelectItem>
       </S.Div>
@@ -59,9 +84,9 @@ export default function EquipmentItemDetail() {
       </S.Div>
       {
         editNum ?
-          <Input name="propertyNum" placeholder="20190500260004" maxLen="14" className="propertyNum" />
+          <Input type="number" name="propertyNum" placeholder="20190500260004" maxLen="14" className="propertyNum" defaultValue={item.propertyNumber} />
           : <S.ItemNumDiv>
-            <p>20190500260004</p>
+            <p>{item.propertyNumber}</p>
           </S.ItemNumDiv>
       }
       <S.Div>

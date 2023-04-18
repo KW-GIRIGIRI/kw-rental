@@ -10,13 +10,8 @@ export default function ItemListWrap({ item, isEdit, isAdd }) {
   const [data, setData] = useState(item)
   const [idx, setIdx] = useState(item[0].id)
 
-  // console.log(data, data[0], idx)
-
   useEffect(() => {
     setData(item)
-  }, [item])
-
-  useEffect(() => {
     setIdx(item.at(-1).id)
   }, [item])
 
@@ -51,7 +46,7 @@ export default function ItemListWrap({ item, isEdit, isAdd }) {
             <S.ItemUl>
               {data.map(i => {
                 return (
-                  <S.ItemLi key={i.id} onClick={() => i.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: i.id } }) : null}>
+                  <S.ItemLi key={i.id} onClick={() => i.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: i.equipmentId } }) : null}>
                     <ItemList id={i.id - data[0].id + 1} num={i.propertyNumber} isEdit={isEdit} isAdd={isAdd} delItem={delItem} />
                   </S.ItemLi>
                 )

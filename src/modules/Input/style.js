@@ -29,9 +29,19 @@ export const InputStyle = styled.input`
     width: 150px;
     font-size: 15px;
     height: 30px;
+    text-align: center;
     border-radius: 5px;
-    &::placeholder{
+    &::placeholder {
       text-align: center;
+    }
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 `;
