@@ -169,7 +169,7 @@ export const changeItemState = async (id, data) => {
       data
     );
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;

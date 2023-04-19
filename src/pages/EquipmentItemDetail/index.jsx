@@ -6,7 +6,7 @@ import ItemReserveHist from "../../components/ItemReserveHist"
 import useToggle from "../../hook/useToggle"
 import { useState } from "react"
 import Input from "../../modules/Input"
-import { getItem, getItemList, getProductDetail } from "../../api/api"
+import { changeItemState, getItem, getItemList, getProductDetail } from "../../api/api"
 import { useEffect } from "react"
 
 // mock data
@@ -32,6 +32,13 @@ export default function EquipmentItemDetail() {
   const [item, setItem] = useState(null)
   const location = useLocation()
 
+  const handleChangeItemState = async (state) => {
+    const data = {
+      "rentalAvailable" : state
+    }
+    await changeItemState(location.state.id, JSON.stringify(data))
+  }
+
   const handleGetEquip = async () => {
     const response = await getProductDetail(location.state.id)
     setEquip(response)
@@ -51,6 +58,10 @@ export default function EquipmentItemDetail() {
   useEffect(() => {
     Promise.all([handleGetItemList(), handleGetItem(), handleGetEquip()])
   }, [])
+
+  useEffect(() => {
+    handleChangeItemState(state)
+  }, [state])
 
   return (
     equip && itemList && item &&
