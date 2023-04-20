@@ -27,9 +27,11 @@ export const NavBtn = styled.button`
 
 export const MonthWrap = styled.div`
   font-size: 13px;
-  padding: 4px 30px;
+  padding: 4px 0;
+  text-align: center;
+  width: 150px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid ${(props) => props.theme.color.text.black};
   font-weight: 500;
 
@@ -53,7 +55,7 @@ export const ContCell = styled.div`
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
   height: 120px;
-  padding: 7px;
+  padding: 10px 7px;
   font-size: 12px;
 
   &:nth-child(7n + 1) {
@@ -62,9 +64,10 @@ export const ContCell = styled.div`
 
   &.month {
     height: 30px;
+    padding: 10px 7px;
   }
 
   &.faded {
-    color: #d9d9d9;
+    color: ${(props) => props.theme.color.gray.g4};
   }
 `;

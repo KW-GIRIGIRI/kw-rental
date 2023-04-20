@@ -13,6 +13,10 @@ export const ItemUl = styled.ul`
 `;
 
 export const ItemLi = styled.li`
+  & > .hover:hover {
+    outline: 1px solid ${(props) => props.theme.color.primary.main};
+    outline-offset: -1px;
+  }
 `;
 
 

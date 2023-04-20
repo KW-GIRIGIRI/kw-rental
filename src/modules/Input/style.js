@@ -28,10 +28,24 @@ export const InputStyle = styled.input`
   &.propertyNum {
     width: 150px;
     font-size: 15px;
-    height: 30px;
+    padding: 6px 0;
+    text-align: center;
     border-radius: 5px;
-    &::placeholder{
+    &::placeholder {
       text-align: center;
+    }
+    &:disabled {
+      background-color: ${(props) => props.theme.color.primary.sub};
+      color: ${(props) => props.theme.color.gray.g5};
+    }
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 `;

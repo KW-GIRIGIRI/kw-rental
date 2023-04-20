@@ -56,7 +56,7 @@ export default function EquipmentDetail() {
             {
               isAuth ?
                 <div>
-                  <button onClick={() => navigate('/equipment/edit', { state: { id: params.id } })}>수정</button>
+                  <button onClick={() => navigate(`/equipment/${params.id}/edit`, { state: { id: params.id } })}>수정</button>
                   <button onClick={() => open()}>삭제</button>
                 </div> : <></>
             }

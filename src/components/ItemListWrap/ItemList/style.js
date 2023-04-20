@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-export const Div = styled.div`
-  & > .hover:hover {
-    outline: 1px solid ${(props) => props.theme.color.primary.main};
-    outline-offset: -1px;
-  }
-`
-
 export const ItemWrap = styled.div`
   width: 244px;
   height: 75px;

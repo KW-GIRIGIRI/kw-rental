@@ -1,41 +1,83 @@
 import * as S from "./style"
 import { BtnWrap } from "../AddEquipment/style"
 import Button from "../../modules/Button"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import ItemReserveHist from "../../components/ItemReserveHist"
 import useToggle from "../../hook/useToggle"
 import { useState } from "react"
 import Input from "../../modules/Input"
-
-const itemList = [20190500260004, 2011231231004, 201905002123123]
-
-// mock data
-export const product = {
-  category: 'camera',
-  modelName: 'DSLR SONY 6600',
-  maker: "SONY",
-  components: '줌렌즈, 단렌즈 20mm, 충전기 포함',
-  purpose: '동영상 촬영',
-  rentalQuantity: {
-    totalQuantity: 10
-  },
-  rentalPlace: '한울관 B119호',
-  imgUrl: "https://img.danawa.com/prod_img/500000/023/522/img/15522023_1.jpg?shrink=500:500"
-}
+import { changeItemState, changePropertyNum, getItem, getItemList, getProductDetail } from "../../api/api"
+import { useEffect } from "react"
+import { useRef } from "react"
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
-   const { Toggle, state } = useToggle()
+  const { Toggle, toggle, state, changeInitial } = useToggle()
   const [editNum, setEditNum] = useState(false);
+  const [itemList, setitemList] = useState([])
+  const [equip, setEquip] = useState(null)
+  const [item, setItem] = useState(null)
+  const propertyNumRef = useRef()
+  const location = useLocation()
+
+  const handleChangeItem = e => {
+    const pItem = itemList.filter(i => i.propertyNumber === e.target.value)[0]
+    Promise.all([handleGetEquip(pItem.equipmentId), handleGetItem(pItem.id)])
+  }
+
+  const handleManageNum = () => {
+    setEditNum(!editNum)
+    if(editNum) handleChangePropertyNum()
+  }
+
+  const handleChangePropertyNum = async () => {
+    if (propertyNumRef.current.value !== item.propertyNumber) {
+      const data = {
+        "propertyNumber": propertyNumRef.current.value
+      }
+
+      const response = await changePropertyNum(location.state.id, JSON.stringify(data))
+      response === 204 || setEditNum(!editNum)
+    }
+  }
+
+  const handleChangeItemState = async (id) => {
+    const data = {
+      "rentalAvailable" : !state
+    }
+    const response = await changeItemState(id || location.state.id, JSON.stringify(data))
+    response === 204 || alert('다시 시도해주세요')
+  }
+
+  const handleGetEquip = async (id) => {
+    const response = await getProductDetail(id || location.state.equipmentId)
+    setEquip(response)
+  }
+
+  const handleGetItemList = async () => {
+    const response = await getItemList(location.state.equipmentId)
+    setitemList(response.items)
+  }
+
+  const handleGetItem = async (id) => {
+    const response = await getItem(id || location.state.id)
+    changeInitial(response.rentalAvailable )
+    setItem(response)
+  }
+  
+  useEffect(() => {
+    Promise.all([handleGetItemList(), handleGetItem(), handleGetEquip()])
+  }, [])
 
   return (
+    equip && itemList && item &&
     <S.Wrapper>
       <S.NavDiv>
         <S.SimpleDesc>
           <span>기자재 조회</span>
-          <span>{product.category}</span>
-          <span>{product.modelName}</span>
-          <span>자산번호</span>
+          <span>{equip.category}</span>
+          <span>{equip.modelName}</span>
+          <span>{item.propertyNumber}</span>
         </S.SimpleDesc>
         <div>
           <button>삭제</button>
@@ -43,27 +85,21 @@ export default function EquipmentItemDetail() {
       </S.NavDiv>
       <S.Div>
         <S.SubTitle>품목 현황</S.SubTitle>
-        <S.SelectItem name="" id="">
+        <S.SelectItem onChange={handleChangeItem}  name="" id="">
         {
-          itemList.map(item => <option key={item} value="">{item}</option>)
+          itemList.map(item => <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>)
         }
         </S.SelectItem>
       </S.Div>
       <S.Div>
         <S.SubTitle>품목 대여 ON/OFF</S.SubTitle>
-      </S.Div>
-      <Toggle className='rental' on='대여 가능' off='대여 불가' />
+        </S.Div>
+        <Toggle onClickFunc={handleChangeItemState} className='rental' on='대여 가능' off='대여 불가' />
       <S.Div>
         <S.SubTitle>자산번호 관리</S.SubTitle>
-        <S.numEditBtn onClick={() => { setEditNum(!editNum) }}><p>수정</p></S.numEditBtn>
+        <S.numEditBtn onClick={handleManageNum}><p>수정</p></S.numEditBtn>
       </S.Div>
-      {
-        editNum ?
-          <Input name="propertyNum" placeholder="20190500260004" maxLen="14" className="propertyNum" />
-          : <S.ItemNumDiv>
-            <p>20190500260004</p>
-          </S.ItemNumDiv>
-      }
+      <Input placeholder="20190500260004" maxLen="14" className="propertyNum" defaultValue={item.propertyNumber} ref={propertyNumRef} disabled={!editNum} />
       <S.Div>
         <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
       </S.Div>
