@@ -12,13 +12,18 @@ import { useRef } from "react"
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
-  const { Toggle, toggle, state } = useToggle()
+  const { Toggle, toggle, state, changeInitial } = useToggle()
   const [editNum, setEditNum] = useState(false);
   const [itemList, setitemList] = useState([])
   const [equip, setEquip] = useState(null)
   const [item, setItem] = useState(null)
   const propertyNumRef = useRef()
   const location = useLocation()
+
+  const handleChangeItem = e => {
+    const pItem = itemList.filter(i => i.propertyNumber === e.target.value)[0]
+    Promise.all([handleGetEquip(pItem.equipmentId), handleGetItem(pItem.id)])
+  }
 
   const handleManageNum = () => {
     setEditNum(!editNum)
@@ -36,37 +41,33 @@ export default function EquipmentItemDetail() {
     }
   }
 
-  const handleChangeItemState = async (state) => {
+  const handleChangeItemState = async (id) => {
     const data = {
-      "rentalAvailable" : state
+      "rentalAvailable" : !state
     }
-    const response = await changeItemState(location.state.id, JSON.stringify(data))
-    response === 204 || alert()
+    const response = await changeItemState(id || location.state.id, JSON.stringify(data))
+    response === 204 || alert('다시 시도해주세요')
   }
 
-  const handleGetEquip = async () => {
-    const response = await getProductDetail(location.state.id)
+  const handleGetEquip = async (id) => {
+    const response = await getProductDetail(id || location.state.equipmentId)
     setEquip(response)
   }
 
   const handleGetItemList = async () => {
-    const response = await getItemList(location.state.id)
+    const response = await getItemList(location.state.equipmentId)
     setitemList(response.items)
   }
 
-  const handleGetItem = async () => {
-    const response = await getItem(location.state.id)
-    response.rentalAvailable && toggle()
+  const handleGetItem = async (id) => {
+    const response = await getItem(id || location.state.id)
+    changeInitial(response.rentalAvailable )
     setItem(response)
   }
-
+  
   useEffect(() => {
     Promise.all([handleGetItemList(), handleGetItem(), handleGetEquip()])
   }, [])
-
-  useEffect(() => {
-    handleChangeItemState(state)
-  }, [state])
 
   return (
     equip && itemList && item &&
@@ -84,16 +85,16 @@ export default function EquipmentItemDetail() {
       </S.NavDiv>
       <S.Div>
         <S.SubTitle>품목 현황</S.SubTitle>
-        <S.SelectItem name="" id="">
+        <S.SelectItem onChange={handleChangeItem}  name="" id="">
         {
-          itemList.map(item => <option key={item.propertyNumber} value="">{item.propertyNumber}</option>)
+          itemList.map(item => <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>)
         }
         </S.SelectItem>
       </S.Div>
       <S.Div>
         <S.SubTitle>품목 대여 ON/OFF</S.SubTitle>
-      </S.Div>
-      <Toggle className='rental' on='대여 가능' off='대여 불가' />
+        </S.Div>
+        <Toggle onClickFunc={handleChangeItemState} className='rental' on='대여 가능' off='대여 불가' />
       <S.Div>
         <S.SubTitle>자산번호 관리</S.SubTitle>
         <S.numEditBtn onClick={handleManageNum}><p>수정</p></S.numEditBtn>

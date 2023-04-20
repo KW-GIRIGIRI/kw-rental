@@ -46,7 +46,7 @@ export default function ItemListWrap({ item, isEdit, isAdd }) {
             <S.ItemUl>
               {data.map(i => {
                 return (
-                  <S.ItemLi key={i.id} onClick={() => i.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: i.equipmentId } }) : null}>
+                  <S.ItemLi key={i.id} onClick={() => i.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: i.id, equipmentId: i.equipmentId, propertyNum: i.propertyNumber } }) : null}>
                     <ItemList id={i.id - data[0].id + 1} num={i.propertyNumber} isEdit={isEdit} isAdd={isAdd} delItem={delItem} />
                   </S.ItemLi>
                 )
