@@ -5,7 +5,7 @@ import Textarea from "../../../modules/Textarea";
 import * as S from "../style";
 import { category } from "../../../data/category";
 
-const DetailDescInput = forwardRef(({product}, addEqRef) => {
+const DetailDescInput = forwardRef(({product, itemLength}, addEqRef) => {
   const selectRef = useRef()
   const location = useLocation()
 
@@ -42,17 +42,17 @@ const DetailDescInput = forwardRef(({product}, addEqRef) => {
         </S.ProductLi>
         <S.ProductLi>
           <p>총 개수</p>
-          <S.DisabledInp disabled name="totalQuantity" ref={el => addEqRef.current[5] = el} type="text" value={`${product?.totalQuantity || 1}`} /> 
+          <p>{itemLength}</p>
         </S.ProductLi>
         <S.ProductLi>
           <p>대여장소</p>
-          <S.CategoryDropdown className="place" defaultValue="한울관" name="rentalPlace" id="" ref={el => addEqRef.current[6] = el}>
+          <S.CategoryDropdown className="place" defaultValue="한울관" name="rentalPlace" id="" ref={el => addEqRef.current[5] = el}>
             <option value="한울관">한울관 B119호</option>
           </S.CategoryDropdown>
         </S.ProductLi>
         <S.ProductLi>
           <p>최대 대여 가능일</p>
-          <Input name="maxRentalDays" maxLen="5" placeholder="ex. 1" defaultValue={product?.maxRentalDays} ref={el => addEqRef.current[7] = el}/>
+          <Input name="maxRentalDays" maxLen="5" placeholder="ex. 1" defaultValue={product?.maxRentalDays} ref={el => addEqRef.current[6] = el}/>
         </S.ProductLi>
       </S.ProductOl>
     </S.Div>

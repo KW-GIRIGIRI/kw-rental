@@ -6,19 +6,21 @@ import ItemReserveHist from "../../components/ItemReserveHist"
 import useToggle from "../../hook/useToggle"
 import { useState } from "react"
 import Input from "../../modules/Input"
-import { changeItemState, changePropertyNum, getItem, getItemList, getProductDetail } from "../../api/api"
+import { changeItemState, changePropertyNum, deleteItem, getItem, getItemList, getProductDetail } from "../../api/api"
 import { useEffect } from "react"
 import { useRef } from "react"
+import useModal from "../../hook/useModal"
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate()
-  const { Toggle, toggle, state, changeInitial } = useToggle()
+  const { Toggle, state, changeInitial } = useToggle()
   const [editNum, setEditNum] = useState(false);
   const [itemList, setitemList] = useState([])
   const [equip, setEquip] = useState(null)
   const [item, setItem] = useState(null)
   const propertyNumRef = useRef()
   const location = useLocation()
+  const { Modal, open, close } = useModal()
 
   const handleChangeItem = e => {
     const pItem = itemList.filter(i => i.propertyNumber === e.target.value)[0]
@@ -64,6 +66,16 @@ export default function EquipmentItemDetail() {
     changeInitial(response.rentalAvailable )
     setItem(response)
   }
+
+  const handleDeleteItem = async () => {
+    if (itemList.length > 1) {
+      const response = await deleteItem(location.state.id)
+      response === 204 && navigate(`/equipment/${location.state.equipmentId}`)
+    } else {
+      alert('품목이 1개일 경우, 삭제가 불가능합니다.')
+      close()
+    }
+  }
   
   useEffect(() => {
     Promise.all([handleGetItemList(), handleGetItem(), handleGetEquip()])
@@ -80,12 +92,12 @@ export default function EquipmentItemDetail() {
           <span>{item.propertyNumber}</span>
         </S.SimpleDesc>
         <div>
-          <button>삭제</button>
+          <button onClick={open}>삭제</button>
         </div>
       </S.NavDiv>
       <S.Div>
         <S.SubTitle>품목 현황</S.SubTitle>
-        <S.SelectItem onChange={handleChangeItem}  name="" id="">
+        <S.SelectItem onChange={handleChangeItem} value={item.propertyNumber}  name="" id="">
         {
           itemList.map(item => <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>)
         }
@@ -106,7 +118,14 @@ export default function EquipmentItemDetail() {
       <ItemReserveHist />
       <BtnWrap>
         <Button onClick={() => navigate(-1)} className="sub" text="뒤로 가기" margin="60px 0 30px" padding="15px 23px" borderRadius="10px" fontSize="15px" />
-      </BtnWrap>
+        </BtnWrap>
+        <Modal>
+          <p>정말 삭제하시겠습니까?</p>
+           <div>
+              <Button onClick={close} text='취소' className='sub' padding='11px 34px' borderRadius='5px' />
+              <Button onClick={handleDeleteItem} text='삭제' className='main' padding='12px 34px' borderRadius='5px' />
+            </div>
+        </Modal>
     </S.Wrapper>
   )
 }

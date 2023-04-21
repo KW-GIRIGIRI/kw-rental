@@ -21,6 +21,7 @@ export default function EquipmentDetail() {
   const navigate = useNavigate()
   const { Modal, open, close } = useModal()
   const { isAuth } = useContext(AuthContext)
+  const [data, setData] = useState([])
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);
@@ -42,6 +43,10 @@ export default function EquipmentDetail() {
     getItem();
   }, [])
 
+  useEffect(() => {
+    setItem(data)
+  }, [data])
+
   return (
     <S.Wrapper>
       {
@@ -56,7 +61,7 @@ export default function EquipmentDetail() {
             {
               isAuth ?
                 <div>
-                  <button onClick={() => navigate(`/equipment/${params.id}/edit`, { state: { id: params.id } })}>수정</button>
+                  <button onClick={() => navigate(`/equipment/${params.id}/edit`)}>수정</button>
                   <button onClick={() => open()}>삭제</button>
                 </div> : <></>
             }
@@ -84,7 +89,7 @@ export default function EquipmentDetail() {
                 <S.SubTitle>품목 관리</S.SubTitle>
                 {
                   item ?
-                    <ItemListWrap item={item.items} isEdit={false} />
+                    <ItemListWrap data={data} setData={setData} item={item.items} isEdit={false} />
                     : <div>loading...</div>
                 }
                 <BtnWrap>

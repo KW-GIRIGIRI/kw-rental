@@ -203,3 +203,18 @@ export const changeItems = async (id, data) => {
     return err;
   }
 };
+
+
+export const deleteItem = async (id) => {
+  try {
+    const response = await instanceUtil.delete(
+      `/admin/items/${id}`,
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+

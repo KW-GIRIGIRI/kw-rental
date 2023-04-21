@@ -1,68 +1,70 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom"
-import ItemList from "./ItemList";
+import ItemListComp from "./ItemListComp";
 import iconPlus from "../../assets/icon-plus-mono.svg";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export default function ItemListWrap({ item, isEdit, isAdd }) {
+export default function ItemListWrap({ item, isEdit, isAdd, data, setData }) {
   const navigate = useNavigate()
-  const [data, setData] = useState(item)
-  const [idx, setIdx] = useState(item[0].id)
+  const [length, setLength] = useState(item?.length || 1)
+  const [preventAdd, setPreventAdd] = useState(!!item)
 
   useEffect(() => {
-    setData(item)
-    setIdx(item.at(-1).id)
+    if (item) {
+      setPreventAdd(!!item)
+      setData(item)
+      setLength(item.length)
+    }
   }, [item])
 
   const addItem = () => {
-    setData([...data].concat([{ id: idx + 1, propertyNumber: null }]))
-    setIdx(idx + 1)
+    setLength(length + 1)
+    setPreventAdd(false)
   }
-
-  const delItem = (id) => {
-    let copy = [...data]
-    if (copy.length === id) {
-      copy.pop()
+  
+  const delItem = (index) => {
+    if (data.length > 1) {
+      const newArr = data.filter((_, i) => i !== index)
+      setData(newArr)
+      setPreventAdd(true)
+      setLength(length - 1)
+    } else {
+      alert('품목은 1개 이상이어야 합나디.')
     }
-    else {
-      copy.splice(id - 1, 1)
-      if (copy[id - 1].propertyNumber) {
-      }
-      else {
-        for (let i = id - 1; i < copy.length; i++)
-          copy[i].id--
-      }
-    }
-    setIdx(idx - 1)
-    setData(copy)
   }
 
   return (
     <>
       <S.Div>
         {
-          data ?
-            <S.ItemUl>
-              {data.map(i => {
-                return (
-                  <S.ItemLi key={i.id} onClick={() => i.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: i.id, equipmentId: i.equipmentId, propertyNum: i.propertyNumber } }) : null}>
-                    <ItemList id={i.id - data[0].id + 1} num={i.propertyNumber} isEdit={isEdit} isAdd={isAdd} delItem={delItem} />
+          <S.ItemUl>
+            {
+            Array(length).fill().map((_, i) => 
+              
+              (length && data) && data[i] ? 
+                <S.ItemLi key={i}
+                  onClick={() => data[i]?.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: data[i].id, equipmentId: data[i].equipmentId, propertyNum: data[i].propertyNumber } }) : null}
+                >
+                  <ItemListComp num={data[i].propertyNumber} index={i} setPreventAdd={setPreventAdd} preventAdd={preventAdd}
+                    isEdit={isEdit} isAdd={isAdd} delItem={delItem} setData={setData} data={data} />
                   </S.ItemLi>
-                )
-              })}
-              {isAdd || isEdit ?
-                <S.ItemLi>
-                  <S.AddBtn onClick={addItem}>
-                    <S.PlusImg src={iconPlus} />
-                    <S.P>New</S.P>
-                  </S.AddBtn>
-                </S.ItemLi>
-                : <></>
-              }
-            </S.ItemUl>
-            :
-            <div>loading...</div>
+                  :
+                <S.ItemLi key={i}>
+                  <ItemListComp index={i} preventAdd={preventAdd} setPreventAdd={setPreventAdd} setDat
+                    isEdit={isEdit} isAdd={isAdd} delItem={delItem} setData={setData} data={data} />
+                  </S.ItemLi>
+              )
+            }
+            {isAdd || isEdit ?
+              <S.ItemLi>
+                <S.AddBtn disabled={!preventAdd} onClick={addItem}>
+                  <S.PlusImg src={iconPlus} />
+                  <p>New</p>
+                </S.AddBtn>
+              </S.ItemLi>
+              : <></>
+            }
+          </S.ItemUl>
         }
       </S.Div>
     </>
