@@ -19,12 +19,6 @@ export const ItemLi = styled.li`
   }
 `;
 
-
-export const P = styled.p`
-  color: ${(props) => props.theme.color.primary.third};
-  font-size: 15px;
-`
-
 export const PlusImg = styled.img`
   margin-right: 7px;
 `
@@ -39,4 +33,6 @@ export const AddBtn = styled.button`
   display: flex;
   align-items: center;
   padding: 0 17px;
+  color: ${(props) => props.theme.color.primary.third};
+  font-size: 15px;
 `;

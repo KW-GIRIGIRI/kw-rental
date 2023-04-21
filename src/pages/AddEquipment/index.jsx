@@ -6,15 +6,16 @@ import DetailDescInput from "../../components/DetailDesc/DetailDescInput"
 import ItemListWrap from "../../components/ItemListWrap"
 import iconFileImgWhite from "../../assets/icon-fileImg-white.svg"
 import Textarea from "../../modules/Textarea"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
-import { addEquipment, getProductDetail, postImage, getItemList } from "../../api/api"
+import { addEquipment, getProductDetail, postImage, getItemList, modifyEquipment } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 
 export default function AddEquipment() {
   const location = useLocation()
+  const params = useParams()
   const navigate = useNavigate()
   const [isEdit, setIsEdit] = useState(false)
   const [product, setProduct] = useState(null)
@@ -24,7 +25,7 @@ export default function AddEquipment() {
   const { Modal, open, close } = useModal()
   const addEqRef = useRef([])
   const { Toggle, state } = useToggle()
-
+  const [data, setData] = useState([])
 
   const handleGetProduct = async (id) => {
     const response = await getProductDetail(id);
@@ -47,24 +48,31 @@ export default function AddEquipment() {
     setImgFile(response)
   }
 
-  const handleAddEquipment = async (e) => {
-    const data = {
+  const handleAddEquipment = async () => {
+    const sendData = {
        equipment : { 
         imgUrl: imgFile, 
-    }, "items": [{
-      propertyNumber: 20
-      // 품목 파트 적용 후 수정
-      }]
+        totalQuantity: data.length
+      }, "items": data
     }
     
-    addEqRef.current.map(eq => data.equipment[eq.name] = eq.value)
+    addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
 
-    const response = await addEquipment(JSON.stringify(data));
-    navigate(`/equipment/${response.split("/")[3]}`)
+    const response = await addEquipment(JSON.stringify(sendData));
+    response && navigate(`/equipment/${response.split("/")[3]}`)
   }
 
+  const handleModifyItems = async () => {
+    const sendData = {
+      "items" : data
+    }
+
+    const response = await modifyEquipment(JSON.stringify(sendData));
+    response === 204 && navigate(`/equipment/${params.id}`)
+  }
+    
   useEffect(() => {
-    if (location.pathname.includes('edit')) handleGetProduct(location.state?.id)
+    if (location.pathname.includes('edit')) handleGetProduct(params.id)
   }, [])
 
   return (
@@ -92,27 +100,29 @@ export default function AddEquipment() {
               <input type="file" accept="image/*" onChange={handleImgFile} />
           </S.FileLabel>
         }
-        <DetailDescInput product={product} ref={addEqRef} />
+        <DetailDescInput itemLength={data.length} product={product} ref={addEqRef} />
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
-      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[8] = el} />
+      <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[7] = el} />
       {
         state || item ? 
           isEdit ?
             <>
               <SubTitle>품목 수정 및 추가</SubTitle>
-              { item ? <ItemListWrap item={item.items} isEdit={isEdit} isAdd={false} /> : <></> }
+              { item ? <ItemListWrap data={data} setData={setData} item={item.items} isEdit={isEdit} isAdd={false} /> : <></> }
             </>
             :
             <>
               <SubTitle>품목관리</SubTitle>
-              <ItemListWrap item={[{ id: 1, propertyNumber: null }]} isEdit={isEdit} isAdd={true} />
+              <ItemListWrap data={data} setData={setData}
+                // item={[{ id: null, propertyNumber: null }]}
+                isEdit={isEdit} isAdd={true} />
             </>
           : <></>
       }
 
       <S.BtnWrap>
-        <Button onClick={handleAddEquipment} className="main" text="저장하기" padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
+        <Button onClick={isEdit ? handleModifyItems : handleAddEquipment} className="main" text={isEdit ? "저장하기" : "기자재 추가"} padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
         <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px" onClick={open}/>
       </S.BtnWrap>
       <Modal>
