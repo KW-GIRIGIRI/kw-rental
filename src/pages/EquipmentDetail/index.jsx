@@ -28,9 +28,6 @@ export default function EquipmentDetail() {
     setProduct(response)
   }
 
-  console.log(data)
-
-
   const getItem = async () => {
     const response = await getItemList(params.id);
     setItem(response)

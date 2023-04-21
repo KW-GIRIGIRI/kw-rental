@@ -43,7 +43,7 @@ export default function ItemListWrap({ item, isEdit, isAdd, data, setData }) {
               
               (length && data) && data[i] ? 
                 <S.ItemLi key={i}
-                  // onClick={() => data[i]?.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: item[i].id, equipmentId: item[i].equipmentId, propertyNum: item[i].propertyNumber } }) : null}
+                  onClick={() => data[i]?.propertyNumber && !isEdit ? navigate(`/equipment/item`, { state: { id: data[i].id, equipmentId: data[i].equipmentId, propertyNum: data[i].propertyNumber } }) : null}
                 >
                   <ItemListComp num={data[i].propertyNumber} index={i} setPreventAdd={setPreventAdd} preventAdd={preventAdd}
                     isEdit={isEdit} isAdd={isAdd} delItem={delItem} setData={setData} data={data} />
