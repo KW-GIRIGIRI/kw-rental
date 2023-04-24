@@ -57,9 +57,9 @@ export default function AddEquipment() {
     }
 
     
-    addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
     //  수정수정수정
     console.log(sendData);
+    addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
 
     const response = await addEquipment(JSON.stringify(sendData));
     response && navigate(`/equipment/${response.split("/")[3]}`)

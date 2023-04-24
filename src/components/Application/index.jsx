@@ -7,7 +7,7 @@ const Application = forwardRef((props, dataRef) => {
    return (
     <S.Div>
       <h2>[필수] 이용약관 동의</h2>
-      <ToS />
+      <ToS ref={dataRef} />
       <h2>대여신청서 작성</h2>
       <ApplicationForm ref={dataRef} />
     </S.Div>

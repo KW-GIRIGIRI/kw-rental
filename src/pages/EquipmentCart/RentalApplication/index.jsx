@@ -10,15 +10,17 @@ export default function RentalApplication() {
   const dataRef = useRef([])
 
   const handlePostReservation = async () => {
-    const data = {
-      "renterName" : dataRef.current.name.innerHTML,
-      "renterPhoneNumber" : dataRef.current.pNumber.value,
-      "renterEmail" :`${dataRef.current.id.value}@${dataRef.current.address.value}`,
-      "rentalPurpose" : dataRef.current.purpose.value
+    if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
+      const data = {
+        "renterName" : dataRef.current.name.innerHTML,
+        "renterPhoneNumber" : dataRef.current.pNumber.value,
+        "renterEmail" :`${dataRef.current.id.value}@${dataRef.current.address.value}`,
+        "rentalPurpose" : dataRef.current.purpose.value
+      }
+  
+      const response = await postReservation(JSON.stringify(data))
+      response === 201 && navigate('/equipment/inventory/success')
     }
-
-    const response = await postReservation(JSON.stringify(data))
-    response === 201 && navigate('/equipment/inventory/success')
   }
 
 
