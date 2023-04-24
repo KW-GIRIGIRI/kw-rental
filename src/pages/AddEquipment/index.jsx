@@ -9,7 +9,7 @@ import Textarea from "../../modules/Textarea"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
-import { addEquipment, getProductDetail, postImage, getItemList, modifyEquipment } from "../../api/api"
+import { addEquipment, getProductDetail, postImage, getItemList, modifyEquipment, changeItems } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 
@@ -33,7 +33,7 @@ export default function AddEquipment() {
 
     setProduct(response)
     setItem(responseId)
-
+    setImgFile(response.imgUrl)
     setIsEdit(true)
   }
 
@@ -49,29 +49,26 @@ export default function AddEquipment() {
   }
 
   const handleAddEquipment = async () => {
+    const item = []
+    data.map(i => item.push({'propertyNumber': i.propertyNumber}))
+
     const sendData = {
        equipment : { 
         imgUrl: imgFile, 
         totalQuantity: data.length
-      }, "items": data
+      }, "items": item
     }
 
-    
-    //  수정수정수정
-    console.log(sendData);
     addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
 
     const response = await addEquipment(JSON.stringify(sendData));
     response && navigate(`/equipment/${response.split("/")[3]}`)
   }
 
-  const handleModifyItems = async () => {
-    const sendData = {
+  const handleModifyEquipment = async () => {
+    const itemData = {
       "items" : data
     }
-
-    const response = await modifyEquipment(JSON.stringify(sendData));
-    response === 204 && navigate(`/equipment/${params.id}`)
   }
     
   useEffect(() => {
@@ -125,7 +122,7 @@ export default function AddEquipment() {
       }
 
       <S.BtnWrap>
-        <Button onClick={isEdit ? handleModifyItems : handleAddEquipment} className="main" text={isEdit ? "저장하기" : "기자재 추가"} padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
+        <Button onClick={isEdit ? handleModifyEquipment : handleAddEquipment} className="main" text={isEdit ? "저장하기" : "기자재 추가"} padding="15px 31px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
         <Button className="sub" text="취소하기" padding="15px 31px" borderRadius="10px" fontSize="15px" onClick={open}/>
       </S.BtnWrap>
       <Modal>
