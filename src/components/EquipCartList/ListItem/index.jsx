@@ -17,7 +17,10 @@ export default function ListItem({ item, handleDeleteInventory, handleModifyCart
         <p>정말 삭제하시겠습니까?</p>
         <div>
           <Button onClick={close} text='취소' className='sub' padding='11px 34px' borderRadius='5px' />
-          <Button onClick={() => handleDeleteInventory(item.id)} text='삭제' className='main' padding='12px 34px' borderRadius='5px' />
+          <Button onClick={() => {
+            handleDeleteInventory(item.id)
+            close()
+          }} text='삭제' className='main' padding='12px 34px' borderRadius='5px' />
         </div>
       </Modal>
       

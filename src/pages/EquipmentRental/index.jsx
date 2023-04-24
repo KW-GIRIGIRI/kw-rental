@@ -19,7 +19,7 @@ export default function EquipmentRental() {
       {
         isAuth ?
           <TabNav className={location.pathname.includes('/status') ? "on" : false} onClick={() => navigate('/equipment/status')} text="대여 현황" /> :
-          <TabNav className={location.pathname.includes('/inventory') ? "on" : false} onClick={() => navigate('/equipment/inventory')} text="담은 기자재(2)" />
+          <TabNav className={location.pathname.includes('/inventory') ? "on" : false} onClick={() => navigate('/equipment/inventory')} text="담은 기자재" />
       }
       <Outlet />
     </>

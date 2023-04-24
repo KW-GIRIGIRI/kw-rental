@@ -28,7 +28,7 @@ export const Purpose = styled.div`
   display: flex;
   & > li {
     margin-right: 20px;
-    flex-basis: 10%;
+    flex-basis: 100px;
   }
 `
 

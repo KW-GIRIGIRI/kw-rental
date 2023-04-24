@@ -33,15 +33,15 @@ export const GalLi = styled.li`
 
 export const Count = styled.span`
   position: absolute;
-  padding: 4px 0;
+  padding: 4px;
   margin: 15px;
-  width: 60px;
+  width: max-content;
   background-color: #fff;
   text-align: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius.circle};
   color: ${(props) => props.theme.color.text.gray};
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   line-height: normal;
 `;
