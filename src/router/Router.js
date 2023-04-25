@@ -10,6 +10,7 @@ import RentalSuccess from "../pages/EquipmentCart/RentalSuccess";
 import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
+import History from '../pages/History';
 
 export default function Router() {
   return (
@@ -29,7 +30,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-        <Route path="/history" >
+        <Route path="/history" element={<History />} >
          </Route>
         </Route>
       </Routes>
