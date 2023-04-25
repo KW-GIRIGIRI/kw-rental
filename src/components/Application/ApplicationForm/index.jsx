@@ -4,8 +4,9 @@ import Input from "../../../modules/Input";
 import { TextareaStyle } from "../../../modules/Textarea/style";
 import useInput from "../../../hook/useInput";
 import { useEffect, useState } from "react";
+import { forwardRef } from "react";
 
-export default function ApplicationForm() {
+const ApplicationForm = forwardRef((props, dataRef) => {
   const [visible, setVisible] = useState(true)
   const purposeInp = useInput('')
 
@@ -19,23 +20,23 @@ export default function ApplicationForm() {
         <S.Info>
           <S.LiWrap>
             <S.FormLi>이름</S.FormLi>
-            <S.P>이영현</S.P>
+            <S.P ref={el => dataRef.current.name = el}>이영현</S.P>
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>연락처</S.FormLi>
-            <Input className='rentalUser' type="tel" maxLen="13"/>
+            <Input ref={el => dataRef.current.pNumber = el} className='rentalUser' type="tel" maxLen="11"/>
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>이메일</S.FormLi>
-            <Input className='rentalUser' maxLen="30"/>
+            <Input className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el}/>
             <span>@</span>
-            <Input className='rentalUser' maxLen="30"/>
+            <Input className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el}/>
           </S.LiWrap>
         </S.Info>
         <S.Purpose>
           <S.FormLi>대여 목적</S.FormLi>
           <S.TextareaWrap>
-            <TextareaStyle {...purposeInp} placeholder="최소 10자 이상 입력하세요." rows="4"></TextareaStyle>
+            <TextareaStyle {...purposeInp} ref={el => dataRef.current.purpose = el} placeholder="최소 10자 이상 입력하세요." rows="4"></TextareaStyle>
             {
               visible ?
               <S.Exclam><img src={iconExclamation} alt=''/><span>구체적으로 작성해주세요.</span></S.Exclam> : <></>
@@ -45,4 +46,6 @@ export default function ApplicationForm() {
       </S.FormWrap>
     </>
   )
-}
+})
+
+export default ApplicationForm

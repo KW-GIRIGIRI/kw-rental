@@ -35,7 +35,7 @@ export default function EquipmentDetail() {
 
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id)
-    !response && navigate('/equipment')
+    !response && navigate('/')
   }
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function EquipmentDetail() {
             {
               isAuth ?
                 <div>
-                  <button onClick={() => navigate(`/equipment/${params.id}/edit`)}>수정</button>
+                  <button onClick={() => navigate(`/${params.id}/edit`)}>수정</button>
                   <button onClick={() => open()}>삭제</button>
                 </div> : <></>
             }

@@ -5,7 +5,7 @@ import Textarea from "../../../modules/Textarea";
 import * as S from "../style";
 import { category } from "../../../data/category";
 
-const DetailDescInput = forwardRef(({product, itemLength}, addEqRef) => {
+const DetailDescInput = forwardRef(({isEdit, product, itemLength}, addEqRef) => {
   const selectRef = useRef()
   const location = useLocation()
 

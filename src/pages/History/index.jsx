@@ -1,0 +1,35 @@
+import { useContext } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Context";
+import TabNav from "../../modules/TabNav";
+import { Section } from "./style";
+
+export default function History() {
+  const { isAuth } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // 설정한 라우팅 주소에 따라서 navigate와 include 수정 
+  return (
+    <>
+      {
+        isAuth ?
+          <>
+            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            </>
+          :
+          <>
+            <TabNav onClick={() => navigate('/history')} text="기자재 대여" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history')} text="랩실 대여" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history')} text="페널티" className={location.pathname.includes('status') ? 'false' : 'on'} />
+          </>
+      }
+      <Section>
+        <Outlet />
+
+      </Section>
+    </>
+  )
+}

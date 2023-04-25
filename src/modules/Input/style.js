@@ -10,6 +10,11 @@ export const InputStyle = styled.input`
   &::placeholder {
     color: ${(props) => props.theme.color.text.gray};
   }
+
+  &.err {
+    border: 1px solid ${(props) => props.theme.color.primary.red};
+  }
+
   &.title {
     display: block;
     font-size: 20px;

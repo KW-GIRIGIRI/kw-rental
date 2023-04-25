@@ -61,11 +61,11 @@ export const deleteEquipment = async (id) => {
   }
 };
 
-export const modifyEquipment = async (id) => {
+export const modifyEquipment = async (id, data) => {
   try {
-    const response = await instanceUtil.put(`/admin/equipments/${id}`);
+    const response = await instanceUtil.put(`/admin/equipments/${id}`, data);
 
-    return response.data;
+    return response.headers.get("Location");
   } catch (err) {
     console.error(err.message);
     return err;
@@ -95,9 +95,9 @@ export const addCartEquip = async (data) => {
   }
 };
 
-export const getCartEquip = async (data) => {
+export const getCartEquip = async () => {
   try {
-    const response = await instanceUtil.get(`/inventories`, data);
+    const response = await instanceUtil.get(`/inventories`);
 
     return response.data.inventories;
   } catch (err) {
@@ -197,7 +197,7 @@ export const changeItems = async (id, data) => {
       data
     );
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;
@@ -218,3 +218,14 @@ export const deleteItem = async (id) => {
   }
 };
 
+// 대여 관련
+export const postReservation = async (data) => {
+  try {
+    const response = await instanceUtil.post(`/reservations`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

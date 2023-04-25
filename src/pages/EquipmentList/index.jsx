@@ -114,7 +114,7 @@ export default function EquipmentList() {
 
         {
           isAuth ?
-            <S.addBtn onClick={() => navigate('/equipment/add')}>
+            <S.addBtn onClick={() => navigate('/add')}>
               <img src={iconPlus} alt="" />
               <p>기자재 추가</p>
             </S.addBtn>

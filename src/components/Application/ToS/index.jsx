@@ -1,8 +1,9 @@
 import * as S from "./style";
 import iconExclamation from "../../../assets/icon-exclamation-circle.svg";
 import { useState } from "react";
+import { forwardRef } from "react";
 
-export default function ToS() {
+const ToS = forwardRef((props, dataRef) => {
   const [isChecked, setIsChecked] = useState(false);
   function handleCheckboxChange(e) {
     setIsChecked(e.target.checked);
@@ -11,23 +12,11 @@ export default function ToS() {
   return (
     <>
       <S.ToSWrap>
-        <S.ToSText>안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
-        <S.ToSText>안녕아년 이용약관</S.ToSText>
+        <S.ToSText>이용약관</S.ToSText>
       </S.ToSWrap>
       <S.Label htmlFor="agree">
         <span>확인하였으며 동의합니다.</span>
-        <S.Check type="checkbox" name="" id="agree" onChange={handleCheckboxChange} />
+        <S.Check type="checkbox" name="" ref={el => dataRef.current.check = isChecked} id="agree" onChange={handleCheckboxChange} />
       </S.Label>
       <div style={{ clear: "both" }}></div>
       {!isChecked ?
@@ -37,4 +26,6 @@ export default function ToS() {
       <div style={{ clear: "both" }}></div>
     </>
   )
-}
+})
+
+export default ToS
