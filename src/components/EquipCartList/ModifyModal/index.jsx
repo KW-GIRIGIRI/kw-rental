@@ -30,8 +30,6 @@ export default function ModifyModal({modal, setModal, item, handleModifyCartEqui
     date: dayjs(item.rentalStartDate)
   })
 
-  console.log(item);
-
   const handleGetDatePicker = e => {
     e.preventDefault()
     const position = e.target.getBoundingClientRect()
