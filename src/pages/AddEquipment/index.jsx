@@ -49,26 +49,35 @@ export default function AddEquipment() {
   }
 
   const handleAddEquipment = async () => {
-    const item = []
-    data.map(i => item.push({'propertyNumber': i.propertyNumber}))
+    if(addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
+    else {
+      const item = []
+      data.map(i => item.push({'propertyNumber': i.propertyNumber}))
 
-    const sendData = {
-       equipment : { 
-        imgUrl: imgFile, 
-        totalQuantity: data.length
-      }, "items": item
+      const sendData = {
+        equipment : { 
+          imgUrl: imgFile, 
+          totalQuantity: data.length
+        }, "items": item
+      }
+
+      addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
+      const response = await addEquipment(JSON.stringify(sendData));
+      response && navigate(`/equipment/${response.split("/")[3]}`)
     }
-
-    addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
-
-    const response = await addEquipment(JSON.stringify(sendData));
-    response && navigate(`/equipment/${response.split("/")[3]}`)
   }
 
   const handleModifyEquipment = async () => {
     const itemData = {
       "items" : data
     }
+
+    const sendData = {
+      imgUrl: imgFile, 
+      totalQuantity: data.length
+    }
+
+    addEqRef.current.map(eq => sendData[eq.name] = eq.value)
   }
     
   useEffect(() => {
@@ -115,7 +124,6 @@ export default function AddEquipment() {
             <>
               <SubTitle>품목관리</SubTitle>
               <ItemListWrap data={data} setData={setData}
-                // item={[{ id: null, propertyNumber: null }]}
                 isEdit={isEdit} isAdd={true} />
             </>
           : <></>
@@ -129,7 +137,10 @@ export default function AddEquipment() {
         <p>작성중인 내용이 있습니다. 나가시겠습니까?</p>
         <div>
           <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
-          <Button text='나가기'className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={() => navigate('/equipment')} />
+          <Button text='나가기' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={() => {
+            navigate('/equipment')
+            close()
+          }}/>
         </div>
       </Modal>
     </Wrapper>

@@ -65,7 +65,7 @@ export const modifyEquipment = async (id) => {
   try {
     const response = await instanceUtil.put(`/admin/equipments/${id}`);
 
-    return response.data;
+    return response;
   } catch (err) {
     console.error(err.message);
     return err;
@@ -197,7 +197,7 @@ export const changeItems = async (id, data) => {
       data
     );
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;
@@ -221,7 +221,7 @@ export const deleteItem = async (id) => {
 // 대여 관련
 export const postReservation = async (data) => {
   try {
-    const response = await instancForm.post(`/reservations`, data);
+    const response = await instanceUtil.post(`/reservations`, data);
 
     return response.status;
   } catch (err) {
