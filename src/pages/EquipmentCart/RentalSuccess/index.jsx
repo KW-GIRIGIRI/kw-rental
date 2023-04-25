@@ -13,7 +13,7 @@ export default function RentalSuccess() {
       <p>기자재 대여가 완료되었습니다.</p>
       <div>
         <Button text='내 대여정보로 이동' className='main' borderRadius='10px' padding='16px 16px' />
-        <Button text='목록 보기' onClick={() => navigate('/equipment')} className='sub' borderRadius='10px' padding='16px 37px' />
+        <Button text='목록 보기' onClick={() => navigate('/')} className='sub' borderRadius='10px' padding='16px 37px' />
       </div>
     </S.Div>
   )

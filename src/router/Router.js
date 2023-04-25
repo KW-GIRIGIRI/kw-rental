@@ -6,7 +6,6 @@ import EquipmentDetail from '../pages/EquipmentDetail';
 import EquipmentItemDetail from '../pages/EquipmentItemDetail';
 import EquipmentList from '../pages/EquipmentList';
 import EquipmentRental from '../pages/EquipmentRental';
-import Notice from '../pages/Notice';
 import RentalSuccess from "../pages/EquipmentCart/RentalSuccess";
 import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
@@ -17,8 +16,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route element={<MainWrapper />}>
-          <Route path="/" element={<Notice />} />
-          <Route path="/equipment/*" element={<EquipmentRental />}>
+          <Route path="/*" element={<EquipmentRental />} >
             <Route path="" element={<EquipmentList />} />
             <Route path=":id" element={<EquipmentDetail />} />
             <Route path=":id/edit" element={<AddEquipment />} />
@@ -31,6 +29,8 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
+        <Route path="/history" >
+         </Route>
         </Route>
       </Routes>
     </BrowserRouter>

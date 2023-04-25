@@ -46,8 +46,8 @@ export default function EquipmentBox() {
             </S.Div>
             <EquipCartList cart={cart} handleDeleteInventory={handleDeleteInventory} handleModifyCartEquip={handleModifyCartEquip} />
             <S.MainBtnWrap>
-              <Button onClick={() => navigate('/equipment/inventory/application')} className="main" text="대여하기" padding="16px 36px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0" />
-              <Button onClick={() => navigate('/equipment')} className="sub" text="목록보기" padding="16px 36px" borderRadius="10px" fontSize="15px" />
+              <Button onClick={() => navigate('/inventory/application')} className="main" text="대여하기" padding="16px 36px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0" />
+              <Button onClick={() => navigate('/')} className="sub" text="목록보기" padding="16px 36px" borderRadius="10px" fontSize="15px" />
             </S.MainBtnWrap>
             <Modal>
               <p>정말 삭제하시겠습니까?</p>

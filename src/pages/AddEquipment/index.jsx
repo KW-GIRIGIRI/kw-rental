@@ -63,26 +63,35 @@ export default function AddEquipment() {
 
       addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
       const response = await addEquipment(JSON.stringify(sendData));
-      response && navigate(`/equipment/${response.split("/")[3]}`)
+      response && navigate(`/${response.split("/")[3]}`)
     }
   }
 
   const handleModifyEquipment = async () => {
-    const itemData = {
-      "items" : data
-    }
+    if (addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
+    else {
+      const item = []
+      data.map(i => item.push({
+        id: i.id,
+        'propertyNumber': i.propertyNumber
+      }))
 
-    const sendData = {
-      imgUrl: imgFile, 
-      totalQuantity: data.length
-    }
+      const itemData = {
+        "items" : item
+      }
 
-    addEqRef.current.map(eq => sendData[eq.name] = eq.value)
+      const sendData = {
+        imgUrl: imgFile, 
+        totalQuantity: data.length
+      }
     
-    const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
-    const itemRes = await changeItems(params.id, JSON.stringify(itemData));
+      addEqRef.current.map(eq => sendData[eq.name] = eq.value)
 
-    itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`)
+      const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+      const itemRes = await changeItems(params.id, JSON.stringify(itemData));
+
+      itemRes === 204 && eqRes && navigate(`/${eqRes.split("/")[3]}`)
+    }
   }
     
   useEffect(() => {
@@ -114,7 +123,7 @@ export default function AddEquipment() {
               <input type="file" accept="image/*" onChange={handleImgFile} />
           </S.FileLabel>
         }
-        <DetailDescInput itemLength={data.length} product={product} ref={addEqRef} />
+        <DetailDescInput isEdit={isEdit} itemLength={data.length} product={product} ref={addEqRef} />
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
       <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[7] = el} />
@@ -122,7 +131,7 @@ export default function AddEquipment() {
         state || item ? 
           isEdit ?
             <>
-              <SubTitle>품목 수정 및 추가</SubTitle>
+              <SubTitle>품목 추가 및 삭제</SubTitle>
               { item ? <ItemListWrap data={data} setData={setData} item={item.items} isEdit={isEdit} isAdd={false} /> : <></> }
             </>
             :
@@ -143,7 +152,7 @@ export default function AddEquipment() {
         <div>
           <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
           <Button text='나가기' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={() => {
-            navigate('/equipment')
+            navigate('/')
             close()
           }}/>
         </div>

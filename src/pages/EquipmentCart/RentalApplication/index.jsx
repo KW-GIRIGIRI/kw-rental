@@ -19,7 +19,7 @@ export default function RentalApplication() {
       }
   
       const response = await postReservation(JSON.stringify(data))
-      response === 201 && navigate('/equipment/inventory/success')
+      response === 201 && navigate('/inventory/success')
     }
   }
 
@@ -29,7 +29,7 @@ export default function RentalApplication() {
       <Application ref={dataRef} />
       <S.MainBtnWrap>
         <Button onClick={handlePostReservation} className="main" text="대여 완료" padding="16px 36px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0" />
-        <Button onClick={() => navigate('/equipment/inventory')} className="sub" text="뒤로 가기" padding="16px 36px" borderRadius="10px" fontSize="15px" />
+        <Button onClick={() => navigate('/inventory')} className="sub" text="뒤로 가기" padding="16px 36px" borderRadius="10px" fontSize="15px" />
       </S.MainBtnWrap>
     </>
   )
