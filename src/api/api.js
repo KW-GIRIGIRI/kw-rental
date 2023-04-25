@@ -61,11 +61,11 @@ export const deleteEquipment = async (id) => {
   }
 };
 
-export const modifyEquipment = async (id) => {
+export const modifyEquipment = async (id, data) => {
   try {
-    const response = await instanceUtil.put(`/admin/equipments/${id}`);
+    const response = await instanceUtil.put(`/admin/equipments/${id}`, data);
 
-    return response;
+    return response.headers.get("Location");
   } catch (err) {
     console.error(err.message);
     return err;

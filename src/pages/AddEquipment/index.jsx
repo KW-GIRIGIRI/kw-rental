@@ -40,10 +40,10 @@ export default function AddEquipment() {
   const handleImgFile = async e => {
     const image = e.target.files[0]
     setImgPreview(URL.createObjectURL(image));
-
+    
     const formData = new FormData()
     formData.append('file', image);
-
+    
     const response = await postImage(formData)
     setImgFile(response)
   }
@@ -78,6 +78,11 @@ export default function AddEquipment() {
     }
 
     addEqRef.current.map(eq => sendData[eq.name] = eq.value)
+    
+    const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+    const itemRes = await changeItems(params.id, JSON.stringify(itemData));
+
+    itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`)
   }
     
   useEffect(() => {
@@ -96,7 +101,7 @@ export default function AddEquipment() {
         {
           isEdit || imgPreview ?
             <>
-              <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product?.imgUrl ?? imgPreview} alt="" />
+              <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={imgPreview || product?.imgUrl} alt="" />
               <S.FileBtn>
                 <img src={iconFileImgWhite} alt="" />
                 <p>사진 변경</p>
