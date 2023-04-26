@@ -111,7 +111,6 @@ export default function EquipmentList() {
           </S.DateCont>
           {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
         </S.FilterWrap>
-
         {
           isAuth ?
             <S.addBtn onClick={() => navigate('/add')}>
