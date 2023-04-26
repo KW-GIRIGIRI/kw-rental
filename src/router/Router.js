@@ -15,6 +15,7 @@ import AuthWrapper from '../layouts/AuthWrapper';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
+import AuthSuccess from '../pages/AuthSuccess';
 
 export default function Router() {
   return (
@@ -24,6 +25,7 @@ export default function Router() {
           <Route path="" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="success" element={<AuthSuccess />} />
         </Route>
         <Route element={<MainWrapper />}>
           <Route path="/*" element={<EquipmentRental />}>
