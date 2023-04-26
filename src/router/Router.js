@@ -11,13 +11,19 @@ import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
+import AuthWrapper from '../layouts/AuthWrapper';
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/auth/*" element={<AuthWrapper />}>
+          <Route path="" />
+          <Route path="signup" />
+          <Route path="forgot" />
+        </Route>
         <Route element={<MainWrapper />}>
-          <Route path="/*" element={<EquipmentRental />} >
+          <Route path="/*" element={<EquipmentRental />}>
             <Route path="" element={<EquipmentList />} />
             <Route path=":id" element={<EquipmentDetail />} />
             <Route path=":id/edit" element={<AddEquipment />} />
@@ -30,8 +36,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-        <Route path="/history" element={<History />} >
-         </Route>
+          <Route path="/history" element={<History />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
