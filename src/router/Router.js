@@ -12,13 +12,14 @@ import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
 import AuthWrapper from '../layouts/AuthWrapper';
+import Login from '../pages/Login';
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/auth/*" element={<AuthWrapper />}>
-          <Route path="" />
+          <Route path="" element={<Login />} />
           <Route path="signup" />
           <Route path="forgot" />
         </Route>
