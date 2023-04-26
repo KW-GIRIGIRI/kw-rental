@@ -52,27 +52,29 @@ export default function ReturnModal({returnModal, setReturnModal,}) {
         }
       </S.ProductUl>
 
-      <p>반납 상태</p>
       {
         faulty.length > 0 &&
-        <S.StateDiv>
-          <span>홍길동 2013020123</span>
-          <ul>
-            {
-              faulty.map((item, i) =>
-                <S.StateLi key={i}>
-                  <p>{item.propertyNum}</p>
-                  <S.Select name="" id="">
-                    <option value="">사유</option>
-                    <option value="">연체</option>
-                    <option value="">고장</option>
-                  </S.Select>
-                  <S.DetailInput type="text" placeholder="상세 사유 입력창" />
-                </S.StateLi>
-              )
-            }
-          </ul>
-        </S.StateDiv>
+        <>
+          <p>반납 상태</p>
+          <S.StateDiv>
+            <span>홍길동 2013020123</span>
+            <ul>
+              {
+                faulty.map((item, i) =>
+                  <S.StateLi key={i}>
+                    <p>{item.propertyNum}</p>
+                    <S.Select name="" id="">
+                      <option value="">사유</option>
+                      <option value="">연체</option>
+                      <option value="">고장</option>
+                    </S.Select>
+                    <S.DetailInput type="text" placeholder="상세 사유 입력창" />
+                  </S.StateLi>
+                )
+              }
+            </ul>
+          </S.StateDiv>
+        </>
       }
 
       <div>

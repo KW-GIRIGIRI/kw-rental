@@ -47,3 +47,10 @@ export const RentalUl = styled.ul`
   display: flex;
   flex-direction: column;
 `;
+
+export const TimeModal = styled.span`
+  font-size: 14px;
+  display: block;
+  margin: 30px 0 16px;
+  line-height: 1.4;
+`;
