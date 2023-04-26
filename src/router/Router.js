@@ -13,6 +13,7 @@ import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
 import AuthWrapper from '../layouts/AuthWrapper';
 import Login from '../pages/Login';
+import SignUp from '../pages/SignUp';
 
 export default function Router() {
   return (
@@ -20,7 +21,7 @@ export default function Router() {
       <Routes>
         <Route path="/auth/*" element={<AuthWrapper />}>
           <Route path="" element={<Login />} />
-          <Route path="signup" />
+          <Route path="signup" element={<SignUp />} />
           <Route path="forgot" />
         </Route>
         <Route element={<MainWrapper />}>

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import iconCheckWhite from "../../assets/icon-check-white.svg";
 import iconCheckGray from "../../assets/icon-check-gray.svg";
 

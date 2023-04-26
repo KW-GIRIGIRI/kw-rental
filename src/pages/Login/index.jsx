@@ -20,7 +20,7 @@ export default function Login() {
         <S.CheckInp type="checkbox" id="check" />
         <label htmlFor="check">자동 로그인</label>
       </S.LoginDiv>
-      <Button width='100%' text='로그인' className='main' padding='14px 0' borderRadius='10px' />
+      <Button width='100%' text='로그인' className='main' padding='14px 0' borderRadius='10px' fontSize='16px' />
       <S.BtnDiv>
         <span>비밀번호 찾기</span>
         <span>회원가입</span>
