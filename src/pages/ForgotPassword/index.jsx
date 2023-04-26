@@ -1,8 +1,17 @@
+import { useNavigate } from "react-router-dom"
 import Button from "../../modules/Button"
 import Input from "../../modules/Input"
 import * as S from "./style"
 
 export default function ForgotPassword() {
+  const navigate = useNavigate()
+
+  const handleFindPassword = event => {
+    event.preventDefault()
+
+    navigate('/auth/success', { state: {isSignup : false}})
+  }
+
   return (
     <S.Wrap>
       <h2>비밀번호 찾기</h2>
@@ -18,7 +27,7 @@ export default function ForgotPassword() {
           <Input className='signup' />
         </S.InpWrap>
 
-          <Button width='100%' text='다음' className='main' padding='14px 0' borderRadius='10px' margin='20px 0' fontSize='16px'/>
+          <Button width='100%' text='다음' className='main' padding='14px 0' borderRadius='10px' margin='20px 0' fontSize='16px' onClick={handleFindPassword}/>
       </S.Form>
     </S.Wrap>
   )

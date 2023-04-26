@@ -84,6 +84,7 @@ export const BtnDiv = styled.div`
   & > span { 
     position: relative;
     padding: 5px 10px;
+    cursor: pointer;
 
     &:first-of-type::after{
       content: "";

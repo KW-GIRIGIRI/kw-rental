@@ -17,6 +17,6 @@ export const Wrap = styled.section`
 
   & > p {
     font-size: 13px;
-    margin-top: 8px;
+    margin-top: 10px;
   }
 `;

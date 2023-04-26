@@ -4,12 +4,20 @@ import * as S from "./style"
 import iconShowPw from "../../assets/icon-showPassword.svg"
 import iconBlockPw from "../../assets/icon-blockPassword.svg"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUp() {
   const [showPw, setShowPw] = useState({
     password: true,
     passwordCheck: true
   })
+  const navigate = useNavigate()
+
+  const handleSignUp = event => {
+    event.preventDefault()
+
+    navigate('/auth/success', { state: {isSignup : true}})
+  }
 
   return (
     <S.Wrap>
@@ -49,7 +57,7 @@ export default function SignUp() {
         <label htmlFor="">연락처(전화번호)</label>
         <Input className='signup' placeholder='공백, - 제외 숫자만 작성해주세요.' />
 
-        <Button width='100%' text='회원가입' className='main' padding='14px 0' borderRadius='10px' margin='20px 0' fontSize='16px'/>
+        <Button width='100%' text='회원가입' className='main' padding='14px 0' borderRadius='10px' margin='20px 0' fontSize='16px' onClick={handleSignUp}/>
       </S.Form>
     </S.Wrap>
   )

@@ -21,12 +21,6 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/auth/*" element={<AuthWrapper />}>
-          <Route path="" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="forgot" element={<ForgotPassword />} />
-          <Route path="success" element={<AuthSuccess />} />
-        </Route>
         <Route element={<MainWrapper />}>
           <Route path="/*" element={<EquipmentRental />}>
             <Route path="" element={<EquipmentList />} />
@@ -41,7 +35,16 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-          <Route path="/history" element={<History />}></Route>
+          {/* 내 대여 정보 및 히스토리 탭 라우터 추가 */}
+          <Route path="/history" element={<History />}>
+
+          </Route>
+        </Route>
+        <Route path="/auth/*" element={<AuthWrapper />}>
+          <Route path="" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="success" element={<AuthSuccess />} />
         </Route>
       </Routes>
     </BrowserRouter>
