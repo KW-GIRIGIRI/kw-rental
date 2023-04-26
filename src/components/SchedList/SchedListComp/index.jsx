@@ -1,8 +1,13 @@
+import { useState } from "react"
 import Button from "../../../modules/Button"
+import CancelModal from "../../EquipSched/CancelModal"
 import * as S from "./style"
 
-export default function SchedListComp({receive}) {
+export default function SchedListComp({ receive }) {
+  const [cancelModal, setCancelModal] = useState(false)
+
   return (
+    <>
     <S.RentalLi>
       <img src="" />
       <div>
@@ -27,7 +32,9 @@ export default function SchedListComp({receive}) {
             <p>20200200020001</p>
           </S.NumWrap>
       }
-      <Button className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" />
+      <Button className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
     </S.RentalLi>
+      <CancelModal cancelModal={cancelModal} setCancelModal={setCancelModal} />
+    </>
   )
 }
