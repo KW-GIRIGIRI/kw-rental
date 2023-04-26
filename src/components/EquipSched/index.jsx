@@ -19,7 +19,6 @@ export default function EquipSched() {
           <span>자산번호</span>
         </S.Header>
         <SchedList receive={receive} />
-        
       </S.SchedWrap>
     </>
   )
