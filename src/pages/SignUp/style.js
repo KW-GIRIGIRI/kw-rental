@@ -46,7 +46,7 @@ export const InpWrap = styled.div`
     width: max-content;
     right: 5px;
     bottom: 0;
-    transform: translateY(-48%);
+    transform: translateY(-46%);
   }
 
   &.email {
@@ -71,3 +71,30 @@ export const PwImg = styled.img`
   right: 16px;
   bottom: ${(props) => props.bottom};
 `;
+
+export const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid ${(props) => props.theme.color.gray.g4};
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
+  padding: 11px 15px;
+  font-size: 15px;
+  margin: 10px 0;
+  &::placeholder {
+    font-size: 15px;
+    color: ${(props) => props.theme.color.primary.third};
+  }
+  &:disabled {
+    background-color: ${(props) => props.theme.color.primary.sub};
+    color: ${(props) => props.theme.color.text.gray};
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    ::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+`

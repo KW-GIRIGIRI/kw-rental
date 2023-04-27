@@ -19,10 +19,17 @@ export const BtnDefault = styled.button`
     color: ${(props) => props.theme.color.text.white};
   }
 
-  /* gray color button */
+  /* gray border color button */
   &.sub {
     border: 1px solid ${(props) => props.theme.color.gray.g3};
     color: ${(props) => props.theme.color.gray.g3};
+  }
+
+  /* gray bg color button */
+  &.gray {
+    border: 1px solid ${(props) => props.theme.color.gray.g1};
+    color: ${(props) => props.theme.color.text.white};
+    background-color: ${(props) => props.theme.color.gray.g4};
   }
 
   &.disable {

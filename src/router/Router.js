@@ -35,10 +35,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-          {/* 내 대여 정보 및 히스토리 탭 라우터 추가 */}
-          <Route path="/history" element={<History />}>
-
-          </Route>
+          <Route path="/history" element={<History />}></Route>
         </Route>
         <Route path="/auth/*" element={<AuthWrapper />}>
           <Route path="" element={<Login />} />
