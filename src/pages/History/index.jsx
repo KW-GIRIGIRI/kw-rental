@@ -18,12 +18,12 @@ export default function History() {
             <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
             <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
             <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
-            </>
+          </>
           :
           <>
-            <TabNav onClick={() => navigate('/history')} text="기자재 대여" className={location.pathname.includes('status') ? 'false' : 'on'} />
-            <TabNav onClick={() => navigate('/history')} text="랩실 대여" className={location.pathname.includes('status') ? 'false' : 'on'} />
-            <TabNav onClick={() => navigate('/history')} text="페널티" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history/equipment')} text="기자재 대여" className={location.pathname.includes('equipment') ? 'on' : 'false'} />
+            <TabNav onClick={() => navigate('/history/lab')} text="랩실 대여" className={location.pathname.includes('lab') ? 'on' : 'false'} />
+            <TabNav onClick={() => navigate('/history/penalty')} text="페널티" className={location.pathname.includes('penalty') ? 'on' : 'false'} />
           </>
       }
       <Section>

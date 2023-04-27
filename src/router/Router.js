@@ -11,6 +11,10 @@ import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
+import EquipmentRentalHistory from "../pages/EquipRentalHistory";
+import LabRentalHistory from "../pages/LabRentalHistory";
+import PenaltyHistory from "../pages/PenaltyHistory";
+
 
 export default function Router() {
   return (
@@ -30,8 +34,11 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-        <Route path="/history" element={<History />} >
-         </Route>
+          <Route path="/history/*" element={<History />} >
+            <Route path="equipment" element={<EquipmentRentalHistory />} />
+            <Route path="lab" element={<LabRentalHistory />} />
+            <Route path="penalty" element={<PenaltyHistory />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
