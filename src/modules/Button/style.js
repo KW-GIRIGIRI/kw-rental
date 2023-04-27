@@ -27,9 +27,9 @@ export const BtnDefault = styled.button`
 
   /* gray bg color button */
   &.gray {
-    border: 1px solid ${(props) => props.theme.color.gray.g1};
     color: ${(props) => props.theme.color.text.white};
     background-color: ${(props) => props.theme.color.gray.g4};
+    box-shadow: 0 0 0 1px #c6c6c6 inset;
   }
 
   &.disable {
