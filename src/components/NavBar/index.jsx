@@ -12,7 +12,7 @@ export default function NavBar() {
     <S.NavWrap>
       <S.NavUl>
         <S.NavLi
-          className={ !location.pathname.includes('/history') ? 'on' : 'off' }
+          className={!location.pathname.includes('/history') ? 'on' : 'off'}
           onClick={() => navigate('/')}>
           <p>기자재 대여</p>
         </S.NavLi>
@@ -20,9 +20,9 @@ export default function NavBar() {
           <p>랩실 대여</p>
         </S.NavLi>
         <S.NavLi
-          className={ location.pathname.includes('/history') ? 'on' : 'off' }
-          onClick={() => navigate('/history')}>
-          <p>{ isAuth ? '히스토리' : '내 대여 정보' }</p>
+          className={location.pathname.includes('/history') ? 'on' : 'off'}
+          onClick={() => navigate('/history/equipment')}>
+          <p>{isAuth ? '히스토리' : '내 대여 정보'}</p>
         </S.NavLi>
       </S.NavUl>
     </S.NavWrap>

@@ -16,6 +16,9 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import AuthSuccess from '../pages/AuthSuccess';
+import EquipmentRentalHistory from "../pages/EquipRentalHistory";
+import LabRentalHistory from "../pages/LabRentalHistory";
+import PenaltyHistory from "../pages/PenaltyHistory";
 
 export default function Router() {
   return (
@@ -34,8 +37,12 @@ export default function Router() {
               <Route path="application" element={<RentalApplication />} />
               <Route path="success" element={<RentalSuccess />} />
             </Route>
+          </Route> 
+          <Route path="/history/*" element={<History />} >
+            <Route path="equipment" element={<EquipmentRentalHistory />} />
+            <Route path="lab" element={<LabRentalHistory />} />
+            <Route path="penalty" element={<PenaltyHistory />} />
           </Route>
-          <Route path="/history" element={<History />}></Route>
         </Route>
         <Route path="/auth/*" element={<AuthWrapper />}>
           <Route path="" element={<Login />} />
