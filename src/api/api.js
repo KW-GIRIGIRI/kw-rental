@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
+const corsKey = process.env.REACT_APP_CORS_KEY;
+const classNum = process.env.REACT_APP_CLASSNUM_URL;
 
 const instanceUtil = axios.create({
   baseURL,
@@ -230,13 +232,29 @@ export const postReservation = async (data) => {
   }
 };
 
+
+// auth 관련
+
 export const getClassNum = async (data) => {
   try {
-    const response = await axios.post('https://proxy.cors.sh/https://klas.kw.ac.kr/ext/out/SelectFindAllList.do', data, {headers: {
-      'x-cors-api-key':'temp_ad2f06f0d618099246758d207c302868'
-    }})
+    const response = await axios.post(classNum, data, {
+      headers: {
+        "x-cors-api-key": corsKey,
+      },
+    });
     
     return response.data[0];
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}
+
+export const Signup = async data => {
+  try {
+    const response = await instanceUtil.post(`/members`, data);
+
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;

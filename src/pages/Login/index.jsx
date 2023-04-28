@@ -30,7 +30,7 @@ export default function Login() {
         <S.Form onSubmit={handleSubmit(handleLogin)}>
         <input type="text" placeholder="학번(아이디)" {...register('id')} />
         <input type={showPw ? 'password' : 'text'} placeholder="비밀번호" {...register('password')}/>
-        <S.PwImg bottom={showPw ? '18px' : '16px'} onClick={() => setShowPw(!showPw)} src={showPw ? iconShowPw : iconBlockPw} alt="" />
+        <S.PwImg bottom={showPw ? '16px' : '18px'} onClick={() => setShowPw(!showPw)} src={showPw ? iconBlockPw : iconShowPw} alt="" />
         </S.Form>
       <S.LoginDiv>
         <S.CheckInp type="checkbox" id="check" />
