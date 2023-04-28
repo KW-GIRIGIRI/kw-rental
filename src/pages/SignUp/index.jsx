@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form';
 import { useRef } from "react"
+import { getClassNum } from "../../api/api"
 
 export default function SignUp() {
   const [showPw, setShowPw] = useState({
@@ -22,9 +23,26 @@ export default function SignUp() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
+  const [classNum, setClassNum] = useState('')
+
+  const handleGetClassNum = async e => {
+    e.preventDefault()
+
+    const data = {
+      name: watch('userName'),
+      birthday: watch('birth'),
+    }
+
+    const response = await getClassNum(data)
+
+    if(!response) alert('이름과 학번을 다시 확인해주세요.')
+    else if (!response.codeName1.includes('미디어')) alert('해당 서비스는 광운대학교 미디어커뮤니케이션 학부 학생만 가입 가능합니다.') 
+    else setClassNum(response.hakbun)
+  }
+
   pwRef.current = watch('password')
 
-  const handleSignUp = (event, data) => {
+  const handleSignUp =  (event, data) => {
     navigate('/auth/success', { state: {isSignup : true}})
   }
 
@@ -63,12 +81,12 @@ export default function SignUp() {
             }
           })}
           />
-          <Button className='main' text='인증하기' borderRadius='5px' padding='9px 10px'/>
+          <Button className='main' text='인증하기' borderRadius='5px' padding='9px 10px' onClick={handleGetClassNum}/>
         </S.InpWrap>
         {errors.birth && <S.ErrText>{errors.birth.message}</S.ErrText>}
 
-        <label htmlFor="">이름</label>
-        <S.Input placeholder='이름과 생년월일을 인증해주세요' disabled />
+        <label htmlFor="">학번(아이디)</label>
+        <S.Input defaultValue={classNum} placeholder='이름과 생년월일을 인증해주세요' disabled />
 
         <label htmlFor="">비밀번호</label>
         <S.InpWrap>

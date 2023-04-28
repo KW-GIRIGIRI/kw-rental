@@ -229,3 +229,16 @@ export const postReservation = async (data) => {
     return err;
   }
 };
+
+export const getClassNum = async (data) => {
+  try {
+    const response = await axios.post('https://proxy.cors.sh/https://klas.kw.ac.kr/ext/out/SelectFindAllList.do', data, {headers: {
+      'x-cors-api-key':'temp_ad2f06f0d618099246758d207c302868'
+    }})
+    
+    return response.data[0];
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrap = styled.section`
   background-color: #ffffff;
   margin: 0 auto 80px;
+  min-width: 460px;
   max-width: 880px;
   width: 70%;
   padding: 45px 0 300px;
