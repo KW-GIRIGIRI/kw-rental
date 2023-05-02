@@ -4,6 +4,7 @@ export const Wrap = styled.section`
   background-color: #ffffff;
   margin: 0 auto 100px;
   max-width: 880px;
+  min-width: 460px;
   width: 70%;
   padding: 45px 0;
   box-sizing: border-box;

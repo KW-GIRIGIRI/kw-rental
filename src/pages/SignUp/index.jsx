@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from 'react-hook-form';
 import { useRef } from "react"
+import { getClassNum, Signup } from "../../api/api"
 
 export default function SignUp() {
   const [showPw, setShowPw] = useState({
@@ -22,10 +23,41 @@ export default function SignUp() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
+  const [memberNumber, setMemberNumber] = useState('')
+
+  const handleGetClassNum = async e => {
+    e.preventDefault()
+
+    const data = {
+      name: watch('name'),
+      birthday: watch('birthDate'),
+    }
+
+    const response = await getClassNum(data)
+
+    if(!response) alert('이름과 학번을 다시 확인해주세요.')
+    else if (!response.codeName1.includes('미디어')) alert('해당 서비스는 광운대학교 미디어커뮤니케이션 학부 학생만 가입 가능합니다.') 
+    else setMemberNumber(response.hakbun)
+  }
+
   pwRef.current = watch('password')
 
-  const handleSignUp = (event, data) => {
-    navigate('/auth/success', { state: {isSignup : true}})
+  const handleSignUp = async () => {
+    const data = {
+      "name" : watch('name'),
+      "birthDate" : watch('birthDate'),
+      "memberNumber" : memberNumber,
+      "password" :  watch('password'),
+      "email" : `${watch('emailF')}@${ watch('emailS')}`,
+      "phoneNumber" : watch('phoneNum')
+    }
+
+    if (Object.entries(data).map(i => !!i[1]).includes(false))
+      alert('값을 입력해주세요') 
+    else {
+      const res = await Signup(JSON.stringify(data))
+      res === 201 && navigate('/auth/success', { state: {isSignup : true}})
+    }
   }
 
   return (
@@ -34,7 +66,7 @@ export default function SignUp() {
       <S.Form onSubmit={handleSubmit(handleSignUp)}>
         <label htmlFor="name">이름</label>
         <S.Input placeholder='홍길동'
-          {...register('userName', {
+          {...register('name', {
             required: {
               value: true,
               message: '이름을 입력해주세요.'
@@ -47,11 +79,11 @@ export default function SignUp() {
             }
           })}
         />
-        {errors.userName && <S.ErrText>{errors.userName.message}</S.ErrText>}
+        {errors.name && <S.ErrText>{errors.name.message}</S.ErrText>}
         <label htmlFor="">생년월일</label>
         <S.InpWrap>
           <S.Input type="number" placeholder='000429'
-          {...register('birth', {
+          {...register('birthDate', {
             required: {
               value: true,
               message: '주민번호 앞자리를 입력하세요.'
@@ -63,12 +95,12 @@ export default function SignUp() {
             }
           })}
           />
-          <Button className='main' text='인증하기' borderRadius='5px' padding='9px 10px'/>
+          <Button className='main' text='인증하기' borderRadius='5px' padding='9px 10px' onClick={handleGetClassNum}/>
         </S.InpWrap>
-        {errors.birth && <S.ErrText>{errors.birth.message}</S.ErrText>}
+        {errors.birthDate && <S.ErrText>{errors.birthDate.message}</S.ErrText>}
 
-        <label htmlFor="">이름</label>
-        <S.Input placeholder='이름과 생년월일을 인증해주세요' disabled />
+        <label htmlFor="">학번(아이디)</label>
+        <S.Input defaultValue={memberNumber} {...register('memberNumber')} placeholder='이름과 생년월일을 인증해주세요' disabled />
 
         <label htmlFor="">비밀번호</label>
         <S.InpWrap>
@@ -83,7 +115,7 @@ export default function SignUp() {
               }
             })}
             />
-            <S.PwImg bottom={showPw.password ? '24px' : '22px'} onClick={() => setShowPw({...showPw, password : !showPw.password})} src={showPw.password ? iconShowPw : iconBlockPw} alt="" />
+            <S.PwImg bottom={showPw.password ? '22px' : '24px'} onClick={() => setShowPw({...showPw, password : !showPw.password})} src={showPw.password ? iconBlockPw : iconShowPw} alt="" />
         </S.InpWrap>
         {errors.password && <S.ErrText>{errors.password.message}</S.ErrText>}
       
@@ -101,7 +133,7 @@ export default function SignUp() {
                 : undefined
             })}
             />
-            <S.PwImg bottom={showPw.passwordCheck ? '24px' : '22px'}  onClick={() => setShowPw({...showPw, passwordCheck : !showPw.passwordCheck})} src={showPw.passwordCheck ? iconShowPw : iconBlockPw} alt="" />
+            <S.PwImg bottom={showPw.passwordCheck ? '22px' : '24px'}  onClick={() => setShowPw({...showPw, passwordCheck : !showPw.passwordCheck})} src={showPw.passwordCheck ? iconBlockPw : iconShowPw} alt="" />
         </S.InpWrap>
         {errors.passwordConfirm && <S.ErrText>{errors.passwordConfirm.message}</S.ErrText>}
 
