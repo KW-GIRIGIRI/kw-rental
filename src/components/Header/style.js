@@ -5,6 +5,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   align-items: center;
   margin: 65px auto 15px;
+  position: relative;
   width: 880px;
 `;
 
