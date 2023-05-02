@@ -16,9 +16,9 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import AuthSuccess from '../pages/AuthSuccess';
-import EquipmentRentalHistory from "../pages/EquipRentalHistory";
-import LabRentalHistory from "../pages/LabRentalHistory";
-import PenaltyHistory from "../pages/PenaltyHistory";
+import EquipmentRentalHistory from "../pages/History/EquipRentalHistory";
+import LabRentalHistory from "../pages/History/LabRentalHistory";
+import PenaltyHistory from "../pages/History/PenaltyHistory";
 import SetAccount from '../pages/SetAccount';
 
 export default function Router() {

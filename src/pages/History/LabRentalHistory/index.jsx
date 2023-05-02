@@ -1,10 +1,9 @@
-import UserState from "../../components/UserState"
-import UserHist from "../../components/UserHist"
-import * as S from "./style"
+import UserState from "../../../components/UserState"
+import UserHist from "../../../components/UserHist"
+import * as S from "../style"
 
 export default function LabRentalHistory() {
   return (
-    // 사용자
     <>
       <S.Title>내 대여 정보</S.Title>
       <S.RentalWrap>
@@ -14,7 +13,5 @@ export default function LabRentalHistory() {
         <UserHist isLab={true} />
       </S.RentalWrap>
     </>
-
-    //관리자(?)
   )
 }
