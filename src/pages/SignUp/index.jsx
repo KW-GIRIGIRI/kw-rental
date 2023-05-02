@@ -108,7 +108,7 @@ export default function SignUp() {
             {...register('password', {
               required: {
                 value: true,
-                message: '주민번호 앞자리를 입력하세요.'
+                message: '비밀번호를 입력하세요.'
               }, minLength: {
                 value: 8,
                 message: '8자 이상 입력하세요.'
@@ -166,7 +166,7 @@ export default function SignUp() {
         {...register('phoneNum', {
           required: {
             value: true,
-            message: '전화번호를 입력하세요.'
+            message: '처음부터 끝까지 입력해주세요.'
           }, maxLength: {
             value: 12,
             message: '12자 이하로 입력하세요.'
