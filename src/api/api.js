@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
+const classNum = process.env.REACT_APP_CLASSNUM_URL;
 
 const instanceUtil = axios.create({
   baseURL,
@@ -229,3 +230,28 @@ export const postReservation = async (data) => {
     return err;
   }
 };
+
+
+// auth 관련
+
+export const getClassNum = async (data) => {
+  try {
+    const response = await axios.post(classNum, data);
+    
+    return response.data[0];
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}
+
+export const Signup = async data => {
+  try {
+    const response = await instanceUtil.post(`/members`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+}

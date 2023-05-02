@@ -11,17 +11,21 @@ import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
+import AuthWrapper from '../layouts/AuthWrapper';
+import Login from '../pages/Login';
+import SignUp from '../pages/SignUp';
+import ForgotPassword from '../pages/ForgotPassword';
+import AuthSuccess from '../pages/AuthSuccess';
 import EquipmentRentalHistory from "../pages/History/EquipRentalHistory";
 import LabRentalHistory from "../pages/History/LabRentalHistory";
 import PenaltyHistory from "../pages/History/PenaltyHistory";
-
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<MainWrapper />}>
-          <Route path="/*" element={<EquipmentRental />} >
+          <Route path="/*" element={<EquipmentRental />}>
             <Route path="" element={<EquipmentList />} />
             <Route path=":id" element={<EquipmentDetail />} />
             <Route path=":id/edit" element={<AddEquipment />} />
@@ -33,12 +37,18 @@ export default function Router() {
               <Route path="application" element={<RentalApplication />} />
               <Route path="success" element={<RentalSuccess />} />
             </Route>
-          </Route>
+          </Route> 
           <Route path="/history/*" element={<History />} >
             <Route path="equipment" element={<EquipmentRentalHistory />} />
             <Route path="lab" element={<LabRentalHistory />} />
             <Route path="penalty" element={<PenaltyHistory />} />
           </Route>
+        </Route>
+        <Route path="/auth/*" element={<AuthWrapper />}>
+          <Route path="" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="success" element={<AuthSuccess />} />
         </Route>
       </Routes>
     </BrowserRouter>

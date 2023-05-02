@@ -72,7 +72,7 @@ export default function EquipmentList() {
   }
 
   const getProduct = async () => {
-    const reqSize = viewMode === 'gal' ? 16 : 10
+    const reqSize = isAuth? '10' : viewMode === 'gal' ? 16 : 10
     const reqKeyword = searchKeyword ? `&keyword=${searchKeyword}` : ''
     const reqCategory = isCategory ? `&category=${category.filter((_, i) => i + 1 === isCategory)[0]?.value}` : ''
     
