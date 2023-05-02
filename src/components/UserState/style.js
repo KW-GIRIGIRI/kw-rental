@@ -1,138 +1,124 @@
 import styled from "styled-components";
 
-export const HistWrapRent = styled.ul`
+export const Div = styled.div`
   box-sizing: border-box;
   font-size: 13px;
   text-align: center;
   width: 100%;
-  
-  .flex {
-    display: flex;
-    align-items: center;
+
+  & .equip {
+    grid-template-columns: 1.7fr 1fr 2fr 1fr 1.2fr 1.1fr;
   }
 
-  .lab-list {
-    padding: 11px 0;
+  & .equipList {
+    grid-template-columns: 1.7fr 6.3fr;
+  }
+
+  & .lab {
+    grid-template-columns: 2.3fr repeat(4, 1fr);
+  }
+
+  & .labList {
+    padding: 33px 0;
+  }
+
+  & .penalty {
+    width: 280px;
+  }
+
+  & .penalList {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 0;
+
+    & span:first-child {
+      height: calc(100% + 20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid ${props => props.theme.color.primary.third};
+    }
+  }
+
+  & button {
+    margin: auto;
   }
 `
 
-export const HistWrapPenalty = styled.ul`
-  box-sizing: border-box;
-  font-size: 13px;
-  text-align: center;
-  width: 280px;
-  
-  .flex {
-    display: flex;
-    align-items: center;
-  }
+export const HistWrap = styled.ul`
+  display: grid;
+  align-items: center;
 `
 
 export const Header = styled.li`
-  background-color: #E0E4E9;
-  height: 36px;
-  border: 1px solid #8B95A1;
-  border-bottom: none;
+  background-color: ${props => props.theme.color.primary.sub};
+  padding: 10px 0;
+  border: 1px solid ${props => props.theme.color.primary.third};
+  display: grid;
+  align-items: center;
 `
 
 export const HistList = styled.li`
-  border: 1px solid #8B95A1;
-  border-bottom: none;
+  border: 1px solid ${props => props.theme.color.primary.third};
+  border-top: none;
+  display: grid;
+  align-items: center;
 
-  &:last-child {
-    border-bottom: 1px solid #8B95A1;
+  & img {
+    background: ${props => props.theme.color.gray.g4};
+    margin: auto;
   }
 `
 
 export const ItemUl = styled.ul`
+
 `
 
-export const ItemList = styled.li`
-  padding: 11px 0;
+export const ItemLi = styled.li`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 2fr 1fr 1.2fr 1.1fr;
+  padding: 12px 0;
 `
-
 
 // 기자재 대여 정보
-export const DateEquip = styled.div`
-  width: 145px;
-  & > p {
+export const DateEquip = styled.span`
+  grid-row-start: 1;
+  grid-row-end: -1;
+
+  & p {
     margin-bottom: 10px;
-  }
-`
 
-export const NameEquip = styled.div`
-  width: 300px;
-  text-align: left;
-
-  & > span {
-    margin-left: 21px;
-  }
-
-  & img {
-    margin-left: 18px;
-    background: #D9D9D9;
-  }
-
-  & div {
-    margin-left: 40px;
-
-    & p:first-child {
-      color: #0E2B5A;
-      margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: none;
     }
   }
 `
 
-export const NumEquip = styled.div`
-  width: 80px;
+export const NameEquip = styled.div`
+  text-align: left;
+  margin-left: 10px;
+
+  & > p:first-child {
+    color: ${props => props.theme.color.primary.main};
+  }
+
+  & > p:last-child {
+    font-size: 14px;
+    margin-top: 5px;
+  }
 `
 
-export const StateEquip = styled.div`
-  width: 140px;
+export const State = styled.span`
+  color: ${props => props.theme.color.primary.main};
 `
-
-export const ButtonEquip = styled.div`
-  width: 101px;
-`
-
 
 // 랩실 대여 정보
-export const DateLab = styled.div`
-  width: 160px;
-  & > p {
-    margin: 15px 0;
-  }
-`
+export const Location = styled.div`
+  text-align: left;
+  margin: auto;
 
-export const NameLab = styled.div`
-  width: 120px;
-`
-
-export const NumLab = styled.div`
-  width: 104px;
-`
-
-export const NumEquipLab = styled.div`
-  width: 170px;
-`
-
-export const StateLab = styled.div`
-  width: 80px;
-
-  & > p {
-    color: #0E2B5A;
-  }
-`
-
-export const ButtonLab = styled.div`
-  width: 132px;
-`
-
-// 페널티 정보
-export const Penalty = styled.div`
-  width: 140px;
-  padding: 11px 0;
-  &:nth-child(2n-1) {
-    border-right: 1px solid #8B95A1;
+  & p:first-child {
+    color: ${props => props.theme.color.primary.main};
+    margin-bottom: 5px;
   }
 `

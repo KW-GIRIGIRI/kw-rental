@@ -1,126 +1,171 @@
 import * as S from "./style"
-import Image from "../../modules/Image/index.jsx"
-import Button from "../../modules/Button"
 
 export default function UserHist({ isEquip, isLab }) {
+  const 기자재대여이력 = [
+    {
+      수령일: "23년 03월 11일(수)",
+      반납일: "23년 03월 12일(목)",
+      대여리스트: [
+        {
+          기자재명: "Oclulus Quest2",
+          개수: 1,
+          정상반납: true
+        },
+        {
+          기자재명: "MIRRORLESS SONY a6600",
+          개수: 3,
+          정상반납: true
+        },
+      ]
+    },
+    {
+      수령일: "23년 03월 10일(화)",
+      반납일: "23년 03월 11일(수)",
+      대여리스트: [
+        {
+          기자재명: "Oclulus Quest2",
+          개수: 1,
+          정상반납: false
+        },
+        {
+          기자재명: "MIRRORLESS SONY a6600",
+          개수: 3,
+          정상반납: true
+        },
+        {
+          기자재명: "Rode NTG-2",
+          개수: 1,
+          정상반납: false
+        },
+      ]
+    },
+  ]
+
+  const 랩실대여이력 = [
+    {
+      사용기간: "22년 09월 11일(수) ~ 22년 09월 12일(목)",
+      장소: "한울관 B119호",
+      사용인원: 4,
+      정상사용: true
+    },
+    {
+      사용기간: "22년 09월 11일(수) ~ 22년 09월 12일(목)",
+      장소: "화도관 302호",
+      사용인원: 2,
+      정상사용: true
+    },
+    {
+      사용기간: "22년 09월 11일(수) ~ 22년 09월 12일(목)",
+      장소: "한울관 B119호",
+      사용인원: 6,
+      정상사용: false
+    },
+  ]
+
+  const 페널티이력 = [
+    {
+      수령일: "21년 09월 11일(수)",
+      반납일: "21년 09월 12일(목)",
+      상태: "6개월 이용 금지",
+      종류: "MIRRORLESS SONY a6600",
+      사유: "연체"
+    },
+    {
+      수령일: "21년 09월 11일(수)",
+      반납일: "21년 09월 12일(목)",
+      상태: "6개월 이용 금지",
+      종류: "한울관 B119호",
+      사유: "연체"
+    },
+    {
+      수령일: "21년 09월 11일(수)",
+      반납일: "21년 09월 12일(목)",
+      상태: "6개월 이용 금지",
+      종류: "한울관 B119호",
+      사유: "연체"
+    },
+    {
+      수령일: "21년 09월 11일(수)",
+      반납일: "21년 09월 12일(목)",
+      상태: "6개월 이용 금지",
+      종류: "MIRRORLESS SONY a6600",
+      사유: "연체"
+    },
+  ]
+
   return (
     <>
       <S.Div>
         {
-          isEquip || isLab ?
-            <div className="flex">
-              <S.Cal className="flex">캘린더</S.Cal> <span>~</span> <S.Cal className="flex">캘린더</S.Cal>
-            </div> : <></>
+          (isEquip || isLab) &&
+          <div>
+            <S.Cal>캘린더</S.Cal>
+            <p>~</p>
+            <S.Cal>캘린더</S.Cal>
+          </div>
         }
         {
           isEquip ?
             <S.HistWrap>
-              <S.Header className="flex">
-                <S.PickupEquip><span>수령일</span></S.PickupEquip>
-                <S.ReturnEquip><span>반납일</span></S.ReturnEquip>
-                <S.NameEquip><span>기자재</span></S.NameEquip>
-                <S.NumEquip><span>개수</span></S.NumEquip>
-                <S.StateEquip className="last-list"><span>상태</span></S.StateEquip>
+              <S.Header className="equip">
+                <span>수령일</span>
+                <span>반납일</span>
+                <span>기자재</span>
+                <span>개수</span>
+                <span>상태</span>
               </S.Header>
-              <S.HistList className="flex">
-                <S.PickupEquip><p>23년 03월 11일</p></S.PickupEquip>
-                <S.ReturnEquip><p>23년 03월 12일</p></S.ReturnEquip>
-                <S.ItemUl>
-                  <S.ItemLi className="flex">
-                    <S.NameEquip><p>Oclulus Quest2</p></S.NameEquip>
-                    <S.NumEquip><p>1</p></S.NumEquip>
-                    <S.StateEquip><p>1</p></S.StateEquip>
-                  </S.ItemLi>
-                  <S.ItemLi className="flex">
-                    <S.NameEquip><p>Oclulus Quest2</p></S.NameEquip>
-                    <S.NumEquip><p>1</p></S.NumEquip>
-                    <S.StateEquip><p>1</p></S.StateEquip>
-                  </S.ItemLi>
-                  <S.ItemLi className="flex">
-                    <S.NameEquip><p>Oclulus Quest2</p></S.NameEquip>
-                    <S.NumEquip><p>1</p></S.NumEquip>
-                    <S.StateEquip><p>1</p></S.StateEquip>
-                  </S.ItemLi>
-                </S.ItemUl>
-              </S.HistList>
-              <S.HistList className="flex">
-                <S.PickupEquip><p>23년 03월 11일</p></S.PickupEquip>
-                <S.ReturnEquip><p>23년 03월 12일</p></S.ReturnEquip>
-                <S.ItemUl>
-                  <S.ItemLi className="flex">
-                    <S.NameEquip><p>Oclulus Quest2</p></S.NameEquip>
-                    <S.NumEquip><p>1</p></S.NumEquip>
-                    <S.StateEquip><p>1</p></S.StateEquip>
-                  </S.ItemLi>
-                </S.ItemUl>
-              </S.HistList>
+              {기자재대여이력.map((기자재, i) => (
+                <S.HistList className="equipList" key={i}>
+                  <S.DateEquip>{기자재.수령일}</S.DateEquip>
+                  <S.DateEquip>{기자재.반납일}</S.DateEquip>
+                  <S.ItemUl>
+                    {기자재.대여리스트.map((아이템, idx) => (
+                      <S.ItemLi key={idx}>
+                        <span>{아이템.기자재명}</span>
+                        <span>{아이템.개수}</span>
+                        <span>{아이템.정상반납 ? "정상 반납" : "불량 반납"}</span>
+                      </S.ItemLi>
+                    ))}
+                  </S.ItemUl>
+                </S.HistList>
+              ))}
             </S.HistWrap>
             : isLab ?
               <S.HistWrap>
-                <S.Header className="flex">
-                  <S.DateLab><span>키 수령일</span></S.DateLab>
-                  <S.DateLab><span>키 반납일</span></S.DateLab>
-                  <S.NameLab><span>랩실</span></S.NameLab>
-                  <S.NumLab><span>사용 인원</span></S.NumLab>
-                  <S.NumLab><span>사용 장비 대수</span></S.NumLab>
-                  <S.StateLab className="last-list"><span>상태</span></S.StateLab>
+                <S.Header className="lab">
+                  <span>사용 기간</span>
+                  <span>랩실</span>
+                  <span>사용 인원</span>
+                  <span>상태</span>
                 </S.Header>
-                <S.HistList className="flex lab">
-                  <S.DateLab><p>23년 03월 11일</p></S.DateLab>
-                  <S.DateLab><p>23년 03월 12일</p></S.DateLab>
-                  <S.NameLab><p>한울관 B119호</p></S.NameLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.StateLab><p>정상 사용</p></S.StateLab>
-                </S.HistList>
-                <S.HistList className="flex lab">
-                  <S.DateLab><p>23년 03월 11일</p></S.DateLab>
-                  <S.DateLab><p>23년 03월 12일</p></S.DateLab>
-                  <S.NameLab><p>한울관 B119호</p></S.NameLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.StateLab><p>정상 사용</p></S.StateLab>
-                </S.HistList>
-                <S.HistList className="flex lab">
-                  <S.DateLab><p>23년 03월 11일</p></S.DateLab>
-                  <S.DateLab><p>23년 03월 12일</p></S.DateLab>
-                  <S.NameLab><p>한울관 B119호</p></S.NameLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.NumLab><p>4</p></S.NumLab>
-                  <S.StateLab><p>정상 사용</p></S.StateLab>
-                </S.HistList>
+                {랩실대여이력.map((랩실, i) => (
+                  <S.HistList className="lab" key={i}>
+                    <span>{랩실.사용기간}</span>
+                    <span>{랩실.장소}</span>
+                    <span>{랩실.사용인원}</span>
+                    <span>{랩실.정상사용 ? "정상 사용" : "불량 사용"}</span>
+                  </S.HistList>
+                ))}
               </S.HistWrap>
               :
               <S.HistWrap>
-                <S.Header className="flex">
-                  <S.DatePenalty><span>수령일</span></S.DatePenalty>
-                  <S.DatePenalty><span>반납일</span></S.DatePenalty>
-                  <S.StatePenalty><span>상태</span></S.StatePenalty>
-                  <S.NamePenalty><span>기자재/랩실</span></S.NamePenalty>
-                  <S.CausePenalt className="last-list"><span>사유</span></S.CausePenalt>
+                <S.Header className="penalty">
+                  <span>수령일</span>
+                  <span>반납일</span>
+                  <span>상태</span>
+                  <span>기자재/랩실</span>
+                  <span>사유</span>
                 </S.Header>
 
-                <S.HistList className="flex penalty">
-                  <S.DatePenalty><p>23년 03월 11일</p></S.DatePenalty>
-                  <S.DatePenalty><p>23년 03월 12일</p></S.DatePenalty>
-                  <S.StatePenalty><p>6개월 이용 금지</p></S.StatePenalty>
-                  <S.NamePenalty><p>MIRRORLESS SONY a6600</p></S.NamePenalty>
-                  <S.CausePenalt><p>연체</p></S.CausePenalt>
-                </S.HistList>
-                <S.HistList className="flex penalty">
-                  <S.DatePenalty><p>23년 03월 11일</p></S.DatePenalty>
-                  <S.DatePenalty><p>23년 03월 12일</p></S.DatePenalty>
-                  <S.StatePenalty><p>6개월 이용 금지</p></S.StatePenalty>
-                  <S.NamePenalty><p>MIRRORLESS SONY a6600</p></S.NamePenalty>
-                  <S.CausePenalt><p>연체</p></S.CausePenalt>
-                </S.HistList>
-                <S.HistList className="flex penalty">
-                  <S.DatePenalty><p>23년 03월 11일</p></S.DatePenalty>
-                  <S.DatePenalty><p>23년 03월 12일</p></S.DatePenalty>
-                  <S.StatePenalty><p>6개월 이용 금지</p></S.StatePenalty>
-                  <S.NamePenalty><p>MIRRORLESS SONY a6600</p></S.NamePenalty>
-                  <S.CausePenalt><p>연체</p></S.CausePenalt>
-                </S.HistList>
+                {페널티이력.map((페널티, i) => (
+                  <S.HistList className="penalty" key={i}>
+                    <span>{페널티.수령일}</span>
+                    <span>{페널티.반납일}</span>
+                    <span>{페널티.상태}</span>
+                    <span>{페널티.종류}</span>
+                    <span>{페널티.사유}</span>
+                  </S.HistList>
+                ))}
               </S.HistWrap>
         }
       </S.Div>
