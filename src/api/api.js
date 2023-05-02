@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
-const corsKey = process.env.REACT_APP_CORS_KEY;
 const classNum = process.env.REACT_APP_CLASSNUM_URL;
 
 const instanceUtil = axios.create({
@@ -237,11 +236,7 @@ export const postReservation = async (data) => {
 
 export const getClassNum = async (data) => {
   try {
-    const response = await axios.post(classNum, data, {
-      headers: {
-        "x-cors-api-key": corsKey,
-      },
-    });
+    const response = await axios.post(classNum, data);
     
     return response.data[0];
   } catch (err) {
