@@ -19,6 +19,7 @@ import AuthSuccess from '../pages/AuthSuccess';
 import EquipmentRentalHistory from "../pages/EquipRentalHistory";
 import LabRentalHistory from "../pages/LabRentalHistory";
 import PenaltyHistory from "../pages/PenaltyHistory";
+import SetAccount from '../pages/SetAccount';
 
 export default function Router() {
   return (
@@ -43,6 +44,7 @@ export default function Router() {
             <Route path="lab" element={<LabRentalHistory />} />
             <Route path="penalty" element={<PenaltyHistory />} />
           </Route>
+          <Route path='/setaccount' element={<SetAccount />} />
         </Route>
         <Route path="/auth/*" element={<AuthWrapper />}>
           <Route path="" element={<Login />} />

@@ -2,9 +2,11 @@ import * as S from "./style"
 import iconMenu from "../../assets/icon-menu.svg"
 import { useRef } from "react"
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileMenu({visible, setVisible}) {
   const modalRef = useRef();
+  const navigate = useNavigate()
 
   const handleClose = (e) => {
     if (!modalRef.current.contains(e.target)) setVisible(false)
@@ -19,7 +21,7 @@ export default function ProfileMenu({visible, setVisible}) {
   
   return (
     <S.Wrap ref={modalRef}>
-      <S.Li>
+      <S.Li onClick={() => { navigate('/setaccount'); setVisible(false)}}>
         <img src={iconMenu} alt="" />
         <p>계정 설정</p>
       </S.Li>
