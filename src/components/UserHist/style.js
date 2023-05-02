@@ -1,15 +1,56 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-  .flex {
-    display: flex;
-    align-items: center;
-  }
-
+  /* 캘린더 */
   & > div {
     margin-bottom: 16px;
-    & > span {
+    display: flex;
+    align-items: center;
+    & > p {
       margin: 0 12px;
+    }
+  }
+
+  span {
+    border-right: 1px solid ${props => props.theme.color.primary.third};
+    height: calc(100% + 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  /* 기자재 */
+  .equip {
+    grid-template-columns: 2fr 2fr 3fr 1fr 2.8fr;
+
+    & > span:nth-child(3) {
+      justify-content: left;
+      margin-left: 20px;
+    }
+  }
+
+  .equipList {
+    grid-template-columns: 2fr 2fr 6.8fr;
+  }
+
+  /* 랩실 */
+  .lab {
+    grid-template-columns: 1.7fr 1fr 1fr 1fr;
+    padding: 10px 0;
+  }
+
+  /* 페널티 */
+  .penalty {
+    grid-template-columns: repeat(3, 1fr) 1.7fr 1fr;
+    padding: 10px 0;
+
+    span:nth-child(4) {
+      justify-content: left;
+      margin-left: 20px;
     }
   }
 `
@@ -22,115 +63,68 @@ export const Cal = styled.div`
   border-radius: 4.12409px;
   justify-content: center;
   font-size: 14px;
+  display: flex;
+  align-items: center;
 `
 
 export const HistWrap = styled.ul`
-  width: 100%;
   box-sizing: border-box;
   text-align: center;
   font-size: 13px;
-
-  .lab > div, .penalty > div {
-    height: 36px;
-    line-height: 36px;
-    border-right: 1px solid #8B95A1;
-    
-    &:last-child {
-      border-right: none;
-    }
-  }
 `
 
 export const Header = styled.li`
+  padding: 10px 0;
   background-color: #E0E4E9;
-  height: 36px;
   border: 1px solid #8B95A1;
-  border-bottom: none;
+  display: grid;
+  align-items: center;
 
-  & > div {
-    height: 100%;
-    line-height : 36px;
-    border-right: 1px solid #8B95A1;
-  }
-
-  .last-list {
-    border-right: none;
+  & span {
+    grid-row-start: 1;
+    grid-row-end: -1;
   }
 `
 
 export const HistList = styled.li`
   border: 1px solid #8B95A1;
-  border-bottom: none;
-  min-height: 36px;
-
-  &:last-child {
-    border-bottom: 1px solid #8B95A1;
-  }
+  border-top: none;
+  display: grid;
+  align-items: center;
 `
 
 export const ItemUl = styled.ul`
 `
 
 export const ItemLi = styled.li`
-  padding: 11px 0;
-`
+  padding: 10px 0;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3fr 1fr 2.8fr;
+  border-bottom: 1px solid ${props => props.theme.color.primary.third};
 
-// 기자재 이력
-export const PickupEquip = styled.div`
-  width: 140px;
-`
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  & > span {
+    grid-row-start: 1;
+    grid-row-end: -1;
 
-export const ReturnEquip = styled.div`
-  width: 139px;
-`
-
-export const NameEquip = styled.div`
-  width: 218px;
-  text-align: left;
-
-  & > span, & > p {
-    margin-left: 21px;
+    &:first-child {
+      justify-content: left;
+      margin-left: 20px;
+    }
   }
 `
 
-export const NumEquip = styled.div`
-  width: 71px;
-`
-
-export const StateEquip = styled.div`
-  width: 198px;
-`
-
-// 랩실 이력
-export const DateLab = styled.div`
-  width: 140px;
-`
-
-export const NameLab = styled.div`
-  width: 120px;
-`
-
-export const NumLab = styled.div`
-  width: 110px;
-`
-
-export const StateLab = styled.div`
-  width: 146px;
-`
-
-//페널티 이력
-export const DatePenalty = styled.div`
-  width: 140px;
-`
-
-export const StatePenalty = styled.div`
-  width: 120px;
-`
-
-export const NamePenalty = styled.div`
-  width: 220px;
-`
-
-export const CausePenalt = styled.div`
-  width: 146px;
+export const DateEquip = styled.p`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-row-start: 1;
+  grid-row-end: -1;
+  border-right: 1px solid ${props => props.theme.color.primary.third};
 `

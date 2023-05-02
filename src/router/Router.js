@@ -11,9 +11,9 @@ import RentalApplication from '../pages/EquipmentCart/RentalApplication';
 import EquipmentCart from '../pages/EquipmentCart';
 import RentalStatus from "../pages/RentalStatus";
 import History from '../pages/History';
-import EquipmentRentalHistory from "../pages/EquipRentalHistory";
-import LabRentalHistory from "../pages/LabRentalHistory";
-import PenaltyHistory from "../pages/PenaltyHistory";
+import EquipmentRentalHistory from "../pages/History/EquipRentalHistory";
+import LabRentalHistory from "../pages/History/LabRentalHistory";
+import PenaltyHistory from "../pages/History/PenaltyHistory";
 
 
 export default function Router() {
