@@ -14,7 +14,7 @@ export default function CheckPw({setCheckPw}) {
   }
 
   return (
-    <div>
+    <>
       <S.SubTit>계정 설정을 위해 비밀번호를 다시 한 번 입력해 주세요.</S.SubTit>
       <Form>
         <label htmlFor="pw">비밀번호 입력</label>
@@ -22,6 +22,6 @@ export default function CheckPw({setCheckPw}) {
         <PwImg bottom={showPw ? '22px' : '24px'} onClick={() => setShowPw(!showPw)} src={showPw ? iconBlockPw : iconShowPw} alt="" />
       </Form>
         <Button text='입력' className='main' padding='12px 33px' borderRadius='10px' fontSize='14px' margin='29px 0' onClick={handleCheckPw} />
-    </div>
+    </>
   )
 }
