@@ -1,17 +1,270 @@
 import UserState from "../../../components/UserState"
 import UserHist from "../../../components/UserHist"
 import * as S from "../style"
+import { useContext, useState, useEffect } from "react"
+import { AuthContext } from "../../../context/Context"
+import Button from "../../../modules/Button"
+import { category } from "../../../data/category"
+import EquipStatistics from "../../../components/EquipStatistics"
+import iconExcel from "../../../assets/icon-excel.svg"
+import Image from "../../../modules/Image"
 
 export default function EquipmentRentalHistory() {
+  // api 없어서 만든 임시 데이터
+  const 가짜대여통계 = [
+    {
+      카테고리: "카메라",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020001",
+      기간내대여수: 24,
+      불량반납: 2,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "녹음 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020002",
+      기간내대여수: 20,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "녹음 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020002",
+      기간내대여수: 20,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "녹음 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020002",
+      기간내대여수: 20,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "녹음 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020002",
+      기간내대여수: 20,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "녹음 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020002",
+      기간내대여수: 20,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "VR 장비",
+      기자재명: "Oculus Quest 2",
+      자산번호: "20190500020004",
+      기간내대여수: 10,
+      불량반납: 0,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "카메라",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "기타",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "VR 장비",
+      기자재명: "Oculus Quest 2",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "카메라",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "기타",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "카메라",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "카메라",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "기타",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "VR 장비",
+      기자재명: "Oculus Quest 2",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "기타",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020005",
+      기간내대여수: 3,
+      불량반납: 1,
+      반납일: "23년 2월 28일"
+    },
+    {
+      카테고리: "촬영보조 장비",
+      기자재명: "MIRRORLESS a6600",
+      자산번호: "20190500020003",
+      기간내대여수: 15,
+      불량반납: 5,
+      반납일: "23년 2월 28일"
+    },
+  ]
+
+  const { isAuth } = useContext(AuthContext)
+  const [productList, setProductList] = useState([])
+  const [isCategory, setIsCategory] = useState(0)
+  const [page, setPage] = useState(0)
+  const [pageArray, setPageArray] = useState([])
+
+  const handleCategory = (e) => {
+    setIsCategory(parseInt(e.target.value))
+    setPage(0)
+  }
+
+  //api 나오면 바꿔야 함
+  const getProduct = async () => {
+    const response = 가짜대여통계;
+
+    window.scrollTo({
+      top: 0, 
+    })
+
+    // setPageArray(response.endPoints)
+
+    if(isCategory)
+      setProductList(response.filter(i => i.카테고리 === category[isCategory - 1].label))
+    else
+      setProductList(response)
+  }
+
+  useEffect(() => {
+    getProduct()
+  }, [page, isCategory])
+
   return (
     <>
-      <S.Title>내 대여 정보</S.Title>
-      <S.RentalWrap>
-        <h2>기자재 대여</h2>
-        <UserState isEquip={true} />
-        <h2>기자재 대여 이력</h2>
-        <UserHist isEquip={true} />
-      </S.RentalWrap>
+      {
+        isAuth ?
+          <>
+            <S.Wrap>
+              <S.Title>기자재 통계</S.Title>
+              <S.Cal>캘린더</S.Cal>
+              <span>~</span>
+              <S.Cal>캘린더</S.Cal>
+            </S.Wrap>
+            <S.RentalWrap>
+              <S.FilterWrap className="mode">
+                <Button className={isCategory ? 'disable shadow' : 'main shadow'} text="전체" padding="10px 21px" borderRadius="20px" onClick={handleCategory} value="0" />
+                {
+                  category.map((item, index) =>
+                    <Button value={index + 1} key={index} className={isCategory === index + 1 ? `main shadow` : 'disable shadow'} text={item.label} padding="10px 21px" borderRadius="20px" onClick={handleCategory} />
+                  )
+                }
+              </S.FilterWrap>
+              <Image src={iconExcel} width="18px" height="18px"/>
+              <EquipStatistics data={productList}/>
+            </S.RentalWrap>
+            <div>페이지</div>
+          </>
+          :
+          <>
+            <S.Title> 내 대여 정보</S.Title>
+            <S.RentalWrap>
+              <h2>기자재 대여</h2>
+              <UserState isEquip={true} />
+              <h2>기자재 대여 이력</h2>
+              <UserHist isEquip={true} />
+            </S.RentalWrap>
+          </>
+      }
     </>
   )
 }
