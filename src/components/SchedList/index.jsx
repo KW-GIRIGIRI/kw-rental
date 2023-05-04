@@ -1,5 +1,6 @@
 import dayjs from "dayjs"
 import { useState } from "react"
+import { createRental } from "../../api/api"
 import useModal from "../../hook/useModal"
 import Button from "../../modules/Button"
 import ReturnModal from "../EquipSched/ReturnModal"
@@ -9,6 +10,19 @@ import * as S from "./style"
 export default function SchedList({ receive, rentList }) {
   const [returnModal, setReturnModal] = useState(false)
   const { Modal, open, close } = useModal()
+
+  const handleCreateRental = async () => {
+    // 대여 api 완료 후 수정, 현재 reservationId 값 누락
+    const data = {
+      "reservationId" : 3,
+      "rentalSpecsRequests" : [{
+        "reservationSpecId" : 9,
+        "propertyNumbers" : [ "123456789" ]
+      }]
+    }
+
+    // const res = await createRental(JSON.stringify(data))
+  }
 
   return (
     rentList?.map(user => 
@@ -35,7 +49,7 @@ export default function SchedList({ receive, rentList }) {
           {dayjs().format('M월 D일(dd) HH:mm')}</S.TimeModal>
           <div>
             <Button text='취소'className='sub' padding="10px 24px" borderRadius="5px" fontSize="14px" onClick={() => close()} />
-            <Button text='확인' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px"/>
+            <Button text='확인' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={handleCreateRental}/>
           </div>
         </Modal>
       </S.SchedLi>
