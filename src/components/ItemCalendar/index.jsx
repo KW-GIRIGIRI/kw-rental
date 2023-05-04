@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import iconRightArrow from "../../assets/icon-rightArrow.svg"
 import iconLeftArrow from "../../assets/icon-leftArrow.svg"
 import iconCalendar from "../../assets/icon-calendar.svg"
 import dayjs from "dayjs"
 import * as S from "./style"
+import { getEquipRentStatus } from "../../api/api"
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"]
 
-const ItemCalendar = () => {
+const ItemCalendar = ({ equipId }) => {
+  const [rentList, setRentList] = useState([])
   const [dayObj, setDayObj] = useState(dayjs())
 
   const thisYear = dayObj.year()
@@ -27,6 +29,15 @@ const ItemCalendar = () => {
   const handleNext = () => {
     setDayObj(dayObj.add(1, "month"))
   }
+
+  const handleGetEquipRentStatus = async () => {
+    const res = await getEquipRentStatus(equipId, dayObj.format('YYYY-MM'))
+    setRentList(res.reservations);
+  }
+
+  useEffect(() => {
+    handleGetEquipRentStatus()
+  }, [])
 
   return (
     <S.Wrapper>
@@ -57,9 +68,19 @@ const ItemCalendar = () => {
         ))}
 
         {Array(daysInMonth).fill().map((_, i) => (
-          <S.ContCell key={i}>
-            {i + 1}
-          </S.ContCell>
+            <S.ContCell key={i}>
+              <span>{i + 1}</span>
+              <S.UserUl>
+                {
+                  rentList[i + 1]?.map((val, idx) => 
+                    <S.UserList key={idx}>
+                      <p>{idx + 1}</p>
+                      <p>{val}</p>
+                    </S.UserList>  
+                  )
+                }
+              </S.UserUl>
+            </S.ContCell>
         ))}
 
         {Array(6 - weekDayOfLast).fill().map((_, i) => (

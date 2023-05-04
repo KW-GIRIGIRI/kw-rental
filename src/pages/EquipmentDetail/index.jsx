@@ -85,7 +85,7 @@ export default function EquipmentDetail() {
             isAuth ?
               <>
                 <S.SubTitle>품목 대여 현황</S.SubTitle>
-                <ItemCalendar />
+                <ItemCalendar equipId={params.id} />
                 <S.SubTitle>품목 관리</S.SubTitle>
                 {
                   item ?

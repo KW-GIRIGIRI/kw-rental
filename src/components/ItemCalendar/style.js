@@ -42,16 +42,18 @@ export const MonthWrap = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.ul`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const ContCell = styled.div`
+export const ContCell = styled.li`
+  display: flex;
   flex: 0 0 calc(100% / 7);
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   box-sizing: border-box;
-  align-items: center;
+  align-items: flex-start;
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
   height: 120px;
@@ -69,5 +71,33 @@ export const ContCell = styled.div`
 
   &.faded {
     color: ${(props) => props.theme.color.gray.g4};
+  }
+`;
+
+export const UserUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`
+
+export const UserList = styled.li`
+  display: flex;
+  min-width: 45px;
+  max-width: 90px;
+  font-size: 9px;
+  color: ${(props) => props.theme.color.text.white};
+  border-radius: 2px;
+  background-color: ${(props) => props.theme.color.primary.main};
+  padding: 3px;
+  font-weight: 400;
+
+  & :first-child{
+    width: 18px;
+  }
+
+  & > p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 `;
