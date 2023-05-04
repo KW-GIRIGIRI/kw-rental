@@ -326,7 +326,7 @@ export const UserLogin = async (data) => {
   try {
     const response = await instanceUtil.post(`/members/login`, data);
 
-    return response;
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;

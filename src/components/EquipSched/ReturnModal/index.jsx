@@ -83,7 +83,6 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
                       <option value="">고장</option>
                       <option value="">연체</option>
                     </S.Select>
-                    <S.DetailInput type="text" placeholder="상세 사유 입력창" />
                   </S.StateLi>
                 )
               }
