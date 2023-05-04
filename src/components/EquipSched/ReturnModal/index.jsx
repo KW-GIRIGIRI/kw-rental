@@ -9,7 +9,6 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
   const checkRef = useRef([])
 
   /* 수령 확인 api 나온 후에 수정 
-  console.log(reservationSpecs);
 
   reservationSpecs.map(item => 
     item.rentalSpecs.map(value => 
@@ -21,7 +20,7 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
     )  
   )
   */
-
+  
   const handleGet = i => {
     const newList = {
       count: i,
@@ -56,10 +55,10 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
           <p>자산번호</p>
         </S.ProductLi>
         {
-          Array(3).fill().map((_, i) => 
+          reservationSpecs.map((val, i) => 
             <S.ProductLi key={i}>
               <S.CheckInp type="checkbox" onClick={() => handleGet(i)} className={faulty.map(v => v.count === i ? 'checked' : '')}/>
-              <p>Oculus Quest2</p>
+              <p>{val.modelName}</p>
               <p ref={el => checkRef.current[i] = el}>{i + 88888888888888}</p>
             </S.ProductLi>
           )
