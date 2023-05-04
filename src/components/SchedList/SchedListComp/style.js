@@ -14,7 +14,7 @@ export const RentalLi = styled.li`
     margin-left: 30px;
     width: 65px;
     height: 65px;
-    border: black 1px solid;
+    border-radius: ${props => props.theme.borderRadius.lv1};
   }
 
   & div:nth-child(2) {

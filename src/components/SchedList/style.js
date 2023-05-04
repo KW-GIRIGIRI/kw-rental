@@ -6,11 +6,6 @@ export const SchedLi = styled.li`
   justify-content: space-between;
 `;
 
-export const Rental = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 export const Renter = styled.div`
   padding: 18px 0;
   text-align: center;

@@ -3,10 +3,24 @@ import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import * as S from "./style"
 
-export default function ReturnModal({returnModal, setReturnModal,}) {
+export default function ReturnModal({returnModal, setReturnModal, reservationSpecs}) {
   const { Modal, open, close } = useModal()
   const [faulty, setFaulty] = useState([])
   const checkRef = useRef([])
+
+  /* 수령 확인 api 나온 후에 수정 
+  console.log(reservationSpecs);
+
+  reservationSpecs.map(item => 
+    item.rentalSpecs.map(value => 
+      <S.ProductLi key={i}>
+        <S.CheckInp type="checkbox" onClick={() => handleGet(i)} className={faulty.map(v => v.count === i ? 'checked' : '')}/>
+        <p>Oculus Quest2</p>
+        <p ref={el => checkRef.current[i] = el}>{i + 88888888888888}</p>
+      </S.ProductLi>
+    )  
+  )
+  */
 
   const handleGet = i => {
     const newList = {
@@ -63,10 +77,11 @@ export default function ReturnModal({returnModal, setReturnModal,}) {
                 faulty.map((item, i) =>
                   <S.StateLi key={i}>
                     <p>{item.propertyNum}</p>
-                    <S.Select name="" id="">
-                      <option value="">사유</option>
-                      <option value="">연체</option>
+                    <S.Select  defaultValue="default" name="" id="">
+                      <option value='default' disabled hidden>사유</option>
+                      <option value="">분실</option>
                       <option value="">고장</option>
+                      <option value="">연체</option>
                     </S.Select>
                     <S.DetailInput type="text" placeholder="상세 사유 입력창" />
                   </S.StateLi>

@@ -1,25 +1,55 @@
 import * as S from "./style"
 import Button from "../../modules/Button"
-import { useState } from "react"
+import { getReceivedRentalList, getReturnRentalList } from "../../api/api"
+import { useEffect, useState } from "react"
 import SchedList from "../SchedList"
+import dayjs from "dayjs"
+import iconWarning from '../../assets/icon-exclamation-gray.svg'
 
-export default function EquipSched() {
+export default function EquipSched({date}) {
   const [receive, setReceive] = useState(true)
+  const [rentList, setRentList] = useState([])
+
+  const handleGetReceived = async () => {
+    const res = await getReceivedRentalList(dayjs(date).format('YYYY-MM-DD'))
+    setRentList(res.reservations)
+  }
+
+  const handleGetReturned = async () => {
+    const res = await getReturnRentalList(dayjs(date).format('YYYY-MM-DD'))
+    const newArr = res.overdueReservations.reservations.concat(res.reservationsByEndDate.reservations)
+    setRentList(newArr)
+  }
+
+  useEffect(() => {
+    receive ? handleGetReceived() : handleGetReturned()
+  }, [date, receive])
 
   return (
     <>
       <Button className={receive ? 'main shadow' : 'disable shadow'} text="수령 예정" padding="10px 21px" borderRadius="20px" fontSize="13px" onClick={() => setReceive(true)}/>
       <Button className={receive ? 'disable shadow' : 'main shadow'} text="반납 예정" margin="0 0 0 10px" padding="10px 21px" borderRadius="20px" fontSize="13px" onClick={() => setReceive(false)}/>
-      <S.SchedTitle>{receive ? '수령 예정' : '반납 예정'}</S.SchedTitle>
-      <S.SchedWrap>
-        <S.Header>
-          <span>대여자</span>
-          <span>기자재</span>
-          <span>개수</span>
-          <span>자산번호</span>
-        </S.Header>
-        <SchedList receive={receive} />
-      </S.SchedWrap>
+
+      {
+        rentList.length ?
+          <>
+            <S.SchedTitle>{receive ? '수령 예정' : '반납 예정'}</S.SchedTitle>
+            <S.SchedWrap>
+              <S.Header>
+                <span>대여자</span>
+                <span>기자재</span>
+                <span>개수</span>
+                <span>자산번호</span>
+              </S.Header>
+              <SchedList rentList={rentList} receive={receive} />
+            </S.SchedWrap>
+          </>
+          :
+          <S.WarnWrap>
+            <img src={iconWarning} alt="" />
+            <p>조회한 일자의 <br />{receive ? '수령' : '반납'} 예정 기자재가 없습니다.</p>
+          </S.WarnWrap>
+      }
     </>
   )
 }

@@ -3,20 +3,21 @@ import Button from "../../../modules/Button"
 import CancelModal from "../../EquipSched/CancelModal"
 import * as S from "./style"
 
-export default function SchedListComp({ receive }) {
+export default function SchedListComp({ receive, rentItem }) {
   const [cancelModal, setCancelModal] = useState(false)
 
   return (
     <>
     <S.RentalLi>
-      <img src="" />
+      <img src={rentItem.imgUrl} alt={`${rentItem.modelName} 이미지`} />
       <div>
-        <p>VR 장비</p>
-        <p>Oculus Quest2</p>
+        <p>{rentItem.category}</p>
+        <p>{rentItem.modelName}</p>
       </div>
-      <span>1</span>
+      <span>{rentItem.reservationSpecId}</span>
       {
-        receive ?
+          receive ?
+            // equipmentId 수정 후 적용
           <select>
             <option>자산번호를 선택하세요.
             </option>
@@ -34,7 +35,7 @@ export default function SchedListComp({ receive }) {
       }
       <Button className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
     </S.RentalLi>
-      <CancelModal cancelModal={cancelModal} setCancelModal={setCancelModal} />
+      <CancelModal modelName={rentItem.modelName} count={rentItem.reservationSpecId} cancelModal={cancelModal} setCancelModal={setCancelModal} />
     </>
   )
 }
