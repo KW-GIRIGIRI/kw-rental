@@ -4,6 +4,7 @@ import * as S from "../style"
 import { useContext } from "react"
 import { AuthContext } from "../../../context/Context"
 import PenaltyState from "../../../components/PenaltyState"
+import { useState } from "react"
 
 export default function PenaltyHistory() {
   //가짜페널티통계
@@ -38,6 +39,7 @@ export default function PenaltyHistory() {
     },
   ]
 
+  const [data, setData] = useState(가짜페널티)
   const { isAuth } = useContext(AuthContext)
 
   return (
@@ -47,7 +49,7 @@ export default function PenaltyHistory() {
           <>
             <S.Title>페널티 관리</S.Title>
             <S.RentalWrap>
-              <PenaltyState data={가짜페널티} />
+              <PenaltyState data={data} setData={setData} />
             </S.RentalWrap>
             <div>페이지</div>
           </>

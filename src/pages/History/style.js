@@ -60,3 +60,27 @@ export const FilterWrap = styled.div`
     gap: 12px;
   }
 `;
+
+export const DownloadModal = styled.div`
+  width: 217px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  right: 26px;
+  margin-top: 25px;
+  background: #fff;
+
+  & > p {
+    padding: 12px 27px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+
+    &:hover {
+      background: #F3F6FB;
+    }
+  }
+
+  & a:hover {
+    cursor: default;
+  }
+`

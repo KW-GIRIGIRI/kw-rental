@@ -8,6 +8,7 @@ import { category } from "../../../data/category"
 import EquipStatistics from "../../../components/EquipStatistics"
 import iconExcel from "../../../assets/icon-excel.svg"
 import Image from "../../../modules/Image"
+import { CSVLink } from "react-csv"
 
 export default function EquipmentRentalHistory() {
   // api 없어서 만든 임시 데이터
@@ -203,23 +204,33 @@ export default function EquipmentRentalHistory() {
   const [isCategory, setIsCategory] = useState(0)
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
+  const [onDownload, setOnDownload] = useState(false)
 
   const handleCategory = (e) => {
     setIsCategory(parseInt(e.target.value))
     setPage(0)
   }
 
+  const handleDownloadXlsx = () => {
+    const xlsx = require( "xlsx" )
+    const book = xlsx.utils.book_new()
+    const data = xlsx.utils.json_to_sheet(productList)
+    xlsx.utils.book_append_sheet( book, data, "기자재 통계" );
+    xlsx.writeFile(book, Date.now().toString()+".xlsx")
+    setOnDownload(false)
+  }
+
   //api 나오면 바꿔야 함
   const getProduct = async () => {
-    const response = 가짜대여통계;
+    const response = 가짜대여통계
 
     window.scrollTo({
-      top: 0, 
+      top: 0,
     })
 
     // setPageArray(response.endPoints)
 
-    if(isCategory)
+    if (isCategory)
       setProductList(response.filter(i => i.카테고리 === category[isCategory - 1].label))
     else
       setProductList(response)
@@ -249,8 +260,18 @@ export default function EquipmentRentalHistory() {
                   )
                 }
               </S.FilterWrap>
-              <Image src={iconExcel} width="18px" height="18px"/>
-              <EquipStatistics data={productList}/>
+              <Image src={iconExcel} width="18px" height="18px" onClick={() => { setOnDownload(!onDownload) }}></Image>
+              {onDownload &&
+                <S.DownloadModal className="download">
+                  <p onClick={handleDownloadXlsx}>
+                    엑셀 파일로 다운로드(.xlsx)
+                  </p>
+                  <p onClick={() => { setOnDownload(false) }}>
+                    <CSVLink data={productList} filename={Date.now()}>엑셀 파일로 다운로드(.csv)</CSVLink>
+                  </p>
+                </S.DownloadModal>}
+
+              <EquipStatistics data={productList} />
             </S.RentalWrap>
             <div>페이지</div>
           </>

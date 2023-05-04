@@ -10,8 +10,8 @@ export default function EquipStatistics({data}) {
         <span>기간 내 대여 수</span>
         <span>불량반납 수</span>
       </S.Header>
-      {data.map(item => (
-        <S.ItemLi>
+      {data.map((item, idx) => (
+        <S.ItemLi key={idx}>
           <span>{item.카테고리}</span>
           <span>{item.기자재명}</span>
           <span>{item.자산번호}</span>
