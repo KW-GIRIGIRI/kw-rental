@@ -27,28 +27,31 @@ export default function SchedListComp({ receive, rentItem }) {
       </div>
       <span>{rentItem.amount}</span>
       {
-          receive ?
-          <select defaultValue="default">
-            <option value='default' disabled hidden>자산번호를 선택하세요.
-              </option>
-              {
-                itemLi.map(item => 
-                  <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>  
-                )
-              }
-          </select>
-          :
-            <S.NumWrap>
-              {
-                rentItem.rentalSpecs ?
-                  rentItem.rentalSpecs?.map(i => <p>{i.propertyNumber}</p>)
-                : <p>-</p>
-              }
-          </S.NumWrap>
-      }
-      <Button className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
+        receive ?
+        <select defaultValue="default">
+          <option value='default' disabled hidden>자산번호를 선택하세요.
+            </option>
+            {
+              itemLi.map(item => 
+                <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>  
+              )
+            }
+        </select>
+        :
+        <S.NumWrap>
+          {
+            rentItem.rentalSpecs ?
+              rentItem.rentalSpecs?.map(i => <p>{i.propertyNumber}</p>)
+            : <p>-</p>
+          }
+        </S.NumWrap>
+        }
+        {
+          receive &&
+          <Button width="max-content" className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
+        }
     </S.RentalLi>
-      <CancelModal modelName={rentItem.modelName} count={rentItem.reservationSpecId} cancelModal={cancelModal} setCancelModal={setCancelModal} />
+      <CancelModal modelName={rentItem.modelName} count={rentItem.count} cancelModal={cancelModal} setCancelModal={setCancelModal} />
     </>
   )
 }

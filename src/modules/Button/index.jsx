@@ -15,11 +15,12 @@ const Button = ({
   className,
   float,
   onClick, 
-  value
+  value,
+  disabled
 }) => {
   return (
     <BtnDefault
-      margin={margin} color={color} boxShadow={boxShadow} backgroundColor={backgroundColor} width={width} height={height} fontWeight={fontWeight} fontSize={fontSize} className={className} onClick={onClick} padding={padding} borderRadius={borderRadius} float={float} value={value}>
+      disabled={disabled} margin={margin} color={color} boxShadow={boxShadow} backgroundColor={backgroundColor} width={width} height={height} fontWeight={fontWeight} fontSize={fontSize} className={className} onClick={onClick} padding={padding} borderRadius={borderRadius} float={float} value={value}>
       {text} 
     </BtnDefault>
   )

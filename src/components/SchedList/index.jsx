@@ -33,7 +33,8 @@ export default function SchedList({ receive, rentList }) {
           {
             user.returnDate && <p>반납일 초과</p>
           }
-          <Button className="main shadow" text={ receive ? "수령확인" : "반납확인" } borderRadius="20px" padding="5.5px 7.5px" fontSize="13px" onClick={() => receive ? open() : setReturnModal(true)} />
+          <Button
+            className='main shadow' text={receive ? "수령확인" : "반납확인"} borderRadius="20px" padding="5.5px 7.5px" fontSize="13px" onClick={() => receive ? open() : setReturnModal(true)} />
         </S.Renter>
         <S.RentalUl>
           {

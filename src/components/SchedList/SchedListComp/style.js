@@ -3,24 +3,22 @@ import iconDownArrow from "../../../assets/icon-downArrow-gray.svg";
 
 export const RentalLi = styled.li`
   flex-grow: 1;
-  padding: 24px 0;
+  padding: 7px 60px 7px 30px;
   box-sizing: border-box;
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   border-left: 1px solid ${(props) => props.theme.color.primary.sub};
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 0.3fr 2fr 1fr;
+  gap: 45px;
   align-items: center;
 
   & img {
-    margin-left: 30px;
     width: 65px;
     height: 65px;
-    border-radius: ${props => props.theme.borderRadius.lv1};
+    border-radius: ${(props) => props.theme.borderRadius.lv1};
   }
 
   & div:nth-child(2) {
-    width: 40px;
-    margin-left: 45px;
-    width: 174px;
     font-size: 14px;
     text-align: left;
 
@@ -34,7 +32,6 @@ export const RentalLi = styled.li`
   }
 
   & span {
-    width: 28px;
     font-size: 14px;
     text-align: center;
   }
@@ -43,8 +40,7 @@ export const RentalLi = styled.li`
     box-sizing: border-box;
     outline: none;
     padding: 3px 20px 3px 9px;
-    margin-left: 50px;
-    width: 165px;
+    width: 170px;
     height: 20px;
     font-size: 12px;
     border-radius: ${(props) => props.theme.borderRadius.lv1};
@@ -54,16 +50,10 @@ export const RentalLi = styled.li`
     -webkit-appearance: none;
     appearance: none;
   }
-
-  & Button {
-    box-sizing: border-box;
-    margin-left: 45px;
-  }
 `;
 
 export const NumWrap = styled.div`
-  margin-left: 50px;
-  width: 165px;
+  width: 170px;
   text-align: center;
   font-size: 12px;
 

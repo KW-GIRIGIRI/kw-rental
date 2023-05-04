@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { returnRental } from "../../../api/api"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import * as S from "./style"
@@ -9,7 +10,6 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
   const checkRef = useRef([])
 
   /* 수령 확인 api 나온 후에 수정 
-
   reservationSpecs.map(item => 
     item.rentalSpecs.map(value => 
       <S.ProductLi key={i}>
@@ -21,6 +21,23 @@ export default function ReturnModal({returnModal, setReturnModal, reservationSpe
   )
   */
   
+  // 반납 확인 api - reservationID 값 수정 후 적용
+  const handleReturnRental = async () => {
+    const data ={
+      "reservationId" : 3,
+      "rentalSpecs" : [ {
+        "id" : 6,
+        "status" : "RETURNED"
+      }, {
+        "id" : 7,
+        "status" : "RETURNED"
+      } ]
+    }
+
+    const res = await returnRental(JSON.stringify(data))
+    console.log(res);
+  }
+
   const handleGet = i => {
     const newList = {
       count: i,
