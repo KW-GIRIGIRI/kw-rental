@@ -49,3 +49,17 @@ export const Header = styled.ul`
     left: 552px;
   }
 `
+export const WarnWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 120px 0 180px;
+
+  & > p {
+    text-align: center;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+`; 

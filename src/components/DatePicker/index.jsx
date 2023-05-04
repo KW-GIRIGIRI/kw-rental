@@ -47,10 +47,10 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
 
   // 수정
   useEffect(() => {
-      window.addEventListener('scroll', handleScrollClose)
-      return () => {
-        window.removeEventListener('scroll', handleScrollClose)
-      }
+    window.addEventListener('scroll', handleScrollClose)
+    return () => {
+      window.removeEventListener('scroll', handleScrollClose)
+    }
   }, []) 
 
   const nextMonth = e => {

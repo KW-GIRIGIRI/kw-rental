@@ -57,9 +57,7 @@ export const CheckInp = styled.input`
 export const StateDiv = styled.section`
   display: grid;
   font-size: 12px;
-  grid-template-columns: 1fr 3fr;
-  align-items: flex-start;
-  gap: 20px;
+  grid-template-columns: 2fr 1fr;
   align-items: flex-start;
   & > span {
     padding: 5px 0;
@@ -93,16 +91,4 @@ export const Select = styled.select`
   appearance: none;
   background: url(${iconDownArrow}) no-repeat 95% 50%;
   border-radius: 3px;
-`;
-
-export const DetailInput = styled.input`
-  border-radius: 3px;
-  font-size: 12px;
-  padding: 3px 8px;
-  border: 1px solid ${(props) => props.theme.color.text.black};
-  width: 100%;
-
-  &::placeholder {
-    font-size: 12px;
-  }
 `;

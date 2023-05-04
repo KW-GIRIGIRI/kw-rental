@@ -3,7 +3,7 @@ import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import * as S from "./style"
 
-export default function CancelModal({cancelModal, setCancelModal,}) {
+export default function CancelModal({modelName, count, cancelModal, setCancelModal,}) {
   const { Modal, open, close } = useModal()
 
   const handleCancelRental = () => {
@@ -26,11 +26,9 @@ export default function CancelModal({cancelModal, setCancelModal,}) {
           <p>취소 개수 설정</p>
         </S.ProductLi>
          <S.ProductLi>
-          <p>Oculus Quest2</p>
+          <p>{modelName}</p>
           <S.Select name="" id="">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            {Array(count).fill().map((v,i) => <option key={i} value={i + 1}>{i+1}</option>)}
           </S.Select>
         </S.ProductLi>
       </S.ProductUl>

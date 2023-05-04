@@ -83,7 +83,17 @@ export default function WeekPicker({ modify }) {
 
   useEffect(() => {
     handleCalcDate()
-  },[calendar])
+  }, [calendar])
+  
+  useEffect(() => {
+   if (calendar.date.day() > 4 || calendar.date.day() === 0) {
+      setCalendar(prev => ({
+        ...prev, 
+        date: calendar.date.add(1, 'week')
+      }))
+   }
+  handleCalcDate()
+  }, [])
 
   return (
     <>

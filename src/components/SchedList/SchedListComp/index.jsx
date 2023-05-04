@@ -1,40 +1,57 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getItemList } from "../../../api/api"
 import Button from "../../../modules/Button"
 import CancelModal from "../../EquipSched/CancelModal"
 import * as S from "./style"
 
-export default function SchedListComp({ receive }) {
+export default function SchedListComp({ receive, rentItem }) {
   const [cancelModal, setCancelModal] = useState(false)
+  const [itemLi, setItemLi] = useState([])
+
+  const handleGetEquip = async () => {
+    const res = await getItemList(rentItem.equipmentId)
+    setItemLi(res.items);
+  }
+
+  useEffect(() => {
+    handleGetEquip()
+  }, [])
 
   return (
     <>
     <S.RentalLi>
-      <img src="" />
+      <img src={rentItem.imgUrl} alt={`${rentItem.modelName} 이미지`} />
       <div>
-        <p>VR 장비</p>
-        <p>Oculus Quest2</p>
+        <p>{rentItem.category}</p>
+        <p>{rentItem.modelName}</p>
       </div>
-      <span>1</span>
+      <span>{rentItem.amount}</span>
       {
         receive ?
-          <select>
-            <option>자산번호를 선택하세요.
+        <select defaultValue="default">
+          <option value='default' disabled hidden>자산번호를 선택하세요.
             </option>
-            <option>20190500020001
-            </option>
-            <option>20190500020002
-            </option>
-            <option>20190500020003
-            </option>
-          </select>
-          :
-          <S.NumWrap>
-            <p>20200200020001</p>
-          </S.NumWrap>
-      }
-      <Button className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
+            {
+              itemLi.map(item => 
+                <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>  
+              )
+            }
+        </select>
+        :
+        <S.NumWrap>
+          {
+            rentItem.rentalSpecs ?
+              rentItem.rentalSpecs?.map(i => <p>{i.propertyNumber}</p>)
+            : <p>-</p>
+          }
+        </S.NumWrap>
+        }
+        {
+          receive &&
+          <Button width="max-content" className="sub shadow" text="대여취소" borderRadius="20px" padding="5px 7px" fontSize="14px" onClick={() => setCancelModal(true)} />
+        }
     </S.RentalLi>
-      <CancelModal cancelModal={cancelModal} setCancelModal={setCancelModal} />
+      <CancelModal modelName={rentItem.modelName} count={rentItem.count} cancelModal={cancelModal} setCancelModal={setCancelModal} />
     </>
   )
 }
