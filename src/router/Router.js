@@ -16,7 +16,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 import AuthSuccess from '../pages/AuthSuccess';
-import EquipmentRentalHistory from "../pages/History/EquipRentalHistory";
+import EquipRentalHistory from "../pages/History/EquipRentalHistory";
 import LabRentalHistory from "../pages/History/LabRentalHistory";
 import PenaltyHistory from "../pages/History/PenaltyHistory";
 import SetAccount from '../pages/SetAccount';
@@ -40,7 +40,7 @@ export default function Router() {
             </Route>
           </Route> 
           <Route path="/history/*" element={<History />} >
-            <Route path="equipment" element={<EquipmentRentalHistory />} />
+            <Route path="equipment" element={<EquipRentalHistory />} />
             <Route path="lab" element={<LabRentalHistory />} />
             <Route path="penalty" element={<PenaltyHistory />} />
           </Route>

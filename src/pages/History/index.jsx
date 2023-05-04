@@ -15,9 +15,8 @@ export default function History() {
       {
         isAuth ?
           <>
-            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
-            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
-            <TabNav onClick={() => navigate('/history')} text="히스토리" className={location.pathname.includes('status') ? 'false' : 'on'} />
+            <TabNav onClick={() => navigate('/history/equipment')} text="기자재 통계" className={location.pathname.includes('equipment') ? 'on' : 'false'} />
+            <TabNav onClick={() => navigate('/history/penalty')} text="페널티 관리" className={location.pathname.includes('penalty') ? 'on' : 'false'} />
           </>
           :
           <>
