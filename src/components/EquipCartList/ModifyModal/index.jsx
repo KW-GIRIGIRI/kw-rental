@@ -19,6 +19,7 @@ dayjs.updateLocale('en', {
     "일", "월", "화", "수", "목", "금", "토"
   ]
 })
+
 export default function ModifyModal({modal, setModal, item, handleModifyCartEquip}) {
   const { Modal, open, close } = useModal()
   const [equip, setEquip] = useState()
@@ -43,7 +44,7 @@ export default function ModifyModal({modal, setModal, item, handleModifyCartEqui
   }
 
   const handleGetEquip = async () => {
-    const response = await getProductDetail(item.id)
+    const response = await getProductDetail(item.equipmentId)
     setEquip(response)
   }
 
