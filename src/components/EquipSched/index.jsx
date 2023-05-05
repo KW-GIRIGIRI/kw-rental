@@ -10,19 +10,19 @@ export default function EquipSched({date}) {
   const [receive, setReceive] = useState(true)
   const [rentList, setRentList] = useState([])
 
-  const handleGetReceived = async () => {
+  const handleGetReceived = async (date) => {
     const res = await getReceivedRentalList(dayjs(date).format('YYYY-MM-DD'))
     setRentList(res.reservations)
   }
 
-  const handleGetReturned = async () => {
+  const handleGetReturned = async (date) => {
     const res = await getReturnRentalList(dayjs(date).format('YYYY-MM-DD'))
     const newArr = res.overdueReservations.reservations.concat(res.reservationsByEndDate.reservations)
     setRentList(newArr)
   }
 
   useEffect(() => {
-    receive ? handleGetReceived() : handleGetReturned()
+    receive ? handleGetReceived(date) : handleGetReturned(date)
   }, [date, receive])
 
   return (
