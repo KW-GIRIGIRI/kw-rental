@@ -28,17 +28,25 @@ export const Header = styled.li`
 export const ItemLi = styled.li`
   font-size: 12px;
 
-  & > span, & > form {
-      height: calc(100% + 22px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-right: 1px solid #E0E4E9;
-      border-bottom: 1px solid #E0E4E9;
+  & > span,
+  & > form {
+    height: calc(100% + 22px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e0e4e9;
+    border-bottom: 1px solid #e0e4e9;
 
-      &:first-child {
-        border-left: 1px solid #E0E4E9;
+    &:first-child {
+      border-left: 1px solid #e0e4e9;
+    }
+
+    & > p:last-child {
+      color: #0e2b5a;
+      &:hover {
+        cursor: pointer;
       }
+    }
   }
 
   & > form > select {
@@ -46,12 +54,4 @@ export const ItemLi = styled.li`
     height: 20px;
     font-size: 12px;
   }
-
-  & > :last-child {
-    color: #0E2B5A;
-
-    & p:hover {
-      cursor: pointer;
-    }
-  }
-`
+`;

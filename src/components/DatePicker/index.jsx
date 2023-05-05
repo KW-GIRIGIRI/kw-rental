@@ -74,7 +74,7 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
         </button>
         <span>{currentMonth.format('YY년 MM월')}</span>
         <button
-          // disabled={currentMonth.month() === dayjs().month() + 1}
+          disabled={currentMonth.month() === dayjs().month() + 1}
           onClick={() => nextMonth()}>
           <img src={iconRightArrow} alt="다음 달 보기" />
         </button>

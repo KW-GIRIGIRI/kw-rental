@@ -56,7 +56,7 @@ export default function PenaltyState({ data, setData }) {
           <span>{penalty.사유}</span>
           <span><p onClick={() => onDelete(idx)}>삭제</p></span>
           <Modal>
-            <p>정말 삭제하시겠습니까?</p>
+            <p>해당 패널티를 정말 삭제하시겠습니까?</p>
             <div>
               <Button text='취소' className='sub' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={close} />
               <Button text='삭제' className='main' padding="11px 30px" borderRadius="5px" fontSize="14px" onClick={handleDeletePenalty} />
