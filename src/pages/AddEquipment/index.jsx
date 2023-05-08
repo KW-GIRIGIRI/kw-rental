@@ -68,7 +68,7 @@ export default function AddEquipment() {
   }
 
   const handleModifyEquipment = async () => {
-    if (addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
+    if (addEqRef.current.filter(eq => eq.value === '').length) alert('빈 값이 있습니다.')
     else {
       const item = []
       data.map(i => item.push({

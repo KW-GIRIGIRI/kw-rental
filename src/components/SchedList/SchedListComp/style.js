@@ -41,7 +41,6 @@ export const RentalLi = styled.li`
     outline: none;
     padding: 3px 20px 3px 9px;
     width: 170px;
-    height: 20px;
     font-size: 12px;
     border-radius: ${(props) => props.theme.borderRadius.lv1};
     border: 1px solid ${(props) => props.theme.color.gray.g3};
@@ -65,3 +64,17 @@ export const NumWrap = styled.div`
     margin-bottom: 0;
   }
 `;
+
+export const PropertyNull = styled.p`
+  width: 170px;
+  font-size: 12px;
+  text-align: center;
+  margin-right: 3px;
+`;
+
+export const PropertyDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px 0;
+`

@@ -19,7 +19,7 @@ export default function MainWrapper() {
 
   return (
     <>
-      <Header classNum={classNum}/>
+      <Header classNum={classNum || "Admin 1"}/>
       <NavBar />
       <S.Section>
         <Outlet />
