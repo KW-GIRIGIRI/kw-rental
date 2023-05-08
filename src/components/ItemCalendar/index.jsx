@@ -37,7 +37,7 @@ const ItemCalendar = ({ equipId }) => {
 
   useEffect(() => {
     handleGetEquipRentStatus()
-  }, [])
+  }, [dayObj])
 
   return (
     <S.Wrapper>
