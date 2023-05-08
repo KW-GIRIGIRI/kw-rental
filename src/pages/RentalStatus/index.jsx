@@ -43,8 +43,8 @@ export default function RentalStatus() {
         <S.Title>대여 현황</S.Title>
         {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
         <S.DateCont onClick={handleGetDatePicker}>
-            <img src={iconCalendar} alt="" />
-            <span>{calendar.date.format('M월 D일(dd)')}</span>
+            <img  src={iconCalendar} alt="" />
+            <span >{calendar.date.format('M월 D일(dd)')}</span>
         </S.DateCont>
       </S.Div>
       <EquipSched date={calendar.date} />

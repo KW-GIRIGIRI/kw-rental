@@ -95,12 +95,12 @@ export default function AddCartEquip({productCount}) {
         <S.InpWrapper>
           <S.DateCont onClick={handleGetDatePicker}>
             <S.DateImg src={iconCalendar} alt="" />
-             {dayjs(calendar.date).format('M월 D일(dd)')}
+            <span>{dayjs(calendar.date).format('M월 D일(dd)')}</span>
           </S.DateCont>
           {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
           <span>~</span>
           <S.DateCont>
-            {dayjs(calendar.date).add(1, 'days').format('M월 D일(dd)')}
+            <span>{dayjs(calendar.date).add(1, 'days').format('M월 D일(dd)')}</span>
           </S.DateCont>
         </S.InpWrapper>
       </S.Form>

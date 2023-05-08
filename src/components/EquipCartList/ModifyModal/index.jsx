@@ -96,11 +96,11 @@ export default function ModifyModal({modal, setModal, item, handleModifyCartEqui
       <InpWrapper className="item">
           <S.DateCont onClick={handleGetDatePicker}>
             <S.DateImg src={iconCalendar} alt="" />
-            {calendar.date.format('M월 D일(dd)')} 
+            <span>{calendar.date.format('M월 D일(dd)')} </span>
           </S.DateCont>
           <span>~</span>
           <S.DateCont>
-            {calendar.date.add(1, 'days').format('M월 D일(dd)')} 
+            <span>{calendar.date.add(1, 'days').format('M월 D일(dd)')}</span>
           </S.DateCont>
         </InpWrapper>
         <p>대여 현황</p>

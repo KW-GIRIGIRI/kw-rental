@@ -72,12 +72,12 @@ export default function ItemReserveHist() {
     <>
       <S.DateCont onClick={handleGetDatePicker}>
         <img src={iconCalendar} alt="" />
-        <span>{calendar.date.format('M월 D일(dd)')}</span>
+        <span>{calendar.date.format('YY년 M월 D일(dd)')}</span>
       </S.DateCont>
       <span>~</span>
       <S.DateCont  onClick={handleGetDatePicker}>
         <img src={iconCalendar} alt="" />
-        <span>{calendar.date.add(7, 'days').format('M월 D일(dd)')}</span>
+        <span>{calendar.date.add(7, 'days').format('YY년 M월 D일(dd)')}</span>
       </S.DateCont>
       <ItemResHistTbl data={가짜품목대여이력데이터} />
       {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}

@@ -11,7 +11,7 @@ const useModal = ({ useBlur = true } = {}) => {
 
   const close = useCallback(() => {
     setIsOpen(() => false);
-    document.body.style.overflow = "unset";
+    document.body.style.overflow = "unset";  
   }, []);
 
   return {

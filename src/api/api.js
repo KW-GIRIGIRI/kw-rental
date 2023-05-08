@@ -17,6 +17,8 @@ const instancForm = axios.create({
   },
 });
 
+axios.defaults.withCredentials = true; 
+
 // 기자재 관련 
 export const getProductList = async (url) => {
   try {

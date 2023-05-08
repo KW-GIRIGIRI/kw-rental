@@ -109,7 +109,7 @@ export default function WeekPicker({ modify }) {
         </S.NextBtn>
         <S.DateCont modify={modify} onClick={handleGetDatePicker}>
           <S.DateImg modify={modify} src={iconCalendar} alt="" />
-          <CalcDate/>
+          <span><CalcDate/></span>
         </S.DateCont>
         {calendar && <DatePicker checkWeek={true} calendar={calendar} setCalendar={setCalendar} />}
         <S.NextBtn modify={modify} 

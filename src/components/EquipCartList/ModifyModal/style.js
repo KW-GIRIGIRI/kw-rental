@@ -41,10 +41,15 @@ export const DateCont = styled.label`
   width: 97px;
   font-size: 12px;
   text-align: center;
+
+  & > span {
+    pointer-events: none;
+  }
 `;
 
 export const DateImg = styled.img`
   width: 13px;
   vertical-align: text-top;
+  pointer-events: none;
   margin-right: 5px;
 `;
