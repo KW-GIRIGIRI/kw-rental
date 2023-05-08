@@ -60,7 +60,7 @@ export default function ModifyModal({modal, setModal, item, handleModifyCartEqui
       "amount" : parseInt(amountRef.current.value)
     }
 
-    handleModifyCartEquip(equip.id, JSON.stringify(data)) && close() && setModal(false)
+    handleModifyCartEquip(item.id, JSON.stringify(data)) && close() && setModal(false)
   }
 
   useEffect(() => {
