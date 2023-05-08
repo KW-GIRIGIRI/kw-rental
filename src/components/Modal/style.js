@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const ModalSection = styled.section`
   width: 100%;
   height: 100vh;
-  overflow-y: scroll;
   z-index: 100;
   position: fixed;
   top: 0;

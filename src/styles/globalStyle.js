@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
     min-width: 1000px;
-    /* overflow: scroll; */
+    overflow-y: scroll;
   }
 
   button {

@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
 const classNum = process.env.REACT_APP_CLASSNUM_URL;
+axios.defaults.withCredentials = true; 
 
 const instanceUtil = axios.create({
   baseURL,
@@ -16,8 +17,6 @@ const instancForm = axios.create({
     "Content-type": "multipart/form-data",
   },
 });
-
-axios.defaults.withCredentials = true; 
 
 // 기자재 관련 
 export const getProductList = async (url) => {

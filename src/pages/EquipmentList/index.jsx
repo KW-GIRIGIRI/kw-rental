@@ -58,7 +58,10 @@ export default function EquipmentList() {
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
       if(searchKeyword.includes('\\')) alert('유효한 값을 입력하세요')
-      else if (searchKeyword.length < 2) open()
+      else if (searchKeyword.length < 2) {
+        setSearchKeyword('')
+        open(); 
+      }
       else {
         getProduct()
         setPage(0)
@@ -98,7 +101,7 @@ export default function EquipmentList() {
         <S.FilterWrap>
           <S.SearchCont>
             {/* search inp 분리 */}
-            <S.SearchInp type="text" placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
+            <S.SearchInp type="text" value={searchKeyword} placeholder="카테고리, 기자재 명을 입력해주세요." onChange={(e) => setSearchKeyword(e.target.value)} onKeyDown={handleSearch} />
             <S.SearchImg onClick={handleSearch} src={iconSearch} alt="" />
           </S.SearchCont>
           <Modal>
@@ -140,25 +143,28 @@ export default function EquipmentList() {
         }
       </S.FilterWrap>
 
-      <EquipListWrap type={viewMode} data={productList} />
+      {productList && <EquipListWrap type={viewMode} data={productList} /> }
 
-      <S.PageBtnWrap>
-        <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-          <img src={iconPageArrow} alt="이전 페이지" />
-        </button>
-        {
-          pageArray?.map((_, index) => {
-            return (
-              <button key={index} onClick={() => setPage(index)} className={page===index  ? 'on' : null}>
-                {index + 1}
-              </button>
-            )
-          })
-        }
-        <button onClick={() => setPage(page + 1)} disabled={page + 1 === pageArray.length}>
-          <img src={iconPageArrow} alt="다음 페이지" />
-        </button>
-      </S.PageBtnWrap>
+      {
+        pageArray &&
+        <S.PageBtnWrap>
+          <button onClick={() => setPage(page - 1)} disabled={page === 0}>
+            <img src={iconPageArrow} alt="이전 페이지" />
+          </button>
+          {
+            pageArray?.map((_, index) => {
+              return (
+                <button key={index} onClick={() => setPage(index)} className={page===index  ? 'on' : null}>
+                  {index + 1}
+                </button>
+              )
+            })
+          }
+          <button onClick={() => setPage(page + 1)} disabled={page + 1 === pageArray.length}>
+            <img src={iconPageArrow} alt="다음 페이지" />
+          </button>
+        </S.PageBtnWrap>
+      }
     </S.Wrapper>
   )
 }

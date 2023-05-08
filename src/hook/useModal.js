@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Modal from "../components/Modal";
 
 const useModal = ({ useBlur = true } = {}) => {
@@ -13,6 +13,30 @@ const useModal = ({ useBlur = true } = {}) => {
     setIsOpen(() => false);
     document.body.style.overflow = "unset";  
   }, []);
+
+   const preventScroll = () => {
+    const currentScrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.top = `-${currentScrollY}px`; 
+    return currentScrollY;
+  };
+
+  const allowScroll = (prevScrollY) => {
+    document.body.style.position = "";
+    document.body.style.width = "";
+    document.body.style.top = "";
+    window.scrollTo(0, prevScrollY);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      const prevScrollY = preventScroll();
+      return () => {
+        allowScroll(prevScrollY);
+      };
+    }
+  }, [isOpen]);
 
   return {
     Modal: isOpen
