@@ -78,10 +78,12 @@ export const DateCont = styled.label`
   box-sizing: border-box;
   width: 128px;
   & > span {
+    pointer-events: none;
     font-size: 13px;
   }
   & > img {
     width: 14px;
+    pointer-events: none;
     margin: 0 9px 3px 0;
   }
 `;

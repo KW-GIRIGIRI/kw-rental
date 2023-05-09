@@ -35,6 +35,7 @@ export const NextBtn = styled.button`
 export const DateImg = styled.img`
   width: ${(props) => (props.modify ? "12px" : "1rem")};
   vertical-align: text-top;
+  pointer-events: none;
   margin-right: 8px;
 `;
 
@@ -48,6 +49,10 @@ export const DateCont = styled.p`
   font-weight: 500;
   font-size: ${(props) => (props.modify ? "12px" : "14px")};
   text-align: center;
+
+  & > span {
+    pointer-events: none;
+  }
 `;
 
 export const DateUl = styled.ul`

@@ -5,8 +5,8 @@ export const GlobalStyle = createGlobalStyle`
   ${reset}
 
   :root {
-    // 후에 반응형 적용 시, 수정
     min-width: 1000px;
+    overflow-y: scroll;
   }
 
   button {

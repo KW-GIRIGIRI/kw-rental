@@ -31,11 +31,15 @@ export const DateCont = styled.label`
   padding: 5px 12px;
   box-sizing: border-box;
   width: 128px;
+
   & > span {
     font-size: 13px;
+    pointer-events: none;
   }
+
   & > img {
     width: 14px;
+    pointer-events: none;
     margin: 0 9px 3px 0;
   }
 `;

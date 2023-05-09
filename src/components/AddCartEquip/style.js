@@ -46,6 +46,7 @@ export const Select = styled.select`
 export const DateImg = styled.img`
   width: 1rem;
   vertical-align: text-top;
+  pointer-events: none;
   margin-right: 10px;
 `;
 
@@ -59,4 +60,8 @@ export const DateCont = styled.div`
   padding: 5px 0;
   width: 120px;
   text-align: center;
+
+  & > span {
+    pointer-events: none;
+  }
 `;

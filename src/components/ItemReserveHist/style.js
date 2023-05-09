@@ -12,12 +12,14 @@ export const DateCont = styled.label`
 
   & > span {
     margin-right: 4px;
+    pointer-events: none;
     font-size: 14px;
   }
 
   & > img {
     width: 16px;
     vertical-align: top;
+    pointer-events: none;
     margin-right: 7px;
   }
 

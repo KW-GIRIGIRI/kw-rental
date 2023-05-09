@@ -45,13 +45,14 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
     }))
   }
 
-  // 수정
   useEffect(() => {
-    window.addEventListener('scroll', handleScrollClose)
-    return () => {
-      window.removeEventListener('scroll', handleScrollClose)
+    if (calendar.visible) {
+      window.addEventListener('scroll', handleScrollClose)
+      return () => {
+        window.removeEventListener('scroll', handleScrollClose)
+      }
     }
-  }, []) 
+  }, [calendar.visible]) 
 
   const nextMonth = e => {
     const plus = currentMonth.add(1, "month");
@@ -125,7 +126,9 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
         days.push(
           <S.CellWrap checkWeek={checkWeek}
             onClick={() => handleGetDay(d)}
-            className={!d.isCurrentMonth || getDate(d) < dayjs() || getDate(d) > dayjs().add(31, 'days') || getDate(d).day() === 5 || getDate(d).day() === 6 || getDate(d).day() === 0  ? "disabled" : ""} key={i}>
+            className={!d.isCurrentMonth || getDate(d) < dayjs() ||
+              getDate(d) > dayjs().add(31, 'days') ||
+              getDate(d).day() === 5 || getDate(d).day() === 6 || getDate(d).day() === 0 ? "disabled" : ""} key={i}>
             {d.day}
           </S.CellWrap>
           );
@@ -139,6 +142,10 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
     });
     return <>{rows}</>;
   };
+
+  useEffect(() => {
+    setCurrentMonth(calendar.date)
+  }, [calendar.date])
 
   useEffect(() => {
     getAllDays();

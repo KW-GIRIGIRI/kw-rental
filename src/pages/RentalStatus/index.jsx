@@ -25,13 +25,17 @@ export default function RentalStatus() {
   }
 
   useEffect(() => {
-    if (calendar.date.day() > 4 || calendar.date.day() === 0) {
+    if (calendar.date.day() > 4) 
       setCalendar(prev => ({
         ...prev,
         date: calendar.date.add(1, 'week').startOf('week').add(1, 'day')
       }))
-    }
-  },[])
+    else if (calendar.date.day() === 0) 
+      setCalendar(prev => ({
+        ...prev,
+        date: calendar.date.add(1, 'day')
+      }))
+  }, [])
   
   return (
     <S.Wrapper>

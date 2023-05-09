@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { forwardRef, useEffect, useState } from "react"
 import { getItemList } from "../../../api/api"
 import Button from "../../../modules/Button"
 import CancelModal from "../../EquipSched/CancelModal"
 import * as S from "./style"
 
-export default function SchedListComp({ receive, rentItem }) {
+const SchedListComp = forwardRef(({ receive, rentItem }, itemRef) => {
   const [cancelModal, setCancelModal] = useState(false)
   const [itemLi, setItemLi] = useState([])
 
@@ -13,13 +13,16 @@ export default function SchedListComp({ receive, rentItem }) {
     setItemLi(res.items);
   }
 
+  console.log(rentItem);
+
+
   useEffect(() => {
     handleGetEquip()
   }, [])
 
   return (
     <>
-    <S.RentalLi>
+      <S.RentalLi>
       <img src={rentItem.imgUrl} alt={`${rentItem.modelName} 이미지`} />
       <div>
         <p>{rentItem.category}</p>
@@ -28,15 +31,23 @@ export default function SchedListComp({ receive, rentItem }) {
       <span>{rentItem.amount}</span>
       {
         receive ?
-        <select defaultValue="default">
-          <option value='default' disabled hidden>자산번호를 선택하세요.
-            </option>
-            {
-              itemLi.map(item => 
-                <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>  
-              )
-            }
-        </select>
+            itemLi.length ?
+              <S.PropertyDiv>
+                {
+                  Array(rentItem.amount).fill().map((_, i) => 
+                    <select
+                      key={i} defaultValue="default">
+                        <option value='default' disabled hidden>자산번호를 선택하세요.</option>
+                          {
+                            itemLi.map(item => 
+                              <option key={item.propertyNumber} value={item.propertyNumber}>{item.propertyNumber}</option>  
+                            )
+                          }
+                      </select> 
+                  )
+                }
+                </S.PropertyDiv>
+            : <S.PropertyNull>소모품</S.PropertyNull>
         :
         <S.NumWrap>
           {
@@ -54,4 +65,6 @@ export default function SchedListComp({ receive, rentItem }) {
       <CancelModal modelName={rentItem.modelName} count={rentItem.count} cancelModal={cancelModal} setCancelModal={setCancelModal} />
     </>
   )
-}
+})
+
+export default SchedListComp

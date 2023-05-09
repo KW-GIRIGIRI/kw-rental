@@ -5,14 +5,31 @@ import { TextareaStyle } from "../../../modules/Textarea/style";
 import useInput from "../../../hook/useInput";
 import { useEffect, useState } from "react";
 import { forwardRef } from "react";
+import { getUserInfo } from "../../../api/api";
 
 const ApplicationForm = forwardRef((props, dataRef) => {
   const [visible, setVisible] = useState(true)
+  const [user, setUser] = useState({
+    name: '',
+    phoneNumber: '',
+    email: ''
+  })
   const purposeInp = useInput('')
+
+  const handleGetUserInfo = async () => {
+    const res = await getUserInfo()
+    setUser(prev => {
+      return {...prev, name: res.name, phoneNumber: res.phoneNumber, email: res.email}
+    })
+  }
 
   useEffect(() => {
     purposeInp.value.length > 10 ? setVisible(false) : setVisible(true)
   }, [purposeInp])
+
+  useEffect(() => {
+    handleGetUserInfo()
+  }, [])
 
   return (
     <>
@@ -20,17 +37,17 @@ const ApplicationForm = forwardRef((props, dataRef) => {
         <S.Info>
           <S.LiWrap>
             <S.FormLi>이름</S.FormLi>
-            <S.P ref={el => dataRef.current.name = el}>이영현</S.P>
+            <S.P ref={el => dataRef.current.name = el}>{user.name}</S.P>
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>연락처</S.FormLi>
-            <Input ref={el => dataRef.current.pNumber = el} className='rentalUser' type="tel" maxLen="11"/>
+            <Input defaultValue={user.phoneNumber} ref={el => dataRef.current.pNumber = el} className='rentalUser' maxLen="11"/>
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>이메일</S.FormLi>
-            <Input className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el}/>
+            <Input defaultValue={user.email.split('@')[0]} className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el}/>
             <span>@</span>
-            <Input className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el}/>
+            <Input defaultValue={user.email.split('@')[1]}  className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el}/>
           </S.LiWrap>
         </S.Info>
         <S.Purpose>

@@ -54,11 +54,15 @@ export default function WeekPicker({ modify }) {
     return weekNo;
   }
 
-  const handleCalcDate = () => {
+  const CalcDate = () => {
+    let num = 1;
     let weekNo = handleWeekNumberByThurFnc()
     if (weekNo === 'prev') weekNo = handleWeekNumberByThurFnc(calendar.date.subtract(-1, 'month'));
-    if (weekNo === 'next') weekNo = 1;
-    return weekNo;
+    if (weekNo === 'next') {
+      weekNo = 1; num = 2;
+    }
+
+    return calendar.date.format(`YY년 ${calendar.date.month() + num}월 ${weekNo}째 주`)
   }
 
   const handleDate = num => {
@@ -82,17 +86,17 @@ export default function WeekPicker({ modify }) {
   }
 
   useEffect(() => {
-    handleCalcDate()
+    CalcDate()
   }, [calendar])
   
   useEffect(() => {
-   if (calendar.date.day() > 4 || calendar.date.day() === 0) {
-      setCalendar(prev => ({
-        ...prev, 
-        date: calendar.date.add(1, 'week')
-      }))
-   }
-  handleCalcDate()
+    if (calendar.date.day() > 4 || calendar.date.day() === 0) {
+        setCalendar(prev => ({
+          ...prev, 
+          date: calendar.date.add(1, 'week')
+        }))
+    }
+    CalcDate()
   }, [])
 
   return (
@@ -105,7 +109,7 @@ export default function WeekPicker({ modify }) {
         </S.NextBtn>
         <S.DateCont modify={modify} onClick={handleGetDatePicker}>
           <S.DateImg modify={modify} src={iconCalendar} alt="" />
-          {calendar.date.format(`YY년 M월 ${handleCalcDate()}째 주`)}
+          <span><CalcDate/></span>
         </S.DateCont>
         {calendar && <DatePicker checkWeek={true} calendar={calendar} setCalendar={setCalendar} />}
         <S.NextBtn modify={modify} 

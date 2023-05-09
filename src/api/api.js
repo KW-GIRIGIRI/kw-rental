@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
 const classNum = process.env.REACT_APP_CLASSNUM_URL;
+axios.defaults.withCredentials = true; 
 
 const instanceUtil = axios.create({
   baseURL,
@@ -345,6 +346,30 @@ export const UserLogin = async (data) => {
     const response = await instanceUtil.post(`/members/login`, data);
 
     return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 회원정보 조회 
+export const getUserInfo = async (date) => {
+  try {
+    const response = await instanceUtil.get(`/members`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 회원 학번 조회 
+export const getUserClassNum = async (date) => {
+  try {
+    const response = await instanceUtil.get(`/members/memberNumber`);
+
+    return response.data;
   } catch (err) {
     console.error(err.message);
     return err;
