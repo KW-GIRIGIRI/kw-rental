@@ -20,6 +20,11 @@ import EquipRentalHistory from "../pages/History/EquipRentalHistory";
 import LabRentalHistory from "../pages/History/LabRentalHistory";
 import PenaltyHistory from "../pages/History/PenaltyHistory";
 import SetAccount from '../pages/SetAccount';
+import LabRental from '../pages/LabRental';
+import LabInformation from '../pages/LabRental/LabInformation';
+import LabRentalSched from '../pages/LabRental/LabRentalSched';
+import LabRentalApplication from '../pages/LabRental/LabRentalApplication';
+import LabRentalSuccess from '../pages/LabRental/LabRentalSuccess';
 
 export default function Router() {
   return (
@@ -38,13 +43,19 @@ export default function Router() {
               <Route path="application" element={<RentalApplication />} />
               <Route path="success" element={<RentalSuccess />} />
             </Route>
-          </Route> 
+          </Route>
           <Route path="/history/*" element={<History />} >
             <Route path="equipment" element={<EquipRentalHistory />} />
             <Route path="lab" element={<LabRentalHistory />} />
             <Route path="penalty" element={<PenaltyHistory />} />
           </Route>
-          <Route path='/setaccount' element={<SetAccount />} />
+          <Route path="/setaccount" element={<SetAccount />} />
+          <Route path="/lab/*" element={<LabRental />}>
+            <Route path="" element={<LabInformation />} />
+            <Route path="status" element={<LabRentalSched />} />
+            <Route path="application" element={<LabRentalApplication />} />
+            <Route path="success" element={<LabRentalSuccess />} />
+          </Route>
         </Route>
         <Route path="/auth/*" element={<AuthWrapper />}>
           <Route path="" element={<Login />} />

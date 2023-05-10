@@ -12,11 +12,12 @@ export default function NavBar() {
     <S.NavWrap>
       <S.NavUl>
         <S.NavLi
-          className={!location.pathname.includes('/history') && !location.pathname.includes('/setaccount') ? 'on' : 'off'}
+          className={!location.pathname.includes('/history') && !location.pathname.includes('/lab') && !location.pathname.includes('/setaccount') ? 'on' : 'off'}
           onClick={() => navigate('/')}>
           <p>기자재 대여</p>
         </S.NavLi>
-        <S.NavLi>
+        <S.NavLi className={!location.pathname.includes('/history') && location.pathname.includes('/lab') ? 'on' : 'off'}
+          onClick={() => navigate('/lab')}>
           <p>랩실 대여</p>
         </S.NavLi>
         <S.NavLi

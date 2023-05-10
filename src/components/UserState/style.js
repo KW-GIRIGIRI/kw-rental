@@ -85,11 +85,11 @@ export const DateEquip = styled.span`
   grid-row-start: 1;
   grid-row-end: -1;
 
-  & p {
+  & > p {
     margin-bottom: 10px;
 
     &:last-child {
-      margin-bottom: none;
+      margin-bottom: 0;
     }
   }
 `
