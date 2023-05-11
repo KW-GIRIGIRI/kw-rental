@@ -1,47 +1,46 @@
 import dayjs from "dayjs"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import { createRental } from "../../api/api"
 import useModal from "../../hook/useModal"
 import Button from "../../modules/Button"
 import ReturnModal from "../EquipSched/ReturnModal"
 import SchedListComp from "./SchedListComp"
 import * as S from "./style"
+import { useSelector } from "react-redux";
 
-export default function SchedList({ receive, rentList }) {
+export default function SchedList({ receive }) {
   const [returnModal, setReturnModal] = useState(false)
   const { Modal, open, close } = useModal()
-  const itemRef = useRef([])
+  const receiveList = useSelector(state => state.authReceive.receiveList)
+  const receiveCheckList = useSelector(state => state.authReceive.receiveCheckList)
 
   const handleCreateRental = async (index) => {
-    const rentItem = rentList[index]
-
-    const data = {
-      "reservationId" : rentItem.reservationId,
-      "rentalSpecsRequests" : [{
-        "reservationSpecId" : 9,
-        "propertyNumbers" : [ "123456789" ]
-      }]
-    }
-
-    // const res = await createRental(JSON.stringify(data))
+    const res = await createRental(JSON.stringify(receiveCheckList[index]))
+    res === 201 && close()
   }
 
   return (
-    rentList?.map((user, index) => 
+    Object.values(receiveList.byId)?.map((user, index) => 
       <S.SchedLi key={user.memberNumber + index}>
         <S.Renter>
           <p>{user.name}</p>
           <p>{user.memberNumber}</p>
           {
-            user.returnDate && <p>반납일 초과</p>
+            user.returnDate && <S.WarnCont>반납일 초과</S.WarnCont>
           }
-          <Button
-            className='main shadow' text={receive ? "수령확인" : "반납확인"} borderRadius="20px" padding="5.5px 7.5px" fontSize="13px" onClick={() => receive ? open() : setReturnModal(true)} />
+          {
+            user.acceptDateTime ? 
+              <S.TimeCont>{user.acceptDateTime.split('T')[1].slice(0,5)}</S.TimeCont> :
+              <Button
+                disabled={receiveCheckList.filter(value => value.reservationId === user.reservationId)[0].rentalSpecsRequests.flatMap((item) => item.propertyNumbers).includes(undefined)}
+                className={receiveCheckList.filter(value => value.reservationId === user.reservationId)[0].rentalSpecsRequests.flatMap((item) => item.propertyNumbers).includes(undefined) ? 'gray shadow' : 'main shadow'}
+                text={receive ? "수령확인" : "반납확인"}
+                borderRadius="20px" padding="5.5px 7.5px" fontSize="13px" onClick={() => receive ? open() : setReturnModal(true)} />}
         </S.Renter>
         <S.RentalUl>
           {
-            user.reservationSpecs?.map(rentItem =>
-              <SchedListComp ref={itemRef} key={rentItem.reservationSpecId} rentItem={rentItem} receive={receive} />
+            user.reservationSpecs?.map(id =>
+              <SchedListComp id={id} key={id} receive={receive} />
             )
           }
         </S.RentalUl>
@@ -56,6 +55,6 @@ export default function SchedList({ receive, rentList }) {
           </div>
         </Modal>
       </S.SchedLi>
-      )
+    )
   )
 }

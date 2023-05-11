@@ -23,13 +23,8 @@ export const Renter = styled.div`
   }
 
   & p:nth-child(2) {
-    margin-top: 7px;
+    margin: 7px 0 18px;
     color: ${(props) => props.theme.color.primary.main};
-  }
-
-  & p:nth-child(3) {
-    margin-top: 7px;
-    color: #e20f0f;
   }
 
   & Button {
@@ -48,4 +43,16 @@ export const TimeModal = styled.span`
   display: block;
   margin: 30px 0 16px;
   line-height: 1.4;
+`;
+
+export const TimeCont = styled.p`
+  font-size: 13px;
+  font-weight: 600;
+  color: ${(props) => props.theme.color.primary.main};
+`;
+
+
+export const WarnCont = styled.p`
+  font-size: 13px;
+  color: ${(props) => props.theme.color.primary.red};
 `;

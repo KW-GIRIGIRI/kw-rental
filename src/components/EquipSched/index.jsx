@@ -5,19 +5,27 @@ import { useEffect, useState } from "react"
 import SchedList from "../SchedList"
 import dayjs from "dayjs"
 import iconWarning from '../../assets/icon-exclamation-gray.svg'
+import { useDispatch } from "react-redux";
+import { setReceiveList, setReserveLen } from "../../store/reducer/authReceive"
+
 
 export default function EquipSched({date}) {
   const [receive, setReceive] = useState(true)
   const [rentList, setRentList] = useState([])
+  const dispatch = useDispatch()
 
   const handleGetReceived = async (date) => {
     const res = await getReceivedRentalList(dayjs(date).format('YYYY-MM-DD'))
+    dispatch(setReceiveList(res.reservations))
+    dispatch(setReserveLen(res.reservations))
     setRentList(res.reservations)
   }
 
   const handleGetReturned = async (date) => {
     const res = await getReturnRentalList(dayjs(date).format('YYYY-MM-DD'))
     const newArr = res.overdueReservations.reservations.concat(res.reservationsByEndDate.reservations)
+    dispatch(setReceiveList(newArr))
+    dispatch(setReserveLen(newArr))
     setRentList(newArr)
   }
 

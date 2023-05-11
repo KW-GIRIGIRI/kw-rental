@@ -267,7 +267,7 @@ export const createRental = async (data) => {
   try {
     const response = await instanceUtil.post(`/admin/rentals`, data);
 
-    return response.headers.get("Location");
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;
@@ -321,7 +321,7 @@ export const returnRental = async (data) => {
 // auth 관련
 export const getClassNum = async (data) => {
   try {
-    const response = await axios.post(classNum, data);
+    const response = await axios.post(classNum, data, { withCredentials: false });
     
     return response.data[0];
   } catch (err) {
