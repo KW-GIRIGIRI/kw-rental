@@ -375,3 +375,15 @@ export const getUserClassNum = async (date) => {
     return err;
   }
 };
+
+// 현재 내 대여 상태 조회
+export const getCurrentRental = async () => {
+  try {
+    const response = await instanceUtil.get(`/reservations?terminated=false`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
