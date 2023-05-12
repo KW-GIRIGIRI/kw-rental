@@ -19,7 +19,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
   const handleGetUserInfo = async () => {
     const res = await getUserInfo()
     setUser(prev => {
-      return {...prev, name: res.name, phoneNumber: res.phoneNumber, email: res.email}
+      return { ...prev, name: res.name, phoneNumber: res.phoneNumber, email: res.email }
     })
   }
 
@@ -41,13 +41,13 @@ const ApplicationForm = forwardRef((props, dataRef) => {
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>연락처</S.FormLi>
-            <Input defaultValue={user.phoneNumber} ref={el => dataRef.current.pNumber = el} className='rentalUser' maxLen="11"/>
+            <Input defaultValue={user.phoneNumber} ref={el => dataRef.current.pNumber = el} className='rentalUser' maxLen="11" />
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>이메일</S.FormLi>
-            <Input defaultValue={user.email.split('@')[0]} className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el}/>
+            <Input defaultValue={user.email.split('@')[0]} className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el} />
             <span>@</span>
-            <Input defaultValue={user.email.split('@')[1]}  className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el}/>
+            <Input defaultValue={user.email.split('@')[1]} className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el} />
           </S.LiWrap>
         </S.Info>
         <S.Purpose>
@@ -56,10 +56,24 @@ const ApplicationForm = forwardRef((props, dataRef) => {
             <TextareaStyle {...purposeInp} ref={el => dataRef.current.purpose = el} placeholder="최소 10자 이상 입력하세요." rows="4"></TextareaStyle>
             {
               visible ?
-              <S.Exclam><img src={iconExclamation} alt=''/><span>구체적으로 작성해주세요.</span></S.Exclam> : <></>
+                <S.Exclam><img src={iconExclamation} alt='' /><span>구체적으로 작성해주세요.</span></S.Exclam> : <></>
             }
           </S.TextareaWrap>
         </S.Purpose>
+        {
+          props.isLab &&
+          <S.Lab>
+            <S.FormLi>대여 인원</S.FormLi>
+            <select>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </S.Lab>
+        }
       </S.FormWrap>
     </>
   )

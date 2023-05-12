@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FormWrap = styled.ul`
-  height: 82px;
   margin-bottom: 15px;
 
   P, Input, Textarea {
@@ -72,4 +71,16 @@ export const Exclam = styled.div`
 
 export const TextareaWrap = styled.div`
   width: 100%;
+`
+
+export const Lab = styled.div`
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+
+  & > select {
+    width: 117px;
+    height: 25px;
+    text-align: center;
+  }
 `
