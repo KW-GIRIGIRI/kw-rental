@@ -1,70 +1,33 @@
 import * as S from "./style"
 import Image from "../../modules/Image/index.jsx"
 import Button from "../../modules/Button"
+import { getCurrentRental } from "../../api/api"
+import { useState, useEffect } from "react"
+import dayjs from "dayjs"
 
 export default function UserState({ isEquip, isLab }) {
-  const 기자재대여 = [
-    {
-      수령일: "23년 03월 11일(수)",
-      반납일: "23년 03월 12일(목)",
-      대여리스트: [
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: false
-        },
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: true
-        }
-      ]
-    },
-    {
-      수령일: "23년 03월 11일(수)",
-      반납일: "23년 03월 12일(목)",
-      대여리스트: [
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: false
-        },
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: true
-        },
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: true
-        }
-      ]
-    },
-    {
-      수령일: "23년 03월 11일(수)",
-      반납일: "23년 03월 12일(목)",
-      대여리스트: [
-        {
-          img: "#",
-          카테고리: "카메라",
-          기자재명: "MIRRORLESS SONY a6600",
-          개수: 1,
-          대여중: false
-        },
-      ]
-    },
-  ]
+  const [myRental, setMyRental] = useState([])
+
+  const handleGetCurrentRental = async () => {
+    const res = await getCurrentRental()
+    setMyRental(res.reservations)
+  }
+
+  useEffect(() => {
+    handleGetCurrentRental()
+  }, [])
+
+  const userRentalStatus = {
+    RESERVED: "대여 신청",
+    RENTED: "대여중",
+    RETURNED: "반납됨",
+    ABNORMAL_RETURNED: "불량 반납",
+    OVERDUE_RENTED: "연체중",
+    CANCELED: "대여 취소"
+  }
+
+  const onDelete = () => {
+  }
 
   const 랩실대여 = [
     {
@@ -100,25 +63,26 @@ export default function UserState({ isEquip, isLab }) {
               <span>상태</span>
             </S.Header>
             {
-              기자재대여.map((기자재, i) => (
+              myRental.length && myRental.map((rental, i) => (
                 <S.HistList key={i} className="equipList">
                   <S.DateEquip>
-                    <p>{기자재.수령일}</p>
+                    <p>{dayjs(rental.startDate).format('YY년 MM월 DD일(dd)')}</p>
                     <p>~</p>
-                    <p>{기자재.반납일}</p>
+                    <p>{dayjs(rental.endDate).format('YY년 MM월 DD일(dd)')}</p>
                   </S.DateEquip>
                   <S.ItemUl>
                     {
-                      기자재.대여리스트.map((아이템, idx) => (
+                      rental.reservationSpecs.map((item, idx) => (
                         <S.ItemLi key={idx}>
-                          <Image src={아이템.img} width="50px" height="50px" borderRadius="5px" />
+                          <Image src={item.imgUrl} width="50px" height="50px" borderRadius="5px" />
                           <S.NameEquip>
-                            <p>{아이템.카테고리}</p>
-                            <p>{아이템.기자재명}</p>
+                            <p>{item.category}</p>
+                            <p>{item.modelName}</p>
                           </S.NameEquip>
-                          <span>{아이템.개수}</span>
-                          <S.State>{아이템.대여중 ? "대여중" : "대여 신청"}</S.State>
-                          {!아이템.대여중 && <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" />}
+                          <span>{item.rentalAmount}</span>
+                          <S.State>{userRentalStatus[item.status]}</S.State>
+                          {userRentalStatus[item.status] === "RESERVED" && 
+                          <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" onClick={onDelete}/>}
                         </S.ItemLi>
                       ))
                     }
@@ -139,15 +103,15 @@ export default function UserState({ isEquip, isLab }) {
               {
                 랩실대여.map((랩실, i) => (
                   <S.HistList key={i} className="lab labList">
-                <span>{랩실.사용기간}</span>
-                <S.Location>
-                  <p>KEY</p>
-                  <p>{랩실.장소}</p>
-                </S.Location>
-                <span>{랩실.사용인원}</span>
-                <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
-                {!랩실.대여중 && <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" />}
-              </S.HistList>
+                    <span>{랩실.사용기간}</span>
+                    <S.Location>
+                      <p>KEY</p>
+                      <p>{랩실.장소}</p>
+                    </S.Location>
+                    <span>{랩실.사용인원}</span>
+                    <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
+                    {!랩실.대여중 && <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" />}
+                  </S.HistList>
                 ))
               }
             </S.HistWrap>
