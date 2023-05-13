@@ -9,7 +9,6 @@ export default function History() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // 설정한 라우팅 주소에 따라서 navigate와 include 수정 
   return (
     <>
       {

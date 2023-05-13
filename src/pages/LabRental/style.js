@@ -14,9 +14,12 @@ export const Wrapper = styled.section`
 
 export const SimpleDesc = styled.div`
   font-size: 13px;
+  margin-bottom: 30px;
+
   & > span:not(:last-child)::after {
     content: " > ";
   }
+
   & > span.on {
     color: ${(props) => props.theme.color.primary.main};
     font-weight: 600;
@@ -26,5 +29,9 @@ export const SimpleDesc = styled.div`
 export const SubTitle = styled.h2`
   font-size: 20px;
   font-weight: 500;
-  margin: 29px 0 25px 0;
+  margin-bottom: 30px;
 `;
+
+export const Div = styled.div`
+  margin-top: 46px;
+`
