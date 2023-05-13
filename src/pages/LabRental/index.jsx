@@ -35,8 +35,8 @@ export default function LabRental() {
       default:
         return (
           <>
-            <Button className={isFirst ? 'main shadow' : 'disable shadow'} text="한울관" padding="10px 29px" borderRadius="20px" margin='0 10px 0 0'/>
-            <Button className={isFirst ? 'disable shadow' : 'main shadow'} text="화도관" padding="10px 29px" borderRadius="20px" />
+            <Button className={isFirst ? 'main shadow' : 'disable shadow'} text="한울관" padding="10px 29px" borderRadius="20px" margin='0 10px 0 0' onClick={() => setIsFirst(true)}/>
+            <Button className={isFirst ? 'disable shadow' : 'main shadow'} text="화도관" padding="10px 29px" borderRadius="20px" onClick={() => setIsFirst(false)} />
           </>
         )
     }
