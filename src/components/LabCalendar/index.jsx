@@ -9,7 +9,9 @@ const weekDays = ["일", "월", "화", "수", "목", "금", "토"]
 
 const LabCalendar = () => {
   const [dayObj, setDayObj] = useState(dayjs())
-
+  
+  const hanul = false;
+  
   const thisYear = dayObj.year()
   const thisMonth = dayObj.month() 
   const daysInMonth = dayObj.daysInMonth()
@@ -60,7 +62,7 @@ const LabCalendar = () => {
           <S.ContCell key={i} className={dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs().format('YYMMDD') && 'today'}>
               <span>{i + 1}</span>
               {
-                dayjs(`${dayObj.year()}-${dayObj.month()+1}-${i}`).day() < 4 && <p>대여(0/20)</p>
+                dayjs(`${dayObj.year()}-${dayObj.month()+1}-${i}`).day() < 4 && <p>{hanul ? '대여(0/20)' : '대여 가능'}</p>
               }
             </S.ContCell>
         ))}
