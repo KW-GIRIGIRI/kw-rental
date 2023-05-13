@@ -82,5 +82,6 @@ export const Lab = styled.div`
     width: 117px;
     height: 25px;
     text-align: center;
+    outline: none;
   }
 `

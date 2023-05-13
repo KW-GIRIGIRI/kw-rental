@@ -44,7 +44,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
-          <Route path="/history/*" element={<History />} >
+          <Route path="/history/*" element={<History />}>
             <Route path="equipment" element={<EquipRentalHistory />} />
             <Route path="lab" element={<LabRentalHistory />} />
             <Route path="penalty" element={<PenaltyHistory />} />

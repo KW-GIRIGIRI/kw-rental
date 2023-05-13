@@ -64,13 +64,10 @@ const ApplicationForm = forwardRef((props, dataRef) => {
           props.isLab &&
           <S.Lab>
             <S.FormLi>대여 인원</S.FormLi>
-            <select>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
+              <select>
+                {
+                  Array(10).fill().map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)
+                }
             </select>
           </S.Lab>
         }
