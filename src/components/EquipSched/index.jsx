@@ -1,28 +1,19 @@
 import * as S from "./style"
 import Button from "../../modules/Button"
-import { getReceivedRentalList, getReturnRentalList } from "../../api/api"
 import { useEffect, useState } from "react"
 import SchedList from "../SchedList"
-import dayjs from "dayjs"
 import iconWarning from '../../assets/icon-exclamation-gray.svg'
+import { useDispatch, useSelector } from "react-redux";
+import { asyncGetReceived, asyncGetReturned } from "../../store/reducer/authReceiveSlice"
+
 
 export default function EquipSched({date}) {
   const [receive, setReceive] = useState(true)
-  const [rentList, setRentList] = useState([])
-
-  const handleGetReceived = async (date) => {
-    const res = await getReceivedRentalList(dayjs(date).format('YYYY-MM-DD'))
-    setRentList(res.reservations)
-  }
-
-  const handleGetReturned = async (date) => {
-    const res = await getReturnRentalList(dayjs(date).format('YYYY-MM-DD'))
-    const newArr = res.overdueReservations.reservations.concat(res.reservationsByEndDate.reservations)
-    setRentList(newArr)
-  }
-
+  const dispatch = useDispatch()
+  const receiveList = useSelector(state => state.authReceive.receiveList.byId)
+  
   useEffect(() => {
-    receive ? handleGetReceived(date) : handleGetReturned(date)
+    receive ? dispatch(asyncGetReceived(date)) : dispatch(asyncGetReturned(date))
   }, [date, receive])
 
   return (
@@ -31,7 +22,7 @@ export default function EquipSched({date}) {
       <Button className={receive ? 'disable shadow' : 'main shadow'} text="반납 예정" margin="0 0 0 10px" padding="10px 21px" borderRadius="20px" fontSize="13px" onClick={() => setReceive(false)}/>
 
       {
-        rentList.length ?
+        Object.keys(receiveList).length ?
           <>
             <S.SchedTitle>{receive ? '수령 예정' : '반납 예정'}</S.SchedTitle>
             <S.SchedWrap>
@@ -41,7 +32,11 @@ export default function EquipSched({date}) {
                 <span>개수</span>
                 <span>자산번호</span>
               </S.Header>
-              <SchedList rentList={rentList} receive={receive} />
+              {
+                Object.values(receiveList)?.map((user, index) => 
+                  <SchedList date={date} key={index} user={user} receive={receive} />
+                )
+              }
             </S.SchedWrap>
           </>
           :

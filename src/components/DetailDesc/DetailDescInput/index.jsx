@@ -22,7 +22,7 @@ const DetailDescInput = forwardRef(({isEdit, product, itemLength}, addEqRef) => 
         }
         {
           category.map((item, index) => 
-            <option key={index} value={product?.category === item.value ? 'default' : item.value}>{item.label}</option>  
+            <option key={index} value={product?.category === item.value && item.value}>{item.label}</option>  
           )
         }
       </S.CategoryDropdown>

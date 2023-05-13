@@ -49,8 +49,9 @@ export default function AddEquipment() {
   }
 
   const handleAddEquipment = async () => {
-    if(addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
-    else {
+    // description과 purpose components는 빈값이어도 된다. -> 수정
+    // if(addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
+    // else {
       const item = []
       data.map(i => item.push({'propertyNumber': i.propertyNumber}))
 
@@ -64,12 +65,12 @@ export default function AddEquipment() {
       addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
       const response = await addEquipment(JSON.stringify(sendData));
       response && navigate(`/${response.split("/")[3]}`)
-    }
+    // }
   }
 
   const handleModifyEquipment = async () => {
-    if (addEqRef.current.filter(eq => eq.value === '').length) alert('빈 값이 있습니다.')
-    else {
+    // if (addEqRef.current.filter(eq => eq.value === '').length) alert('빈 값이 있습니다.')
+    // else {
       const item = []
       data.map(i => item.push({
         id: i.id,
@@ -86,12 +87,12 @@ export default function AddEquipment() {
       }
     
       addEqRef.current.map(eq => sendData[eq.name] = eq.value)
-
+    
       const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
       const itemRes = await changeItems(params.id, JSON.stringify(itemData));
 
       itemRes === 204 && eqRes && navigate(`/${eqRes.split("/")[3]}`)
-    }
+    // }
   }
     
   useEffect(() => {

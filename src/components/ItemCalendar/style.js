@@ -56,7 +56,7 @@ export const ContCell = styled.li`
   align-items: flex-start;
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
-  height: 120px;
+  min-height: 120px;
   padding: 10px 7px;
   font-size: 12px;
 
@@ -77,6 +77,7 @@ export const ContCell = styled.li`
 export const UserUl = styled.ul`
   display: flex;
   flex-direction: column;
+  margin-top: 5px;
   gap: 5px;
 `
 

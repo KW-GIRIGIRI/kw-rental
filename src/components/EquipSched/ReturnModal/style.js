@@ -9,7 +9,7 @@ export const ProductUl = styled.ul`
 
 export const ProductLi = styled.li`
   display: grid;
-  grid-template-columns: 1fr 2fr 3fr;
+  grid-template-columns: 1fr 2fr 2fr;
   padding: 7px 0;
   text-align: center;
   border: 1px solid ${(props) => props.theme.color.primary.sub};
@@ -67,6 +67,7 @@ export const StateDiv = styled.section`
 
 export const StateLi = styled.li`
   display: flex;
+  justify-content: space-between;
   width: 100%;
   gap: 8px;
   align-items: center;

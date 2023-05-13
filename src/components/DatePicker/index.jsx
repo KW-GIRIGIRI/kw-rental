@@ -126,9 +126,9 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
         days.push(
           <S.CellWrap checkWeek={checkWeek}
             onClick={() => handleGetDay(d)}
-            className={!d.isCurrentMonth || getDate(d) < dayjs() ||
-              getDate(d) > dayjs().add(31, 'days') ||
-              getDate(d).day() === 5 || getDate(d).day() === 6 || getDate(d).day() === 0 ? "disabled" : ""} key={i}>
+            className={!d.isCurrentMonth || getDate(d) < dayjs() || getDate(d) > dayjs().add(31, 'days') || getDate(d).day() === 5 || getDate(d).day() === 6 || getDate(d).day() === 0 ? "disabled" : ""} 
+            key={i}
+          >
             {d.day}
           </S.CellWrap>
           );
