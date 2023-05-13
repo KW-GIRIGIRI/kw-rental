@@ -33,16 +33,16 @@ export const GalLi = styled.li`
 
 export const Count = styled.span`
   position: absolute;
-  padding: 4px;
+  padding: 4px 10px;
   margin: 15px;
   width: max-content;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.color.primary.main};
   text-align: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: ${(props) => props.theme.borderRadius.circle};
-  color: ${(props) => props.theme.color.text.gray};
+  color: ${(props) => props.theme.color.text.white};
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: normal;
 `;
 

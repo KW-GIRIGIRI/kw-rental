@@ -12,10 +12,12 @@ export const BtnDefault = styled.button`
   box-shadow: ${(props) => props.boxShadow};
   line-height: 1;
   float: ${(props) => props.float};
+  box-sizing: border-box;
 
   /* main color button */
   &.main {
     background-color: ${(props) => props.theme.color.primary.main};
+    border: 1px solid ${(props) => props.theme.color.primary.main};
     color: ${(props) => props.theme.color.text.white};
   }
 

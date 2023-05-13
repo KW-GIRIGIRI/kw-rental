@@ -39,8 +39,8 @@ export default function Login() {
         <S.PwImg bottom={showPw ? '16px' : '18px'} onClick={() => setShowPw(!showPw)} src={showPw ? iconBlockPw : iconShowPw} alt="" />
         </S.Form>
       <S.LoginDiv>
-        <S.CheckInp type="checkbox" id="check" />
-        <label htmlFor="check">자동 로그인</label>
+        {/* <S.CheckInp type="checkbox" id="check" /> */}
+        {/* <label htmlFor="check">자동 로그인</label> */}
         </S.LoginDiv>
       {/* <S.ErrText>아이디 또는 비밀번호를 잘못 입력했습니다.</S.ErrText> */}
       <Button width='100%' text='로그인' className={isValid ? 'main' : 'gray'} padding='14px 0' borderRadius='10px' fontSize='16px' onClick={handleLogin} />
