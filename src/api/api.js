@@ -300,13 +300,7 @@ export const getReturnRentalList = async (date) => {
   }
 };
 
-/** 대여 반납- status 는 반납이 어떤 상태인지 의미한다.
- * 
- * RETURND : 정상 반납 (만약 반납 당시가 반납일보다 늦은 경우 자동으로 연체 반납 처리됨)
- * LOST : 분실
- * BROKEN : 파손
- * OVERDUE_RENTED : 연체 (연체가 시작됨을 의미. 아직 반납되지 않음)
- */
+// 대여 반납
 export const returnRental = async (data) => {
   try {
     const response = await instanceUtil.patch(`/admin/rentals/returns`, data);

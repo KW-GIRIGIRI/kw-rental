@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react"
-import { getItemList } from "../../../api/api"
+import { getRentAvailabilityItemList } from "../../../api/api"
 import Button from "../../../modules/Button"
 import CancelModal from "../../EquipSched/CancelModal"
 import * as S from "./style"
 import { useDispatch, useSelector } from "react-redux";
-import { setReserveId } from "../../../store/reducer/authReceive"
+import { setReserveId } from "../../../store/reducer/authReceiveSlice"
 
 export default function SchedListComp({ id, receive }) {
   const [cancelModal, setCancelModal] = useState(false)
   const [itemLi, setItemLi] = useState([])
   const dispatch = useDispatch()
   const receiveSpecList = useSelector(state => state.authReceive.receiveSpecList.byId)
-  const receiveSpecAllList = useSelector(state => state.authReceive.receiveSpecList.allIds)
-  const receiveItem = receiveSpecList[receiveSpecAllList.indexOf(id)]
+  const receiveItem = receiveSpecList[id] || null;
 
   const handleGetEquip = async () => {
-    const res = await getItemList(receiveItem.equipmentId)
+    const res = await getRentAvailabilityItemList(receiveItem.equipmentId)
     setItemLi(res.items);
   }
 
@@ -33,7 +32,7 @@ export default function SchedListComp({ id, receive }) {
   }, [])
 
   return (
-        <>
+    <>
       <S.RentalLi>
       <img src={receiveItem.imgUrl} alt={`${receiveItem.modelName} 이미지`} />
       <div>
