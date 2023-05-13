@@ -5,8 +5,9 @@ export const Div = styled.div`
 `;
 
 export const ReserveUl = styled.ul`
-  border: 1px solid ${props => props.theme.color.primary.sub};
-`
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
+  width: ${(props) => (props?.hanul ? "100%" : "210px")};
+`;
 
 export const ReserveLi = styled.li`
   display: grid;
@@ -16,11 +17,23 @@ export const ReserveLi = styled.li`
   font-size: 13px;
   padding: 12px;
   text-align: center;
+
+  &.auth {
+    grid-template-columns: repeat(2, 1fr);
+
+    & > button {
+      margin: 0 auto;
+    }
+  }
   
   &:first-of-type {
     font-size: 12px;
     padding: 8px;
     background-color: ${(props) => props.theme.color.primary.sub};
+  }
+
+  & > button {
+    margin-left: auto;
   }
 `;
 
