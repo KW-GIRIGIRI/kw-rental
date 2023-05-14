@@ -12,7 +12,7 @@ dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);
 dayjs.extend(weekOfYear)
 
-export default function DatePicker({ checkWeek, calendar, setCalendar }) {
+export default function DatePicker({ initial, checkWeek, calendar, setCalendar }) {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef()
@@ -128,7 +128,13 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
         days.push(
           <S.CellWrap checkWeek={checkWeek}
             onClick={() => handleGetDay(d)}
-            className={!d.isCurrentMonth || getDate(d) < dayjs() || getDate(d) > dayjs().add(31, 'days') || getDate(d).day() === 5 || getDate(d).day() === 6 || getDate(d).day() === 0 ? "disabled" : ""} 
+            className={
+              !d.isCurrentMonth
+                || (!!initial ? getDate(d) < dayjs() : getDate(d) < dayjs().subtract(1, 'days'))
+                || getDate(d) > dayjs().add(31, 'days')
+                || getDate(d).day() > 4
+                || getDate(d).day() === 0
+                ? "disabled" : ""} 
             key={i}
           >
             {d.day}

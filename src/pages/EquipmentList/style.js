@@ -52,42 +52,6 @@ export const SearchImg = styled.img`
   width: 1rem;
 `
 
-export const DateInp = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  width: 128px;
-  padding: 7px 0;
-  &::-webkit-calendar-picker-indicator {
-    width: 100%;
-  }
-`;
-
-export const DateCont = styled.label`
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid ${(props) => props.theme.color.primary.main};
-  color: ${(props) => props.theme.color.primary.main};
-  border-radius: ${(props) => props.theme.borderRadius.circle};
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 5px 0;
-  box-sizing: border-box;
-  width: 128px;
-  & > span {
-    pointer-events: none;
-    font-size: 13px;
-  }
-  & > img {
-    width: 14px;
-    pointer-events: none;
-    margin: 0 9px 3px 0;
-  }
-`;
-
 export const addBtn = styled.button`
   background-color: ${props => props.theme.color.primary.main};
   border-radius: ${props => props.theme.borderRadius.lv1};

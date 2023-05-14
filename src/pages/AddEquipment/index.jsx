@@ -20,10 +20,8 @@ export default function AddEquipment() {
   const params = useParams()
   const navigate = useNavigate()
   const [isEdit, setIsEdit] = useState(false)
-  // const [product, setProduct] = useState(null)
   const [imgFile, setImgFile] = useState('')
   const [imgPreview, setImgPreview] = useState('')
-  // const [item, setItem] = useState(null)
   const { Modal, open, close } = useModal()
   const addEqRef = useRef([])
   const { Toggle, state } = useToggle()
@@ -34,10 +32,7 @@ export default function AddEquipment() {
 
   const handleGetProduct = async (id) => {
     const response = await getProductDetail(id);
-    const responseId = await getItemList(id);
-
-    // setProduct(response)
-    // setItem(responseId)
+    
     setImgFile(response.imgUrl)
     setIsEdit(true)
   }

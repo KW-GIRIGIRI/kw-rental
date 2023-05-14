@@ -9,10 +9,11 @@ import * as S from "./style"
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived } from "../../store/reducer/authReceiveSlice"
 
-export default function SchedList({ date, user, receive }) {
+export default function SchedList({ user, receive }) {
   const [returnModal, setReturnModal] = useState(false)
   const { Modal, open, close } = useModal()
   const receiveCheckList = useSelector(state => state.authReceive.receiveCheckList)
+  const selectDate = useSelector(state => state.datePicker.singularDate)
   const dispatch = useDispatch()
 
   const handleCreateRental = async (reserveId) => {
@@ -21,7 +22,7 @@ export default function SchedList({ date, user, receive }) {
     const res = await createRental(JSON.stringify(sendData))
     res === 201 && close()
 
-    dispatch(asyncGetReceived(date))
+    dispatch(asyncGetReceived(selectDate))
   }
 
   return (
@@ -30,7 +31,7 @@ export default function SchedList({ date, user, receive }) {
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
         {
-          user.returnDate && <S.WarnCont>반납일 초과</S.WarnCont>
+          (!receive &&  !user.acceptDateTime) && <S.WarnCont>반납일 초과</S.WarnCont>
         }
         {
           receive && user.acceptDateTime ?
@@ -49,7 +50,7 @@ export default function SchedList({ date, user, receive }) {
         }
       </S.RentalUl>
       {
-        !receive && <ReturnModal user={user} returnModal={returnModal} setReturnModal={setReturnModal} date={date} />
+        !receive && <ReturnModal user={user} returnModal={returnModal} setReturnModal={setReturnModal} />
       }
       <Modal>
         <S.TimeModal>수령을 확정하시겠습니까?<br />
