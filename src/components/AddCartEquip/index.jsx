@@ -9,6 +9,7 @@ import dayjs from "dayjs"
 import updateLocale from "dayjs/plugin/updateLocale"
 import toArray from "dayjs/plugin/toArray"
 import DatePicker from "../DatePicker";
+import { useSelector } from "react-redux";
 
 dayjs.extend(updateLocale)
 dayjs.extend(toArray)
@@ -19,7 +20,7 @@ dayjs.updateLocale('en', {
   ]
 })
 
-export default function AddCartEquip({productCount}) {
+export default function AddCartEquip() {
   const amountRef = useRef()
   const navigate = useNavigate();
   const params = useParams()
@@ -30,6 +31,7 @@ export default function AddCartEquip({productCount}) {
     left: 0,
     date: dayjs().add(1, 'days')
   })
+  const productCount = useSelector(state => state.modifyEquip.equip.totalQuantity)
 
   const handleGetDatePicker = e => {
     e.preventDefault()

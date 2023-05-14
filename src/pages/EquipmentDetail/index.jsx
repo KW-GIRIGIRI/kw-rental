@@ -13,23 +13,28 @@ import * as S from "./style"
 import useModal from "../../hook/useModal"
 import { category } from "../../data/category"
 import ItemCalendar from "../../components/ItemCalendar"
+import { useDispatch, useSelector } from "react-redux"
+import { resetEquip, setEquip, setItemList } from "../../store/reducer/modifyEquipSlice"
 
 export default function EquipmentDetail() {
   const params = useParams();
-  const [product, setProduct] = useState(null)
   const [item, setItem] = useState(null)
   const navigate = useNavigate()
   const { Modal, open, close } = useModal()
   const { isAuth } = useContext(AuthContext)
   const [data, setData] = useState([])
+  const dispatch = useDispatch()
+  const product = useSelector(state => state.modifyEquip.equip)
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);
-    setProduct(response)
+    dispatch(setEquip(response))
   }
 
   const getItem = async () => {
     const response = await getItemList(params.id);
+    dispatch(setItemList(response))
+
     setItem(response)
   };
 
@@ -39,6 +44,11 @@ export default function EquipmentDetail() {
   }
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0, 
+    })
+
+    dispatch(resetEquip())
     getProduct();
     getItem();
   }, [])
@@ -75,7 +85,7 @@ export default function EquipmentDetail() {
           </S.NavDiv>
           <S.DetailWrapper>
             <Image width="300px" height="300px" borderRadius={props => props.theme.borderRadius.lv2} src={product.imgUrl} alt="" />
-            <DetailDesc product={product} />
+            <DetailDesc />
           </S.DetailWrapper>
           <S.SubTitle>안내사항</S.SubTitle>
           <S.NoticeWrap>
@@ -101,7 +111,7 @@ export default function EquipmentDetail() {
                 <S.SubTitle>대여 현황</S.SubTitle>
                 <WeekPicker />
                 <S.SubTitle>기자재 담기</S.SubTitle>
-                <AddCartEquip productCount={product.totalQuantity} />
+                <AddCartEquip />
               </>
           }
         </>

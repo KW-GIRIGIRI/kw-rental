@@ -12,27 +12,32 @@ import Image from "../../modules/Image"
 import { addEquipment, getProductDetail, postImage, getItemList, modifyEquipment, changeItems } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
+import { useDispatch, useSelector } from "react-redux"
+import { resetEquip } from "../../store/reducer/modifyEquipSlice"
 
 export default function AddEquipment() {
   const location = useLocation()
   const params = useParams()
   const navigate = useNavigate()
   const [isEdit, setIsEdit] = useState(false)
-  const [product, setProduct] = useState(null)
+  // const [product, setProduct] = useState(null)
   const [imgFile, setImgFile] = useState('')
   const [imgPreview, setImgPreview] = useState('')
-  const [item, setItem] = useState(null)
+  // const [item, setItem] = useState(null)
   const { Modal, open, close } = useModal()
   const addEqRef = useRef([])
   const { Toggle, state } = useToggle()
   const [data, setData] = useState([])
+  const product = useSelector(state => state.modifyEquip.equip)
+  const item = useSelector(state => state.modifyEquip.itemList)
+  const dispatch = useDispatch()
 
   const handleGetProduct = async (id) => {
     const response = await getProductDetail(id);
     const responseId = await getItemList(id);
 
-    setProduct(response)
-    setItem(responseId)
+    // setProduct(response)
+    // setItem(responseId)
     setImgFile(response.imgUrl)
     setIsEdit(true)
   }
@@ -52,51 +57,58 @@ export default function AddEquipment() {
     // description과 purpose components는 빈값이어도 된다. -> 수정
     // if(addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
     // else {
-      const item = []
-      data.map(i => item.push({'propertyNumber': i.propertyNumber}))
+    const item = []
+    data.map(i => item.push({'propertyNumber': i.propertyNumber}))
 
-      const sendData = {
-        equipment : { 
-          imgUrl: imgFile, 
-          totalQuantity: data.length
-        }, "items": item
-      }
+    const sendData = {
+      equipment : { 
+        imgUrl: imgFile, 
+        totalQuantity: data.length
+      }, "items": item
+    }
 
-      addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
-      const response = await addEquipment(JSON.stringify(sendData));
-      response && navigate(`/${response.split("/")[3]}`)
+    addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
+    const response = await addEquipment(JSON.stringify(sendData));
+    response && navigate(`/${response.split("/")[3]}`)
     // }
   }
 
   const handleModifyEquipment = async () => {
     // if (addEqRef.current.filter(eq => eq.value === '').length) alert('빈 값이 있습니다.')
     // else {
-      const item = []
-      data.map(i => item.push({
-        id: i.id,
-        'propertyNumber': i.propertyNumber
-      }))
+    const sendItem = []
+    data.map(i => sendItem.push({
+      id: i.id,
+      'propertyNumber': i.propertyNumber
+    }))
 
-      const itemData = {
-        "items" : item
-      }
-
-      const sendData = {
-        imgUrl: imgFile, 
-        totalQuantity: data.length
-      }
+    const itemData = {
+      "items" : sendItem
+    }
     
-      addEqRef.current.map(eq => sendData[eq.name] = eq.value)
+    const sendData = {
+      imgUrl: imgFile, 
+      totalQuantity: data.length
+    }
     
+    addEqRef.current.map(eq => sendData[eq.name] = eq.value)
+    
+    
+    if(!(item.items.every((item) => itemData.items.some((otherItem) => otherItem.propertyNumber === item.propertyNumber)))) {
+      const itemRes = await changeItems(params.id, JSON.stringify(itemData)); 
       const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
-      const itemRes = await changeItems(params.id, JSON.stringify(itemData));
 
-      itemRes === 204 && eqRes && navigate(`/${eqRes.split("/")[3]}`)
+      (itemRes === 204 && eqRes) && navigate(`/${eqRes.split("/")[3]}`)
+    } else {
+      const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+      eqRes && navigate(`/${eqRes.split("/")[3]}`)
+    }
     // }
   }
     
   useEffect(() => {
     if (location.pathname.includes('edit')) handleGetProduct(params.id)
+    else if(location.pathname.includes('add')) dispatch(resetEquip())
   }, [])
 
   return (
