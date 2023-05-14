@@ -381,3 +381,15 @@ export const getCurrentRental = async () => {
     return err;
   }
 };
+
+// 사용자 기자재 대여 이력
+export const getUserRentalHistory = async (fromDate, toDate) => {
+  try {
+    const response = await instanceUtil.get(`/rentals?from=${fromDate}&to=${toDate}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
