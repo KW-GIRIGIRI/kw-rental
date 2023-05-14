@@ -108,11 +108,16 @@ export default function EquipmentList() {
             <p>최소 2자 이상의 검색어를 입력해주세요.</p>
             <Button text='확인'className='main' padding="10px 20px" borderRadius="5px" fontSize="14px" onClick={close} float='right' />
           </Modal>
-          <S.DateCont onClick={handleGetDatePicker}>
-            <img src={iconCalendar} alt="" />
-            <span>{calendar.date.format('M월 D일(dd)')}</span>
-          </S.DateCont>
-          {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
+          {
+            !isAuth &&
+            <>
+              <S.DateCont onClick={handleGetDatePicker}>
+                <img src={iconCalendar} alt="" />
+                <span>{calendar.date.format('M월 D일(dd)')}</span>
+              </S.DateCont>
+              {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
+            </>
+          }
         </S.FilterWrap>
         {
           isAuth ?

@@ -48,8 +48,10 @@ export default function DatePicker({ checkWeek, calendar, setCalendar }) {
   useEffect(() => {
     if (calendar.visible) {
       window.addEventListener('scroll', handleScrollClose)
+      window.addEventListener('resize', handleScrollClose)
       return () => {
         window.removeEventListener('scroll', handleScrollClose)
+        window.removeEventListener('resize', handleScrollClose)
       }
     }
   }, [calendar.visible]) 
