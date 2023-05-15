@@ -6,12 +6,12 @@ export const Section = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const HeadOne = styled.h1`
   font-size: 96px;
   font-weight: 900;
-  color: ${props => props.theme.color.primary.main};
+  color: ${(props) => props.theme.color.primary.main};
   margin-bottom: 11px;
 `;
 

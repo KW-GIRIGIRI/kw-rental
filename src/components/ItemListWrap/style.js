@@ -4,7 +4,7 @@ export const Div = styled.div`
   width: 100%;
   margin: 0 auto;
   margin-bottom: 100px;
-`
+`;
 
 export const ItemUl = styled.ul`
   display: flex;
@@ -21,7 +21,7 @@ export const ItemLi = styled.li`
 
 export const PlusImg = styled.img`
   margin-right: 7px;
-`
+`;
 
 export const AddBtn = styled.button`
   width: 244px;

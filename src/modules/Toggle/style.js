@@ -48,9 +48,10 @@ export const Circle = styled.span`
     `}
 
   &.rental {
-    ${(props) => props.state &&
-    css`
-      transform: translate(57px, 0);
-    `}
+    ${(props) =>
+      props.state &&
+      css`
+        transform: translate(57px, 0);
+      `}
   }
 `;

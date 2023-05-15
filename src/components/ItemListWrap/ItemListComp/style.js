@@ -9,11 +9,11 @@ export const ItemWrap = styled.div`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-`
+`;
 
 export const ItemId = styled.p`
   font-size: 15px;
-`
+`;
 
 export const InputId = styled.input`
   box-sizing: border-box;
@@ -48,8 +48,6 @@ export const DelBtn = styled.button`
   position: absolute;
   top: 13px;
   right: 13px;
-`
+`;
 
-export const MinusImg = styled.img`
-  
-`
+export const MinusImg = styled.img``;

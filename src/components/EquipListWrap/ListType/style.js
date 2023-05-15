@@ -18,7 +18,7 @@ export const ListLi = styled.li`
     font-weight: 600;
     border-radius: 10px 10px 0 0;
     & > p:nth-child(2) {
-        text-align: left;
+      text-align: left;
     }
   }
   & > img {
@@ -35,7 +35,7 @@ export const ItemWrap = styled.div`
   flex-direction: column;
   gap: 8px;
   text-align: left;
-  & :first-child{
+  & :first-child {
     font-size: 14px;
   }
-`
+`;

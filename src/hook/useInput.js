@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export default function useInput(initialValue, validator) {
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    setValue(initialValue)
-  }, [initialValue])
+    setValue(initialValue);
+  }, [initialValue]);
 
-  const onChange = event => {
+  const onChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -19,6 +19,6 @@ export default function useInput(initialValue, validator) {
     if (willUpdate) {
       setValue(value);
     }
-  }
+  };
   return { value, onChange };
 }

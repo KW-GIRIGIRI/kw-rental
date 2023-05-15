@@ -80,13 +80,13 @@ export const BtnDiv = styled.div`
   justify-content: center;
   font-size: 14px;
   color: ${(props) => props.theme.color.primary.main};
-  
-  & > span { 
+
+  & > span {
     position: relative;
     padding: 5px 10px;
     cursor: pointer;
 
-    &:first-of-type::after{
+    &:first-of-type::after {
       content: "";
       width: 1.8px;
       height: 13px;

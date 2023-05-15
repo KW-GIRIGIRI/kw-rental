@@ -2,9 +2,8 @@
 name: Bug report
 about: Create a report to help us improve
 title: "[#issue-number] Bug report"
-labels: ''
-assignees: ''
-
+labels: ""
+assignees: ""
 ---
 
 ☝️ Issue Number

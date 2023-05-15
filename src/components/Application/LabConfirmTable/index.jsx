@@ -1,4 +1,4 @@
-import * as S from "./style"
+import * as S from "./style";
 
 export default function LabConfirmTable() {
   return (
@@ -12,5 +12,5 @@ export default function LabConfirmTable() {
         <p>한울관 B119호</p>
       </S.Info>
     </S.Wrap>
-  )
+  );
 }

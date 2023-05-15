@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   equip: {},
-  itemList: []
+  itemList: [],
 };
 
 const modifyEquipSlice = createSlice({
@@ -10,16 +10,16 @@ const modifyEquipSlice = createSlice({
   initialState,
   reducers: {
     setEquip: (state, action) => {
-      state.equip = action.payload
+      state.equip = action.payload;
     },
     setItemList: (state, action) => {
-      state.itemList = action.payload
+      state.itemList = action.payload;
     },
     resetEquip: (state) => {
-      state.equip = {}
-      state.itemList = []
-    }
-  }
+      state.equip = {};
+      state.itemList = [];
+    },
+  },
 });
 
 export const { setEquip, setItemList, resetEquip } = modifyEquipSlice.actions;

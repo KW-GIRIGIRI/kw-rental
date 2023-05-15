@@ -1,7 +1,5 @@
-import * as s from "./style"
+import * as s from "./style";
 
 export default function LabRentalManage() {
-  return (
-    <div>LabRentalManage</div>
-  )
+  return <div>LabRentalManage</div>;
 }

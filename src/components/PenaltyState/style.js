@@ -11,19 +11,20 @@ export const ItemUl = styled.ul`
     grid-template-columns: 1.1fr 1.6fr 3.4fr 2.6fr 1fr 1fr;
     padding: 11px 0;
 
-    & > span:nth-child(3), & > span:nth-child(4) {
+    & > span:nth-child(3),
+    & > span:nth-child(4) {
       text-align: left;
       justify-content: left;
       padding-left: 20px;
     }
   }
-`
+`;
 
 export const Header = styled.li`
-  background: #E0E4E9;
+  background: #e0e4e9;
   font-size: 13px;
   text-align: center;
-`
+`;
 
 export const ItemLi = styled.li`
   font-size: 12px;

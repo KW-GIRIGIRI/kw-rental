@@ -1,52 +1,74 @@
-import * as S from "./style"
-import Button from "../../modules/Button"
-import { useEffect, useState } from "react"
-import SchedList from "../SchedList"
-import iconWarning from '../../assets/icon-exclamation-gray.svg'
+import * as S from "./style";
+import Button from "../../modules/Button";
+import { useEffect, useState } from "react";
+import SchedList from "../SchedList";
+import iconWarning from "../../assets/icon-exclamation-gray.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { asyncGetReceived, asyncGetReturned } from "../../store/reducer/authReceiveSlice"
+import {
+  asyncGetReceived,
+  asyncGetReturned,
+} from "../../store/reducer/authReceiveSlice";
 
 export default function EquipSched() {
-  const [receive, setReceive] = useState(true)
-  const dispatch = useDispatch()
-  const receiveList = useSelector(state => state.authReceive.receiveList.byId)
-  const selectDate = useSelector(state => state.datePicker.singularDate)
+  const [receive, setReceive] = useState(true);
+  const dispatch = useDispatch();
+  const receiveList = useSelector(
+    (state) => state.authReceive.receiveList.byId
+  );
+  const selectDate = useSelector((state) => state.datePicker.singularDate);
 
   useEffect(() => {
     if (selectDate) {
-      receive ? dispatch(asyncGetReceived(selectDate)) : dispatch(asyncGetReturned(selectDate))
-    } 
-  }, [selectDate, receive])
+      receive
+        ? dispatch(asyncGetReceived(selectDate))
+        : dispatch(asyncGetReturned(selectDate));
+    }
+  }, [selectDate, receive]);
 
   return (
     <>
-      <Button className={receive ? 'main shadow' : 'disable shadow'} text="수령 예정" padding="10px 21px" borderRadius="20px" fontSize="13px" onClick={() => setReceive(true)}/>
-      <Button className={receive ? 'disable shadow' : 'main shadow'} text="반납 예정" margin="0 0 0 10px" padding="10px 21px" borderRadius="20px" fontSize="13px" onClick={() => setReceive(false)}/>
+      <Button
+        className={receive ? "main shadow" : "disable shadow"}
+        text="수령 예정"
+        padding="10px 21px"
+        borderRadius="20px"
+        fontSize="13px"
+        onClick={() => setReceive(true)}
+      />
+      <Button
+        className={receive ? "disable shadow" : "main shadow"}
+        text="반납 예정"
+        margin="0 0 0 10px"
+        padding="10px 21px"
+        borderRadius="20px"
+        fontSize="13px"
+        onClick={() => setReceive(false)}
+      />
 
-      {
-        Object.keys(receiveList).length ?
-          <>
-            <S.SchedTitle>{receive ? '수령 예정' : '반납 예정'}</S.SchedTitle>
-            <S.SchedWrap>
-              <S.Header>
-                <span>대여자</span>
-                <span>기자재</span>
-                <span>개수</span>
-                <span>자산번호</span>
-              </S.Header>
-              {
-                Object.values(receiveList)?.map((user, index) => 
-                  <SchedList key={index} user={user} receive={receive} />
-                )
-              }
-            </S.SchedWrap>
-          </>
-          :
-          <S.WarnWrap>
-            <img src={iconWarning} alt="" />
-            <p>조회한 일자의 <br />{receive ? '수령' : '반납'} 예정 기자재가 없습니다.</p>
-          </S.WarnWrap>
-      }
+      {Object.keys(receiveList).length ? (
+        <>
+          <S.SchedTitle>{receive ? "수령 예정" : "반납 예정"}</S.SchedTitle>
+          <S.SchedWrap>
+            <S.Header>
+              <span>대여자</span>
+              <span>기자재</span>
+              <span>개수</span>
+              <span>자산번호</span>
+            </S.Header>
+            {Object.values(receiveList)?.map((user, index) => (
+              <SchedList key={index} user={user} receive={receive} />
+            ))}
+          </S.SchedWrap>
+        </>
+      ) : (
+        <S.WarnWrap>
+          <img src={iconWarning} alt="" />
+          <p>
+            조회한 일자의 <br />
+            {receive ? "수령" : "반납"} 예정 기자재가 없습니다.
+          </p>
+        </S.WarnWrap>
+      )}
     </>
-  )
+  );
 }

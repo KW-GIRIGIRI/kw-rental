@@ -23,7 +23,6 @@ export const asyncGetReturned = createAsyncThunk(
   }
 );
 
-
 const handleFulfilled = (state, action) => {
   state.receiveList = {
     byId: {},
@@ -74,7 +73,7 @@ const handleFulfilled = (state, action) => {
   );
 
   state.receiveCheckList = newItems;
-}
+};
 
 const initialState = {
   receiveList: {
@@ -85,7 +84,7 @@ const initialState = {
     byId: {},
     allIds: [],
   },
-  receiveCheckList: []
+  receiveCheckList: [],
 };
 
 const authReceiveSlice = createSlice({

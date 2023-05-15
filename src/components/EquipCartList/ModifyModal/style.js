@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import iconDownArrow from "../../../assets/icon-downArrow-gray.svg"
+import iconDownArrow from "../../../assets/icon-downArrow-gray.svg";
 
 export const Div = styled.div`
   padding-bottom: 15px;
@@ -26,8 +26,8 @@ export const SelectCount = styled.select`
   border-radius: 5px;
   background: url(${iconDownArrow}) no-repeat 95% 50%;
   -webkit-appearance: none;
-  -moz-appearance: none; 
-  appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
 `;
 
 export const DateCont = styled.label`

@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   margin-top: 46px;
   height: 450px;
-  border: 1px solid ${props => props.theme.color.primary.sub};
-  border-radius: ${props => props.theme.borderRadius.lv2};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
+  border-radius: ${(props) => props.theme.borderRadius.lv2};
   padding: 18px 25px;
   position: relative;
-`
+`;
 
 export const BtnWrap = styled.div`
   margin-top: 20px;
@@ -17,7 +17,7 @@ export const BtnWrap = styled.div`
   }
 
   text-align: center;
-`
+`;
 
 export const Div = styled.div`
   display: flex;
@@ -30,6 +30,6 @@ export const Div = styled.div`
     margin-left: 7px;
     font-size: 13px;
     font-weight: 600;
-    color: ${props => props.theme.color.primary.main};
+    color: ${(props) => props.theme.color.primary.main};
   }
-`
+`;

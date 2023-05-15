@@ -11,14 +11,14 @@ const useModal = ({ useBlur = true } = {}) => {
 
   const close = useCallback(() => {
     setIsOpen(() => false);
-    document.body.style.overflow = "unset";  
+    document.body.style.overflow = "unset";
   }, []);
 
-   const preventScroll = () => {
+  const preventScroll = () => {
     const currentScrollY = window.scrollY;
     document.body.style.position = "fixed";
     document.body.style.width = "100%";
-    document.body.style.top = `-${currentScrollY}px`; 
+    document.body.style.top = `-${currentScrollY}px`;
     return currentScrollY;
   };
 
@@ -41,10 +41,10 @@ const useModal = ({ useBlur = true } = {}) => {
   return {
     Modal: isOpen
       ? ({ children, className }) => (
-        <Modal className={className} onClose={useBlur ? close : null}>
-          {children}
-        </Modal>
-      )
+          <Modal className={className} onClose={useBlur ? close : null}>
+            {children}
+          </Modal>
+        )
       : () => null,
     open,
     close,

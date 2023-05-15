@@ -1,20 +1,25 @@
-import { useEffect } from "react"
-import useModal from "../../../hook/useModal"
-import Button from "../../../modules/Button"
-import * as S from "./style"
+import { useEffect } from "react";
+import useModal from "../../../hook/useModal";
+import Button from "../../../modules/Button";
+import * as S from "./style";
 
-export default function CancelModal({modelName, count, cancelModal, setCancelModal,}) {
-  const { Modal, open, close } = useModal()
+export default function CancelModal({
+  modelName,
+  count,
+  cancelModal,
+  setCancelModal,
+}) {
+  const { Modal, open, close } = useModal();
 
   const handleCancelRental = () => {
-    setCancelModal(false)
-    close()
-  }
+    setCancelModal(false);
+    close();
+  };
 
   useEffect(() => {
-    cancelModal && open()
-    setCancelModal(false)
-  }, [cancelModal, close])
+    cancelModal && open();
+    setCancelModal(false);
+  }, [cancelModal, close]);
 
   return (
     <Modal className="modify">
@@ -25,16 +30,29 @@ export default function CancelModal({modelName, count, cancelModal, setCancelMod
           <p>기자재</p>
           <p>취소 개수 설정</p>
         </S.ProductLi>
-         <S.ProductLi>
+        <S.ProductLi>
           <p>{modelName}</p>
           <S.Select name="" id="">
-            {Array(count).fill().map((v,i) => <option key={i} value={i + 1}>{i+1}</option>)}
+            {Array(count)
+              .fill()
+              .map((v, i) => (
+                <option key={i} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
           </S.Select>
         </S.ProductLi>
       </S.ProductUl>
       <div>
-        <Button text='대여취소' className='main' padding="11px 24px" borderRadius="5px" fontSize="14px" onClick={handleCancelRental}/>
+        <Button
+          text="대여취소"
+          className="main"
+          padding="11px 24px"
+          borderRadius="5px"
+          fontSize="14px"
+          onClick={handleCancelRental}
+        />
       </div>
     </Modal>
-  )
+  );
 }

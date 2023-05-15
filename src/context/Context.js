@@ -2,11 +2,11 @@ import { createContext, useState } from "react";
 
 export const AuthContext = createContext({
   isAuth: "",
-  setIsAuth: () => { },
+  setIsAuth: () => {},
 });
 
 export const AuthStore = (props) => {
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(true);
   // user(false) || admin(true)
 
   return (

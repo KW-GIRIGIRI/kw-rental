@@ -1,6 +1,6 @@
-import UserState from "../../../components/UserState"
-import UserHist from "../../../components/UserHist"
-import * as S from "../style"
+import UserState from "../../../components/UserState";
+import UserHist from "../../../components/UserHist";
+import * as S from "../style";
 
 export default function LabRentalHistory() {
   return (
@@ -13,5 +13,5 @@ export default function LabRentalHistory() {
         <UserHist isLab={true} />
       </S.RentalWrap>
     </>
-  )
+  );
 }

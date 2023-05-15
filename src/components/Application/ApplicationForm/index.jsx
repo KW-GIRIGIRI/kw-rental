@@ -8,28 +8,33 @@ import { forwardRef } from "react";
 import { getUserInfo } from "../../../api/api";
 
 const ApplicationForm = forwardRef((props, dataRef) => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true);
   const [user, setUser] = useState({
-    name: '',
-    phoneNumber: '',
-    email: ''
-  })
-  const purposeInp = useInput('')
+    name: "",
+    phoneNumber: "",
+    email: "",
+  });
+  const purposeInp = useInput("");
 
   const handleGetUserInfo = async () => {
-    const res = await getUserInfo()
-    setUser(prev => {
-      return { ...prev, name: res.name, phoneNumber: res.phoneNumber, email: res.email }
-    })
-  }
+    const res = await getUserInfo();
+    setUser((prev) => {
+      return {
+        ...prev,
+        name: res.name,
+        phoneNumber: res.phoneNumber,
+        email: res.email,
+      };
+    });
+  };
 
   useEffect(() => {
-    purposeInp.value.length > 10 ? setVisible(false) : setVisible(true)
-  }, [purposeInp])
+    purposeInp.value.length > 10 ? setVisible(false) : setVisible(true);
+  }, [purposeInp]);
 
   useEffect(() => {
-    handleGetUserInfo()
-  }, [])
+    handleGetUserInfo();
+  }, []);
 
   return (
     <>
@@ -37,43 +42,70 @@ const ApplicationForm = forwardRef((props, dataRef) => {
         <S.Info>
           <S.LiWrap>
             <S.FormLi>이름</S.FormLi>
-            <S.P ref={el => dataRef.current.name = el}>{user.name}</S.P>
+            <S.P ref={(el) => (dataRef.current.name = el)}>{user.name}</S.P>
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>연락처</S.FormLi>
-            <Input defaultValue={user.phoneNumber} ref={el => dataRef.current.pNumber = el} className='rentalUser' maxLen="11" />
+            <Input
+              defaultValue={user.phoneNumber}
+              ref={(el) => (dataRef.current.pNumber = el)}
+              className="rentalUser"
+              maxLen="11"
+            />
           </S.LiWrap>
           <S.LiWrap>
             <S.FormLi>이메일</S.FormLi>
-            <Input defaultValue={user.email.split('@')[0]} className='rentalUser' maxLen="30" ref={el => dataRef.current.id = el} />
+            <Input
+              defaultValue={user.email.split("@")[0]}
+              className="rentalUser"
+              maxLen="30"
+              ref={(el) => (dataRef.current.id = el)}
+            />
             <span>@</span>
-            <Input defaultValue={user.email.split('@')[1]} className='rentalUser' maxLen="30" ref={el => dataRef.current.address = el} />
+            <Input
+              defaultValue={user.email.split("@")[1]}
+              className="rentalUser"
+              maxLen="30"
+              ref={(el) => (dataRef.current.address = el)}
+            />
           </S.LiWrap>
         </S.Info>
         <S.Purpose>
           <S.FormLi>대여 목적</S.FormLi>
           <S.TextareaWrap>
-            <TextareaStyle {...purposeInp} ref={el => dataRef.current.purpose = el} placeholder="최소 10자 이상 입력하세요." rows="4"></TextareaStyle>
-            {
-              visible ?
-                <S.Exclam><img src={iconExclamation} alt='' /><span>구체적으로 작성해주세요.</span></S.Exclam> : <></>
-            }
+            <TextareaStyle
+              {...purposeInp}
+              ref={(el) => (dataRef.current.purpose = el)}
+              placeholder="최소 10자 이상 입력하세요."
+              rows="4"
+            ></TextareaStyle>
+            {visible ? (
+              <S.Exclam>
+                <img src={iconExclamation} alt="" />
+                <span>구체적으로 작성해주세요.</span>
+              </S.Exclam>
+            ) : (
+              <></>
+            )}
           </S.TextareaWrap>
         </S.Purpose>
-        {
-          props.isLab &&
+        {props.isLab && (
           <S.Lab>
             <S.FormLi>대여 인원</S.FormLi>
-              <select>
-                {
-                  Array(10).fill().map((_, i) => <option key={i} value={i + 1}>{i + 1}</option>)
-                }
+            <select>
+              {Array(10)
+                .fill()
+                .map((_, i) => (
+                  <option key={i} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
             </select>
           </S.Lab>
-        }
+        )}
       </S.FormWrap>
     </>
-  )
-})
+  );
+});
 
-export default ApplicationForm
+export default ApplicationForm;

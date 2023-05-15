@@ -1,10 +1,10 @@
-import { BtnDefault } from "./style"
+import { BtnDefault } from "./style";
 
 const Button = ({
   text,
   borderRadius,
   margin,
-  color, 
+  color,
   backgroundColor,
   width,
   padding,
@@ -14,16 +14,31 @@ const Button = ({
   fontSize,
   className,
   float,
-  onClick, 
+  onClick,
   value,
-  disabled
+  disabled,
 }) => {
   return (
     <BtnDefault
-      disabled={disabled} margin={margin} color={color} boxShadow={boxShadow} backgroundColor={backgroundColor} width={width} height={height} fontWeight={fontWeight} fontSize={fontSize} className={className} onClick={onClick} padding={padding} borderRadius={borderRadius} float={float} value={value}>
-      {text} 
+      disabled={disabled}
+      margin={margin}
+      color={color}
+      boxShadow={boxShadow}
+      backgroundColor={backgroundColor}
+      width={width}
+      height={height}
+      fontWeight={fontWeight}
+      fontSize={fontSize}
+      className={className}
+      onClick={onClick}
+      padding={padding}
+      borderRadius={borderRadius}
+      float={float}
+      value={value}
+    >
+      {text}
     </BtnDefault>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

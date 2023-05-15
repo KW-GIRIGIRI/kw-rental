@@ -35,50 +35,48 @@ export const Div = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 1px solid ${props => props.theme.color.primary.third};
+      border-right: 1px solid ${(props) => props.theme.color.primary.third};
     }
   }
 
   & button {
     margin: auto;
   }
-`
+`;
 
 export const HistWrap = styled.ul`
   display: grid;
   align-items: center;
-`
+`;
 
 export const Header = styled.li`
-  background-color: ${props => props.theme.color.primary.sub};
+  background-color: ${(props) => props.theme.color.primary.sub};
   padding: 10px 0;
-  border: 1px solid ${props => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.third};
   display: grid;
   align-items: center;
-`
+`;
 
 export const HistList = styled.li`
-  border: 1px solid ${props => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.third};
   border-top: none;
   display: grid;
   align-items: center;
 
   & img {
-    background: ${props => props.theme.color.gray.g4};
+    background: ${(props) => props.theme.color.gray.g4};
     margin: auto;
   }
-`
+`;
 
-export const ItemUl = styled.ul`
-
-`
+export const ItemUl = styled.ul``;
 
 export const ItemLi = styled.li`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 2fr 1fr 1.2fr 1.1fr;
   padding: 12px 0;
-`
+`;
 
 // 기자재 대여 정보
 export const DateEquip = styled.span`
@@ -92,25 +90,25 @@ export const DateEquip = styled.span`
       margin-bottom: 0;
     }
   }
-`
+`;
 
 export const NameEquip = styled.div`
   text-align: left;
   margin-left: 10px;
 
   & > p:first-child {
-    color: ${props => props.theme.color.primary.main};
+    color: ${(props) => props.theme.color.primary.main};
   }
 
   & > p:last-child {
     font-size: 14px;
     margin-top: 5px;
   }
-`
+`;
 
 export const State = styled.span`
-  color: ${props => props.theme.color.primary.main};
-`
+  color: ${(props) => props.theme.color.primary.main};
+`;
 
 // 랩실 대여 정보
 export const Location = styled.div`
@@ -118,7 +116,7 @@ export const Location = styled.div`
   margin: auto;
 
   & p:first-child {
-    color: ${props => props.theme.color.primary.main};
+    color: ${(props) => props.theme.color.primary.main};
     margin-bottom: 5px;
   }
-`
+`;

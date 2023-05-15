@@ -25,7 +25,7 @@ export const ReserveLi = styled.li`
       margin: 0 auto;
     }
   }
-  
+
   &:first-of-type {
     font-size: 12px;
     padding: 8px;

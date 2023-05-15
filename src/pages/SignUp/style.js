@@ -54,13 +54,13 @@ export const InpWrap = styled.div`
     display: flex;
     gap: 35px;
 
-    &::after{
+    &::after {
       content: "@";
       position: absolute;
       top: 50%;
       right: 50%;
       transform: translate(50%, -50%);
-      color: ${props => props.theme.color.text.gray};
+      color: ${(props) => props.theme.color.text.gray};
       font-size: 13px;
     }
   }
@@ -98,4 +98,4 @@ export const Input = styled.input`
       margin: 0;
     }
   }
-`
+`;

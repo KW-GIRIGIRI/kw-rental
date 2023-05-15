@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_URL;
 const classNum = process.env.REACT_APP_CLASSNUM_URL;
-axios.defaults.withCredentials = true; 
+axios.defaults.withCredentials = true;
 
 const instanceUtil = axios.create({
   baseURL,
@@ -18,7 +18,7 @@ const instancForm = axios.create({
   },
 });
 
-// 기자재 관련 
+// 기자재 관련
 export const getProductList = async (url) => {
   try {
     const response = await instanceUtil.get(`/equipments?${url}`);
@@ -39,7 +39,7 @@ export const getProductDetail = async (id) => {
     console.error(err.message);
     return err;
   }
-}
+};
 
 export const addEquipment = async (data) => {
   try {
@@ -76,7 +76,10 @@ export const modifyEquipment = async (id, data) => {
 
 export const postImage = async (formData) => {
   try {
-    const response = await instancForm.post(`/admin/equipments/images`, formData);
+    const response = await instancForm.post(
+      `/admin/equipments/images`,
+      formData
+    );
 
     return response.headers.get("Location");
   } catch (err) {
@@ -85,7 +88,7 @@ export const postImage = async (formData) => {
   }
 };
 
-// 담은 기자재 관련 
+// 담은 기자재 관련
 export const addCartEquip = async (data) => {
   try {
     const response = await instanceUtil.post(`/inventories`, data);
@@ -109,14 +112,14 @@ export const getCartEquip = async () => {
 };
 
 export const deleteAllCartEquip = async () => {
-try {
-  const response = await instanceUtil.delete(`/inventories`);
+  try {
+    const response = await instanceUtil.delete(`/inventories`);
 
-  return response.status;
-} catch (err) {
-  console.error(err.message);
-  return err;
-}
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
 };
 
 export const deleteCartEquip = async (id) => {
@@ -206,12 +209,9 @@ export const changeItems = async (id, data) => {
   }
 };
 
-
 export const deleteItem = async (id) => {
   try {
-    const response = await instanceUtil.delete(
-      `/admin/items/${id}`,
-    );
+    const response = await instanceUtil.delete(`/admin/items/${id}`);
 
     return response.status;
   } catch (err) {
@@ -315,16 +315,18 @@ export const returnRental = async (data) => {
 // auth 관련
 export const getClassNum = async (data) => {
   try {
-    const response = await axios.post(classNum, data, { withCredentials: false });
-    
+    const response = await axios.post(classNum, data, {
+      withCredentials: false,
+    });
+
     return response.data[0];
   } catch (err) {
     console.error(err.message);
     return err;
   }
-}
+};
 
-export const Signup = async data => {
+export const Signup = async (data) => {
   try {
     const response = await instanceUtil.post(`/members`, data);
 
@@ -333,7 +335,7 @@ export const Signup = async data => {
     console.error(err.message);
     return err;
   }
-}
+};
 
 export const UserLogin = async (data) => {
   try {
@@ -346,7 +348,7 @@ export const UserLogin = async (data) => {
   }
 };
 
-// 회원정보 조회 
+// 회원정보 조회
 export const getUserInfo = async (date) => {
   try {
     const response = await instanceUtil.get(`/members`);
@@ -358,7 +360,7 @@ export const getUserInfo = async (date) => {
   }
 };
 
-// 회원 학번 조회 
+// 회원 학번 조회
 export const getUserClassNum = async (date) => {
   try {
     const response = await instanceUtil.get(`/members/memberNumber`);
@@ -385,7 +387,9 @@ export const getCurrentRental = async () => {
 // 사용자 기자재 대여 이력
 export const getUserRentalHistory = async (fromDate, toDate) => {
   try {
-    const response = await instanceUtil.get(`/rentals?from=${fromDate}&to=${toDate}`);
+    const response = await instanceUtil.get(
+      `/rentals?from=${fromDate}&to=${toDate}`
+    );
 
     return response.data;
   } catch (err) {

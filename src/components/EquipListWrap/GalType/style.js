@@ -10,7 +10,7 @@ export const scrollText = keyframes`
   100% {
     transform: translateX(0%);
   }
-`
+`;
 
 export const GalUl = styled.ul`
   display: grid;
@@ -47,10 +47,10 @@ export const Count = styled.span`
 `;
 
 export const Category = styled.p`
-  color: ${props => props.theme.color.primary.main};
+  color: ${(props) => props.theme.color.primary.main};
   font-size: 14px;
   margin: 11px 0 7px;
-`
+`;
 export const Title = styled.p`
   font-size: 15px;
   margin-bottom: 12px;
