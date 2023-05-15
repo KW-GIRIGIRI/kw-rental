@@ -17,6 +17,10 @@ export const RentalWrap = styled.div`
   & > h2 {
     font-size: 18px;
     margin: 27px 0 15px 0;
+
+    &:nth-child(3) {
+      margin-top: 54px;
+    }
   }
 
   & > img {

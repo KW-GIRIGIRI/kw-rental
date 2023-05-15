@@ -4,6 +4,7 @@ import Button from "../../modules/Button"
 import { getCurrentRental } from "../../api/api"
 import { useState, useEffect } from "react"
 import dayjs from "dayjs"
+import { rentalStatus } from '../../data/rentalStatus'
 
 export default function UserState({ isEquip, isLab }) {
   const [myRental, setMyRental] = useState([])
@@ -16,15 +17,6 @@ export default function UserState({ isEquip, isLab }) {
   useEffect(() => {
     handleGetCurrentRental()
   }, [])
-
-  const userRentalStatus = {
-    RESERVED: "대여 신청",
-    RENTED: "대여중",
-    RETURNED: "반납됨",
-    ABNORMAL_RETURNED: "불량 반납",
-    OVERDUE_RENTED: "연체중",
-    CANCELED: "대여 취소"
-  }
 
   const onDelete = () => {
   }
@@ -53,7 +45,7 @@ export default function UserState({ isEquip, isLab }) {
   return (
     <S.Div>
       {
-        isEquip ?
+        isEquip && myRental.length ?
           <S.HistWrap>
             <S.Header className="equip">
               <span>수령일 ~ 반납일</span>
@@ -63,7 +55,7 @@ export default function UserState({ isEquip, isLab }) {
               <span>상태</span>
             </S.Header>
             {
-              myRental.length && myRental.map((rental, i) => (
+              myRental.map((rental, i) => (
                 <S.HistList key={i} className="equipList">
                   <S.DateEquip>
                     <p>{dayjs(rental.startDate).format('YY년 MM월 DD일(dd)')}</p>
@@ -80,9 +72,9 @@ export default function UserState({ isEquip, isLab }) {
                             <p>{item.modelName}</p>
                           </S.NameEquip>
                           <span>{item.rentalAmount}</span>
-                          <S.State>{userRentalStatus[item.status]}</S.State>
-                          {userRentalStatus[item.status] === "RESERVED" && 
-                          <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" onClick={onDelete}/>}
+                          <S.State>{rentalStatus[item.status]}</S.State>
+                          {item.status === "RESERVED" ?
+                            <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" onClick={onDelete} /> : <></>}
                         </S.ItemLi>
                       ))
                     }
@@ -90,43 +82,47 @@ export default function UserState({ isEquip, isLab }) {
                 </S.HistList>
               ))
             }
-          </S.HistWrap>
-          : isLab ?
-            <S.HistWrap>
-              <S.Header className="lab">
-                <span>사용 기간</span>
-                <span>랩실</span>
-                <span>사용 인원</span>
-                <span>상태</span>
-                <span></span>
-              </S.Header>
-              {
-                랩실대여.map((랩실, i) => (
-                  <S.HistList key={i} className="lab labList">
-                    <span>{랩실.사용기간}</span>
-                    <S.Location>
-                      <p>KEY</p>
-                      <p>{랩실.장소}</p>
-                    </S.Location>
-                    <span>{랩실.사용인원}</span>
-                    <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
-                    {!랩실.대여중 && <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" />}
-                  </S.HistList>
-                ))
-              }
-            </S.HistWrap>
-            :
-            <S.HistWrap className="penalty">
-              <S.Header className="penalList">
-                <span>상태</span>
-                <span>비고</span>
-              </S.Header>
+          </S.HistWrap> : <></>
+      }
+      {
+        isLab ?
+          <S.HistWrap>
+            <S.Header className="lab">
+              <span>사용 기간</span>
+              <span>랩실</span>
+              <span>사용 인원</span>
+              <span>상태</span>
+              <span></span>
+            </S.Header>
+            {
+              랩실대여.map((랩실, i) => (
+                <S.HistList key={i} className="lab labList">
+                  <span>{랩실.사용기간}</span>
+                  <S.Location>
+                    <p>KEY</p>
+                    <p>{랩실.장소}</p>
+                  </S.Location>
+                  <span>{랩실.사용인원}</span>
+                  <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
+                  {!랩실.대여중 && <Button text="대여취소" className="shadow sub" borderRadius="20px" fontSize="14px" width="70px" height="27px" />}
+                </S.HistList>
+              ))
+            }
+          </S.HistWrap> : <></>
+      }
+      {
+        !isEquip && !isLab ?
+          <S.HistWrap className="penalty">
+            <S.Header className="penalList">
+              <span>상태</span>
+              <span>비고</span>
+            </S.Header>
 
-              <S.HistList className="penalList">
-                <span>{페널티.이용가능 ? "정상 이용 가능" : "정지"}</span>
-                <span>{페널티.사유.length ? 페널티.사유 : "-"}</span>
-              </S.HistList>
-            </S.HistWrap>
+            <S.HistList className="penalList">
+              <span>{페널티.이용가능 ? "정상 이용 가능" : "정지"}</span>
+              <span>{페널티.사유.length ? 페널티.사유 : "-"}</span>
+            </S.HistList>
+          </S.HistWrap> : <></>
       }
     </S.Div>
   )

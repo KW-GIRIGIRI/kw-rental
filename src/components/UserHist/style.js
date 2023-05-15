@@ -17,7 +17,7 @@ export const Div = styled.div`
 
   /* 기자재 */
   .equip {
-    grid-template-columns: 2fr 2fr 3fr 1fr 2.8fr;
+    grid-template-columns: 1fr 1fr 1.8fr 1.8fr;
 
     & > span:nth-child(3) {
       justify-content: left;
@@ -26,7 +26,7 @@ export const Div = styled.div`
   }
 
   .equipList {
-    grid-template-columns: 2fr 2fr 6.8fr;
+    grid-template-columns: 1fr 1fr 3.6fr;
   }
 
   /* 랩실 */
@@ -45,18 +45,6 @@ export const Div = styled.div`
       margin-left: 20px;
     }
   }
-`
-
-export const Cal = styled.div`
-  box-sizing: border-box;
-  width: 145px;
-  height: 26.07px;
-  border: 1px solid #000000;
-  border-radius: 4.12409px;
-  justify-content: center;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
 `
 
 export const HistWrap = styled.ul`
@@ -93,7 +81,7 @@ export const ItemLi = styled.li`
   height: 100%;
   display: grid;
   align-items: center;
-  grid-template-columns: 3fr 1fr 2.8fr;
+  grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid ${props => props.theme.color.primary.third};
 
   &:last-child {
@@ -108,6 +96,10 @@ export const ItemLi = styled.li`
       justify-content: left;
       margin-left: 20px;
     }
+  }
+
+  & .on {
+    color: ${props => props.theme.color.primary.main};
   }
 `
 

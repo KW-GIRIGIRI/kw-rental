@@ -24,7 +24,7 @@ export default function LabRentalSched() {
         <LabCalendar />
         <LabReserveWrap />
       </S.Section>
-      <SubTitle>사용 이력</SubTitle>
+      { isAuth && <SubTitle>사용 이력</SubTitle> }
     </>
   )
 }
