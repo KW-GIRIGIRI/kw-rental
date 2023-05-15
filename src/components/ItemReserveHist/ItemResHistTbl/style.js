@@ -1,43 +1,39 @@
 import styled from "styled-components";
 
-export const HistTable = styled.table`
+export const HistUl = styled.ul`
   width: 100%;
-  border-collapse: collapse;
-  border: 1px solid ${props => props.theme.color.primary.third};
+  border-radius: 10px 10px 0 0;
+  border: 1px solid ${(props) => props.theme.color.primary.third};
   font-size: 13px;
-  margin-top: 20px;
+  margin-top: 15px;
+`;
 
-  & th, td {
-    border: 1px solid ${props => props.theme.color.primary.third};
-    vertical-align: middle;
-  }
+export const HistLi = styled.li`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 1.5fr;
+  text-align: center;
+  border-bottom: 1px solid ${(props) => props.theme.color.primary.third};
 
-  & th {
-    align-items: center;
-    &:nth-child(-n+4) {
-      width: 150px;
+  & > p {
+    border-right: 1px solid ${(props) => props.theme.color.primary.third};
+    padding: 10px;
+
+    &:last-of-type {
+      border-right: none;
+      text-align: left;
+      margin-left: 10px;
     }
-    &:first-child {
-      width: 140px;
+  }
+
+  &:first-of-type {
+    border-radius: 10px 10px 0 0;
+    background-color: ${(props) => props.theme.color.primary.sub};
+    & > p {
+      text-align: center;
     }
-
   }
 
-  & tr {
-    box-sizing: border-box;
-    height: 36px;
+  &:last-of-type {
+    border-bottom: none;
   }
-
-  & > thead {
-    background-color: ${props => props.theme.color.primary.sub};
-  }
-
-  & td {
-    text-align: center;
-    padding: 0 20px;
-  }
-
-  & td:nth-child(5) {
-    text-align: left;
-  }
-`
+`;
