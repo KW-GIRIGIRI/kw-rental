@@ -1,6 +1,5 @@
 import * as S from "./style"
 import iconSearch from "../../assets/icon-search.svg"
-import iconCalendar from "../../assets/icon-calendar.svg"
 import iconGalOn from "../../assets/icon-gal-on.svg"
 import iconGal from "../../assets/icon-gal.svg"
 import iconListOn from "../../assets/icon-list-on.svg"
@@ -9,23 +8,13 @@ import iconPlus from "../../assets/icon-plus.svg"
 import Button from "../../modules/Button"
 import EquipListWrap from "../../components/EquipListWrap"
 import iconPageArrow from "../../assets/icon-pageArrow.svg"
-import DatePicker from "../../components/DatePicker"
 import { useContext, useEffect, useState } from "react"
 import { getProductList } from "../../api/api"
 import { AuthContext } from "../../context/Context"
 import { useNavigate } from "react-router-dom"
 import useModal from "../../hook/useModal"
 import { category } from "../../data/category"
-import dayjs from "dayjs"
-import updateLocale from "dayjs/plugin/updateLocale"
-
-dayjs.extend(updateLocale)
-
-dayjs.updateLocale('en', {
-  weekdays: [
-    "일", "월", "화", "수", "목", "금", "토"
-  ]
-})
+import SingularDatePicker from "../../components/DatePicker/SingularDatePicker"
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState('gal')
@@ -35,25 +24,8 @@ export default function EquipmentList() {
   const [searchKeyword, setSearchKeyword] = useState('')
   const { isAuth } = useContext(AuthContext)
   const [isCategory, setIsCategory] = useState(0)
-  const [calendar, setCalendar] = useState({
-    visible: false,
-    top: 0,
-    left: 0,
-    date: dayjs().add(1, 'days')
-  })
   const { Modal, open, close } = useModal();
   const navigate = useNavigate()
-
-  const handleGetDatePicker = e => {
-    const position = e.target.getBoundingClientRect()
-    const top = position.top + position.height, left = position.left
-    setCalendar(prev => ({
-      ...prev,
-      visible: true,
-      top: top,
-      left: left,
-    }))
-  }
 
   const handleSearch = (e) => {
     if (e.key === 'Enter' || e.type === "click") {
@@ -95,7 +67,7 @@ export default function EquipmentList() {
     if (isAuth) setViewMode('list')
   }, [page, viewMode, isCategory])
 
-  return (
+  return ( 
     <S.Wrapper>
       <S.FilterWrap>
         <S.FilterWrap>
@@ -108,11 +80,7 @@ export default function EquipmentList() {
             <p>최소 2자 이상의 검색어를 입력해주세요.</p>
             <Button text='확인'className='main' padding="10px 20px" borderRadius="5px" fontSize="14px" onClick={close} float='right' />
           </Modal>
-          <S.DateCont onClick={handleGetDatePicker}>
-            <img src={iconCalendar} alt="" />
-            <span>{calendar.date.format('M월 D일(dd)')}</span>
-          </S.DateCont>
-          {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
+          { !isAuth && <SingularDatePicker initial={1} /> }
         </S.FilterWrap>
         {
           isAuth ?

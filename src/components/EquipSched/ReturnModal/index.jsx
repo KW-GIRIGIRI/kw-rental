@@ -6,12 +6,13 @@ import Button from "../../../modules/Button"
 import { asyncGetReturned } from "../../../store/reducer/authReceiveSlice"
 import * as S from "./style"
 
-export default function ReturnModal({date, user, returnModal, setReturnModal}) {
+export default function ReturnModal({ user, returnModal, setReturnModal}) {
   const { Modal, open, close } = useModal()
   const [faulty, setFaulty] = useState([])
   const checkRef = useRef([])
   const dispatch = useDispatch()
   const receiveSpecList = useSelector(state => state.authReceive.receiveSpecList.byId)
+  const selectDate = useSelector(state => state.datePicker.singularDate)
 
   const specArr = user.reservationSpecs.flatMap((i) => {
     const item = receiveSpecList[i]
@@ -48,7 +49,7 @@ export default function ReturnModal({date, user, returnModal, setReturnModal}) {
       const res = await returnRental(JSON.stringify(data))
       res === 204 && close()
 
-      dispatch(asyncGetReturned(date))
+      dispatch(asyncGetReturned(selectDate))
     }
   }
 

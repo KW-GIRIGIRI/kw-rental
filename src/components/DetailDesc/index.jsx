@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import { category } from "../../data/category";
 import * as S from "./style";
 
-export default function DetailDesc({ product }) {
+export default function DetailDesc() {
+  const product = useSelector(state => state.modifyEquip.equip)
+
   return (
     <S.Div>
       <S.ProductSpan>{category.map(value =>  value.value === product.category && value.label )}</S.ProductSpan>

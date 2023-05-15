@@ -42,26 +42,3 @@ export const Select = styled.select`
   background: url(${iconDownArrow}) no-repeat right 8px top 50%;
   background-size: 10px;
 `;
-
-export const DateImg = styled.img`
-  width: 1rem;
-  vertical-align: text-top;
-  pointer-events: none;
-  margin-right: 10px;
-`;
-
-export const DateCont = styled.div`
-  position: relative;
-  border: 1px solid #000000;
-  font-size: 14px;
-  border-radius: ${(props) => props.theme.borderRadius.lv1};
-  box-sizing: border-box;
-  line-height: normal;
-  padding: 5px 0;
-  width: 120px;
-  text-align: center;
-
-  & > span {
-    pointer-events: none;
-  }
-`;

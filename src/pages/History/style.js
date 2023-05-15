@@ -32,24 +32,7 @@ export const RentalWrap = styled.div`
 export const Wrap = styled.div`
   display: flex;
   align-items: center;
-
-  & > span {
-    margin-left: 10px;
-  }
-`
-
-export const Cal = styled.div`
-  width: 152px;
-  height: 30px;
-  border: 1px solid #0E2B5A;
-  color: #0E2B5A;
-  font-size: 13px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 10px;
+  gap: 20px;
 `
 
 export const FilterWrap = styled.div`

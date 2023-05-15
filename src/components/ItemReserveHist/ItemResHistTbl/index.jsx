@@ -1,32 +1,26 @@
 import * as S from "./style"
-import { useState } from "react"
 
-// 품목 예약/사용 이력 테이블 컴포넌트
 export default function ItemResHistTbl({ data }) {
   return (
-    <S.HistTable>
-      <thead>
-        <tr>
-          <th scope="col">상태</th>
-          <th scope="col">수령일</th>
-          <th scope="col">반납일</th>
-          <th scope="col">대여자</th>
-          <th scope="col">비고</th>
-        </tr>
-      </thead>
-      <tbody>
+    <S.HistUl>
+        <S.HistLi>
+          <p>상태</p>
+          <p>수령일</p>
+          <p>반납일</p>
+          <p>대여자</p>
+          <p>비고</p>
+        </S.HistLi>
         {data.map(i => {
           return (
-            <tr key={i.id}>
-              <td>{i.returnStatus}</td>
-              <td>{i.pickupDate}</td>
-              <td>{i.returnDate}</td>
-              <td>{i.renter}</td>
-              <td>{i.note}</td>
-            </tr>
+            <S.HistLi key={i.id}>
+              <p>{i.returnStatus}</p>
+              <p>{i.pickupDate}</p>
+              <p>{i.returnDate}</p>
+              <p>{i.renter}</p>
+              <p>{i.note || '-'}</p>
+            </S.HistLi>
           )
         })}
-      </tbody>
-    </S.HistTable>
+    </S.HistUl>
   )
 }

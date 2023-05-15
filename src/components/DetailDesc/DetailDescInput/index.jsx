@@ -4,25 +4,28 @@ import Input from "../../../modules/Input";
 import Textarea from "../../../modules/Textarea";
 import * as S from "../style";
 import { category } from "../../../data/category";
+import { useSelector } from "react-redux";
 
-const DetailDescInput = forwardRef(({isEdit, product, itemLength}, addEqRef) => {
+const DetailDescInput = forwardRef(({state, itemLength}, addEqRef) => {
   const selectRef = useRef()
   const location = useLocation()
+  const product = useSelector(state => state.modifyEquip.equip)
 
   const handleSelectWidth = (e) => {
     e.target.style.padding = `5px ${selectRef.current.value.length + 10}px 5px ${selectRef.current.value.length + 5}px`
   }
 
+  // 새로고침 시 어떻게 할거야? -> 입력 중인 내용이 사라집니다.
   return (
     <S.Div>
       <S.CategoryDropdown
-        onChange={handleSelectWidth} ref={(el)=> {selectRef.current = el; addEqRef.current[0] = el}} name="category" id="" defaultValue="default">
+        onChange={handleSelectWidth} ref={(el)=> {selectRef.current = el; addEqRef.current[0] = el}} name="category" id="" defaultValue={product?.category || 'default'}>
         {
           location.pathname.includes('add') && <option value='default' disabled hidden>카테고리</option>
         }
         {
           category.map((item, index) => 
-            <option key={index} value={product?.category === item.value && item.value}>{item.label}</option>  
+            <option key={index} value={item.value}>{item.label}</option>  
           )
         }
       </S.CategoryDropdown>
@@ -42,7 +45,10 @@ const DetailDescInput = forwardRef(({isEdit, product, itemLength}, addEqRef) => 
         </S.ProductLi>
         <S.ProductLi>
           <p>총 개수</p>
-          <p>{itemLength}</p>
+          {
+            state ?  <p>{itemLength}</p>
+            : <Input maxLen="10" placeholder="ex. 10" name="totalQuantity" ref={el => addEqRef.current[8] = el} /> 
+          }
         </S.ProductLi>
         <S.ProductLi>
           <p>대여장소</p>
@@ -52,7 +58,7 @@ const DetailDescInput = forwardRef(({isEdit, product, itemLength}, addEqRef) => 
         </S.ProductLi>
         <S.ProductLi>
           <p>최대 대여 가능일</p>
-          <Input name="maxRentalDays" maxLen="5" placeholder="ex. 1" defaultValue={product?.maxRentalDays} ref={el => addEqRef.current[6] = el}/>
+          <Input name="maxRentalDays" disabled maxLen="5" placeholder="ex. 1" defaultValue={product?.maxRentalDays || 1} ref={el => addEqRef.current[6] = el}/>
         </S.ProductLi>
       </S.ProductOl>
     </S.Div>
