@@ -95,7 +95,7 @@ export default function DualDatePicker({ firstInitial, lastInitial, className })
   }, [lastCalendar.date])
 
   return (
-    <S.InpWrapper>
+    <S.InpWrapper className={className}>
       <S.DateCont onClick={(e) => handleGetDatePicker(e, 1)} className={className}>
         <img src={iconCalendar} alt="" />
         <span>{dayjs(firstCalendar.date).format(

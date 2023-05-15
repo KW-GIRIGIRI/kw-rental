@@ -4,6 +4,10 @@ export const InpWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
+
+  &.authHistory {
+    gap: 7px;
+  }
 `;
 
 export const DateCont = styled.div`

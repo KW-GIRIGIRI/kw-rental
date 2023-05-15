@@ -1,3 +1,4 @@
+import DualDatePicker from "../DatePicker/DualDatePicker"
 import * as S from "./style"
 
 export default function UserHist({ isEquip, isLab }) {
@@ -95,15 +96,8 @@ export default function UserHist({ isEquip, isLab }) {
 
   return (
     <>
+      { (isEquip || isLab) &&  <DualDatePicker firstInitial={-90} /> }
       <S.Div>
-        {
-          (isEquip || isLab) &&
-          <div>
-            <S.Cal>캘린더</S.Cal>
-            <p>~</p>
-            <S.Cal>캘린더</S.Cal>
-          </div>
-        }
         {
           isEquip ?
             <S.HistWrap>
