@@ -5,6 +5,7 @@ export const HistTable = styled.table`
   border-collapse: collapse;
   border: 1px solid ${props => props.theme.color.primary.third};
   font-size: 13px;
+  margin-top: 20px;
 
   & th, td {
     border: 1px solid ${props => props.theme.color.primary.third};

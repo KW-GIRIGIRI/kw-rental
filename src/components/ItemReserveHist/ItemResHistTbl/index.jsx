@@ -1,5 +1,4 @@
 import * as S from "./style"
-import { useState } from "react"
 
 // 품목 예약/사용 이력 테이블 컴포넌트
 export default function ItemResHistTbl({ data }) {

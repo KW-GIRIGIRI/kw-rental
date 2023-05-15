@@ -37,7 +37,7 @@ export default function SingularDatePicker({ initial }) {
         <img src={iconCalendar} alt="" />
         <span>{calendar.date.format('M월 D일(dd)')}</span>
       </S.DateCont>
-      {calendar && <DatePicker initial={initial} calendar={calendar} setCalendar={setCalendar} />}
+      {calendar && <DatePicker className='user' initial={initial} calendar={calendar} setCalendar={setCalendar} />}
     </>
   )
 }

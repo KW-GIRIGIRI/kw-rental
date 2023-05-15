@@ -65,6 +65,12 @@ export default function DualDatePicker({ firstInitial, lastInitial, className })
   }, [])
   
   useEffect(() => {
+    if (className !== 'user' && lastCalendar.date.valueOf() < firstCalendar.date.valueOf()) {
+      setLastCalendar(prev => ({
+        ...prev,
+        date: dayjs(firstCalendar.date.add(1, 'days'))
+      }))
+    }
     dispatch(setDualFirstDate(dayjs(firstCalendar.date).format('YYYY-MM-DD')))
     if (className === 'user') {
       let sendDate =
@@ -79,6 +85,12 @@ export default function DualDatePicker({ firstInitial, lastInitial, className })
 
 
   useEffect(() => {
+    if (className !== 'user' && lastCalendar.date.valueOf() < firstCalendar.date.valueOf()) {
+      setFirstCalendar(prev => ({
+        ...prev,
+        date: dayjs(lastCalendar.date.subtract(1, 'days'))
+      }))
+    }
     dispatch(setDuaLastDate(dayjs(lastCalendar.date).format('YYYY-MM-DD')))
   }, [lastCalendar.date])
 
@@ -90,7 +102,7 @@ export default function DualDatePicker({ firstInitial, lastInitial, className })
           className !== 'user' ? 'YY년 M월 D일(dd)' : 'M월 D일(dd)'
         )}</span>
       </S.DateCont>
-      {firstCalendar && <DatePicker calendar={firstCalendar} setCalendar={setFirstCalendar} />}
+      {firstCalendar && <DatePicker className={className} calendar={firstCalendar} setCalendar={setFirstCalendar} />}
       <span>~</span>
       <S.DateCont onClick={(e) => handleGetDatePicker(e, 0)} className={className}>
         { className !== 'user' && <img src={iconCalendar} alt="" /> }

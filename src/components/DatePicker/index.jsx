@@ -12,7 +12,7 @@ dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);
 dayjs.extend(weekOfYear)
 
-export default function DatePicker({ initial, checkWeek, calendar, setCalendar }) {
+export default function DatePicker({ initial, className, checkWeek, calendar, setCalendar }) {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef()
@@ -70,13 +70,13 @@ export default function DatePicker({ initial, checkWeek, calendar, setCalendar }
     return (
       <S.Header>
         <button
-          disabled={currentMonth.month() === dayjs().month()}
+          disabled={className === 'user' && currentMonth.month() === dayjs().month()}
           onClick={() => prevMonth()}>
           <img src={iconLeftArrow} alt="이전 달 보기" />
         </button>
         <span>{currentMonth.format('YY년 MM월')}</span>
         <button
-          disabled={currentMonth.month() === dayjs().month() + 1}
+          disabled={className === 'user' && currentMonth.month() === dayjs().month() + 1}
           onClick={() => nextMonth()}>
           <img src={iconRightArrow} alt="다음 달 보기" />
         </button>
@@ -130,11 +130,11 @@ export default function DatePicker({ initial, checkWeek, calendar, setCalendar }
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth
-                || (!!initial ? getDate(d) < dayjs() : getDate(d) < dayjs().subtract(1, 'days'))
-                || getDate(d) > dayjs().add(31, 'days')
-                || getDate(d).day() > 4
-                || getDate(d).day() === 0
-                ? "disabled" : ""} 
+              || getDate(d).day() > 4
+              || getDate(d).day() === 0
+              || (className === 'user' && (!!initial ? getDate(d) < dayjs() : getDate(d) < dayjs().subtract(1, 'days')))
+              || (className === 'user' && getDate(d) > dayjs().add(31, 'days'))
+              ? "disabled" : ""} 
             key={i}
           >
            
