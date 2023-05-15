@@ -1,47 +1,51 @@
 import { useRef } from 'react'
 import { Editor } from '@toast-ui/react-editor'
-import '@toast-ui/editor/dist/toastui-editor.css'
+import { BtnWrap } from '../style'
+import Button from '../../../modules/Button'
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
+import '@toast-ui/editor/dist/toastui-editor.css'
 import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 import '@toast-ui/editor/dist/i18n/ko-kr'
+import { postImage } from "../../../api/api"
 
-export default function ToastEditor({ setContent }) {
-  // Editor DOM 선택용
+export default function ToastEditor({ content, setContent, setIsEdit }) {
   const editorRef = useRef()
 
-  // 등록 버튼 핸들러
   const handleRegisterButton = () => {
     setContent(editorRef.current?.getInstance().getHTML())
+    handleEditState()
+  }
+
+  const handleEditState = () => {
+    setIsEdit(false)
   }
 
   const onUploadImage = async (blob, callback) => {
-    console.log(blob)
-    // 1. 첨부된 이미지 파일을 서버로 전송후, 이미지 경로 url을 받아온다.
-    // const imgUrl = await .... 서버 전송 / 경로 수신 코드 ...
+    const formData = new FormData();
+    formData.append('file', blob);
+    const response = await postImage(formData)
 
-    // 2. 첨부된 이미지를 화면에 표시(경로는 임의로 넣었다.)
-    callback('http://localhost:3000/img/너굴짱.png', '너굴짱')
+    callback(response, blob.name)
     return false
   }
 
   return (
     <>
-      {/* <h2>### Editor Toast</h2> */}
       <Editor
+        initialValue={content}
         ref={editorRef}
         placeholder="내용을 입력해주세요."
-        previewStyle="vertical" // 미리보기 스타일 지정
-        height="300px" // 에디터 창 높이
+        previewStyle="vertical"
+        height="450px"
         initialEditType="wysiwyg"
         toolbarItems={[
-          // 툴바 옵션 설정
           ['heading', 'bold', 'italic', 'strike'],
           ['hr', 'quote'],
           ['ul', 'ol', 'task', 'indent', 'outdent'],
           ['table', 'image', 'link']
         ]}
-        useCommandShortcut={false} // 키보드 입력 컨트롤 방지
+        useCommandShortcut={false}
         plugins={[colorSyntax]}
         language="ko-KR"
         hooks={{
@@ -49,7 +53,10 @@ export default function ToastEditor({ setContent }) {
         }}
       ></Editor>
 
-      <button onClick={handleRegisterButton}>등록</button>
+      <BtnWrap>
+        <Button text="저장하기" onClick={handleRegisterButton} padding="15px 30px" fontSize="15px" fontWeight="600" className="main" borderRadius="10px" />
+        <Button text="취소하기" onClick={handleEditState} padding="15px 30px" fontSize="15px" fontWeight="600" className="sub" borderRadius="10px" />
+      </BtnWrap>
     </>
   );
 }

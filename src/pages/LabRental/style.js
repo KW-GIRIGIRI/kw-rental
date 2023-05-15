@@ -4,6 +4,7 @@ export const Section = styled.div`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: ${(props) => props.theme.borderRadius.lv2};
   padding: 35px 25px;
+  position: relative;
 `;
 
 export const Wrapper = styled.section`
@@ -34,4 +35,23 @@ export const SubTitle = styled.h2`
 
 export const Div = styled.div`
   margin-top: 46px;
+`
+
+export const InfoBtn = styled.div`
+  padding: 6px 10px;
+  border: 1px solid ${(props) => props.theme.color.primary.main};
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  position: absolute;
+  right: 28px;
+  top: 35px;
+  cursor: pointer;
+
+  & > span {
+    font-size: 13px;
+    color: ${(props) => props.theme.color.primary.main};
+    margin-right: 2px;
+  }
 `
