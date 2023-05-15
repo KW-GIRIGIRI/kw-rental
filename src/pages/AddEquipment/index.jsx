@@ -9,7 +9,7 @@ import Textarea from "../../modules/Textarea"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import Image from "../../modules/Image"
-import { addEquipment, getProductDetail, postImage, getItemList, modifyEquipment, changeItems } from "../../api/api"
+import { addEquipment, getProductDetail, postImage, modifyEquipment, changeItems } from "../../api/api"
 import useModal from "../../hook/useModal"
 import useToggle from "../../hook/useToggle"
 import { useDispatch, useSelector } from "react-redux"
@@ -58,11 +58,12 @@ export default function AddEquipment() {
     const sendData = {
       equipment : { 
         imgUrl: imgFile, 
-        totalQuantity: data.length
       }, "items": item
     }
 
     addEqRef.current.map(eq => sendData.equipment[eq.name] = eq.value)
+    if(state) sendData.equipment.totalQuantity = data.length
+
     const response = await addEquipment(JSON.stringify(sendData));
     response && navigate(`/${response.split("/")[3]}`)
     // }
@@ -131,12 +132,12 @@ export default function AddEquipment() {
               <input type="file" accept="image/*" onChange={handleImgFile} />
           </S.FileLabel>
         }
-        <DetailDescInput isEdit={isEdit} itemLength={data.length} product={product} ref={addEqRef} />
+        <DetailDescInput state={state} isEdit={isEdit} itemLength={data.length} product={product} ref={addEqRef} />
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
       <Textarea maxLen="500" className="detailDesc" placeholder="안내사항을 작성해주세요." name="description" id="" rows="6" count="500" defaultValue={product?.description} ref={el => addEqRef.current[7] = el} />
       {
-        state || item ? 
+        state && item ? 
           isEdit ?
             <>
               <SubTitle>품목 추가 및 삭제</SubTitle>
