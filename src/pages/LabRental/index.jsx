@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/Context";
 import Button from "../../modules/Button";
 import TabNav from "../../modules/TabNav";
 import * as S from "./style"
+import iconArrowRightSmall from "../../assets/icon-arrow-right-small.svg"
 
 export default function LabRental() {
   const { isAuth } = useContext(AuthContext)
@@ -12,7 +13,7 @@ export default function LabRental() {
   const [isFirst, setIsFirst] = useState(true)
 
   const SubTitle = () => {
-    switch (pathname) { 
+    switch (pathname) {
       case '/lab/status':
         return isAuth ? '대여 관리' : '랩실 현황'
       default:
@@ -29,13 +30,13 @@ export default function LabRental() {
               <span className={pathname.includes('/lab/application') ? 'on' : ''}>랩실 대여하기</span>
               <span className={pathname.includes('/lab/success') ? 'on' : ''}>랩실 대여 완료</span>
             </S.SimpleDesc>
-            { pathname.includes('/application') && <S.SubTitle>랩실 대여하기</S.SubTitle> }
+            {pathname.includes('/application') && <S.SubTitle>랩실 대여하기</S.SubTitle>}
           </>
         )
       default:
         return (
           <>
-            <Button className={isFirst ? 'main shadow' : 'disable shadow'} text="한울관" padding="10px 29px" borderRadius="20px" margin='0 10px 0 0' onClick={() => setIsFirst(true)}/>
+            <Button className={isFirst ? 'main shadow' : 'disable shadow'} text="한울관" padding="10px 29px" borderRadius="20px" margin='0 10px 0 0' onClick={() => setIsFirst(true)} />
             <Button className={isFirst ? 'disable shadow' : 'main shadow'} text="화도관" padding="10px 29px" borderRadius="20px" onClick={() => setIsFirst(false)} />
           </>
         )
@@ -59,11 +60,20 @@ export default function LabRental() {
       <S.Section>
         {
           (!pathname.includes('/application') && !pathname.includes('/success'))
-          && <S.SubTitle><SubTitle /></S.SubTitle>
+          &&
+          <>
+            <S.SubTitle><SubTitle /></S.SubTitle>
+
+            {isAuth && !pathname.includes('lab/') ?
+              <S.InfoBtn>
+                <span onClick={() => { navigate('/lab/edit') }}>랩실 소개 관리</span>
+                <img src={iconArrowRightSmall} alt='오른쪽 화살표 아이콘' />
+              </S.InfoBtn> : <></>}
+          </>
         }
         <Section />
         <Outlet />
-      </S.Section>
+      </S.Section >
     </>
   )
 }

@@ -4,11 +4,14 @@ import ToastViewer from './ToastViewer'
 
 export default function ToastUI() {
   const [content, setContent] = useState("")
+  const [isEdit, setIsEdit] = useState(false)
 
   return (
     <>
-      <ToastEditor setContent={setContent} />
-      <ToastViewer content={content} />
+      {isEdit ?
+        <ToastEditor content={content} setContent={setContent} setIsEdit={setIsEdit} /> :
+        <ToastViewer content={content} setIsEdit={setIsEdit} />
+      }
     </>
   )
 }

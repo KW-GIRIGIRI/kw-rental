@@ -66,6 +66,7 @@ export default function Router() {
             />
             <Route path="application" element={<LabRentalApplication />} />
             <Route path="success" element={<LabRentalSuccess />} />
+            <Route path="edit" element={<LabInformation />} />
           </Route>
         </Route>
         <Route path="/auth/*" element={<AuthWrapper />}>
