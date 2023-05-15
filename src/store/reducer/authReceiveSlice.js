@@ -1,13 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
 import { getReceivedRentalList, getReturnRentalList } from "../../api/api";
 
 export const asyncGetReceived = createAsyncThunk(
   "authReceive/asyncGetReceived",
   async (date) => {
-    const response = await getReceivedRentalList(
-      dayjs(date).format("YYYY-MM-DD")
-    );
+    const response = await getReceivedRentalList(date);
 
     return response.reservations;
   }
@@ -16,9 +13,7 @@ export const asyncGetReceived = createAsyncThunk(
 export const asyncGetReturned = createAsyncThunk(
   "authReceive/asyncGetReturned",
   async (date) => {
-    const response = await getReturnRentalList(
-      dayjs(date).format("YYYY-MM-DD")
-    );
+    const response = await getReturnRentalList(date);
 
     const newArr = response.overdueReservations.reservations.concat(
       response.reservationsByEndDate.reservations

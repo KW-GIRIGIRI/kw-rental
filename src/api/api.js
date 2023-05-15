@@ -341,7 +341,7 @@ export const UserLogin = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
+    alert(err.response.data);
     return err;
   }
 };

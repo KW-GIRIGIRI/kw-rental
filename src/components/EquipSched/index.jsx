@@ -6,15 +6,17 @@ import iconWarning from '../../assets/icon-exclamation-gray.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived, asyncGetReturned } from "../../store/reducer/authReceiveSlice"
 
-
-export default function EquipSched({date}) {
+export default function EquipSched() {
   const [receive, setReceive] = useState(true)
   const dispatch = useDispatch()
   const receiveList = useSelector(state => state.authReceive.receiveList.byId)
-  
+  const selectDate = useSelector(state => state.datePicker.singularDate)
+
   useEffect(() => {
-    receive ? dispatch(asyncGetReceived(date)) : dispatch(asyncGetReturned(date))
-  }, [date, receive])
+    if (selectDate) {
+      receive ? dispatch(asyncGetReceived(selectDate)) : dispatch(asyncGetReturned(selectDate))
+    } 
+  }, [selectDate, receive])
 
   return (
     <>
@@ -34,7 +36,7 @@ export default function EquipSched({date}) {
               </S.Header>
               {
                 Object.values(receiveList)?.map((user, index) => 
-                  <SchedList date={date} key={index} user={user} receive={receive} />
+                  <SchedList key={index} user={user} receive={receive} />
                 )
               }
             </S.SchedWrap>

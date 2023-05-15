@@ -1,15 +1,7 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-  /* 캘린더 */
-  & > div {
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    & > p {
-      margin: 0 12px;
-    }
-  }
+  margin-top: 16px;
 
   span {
     border-right: 1px solid ${props => props.theme.color.primary.third};

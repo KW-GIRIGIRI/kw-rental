@@ -1,3 +1,4 @@
+import DualDatePicker from "../DatePicker/DualDatePicker"
 import * as S from "./style"
 import { getUserRentalHistory } from "../../api/api"
 import dayjs from "dayjs"
@@ -83,6 +84,7 @@ export default function UserHist({ isEquip, isLab }) {
 
   return (
     <>
+// (isEquip || isLab) &&  <DualDatePicker firstInitial={-90} /> 
       <S.Div>
         {
           // 캘린더
