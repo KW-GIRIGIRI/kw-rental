@@ -21,7 +21,7 @@ export default function AuthSuccess() {
       )}
       <Button
         text="로그인하러 가기"
-        onClick={() => navigate("/auth")}
+        onClick={() => navigate("/")}
         className="main"
         borderRadius="10px"
         padding="16px 16px"

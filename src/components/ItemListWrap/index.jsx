@@ -46,7 +46,7 @@ export default function ItemListWrap({ item, isEdit, isAdd, data, setData }) {
                     key={i}
                     onClick={() =>
                       data[i]?.propertyNumber && !isEdit && !isAdd
-                        ? navigate(`/item`, {
+                        ? navigate(`/equipment/item`, {
                             state: {
                               id: data[i].id,
                               equipmentId: data[i].equipmentId,

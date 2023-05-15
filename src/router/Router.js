@@ -35,8 +35,14 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/*" element={<AuthWrapper />}>
+          <Route path="" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="success" element={<AuthSuccess />} />
+        </Route>
         <Route element={<MainWrapper />}>
-          <Route path="/*" element={<EquipmentRental />}>
+          <Route path="/equipment/*" element={<EquipmentRental />}>
             <Route path="" element={<EquipmentList />} />
             <Route path=":id" element={<EquipmentDetail />} />
             <Route path=":id/edit" element={<AddEquipment />} />
@@ -49,6 +55,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
             </Route>
           </Route>
+
           <Route path="/history/*" element={<History />}>
             <Route path="equipment" element={<EquipRentalHistory />} />
             <Route path="lab" element={<LabRentalHistory />} />
@@ -68,12 +75,6 @@ export default function Router() {
             <Route path="success" element={<LabRentalSuccess />} />
             <Route path="edit" element={<LabInformation />} />
           </Route>
-        </Route>
-        <Route path="/auth/*" element={<AuthWrapper />}>
-          <Route path="" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="forgot" element={<ForgotPassword />} />
-          <Route path="success" element={<AuthSuccess />} />
         </Route>
       </Routes>
     </BrowserRouter>

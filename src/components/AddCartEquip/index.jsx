@@ -77,7 +77,7 @@ export default function AddCartEquip() {
           margin="0 0 10px 0"
           onClick={() => {
             close();
-            navigate("/inventory");
+            navigate("/equipment/inventory");
           }}
         />
       </Modal>

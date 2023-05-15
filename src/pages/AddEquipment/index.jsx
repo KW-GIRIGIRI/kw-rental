@@ -72,7 +72,7 @@ export default function AddEquipment() {
     if (state) sendData.equipment.totalQuantity = data.length;
 
     const response = await addEquipment(JSON.stringify(sendData));
-    response && navigate(`/${response.split("/")[3]}`);
+    response && navigate(`/equipment/${response.split("/")[3]}`);
     // }
   };
 
@@ -108,10 +108,10 @@ export default function AddEquipment() {
       const itemRes = await changeItems(params.id, JSON.stringify(itemData));
       const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
 
-      itemRes === 204 && eqRes && navigate(`/${eqRes.split("/")[3]}`);
+      itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
     } else {
       const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
-      eqRes && navigate(`/${eqRes.split("/")[3]}`);
+      eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
     }
     // }
   };
@@ -241,7 +241,7 @@ export default function AddEquipment() {
             borderRadius="5px"
             fontSize="14px"
             onClick={() => {
-              navigate("/");
+              navigate("/equipment");
               close();
             }}
           />

@@ -10,7 +10,7 @@ export default function GalType({ data }) {
     <S.GalUl>
       {data.map((item) => {
         return (
-          <S.GalLi key={item.id} onClick={() => navigate(`/${item.id}`)}>
+          <S.GalLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>
             <S.Count>
               {item.rentalQuantity.remainingQuantity} /{" "}
               {item.rentalQuantity.totalQuantity}대

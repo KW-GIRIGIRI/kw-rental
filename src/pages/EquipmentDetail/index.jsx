@@ -44,7 +44,7 @@ export default function EquipmentDetail() {
 
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id);
-    !response && navigate("/");
+    !response && navigate("/equipment");
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function EquipmentDetail() {
             </S.SimpleDesc>
             {isAuth ? (
               <div>
-                <button onClick={() => navigate(`/${params.id}/edit`)}>
+                <button onClick={() => navigate(`/equipment/${params.id}/edit`)}>
                   수정
                 </button>
                 <button onClick={() => open()}>삭제</button>

@@ -19,7 +19,7 @@ export default function NavBar() {
               ? "on"
               : "off"
           }
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/equipment")}
         >
           <p>기자재 대여</p>
         </S.NavLi>

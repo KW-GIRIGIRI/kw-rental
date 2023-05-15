@@ -18,7 +18,7 @@ export default function ListType({ data }) {
       </S.ListLi>
       {data.map((item) => {
         return (
-          <S.ListLi key={item.id} onClick={() => navigate(`/${item.id}`)}>
+          <S.ListLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>
             <Image
               width="72px"
               height="72px"

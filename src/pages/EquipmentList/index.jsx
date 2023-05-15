@@ -98,7 +98,7 @@ export default function EquipmentList() {
           {!isAuth && <SingularDatePicker initial={1} />}
         </S.FilterWrap>
         {isAuth ? (
-          <S.addBtn onClick={() => navigate("/add")}>
+          <S.addBtn onClick={() => navigate("/equipment/add")}>
             <img src={iconPlus} alt="" />
             <p>기자재 추가</p>
           </S.addBtn>
