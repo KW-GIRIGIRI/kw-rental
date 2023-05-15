@@ -4,7 +4,7 @@ export const Div = styled.div`
   margin-top: 16px;
 
   span {
-    border-right: 1px solid ${props => props.theme.color.primary.third};
+    border-right: 1px solid ${(props) => props.theme.color.primary.third};
     height: calc(100% + 20px);
     display: flex;
     align-items: center;
@@ -45,18 +45,18 @@ export const Div = styled.div`
       margin-left: 20px;
     }
   }
-`
+`;
 
 export const HistWrap = styled.ul`
   box-sizing: border-box;
   text-align: center;
   font-size: 13px;
-`
+`;
 
 export const Header = styled.li`
   padding: 10px 0;
-  background-color: #E0E4E9;
-  border: 1px solid #8B95A1;
+  background-color: #e0e4e9;
+  border: 1px solid #8b95a1;
   display: grid;
   align-items: center;
 
@@ -64,17 +64,16 @@ export const Header = styled.li`
     grid-row-start: 1;
     grid-row-end: -1;
   }
-`
+`;
 
 export const HistList = styled.li`
-  border: 1px solid #8B95A1;
+  border: 1px solid #8b95a1;
   border-top: none;
   display: grid;
   align-items: center;
-`
+`;
 
-export const ItemUl = styled.ul`
-`
+export const ItemUl = styled.ul``;
 
 export const ItemLi = styled.li`
   padding: 10px 0;
@@ -82,12 +81,12 @@ export const ItemLi = styled.li`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid ${props => props.theme.color.primary.third};
+  border-bottom: 1px solid ${(props) => props.theme.color.primary.third};
 
   &:last-child {
     border-bottom: none;
   }
-  
+
   & > span {
     grid-row-start: 1;
     grid-row-end: -1;
@@ -99,9 +98,9 @@ export const ItemLi = styled.li`
   }
 
   & .on {
-    color: ${props => props.theme.color.primary.main};
+    color: ${(props) => props.theme.color.primary.main};
   }
-`
+`;
 
 export const DateEquip = styled.p`
   height: 100%;
@@ -110,5 +109,5 @@ export const DateEquip = styled.p`
   justify-content: center;
   grid-row-start: 1;
   grid-row-end: -1;
-  border-right: 1px solid ${props => props.theme.color.primary.third};
-`
+  border-right: 1px solid ${(props) => props.theme.color.primary.third};
+`;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.section`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
-  border-radius: ${props => props.theme.borderRadius.lv2};
+  border-radius: ${(props) => props.theme.borderRadius.lv2};
   padding: 20px 45px;
 `;
 
@@ -12,9 +12,9 @@ export const DetailWrapper = styled.div`
   gap: 34px;
   margin: 30px 0 55px;
   padding-bottom: 36px;
-  border-bottom: 1px solid ${props => props.theme.color.primary.sub};
+  border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   & > img {
-    border: 1px solid ${props => props.theme.color.primary.sub};
+    border: 1px solid ${(props) => props.theme.color.primary.sub};
   }
 `;
 
@@ -37,7 +37,7 @@ export const NoticeText = styled.p`
   list-style: inside;
   margin: 15px 0;
   font-size: 14px;
-  color: ${props => props.theme.color.text.gray};
+  color: ${(props) => props.theme.color.text.gray};
 `;
 
 export const SubTitle = styled.p`

@@ -35,7 +35,7 @@ export const SubTitle = styled.h2`
 
 export const Div = styled.div`
   margin-top: 46px;
-`
+`;
 
 export const InfoBtn = styled.div`
   padding: 6px 10px;
@@ -43,7 +43,7 @@ export const InfoBtn = styled.div`
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   position: absolute;
   right: 28px;
   top: 35px;
@@ -54,4 +54,4 @@ export const InfoBtn = styled.div`
     color: ${(props) => props.theme.color.primary.main};
     margin-right: 2px;
   }
-`
+`;

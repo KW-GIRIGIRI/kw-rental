@@ -9,7 +9,7 @@ export const ModalSection = styled.section`
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content : center;
+  justify-content: center;
   align-items: center;
   text-align: center;
 `;
@@ -61,4 +61,4 @@ export const Div = styled.div`
 
 export const CloseBtn = styled.button`
   float: right;
-`
+`;

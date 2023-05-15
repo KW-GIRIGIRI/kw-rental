@@ -8,7 +8,7 @@ export const Section = styled.div`
 
 export const Title = styled.h1`
   font-size: 20px;
-`
+`;
 
 export const RentalWrap = styled.div`
   padding: 0 14px;
@@ -31,13 +31,13 @@ export const RentalWrap = styled.div`
       cursor: pointer;
     }
   }
-`
+`;
 
 export const Wrap = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-`
+`;
 
 export const FilterWrap = styled.div`
   display: flex;
@@ -63,11 +63,11 @@ export const DownloadModal = styled.div`
     line-height: 16px;
 
     &:hover {
-      background: #F3F6FB;
+      background: #f3f6fb;
     }
   }
 
   & a:hover {
     cursor: default;
   }
-`
+`;

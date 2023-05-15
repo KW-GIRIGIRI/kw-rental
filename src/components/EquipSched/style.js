@@ -5,7 +5,7 @@ export const SchedTitle = styled.h1`
   margin-top: 30px;
   font-weight: 600;
   font-size: 18px;
-`
+`;
 
 export const SchedWrap = styled.ul`
   margin-top: 36px;
@@ -15,7 +15,7 @@ export const SchedWrap = styled.ul`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: ${(props) => props.theme.borderRadius.lv2};
-`
+`;
 
 export const Header = styled.ul`
   padding: 0 20px;
@@ -48,7 +48,7 @@ export const Header = styled.ul`
   & span:last-child {
     left: 552px;
   }
-`
+`;
 export const WarnWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -62,4 +62,4 @@ export const WarnWrap = styled.div`
     line-height: 1.6;
     font-size: 16px;
   }
-`; 
+`;

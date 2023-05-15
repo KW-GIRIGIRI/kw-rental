@@ -1,27 +1,32 @@
-import * as S from "./style"
-import iconMenu from "../../assets/icon-menu.svg"
-import { useRef } from "react"
+import * as S from "./style";
+import iconMenu from "../../assets/icon-menu.svg";
+import { useRef } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ProfileMenu({visible, setVisible}) {
+export default function ProfileMenu({ visible, setVisible }) {
   const modalRef = useRef();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClose = (e) => {
-    if (!modalRef.current.contains(e.target)) setVisible(false)
-  }
-  
+    if (!modalRef.current.contains(e.target)) setVisible(false);
+  };
+
   useEffect(() => {
-    window.addEventListener('click', handleClose)
+    window.addEventListener("click", handleClose);
     return () => {
-      window.removeEventListener('click', handleClose)
-    }
-  }, [])
-  
+      window.removeEventListener("click", handleClose);
+    };
+  }, []);
+
   return (
     <S.Wrap ref={modalRef}>
-      <S.Li onClick={() => { navigate('/setaccount'); setVisible(false)}}>
+      <S.Li
+        onClick={() => {
+          navigate("/setaccount");
+          setVisible(false);
+        }}
+      >
         <img src={iconMenu} alt="" />
         <p>계정 설정</p>
       </S.Li>
@@ -38,5 +43,5 @@ export default function ProfileMenu({visible, setVisible}) {
         <p>로그아웃</p>
       </S.Li>
     </S.Wrap>
-  )
+  );
 }

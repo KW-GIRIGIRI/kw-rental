@@ -9,8 +9,8 @@ export const Div = styled.div`
     margin-bottom: 28px;
     margin-top: 30px;
   }
-`; 
+`;
 
 export const Lab = styled.div`
   margin-bottom: 58px;
-`
+`;

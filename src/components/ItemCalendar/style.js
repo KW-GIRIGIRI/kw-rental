@@ -79,7 +79,7 @@ export const UserUl = styled.ul`
   flex-direction: column;
   margin-top: 5px;
   gap: 5px;
-`
+`;
 
 export const UserList = styled.li`
   display: flex;
@@ -92,7 +92,7 @@ export const UserList = styled.li`
   padding: 3px;
   font-weight: 400;
 
-  & :first-child{
+  & :first-child {
     width: 18px;
   }
 

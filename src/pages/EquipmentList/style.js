@@ -30,7 +30,7 @@ export const FilterWrap = styled.div`
 export const SearchCont = styled.label`
   position: relative;
   margin-right: 13px;
-`
+`;
 
 export const SearchInp = styled.input`
   width: 294px;
@@ -39,9 +39,9 @@ export const SearchInp = styled.input`
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid ${(props) => props.theme.color.gray.g3};
   box-sizing: border-box;
-  &::placeholder{
+  &::placeholder {
     font-size: 13px;
-    color: ${props => props.theme.color.text.gray};
+    color: ${(props) => props.theme.color.text.gray};
   }
 `;
 
@@ -50,11 +50,11 @@ export const SearchImg = styled.img`
   right: 16px;
   top: 8px;
   width: 1rem;
-`
+`;
 
 export const addBtn = styled.button`
-  background-color: ${props => props.theme.color.primary.main};
-  border-radius: ${props => props.theme.borderRadius.lv1};
+  background-color: ${(props) => props.theme.color.primary.main};
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,9 +62,9 @@ export const addBtn = styled.button`
   gap: 6px;
   & > p {
     line-height: 1;
-    color: ${props => props.theme.color.text.white};
+    color: ${(props) => props.theme.color.text.white};
   }
-`
+`;
 
 export const TypeBtn = styled.button`
   border: 1px solid ${(props) => props.theme.color.gray.g4};

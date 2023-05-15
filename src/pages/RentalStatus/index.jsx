@@ -1,6 +1,6 @@
-import * as S from "./style"
-import EquipSched from "../../components/EquipSched"
-import SingularDatePicker from "../../components/DatePicker/SingularDatePicker"
+import * as S from "./style";
+import EquipSched from "../../components/EquipSched";
+import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
 
 export default function RentalStatus() {
   return (
@@ -11,5 +11,5 @@ export default function RentalStatus() {
       </S.Div>
       <EquipSched />
     </S.Wrapper>
-  )
+  );
 }

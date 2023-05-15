@@ -51,7 +51,6 @@ export const TimeCont = styled.p`
   color: ${(props) => props.theme.color.primary.main};
 `;
 
-
 export const WarnCont = styled.p`
   font-size: 13px;
   color: ${(props) => props.theme.color.primary.red};

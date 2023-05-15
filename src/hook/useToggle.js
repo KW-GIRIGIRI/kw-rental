@@ -5,9 +5,8 @@ const useToggle = () => {
   const [state, setState] = useState(true);
 
   const toggle = useCallback(() => {
-    setState((state) => !state)
-  }, []
-);
+    setState((state) => !state);
+  }, []);
 
   const changeInitial = useCallback((initial) => {
     setState(initial);

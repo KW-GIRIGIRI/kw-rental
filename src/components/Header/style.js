@@ -21,6 +21,6 @@ export const ImgLogo = styled.img`
 
 export const Desc = styled.p`
   font-size: 1rem;
-  color: ${props => props.theme.color.primary.main};
+  color: ${(props) => props.theme.color.primary.main};
   font-weight: 600;
-`
+`;

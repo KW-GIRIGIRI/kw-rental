@@ -27,7 +27,7 @@ export const InpWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-`
+`;
 
 export const Select = styled.select`
   width: 110px;

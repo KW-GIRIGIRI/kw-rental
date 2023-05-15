@@ -6,5 +6,5 @@ export const rentalStatus = {
   BROKEN: "파손",
   OVERDUE_RENTED: "연체",
   ABNORMAL_RETURNED: "불량 반납",
-  CANCELED: "대여 취소"
-}
+  CANCELED: "대여 취소",
+};

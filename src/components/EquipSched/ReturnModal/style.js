@@ -5,7 +5,7 @@ import iconExclamation from "../../../assets/icon-exclamation.svg";
 
 export const ProductUl = styled.ul`
   margin-bottom: 26px;
-`
+`;
 
 export const ProductLi = styled.li`
   display: grid;
@@ -47,7 +47,8 @@ export const CheckInp = styled.input`
   height: 13px;
   margin: 0 auto;
   border-radius: ${(props) => props.theme.borderRadius.lv1};
-  background: ${(props) => props.theme.color.primary.main} url(${iconCheck}) no-repeat center / 70%;
+  background: ${(props) => props.theme.color.primary.main} url(${iconCheck})
+    no-repeat center / 70%;
 
   &.checked {
     background: #ad1414 url(${iconExclamation}) no-repeat 50%;

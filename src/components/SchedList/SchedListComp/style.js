@@ -77,4 +77,4 @@ export const PropertyDiv = styled.div`
   flex-direction: column;
   gap: 8px;
   margin: 10px 0;
-`
+`;

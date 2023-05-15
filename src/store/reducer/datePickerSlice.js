@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  singularDate: '',
+  singularDate: "",
   dualDate: {
-    firstDate: '',
-    lastDate: '',
+    firstDate: "",
+    lastDate: "",
   },
 };
 

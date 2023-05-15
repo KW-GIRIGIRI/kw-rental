@@ -1,4 +1,4 @@
-import { ImgDefault } from "./style"
+import { ImgDefault } from "./style";
 
 const Image = ({
   borderRadius,
@@ -7,13 +7,19 @@ const Image = ({
   height,
   src,
   onClick,
-  alt=""
+  alt = "",
 }) => {
   return (
     <ImgDefault
-      onClick={onClick} margin={margin} borderRadius={borderRadius} width={width} height={height} src={src} alt={alt} >
-    </ImgDefault>
-  )
-}
+      onClick={onClick}
+      margin={margin}
+      borderRadius={borderRadius}
+      width={width}
+      height={height}
+      src={src}
+      alt={alt}
+    ></ImgDefault>
+  );
+};
 
-export default Image
+export default Image;

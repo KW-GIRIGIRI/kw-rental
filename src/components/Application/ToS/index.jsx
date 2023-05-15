@@ -16,16 +16,26 @@ const ToS = forwardRef((props, dataRef) => {
       </S.ToSWrap>
       <S.Label htmlFor="agree">
         <span>확인하였으며 동의합니다.</span>
-        <S.Check type="checkbox" name="" ref={el => dataRef.current.check = isChecked} id="agree" onChange={handleCheckboxChange} />
+        <S.Check
+          type="checkbox"
+          name=""
+          ref={(el) => (dataRef.current.check = isChecked)}
+          id="agree"
+          onChange={handleCheckboxChange}
+        />
       </S.Label>
       <div style={{ clear: "both" }}></div>
-      {!isChecked ?
-        <S.Exclam><img src={iconExclamation} alt="" /><span>필수 사항입니다.</span></S.Exclam>
-        : <S.Empty></S.Empty>
-      }
+      {!isChecked ? (
+        <S.Exclam>
+          <img src={iconExclamation} alt="" />
+          <span>필수 사항입니다.</span>
+        </S.Exclam>
+      ) : (
+        <S.Empty></S.Empty>
+      )}
       <div style={{ clear: "both" }}></div>
     </>
-  )
-})
+  );
+});
 
-export default ToS
+export default ToS;

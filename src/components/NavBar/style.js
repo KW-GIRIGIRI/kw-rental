@@ -13,7 +13,7 @@ export const NavUl = styled.ul`
   margin: 0 auto;
   padding: 16px 0;
   gap: 50px;
-`
+`;
 
 export const NavLi = styled.li`
   cursor: pointer;
@@ -24,4 +24,3 @@ export const NavLi = styled.li`
     color: ${(props) => props.theme.color.text.white};
   }
 `;
-

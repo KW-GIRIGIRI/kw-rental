@@ -20,10 +20,10 @@ export const FileLabel = styled.label`
     margin-bottom: 10px;
   }
   & > p {
-    color: ${props => props.theme.color.text.gray};
+    color: ${(props) => props.theme.color.text.gray};
     font-size: 14px;
     width: max-content;
-}
+  }
 `;
 
 export const Div = styled.div`
@@ -32,7 +32,7 @@ export const Div = styled.div`
 
 export const BtnWrap = styled.div`
   text-align: center;
-`
+`;
 
 export const FileBtn = styled.label`
   position: absolute;
@@ -43,7 +43,7 @@ export const FileBtn = styled.label`
   gap: 6px;
   background-color: ${(props) => props.theme.color.primary.main};
   color: ${(props) => props.theme.color.text.white};
-  border-radius: ${props => props.theme.borderRadius.lv1};
+  border-radius: ${(props) => props.theme.borderRadius.lv1};
   font-size: 13px;
   transform: translate(10px, 130px);
   & > input {

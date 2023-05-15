@@ -13,4 +13,4 @@ export const LogoImg = styled.img`
   width: 130px;
   margin: 96px 0 37px;
   margin-bottom: 37px;
-`
+`;

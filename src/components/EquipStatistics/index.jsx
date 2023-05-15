@@ -1,6 +1,6 @@
-import * as S from "./style"
+import * as S from "./style";
 
-export default function EquipStatistics({data}) {
+export default function EquipStatistics({ data }) {
   return (
     <S.ItemUl>
       <S.Header>
@@ -18,8 +18,7 @@ export default function EquipStatistics({data}) {
           <span>{item.기간내대여수}</span>
           <span>{item.불량반납}</span>
         </S.ItemLi>
-      ))
-      }
+      ))}
     </S.ItemUl>
-  )
+  );
 }

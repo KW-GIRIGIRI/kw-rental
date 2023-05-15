@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Div = styled.div`
   position: relative;
   width: 100%;
-`
+`;
 
 export const TextareaStyle = styled.textarea`
   width: 100%;
