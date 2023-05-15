@@ -1,85 +1,32 @@
 import Button from "../../modules/Button";
-import iconCalendar from "../../assets/icon-calendar.svg"
 import * as S from "./style"
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { addCartEquip } from "../../api/api";
 import useModal from "../../hook/useModal";
-import dayjs from "dayjs"
-import updateLocale from "dayjs/plugin/updateLocale"
-import toArray from "dayjs/plugin/toArray"
-import DatePicker from "../DatePicker";
 import { useSelector } from "react-redux";
-
-dayjs.extend(updateLocale)
-dayjs.extend(toArray)
-
-dayjs.updateLocale('en', {
-  weekdays: [
-    "일", "월", "화", "수", "목", "금", "토"
-  ]
-})
+import DualDatePicker from "../DatePicker/DualDatePicker";
 
 export default function AddCartEquip() {
   const amountRef = useRef()
   const navigate = useNavigate();
   const params = useParams()
   const { Modal, open, close } = useModal()
-  const [calendar, setCalendar] = useState({
-    visible: false,
-    top: 0,
-    left: 0,
-    date: dayjs().add(1, 'days')
-  })
   const productCount = useSelector(state => state.modifyEquip.equip.totalQuantity)
-
-  const handleGetDatePicker = e => {
-    e.preventDefault()
-    const position = e.target.getBoundingClientRect()
-    const top = position.top + position.height, left = position.left
-    setCalendar(prev => ({
-      ...prev,
-      visible: true,
-      top: top,
-      left: left,
-    }))
-  }
+  const selectDate = useSelector(state => state.datePicker.dualDate)
 
   const handleAddCart = async () => {
      const data = {
       "equipmentId" : parseInt(params.id),
-      "rentalStartDate" : dayjs(calendar.date).format('YYYY-MM-DD').split('-').map(i => parseInt(i)),
-      "rentalEndDate" : dayjs(calendar.date).add(1, 'days').format('YYYY-MM-DD').split("-").map(i => parseInt(i)),
+      "rentalStartDate" : selectDate.firstDate.split('-').map(i => parseInt(i)),
+      "rentalEndDate" : selectDate.lastDate.split("-").map(i => parseInt(i)),
       "amount" : parseInt(amountRef.current.value)
      }
-
+    
     const response = await addCartEquip(JSON.stringify(data))
     response.includes('/inventories') && open()
   }
 
-  const handleSetMon = (num) => {
-    setCalendar(prev => ({
-      ...calendar,
-      date : calendar.date.add(num, 'days')
-    }))
-  }
-
-  useEffect(() => {
-    switch (calendar.date.day()) {
-      case 5:
-        handleSetMon(3);
-        break;
-      case 6: 
-        handleSetMon(2);
-        break;
-      case 0: 
-        handleSetMon(1);
-        break;
-      default:
-        break;
-    }
-  }, [])
-  
   return (
     <S.Wrapper>
       <S.Form>
@@ -95,15 +42,7 @@ export default function AddCartEquip() {
         </S.InpWrapper>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
-          <S.DateCont onClick={handleGetDatePicker}>
-            <S.DateImg src={iconCalendar} alt="" />
-            <span>{dayjs(calendar.date).format('M월 D일(dd)')}</span>
-          </S.DateCont>
-          {calendar && <DatePicker calendar={calendar} setCalendar={setCalendar} />}
-          <span>~</span>
-          <S.DateCont>
-            <span>{dayjs(calendar.date).add(1, 'days').format('M월 D일(dd)')}</span>
-          </S.DateCont>
+          <DualDatePicker firstInitial={1} className='user' />
         </S.InpWrapper>
       </S.Form>
       <Button onClick={handleAddCart} className="main" text="기자재 담기" padding="15px 23px" borderRadius="10px" fontSize="15px" margin="0 13px 0 0"/>
