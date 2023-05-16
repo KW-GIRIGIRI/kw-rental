@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import iconDownArrow from "../../assets/icon-downArrow-gray.svg";
 
 export const SchedTitle = styled.h1`
   margin-top: 30px;

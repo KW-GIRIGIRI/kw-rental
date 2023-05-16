@@ -21,7 +21,7 @@ export default function RentalSuccess() {
         />
         <Button
           text="목록 보기"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/equipment")}
           className="sub"
           borderRadius="10px"
           padding="16px 37px"

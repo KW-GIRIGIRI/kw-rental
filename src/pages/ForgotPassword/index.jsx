@@ -9,7 +9,7 @@ export default function ForgotPassword() {
   const handleFindPassword = (event) => {
     event.preventDefault();
 
-    navigate("/auth/success", { state: { isSignup: false } });
+    navigate("/success", { state: { isSignup: false } });
   };
 
   return (

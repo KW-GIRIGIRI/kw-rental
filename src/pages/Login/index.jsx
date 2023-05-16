@@ -27,7 +27,7 @@ export default function Login() {
     };
 
     const res = await UserLogin(JSON.stringify(data));
-    res === 200 && navigate("/");
+    res === 200 && navigate("/equipment");
   };
 
   return (
@@ -63,8 +63,8 @@ export default function Login() {
           onClick={handleLogin}
         />
         <S.BtnDiv>
-          <span onClick={() => navigate("/auth/forgot")}>비밀번호 찾기</span>
-          <span onClick={() => navigate("/auth/signup")}>회원가입</span>
+          <span onClick={() => navigate("/forgot")}>비밀번호 찾기</span>
+          <span onClick={() => navigate("/signup")}>회원가입</span>
         </S.BtnDiv>
       </S.Wrap>
       <S.Policy>개인정보처리방침</S.Policy>

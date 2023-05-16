@@ -19,7 +19,7 @@ export default function NotFound() {
         className="sub"
         padding="16px 40px"
         borderRadius="10px"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/equipment")}
       />
     </S.Section>
   );

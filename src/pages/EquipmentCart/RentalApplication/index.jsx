@@ -19,7 +19,7 @@ export default function RentalApplication() {
       };
 
       const response = await postReservation(JSON.stringify(data));
-      response === 201 && navigate("/inventory/success");
+      response === 201 && navigate("/equipment/inventory/success");
     }
   };
 
@@ -37,7 +37,7 @@ export default function RentalApplication() {
           margin="0 13px 0 0"
         />
         <Button
-          onClick={() => navigate("/inventory")}
+          onClick={() => navigate("/equipment/inventory")}
           className="sub"
           text="뒤로 가기"
           padding="16px 36px"

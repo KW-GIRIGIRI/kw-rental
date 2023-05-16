@@ -28,6 +28,7 @@ import LabRentalSuccess from "../pages/LabRental/LabRentalSuccess";
 import { useContext } from "react";
 import { AuthContext } from "../context/Context";
 import LabRentalManage from "../pages/LabRental/LabAuthManage";
+import NotFound from "../pages/NotFound";
 
 export default function Router() {
   const { isAuth } = useContext(AuthContext);
@@ -35,8 +36,14 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<AuthWrapper />}>
+          <Route path="" element={<Login />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="forgot" element={<ForgotPassword />} />
+          <Route path="success" element={<AuthSuccess />} />
+        </Route>
         <Route element={<MainWrapper />}>
-          <Route path="/*" element={<EquipmentRental />}>
+          <Route path="/equipment/*" element={<EquipmentRental />}>
             <Route path="" element={<EquipmentList />} />
             <Route path=":id" element={<EquipmentDetail />} />
             <Route path=":id/edit" element={<AddEquipment />} />
@@ -69,12 +76,7 @@ export default function Router() {
             <Route path="edit" element={<LabInformation />} />
           </Route>
         </Route>
-        <Route path="/auth/*" element={<AuthWrapper />}>
-          <Route path="" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="forgot" element={<ForgotPassword />} />
-          <Route path="success" element={<AuthSuccess />} />
-        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

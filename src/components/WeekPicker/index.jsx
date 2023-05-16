@@ -4,14 +4,9 @@ import iconRightArrow from "../../assets/icon-rightArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
 import * as S from "./style";
 import DatePicker from "../DatePicker";
-import updateLocale from "dayjs/plugin/updateLocale";
 import dayjs from "dayjs";
-
-dayjs.extend(updateLocale);
-
-dayjs.updateLocale("en", {
-  weekdays: ["일", "월", "화", "수", "목", "금", "토"],
-});
+import { getProductAmountFromDate } from "../../api/api";
+import { useParams } from "react-router-dom";
 
 export default function WeekPicker({ modify }) {
   const [calendar, setCalendar] = useState({
@@ -20,6 +15,8 @@ export default function WeekPicker({ modify }) {
     left: 0,
     date: dayjs().add(1, "days"),
   });
+  const params = useParams()
+  const [amountArr, setAmountArr] = useState([])
 
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -80,6 +77,14 @@ export default function WeekPicker({ modify }) {
     }));
   };
 
+  const handleGetProductAmount = async () => {
+    const startDate = calendar.date.startOf("week").add(1, "days").format('YYYY-MM-DD');
+    const endDate = calendar.date.startOf("week").add(4, "days").format('YYYY-MM-DD');
+
+    const res = await getProductAmountFromDate(params.id, startDate, endDate)
+    setAmountArr(res.remainQuantities);
+  }
+
   const handleWeekPrint = (num) => {
     const pDate = calendar.date.startOf("week").add(num, "days");
 
@@ -90,14 +95,16 @@ export default function WeekPicker({ modify }) {
           modify={modify}
           className={pDate >= dayjs() ? false : "disabled"}
         >
-          {num} {/* 대여 가능 개수 */}
+          {amountArr[num-1]?.remainQuantity}
         </S.DateSubTit>
       </S.DateLi>
     );
   };
 
+
   useEffect(() => {
     CalcDate();
+    handleGetProductAmount()
   }, [calendar]);
 
   useEffect(() => {

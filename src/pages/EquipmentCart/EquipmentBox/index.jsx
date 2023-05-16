@@ -61,7 +61,7 @@ export default function EquipmentBox() {
           />
           <S.MainBtnWrap>
             <Button
-              onClick={() => navigate("/inventory/application")}
+              onClick={() => navigate("/equipment/inventory/application")}
               className="main"
               text="대여하기"
               padding="16px 36px"
@@ -70,7 +70,7 @@ export default function EquipmentBox() {
               margin="0 13px 0 0"
             />
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/equipment")}
               className="sub"
               text="목록보기"
               padding="16px 36px"

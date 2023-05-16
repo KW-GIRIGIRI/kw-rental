@@ -12,13 +12,6 @@ export const scrollText = keyframes`
   }
 `;
 
-export const GalUl = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 30px;
-  row-gap: 32px;
-`;
-
 export const GalLi = styled.li`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;

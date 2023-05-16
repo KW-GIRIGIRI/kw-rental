@@ -88,6 +88,20 @@ export const postImage = async (formData) => {
   }
 };
 
+// 기자재 날짜 별 대여 가능 갯수 조회
+export const getProductAmountFromDate = async (id, from, to) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/equipments/${id}/remainQuantities?from=${from}&to=${to}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
 // 담은 기자재 관련
 export const addCartEquip = async (data) => {
   try {

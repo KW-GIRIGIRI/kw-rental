@@ -102,8 +102,8 @@ export default function DualDatePicker({
         ...prev,
         date: dayjs(lastCalendar.date.subtract(1, "days")),
       }));
-    }
-    dispatch(setDuaLastDate(dayjs(lastCalendar.date).format("YYYY-MM-DD")));
+      dispatch(setDuaLastDate(dayjs(lastCalendar.date).format("YYYY-MM-DD")));
+    } 
   }, [lastCalendar.date]);
 
   return (
