@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-export const ListUl = styled.ul`
-  border-radius: 10px;
-`;
-
 export const ListLi = styled.li`
   display: grid;
   font-size: 15px;

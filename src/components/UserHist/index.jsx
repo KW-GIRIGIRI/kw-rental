@@ -83,7 +83,8 @@ export default function UserHist({ isEquip, isLab }) {
 
   return (
     <>
-      // (isEquip || isLab) && <DualDatePicker firstInitial={-90} />
+      {/* (isEquip || isLab) &&
+      <DualDatePicker firstInitial={-90} /> */}
       <S.Div>
         {
           // 캘린더
