@@ -1,5 +1,14 @@
-import * as s from "./style";
+import SingularDatePicker from '../../../components/DatePicker/SingularDatePicker';
+import LabSched from '../../../components/LabSched';
+import { Cal } from "./style";
 
 export default function LabRentalManage() {
-  return <div>LabRentalManage</div>;
+  return (
+    <>
+      <Cal>
+        <SingularDatePicker />
+      </Cal>
+      <LabSched />
+    </>
+  )
 }

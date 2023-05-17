@@ -29,7 +29,7 @@ export const SimpleDesc = styled.div`
 
 export const SubTitle = styled.h2`
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 30px;
 `;
 
