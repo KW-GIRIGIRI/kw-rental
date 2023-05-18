@@ -5,7 +5,7 @@ import DatePicker from "..";
 import * as S from "./style";
 import { useDispatch } from "react-redux";
 import {
-  setDuaLastDate,
+  setDualLastDate,
   setDualFirstDate,
 } from "../../../store/reducer/datePickerSlice";
 
@@ -89,7 +89,7 @@ export default function DualDatePicker({
         //   dayjs(firstCalendar.date).add(4, 'days') :
         dayjs(firstCalendar.date).add(1, "days");
 
-      dispatch(setDuaLastDate(sendDate.format("YYYY-MM-DD")));
+      dispatch(setDualLastDate(sendDate.format("YYYY-MM-DD")));
     }
   }, [firstCalendar.date]);
 
@@ -102,8 +102,8 @@ export default function DualDatePicker({
         ...prev,
         date: dayjs(lastCalendar.date.subtract(1, "days")),
       }));
-      dispatch(setDuaLastDate(dayjs(lastCalendar.date).format("YYYY-MM-DD")));
-    } 
+    }
+      dispatch(setDualLastDate(dayjs(lastCalendar.date).format("YYYY-MM-DD")));
   }, [lastCalendar.date]);
 
   return (

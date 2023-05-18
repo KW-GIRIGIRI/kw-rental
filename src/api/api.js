@@ -439,3 +439,17 @@ export const getUserRentalHistory = async (fromDate, toDate) => {
     return err;
   }
 };
+
+// 관리자 기자재 히스토리 조회
+export const getAdminEquipHistory = async (fromDate, toDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/items/histories?size=15&from=${fromDate}&to=${toDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

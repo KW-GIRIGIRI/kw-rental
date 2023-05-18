@@ -18,13 +18,13 @@ const datePickerSlice = createSlice({
     setDualFirstDate: (state, action) => {
       state.dualDate.firstDate = action.payload;
     },
-    setDuaLastDate: (state, action) => {
+    setDualLastDate: (state, action) => {
       state.dualDate.lastDate = action.payload;
     },
   },
 });
 
-export const { setSingularDate, setDualFirstDate, setDuaLastDate } =
+export const { setSingularDate, setDualFirstDate, setDualLastDate } =
   datePickerSlice.actions;
 
 export default datePickerSlice.reducer;

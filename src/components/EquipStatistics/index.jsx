@@ -1,6 +1,15 @@
 import * as S from "./style";
 
 export default function EquipStatistics({ data }) {
+  const category =
+  {
+    CAMERA: "카메라",
+    RECORDING: "녹음 장비",
+    FILMING_ASSIST: "촬영보조 장비",
+    VR: "VR 장비",
+    ETC: "기타"
+  }
+
   return (
     <S.ItemUl>
       <S.Header>
@@ -12,11 +21,11 @@ export default function EquipStatistics({ data }) {
       </S.Header>
       {data.map((item, idx) => (
         <S.ItemLi key={idx}>
-          <span>{item.카테고리}</span>
-          <span>{item.기자재명}</span>
-          <span>{item.자산번호}</span>
-          <span>{item.기간내대여수}</span>
-          <span>{item.불량반납}</span>
+          <span>{category[item.category]}</span>
+          <span>{item.modelName}</span>
+          <span>{item.propertyNumber}</span>
+          <span>{item.abnormalRentalCount + item.normalRentalCount}</span>
+          <span>{item.abnormalRentalCount}</span>
         </S.ItemLi>
       ))}
     </S.ItemUl>
