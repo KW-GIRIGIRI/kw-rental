@@ -6,7 +6,6 @@ const initialState = {
     firstDate: "",
     lastDate: "",
   },
-  modifyEquipAmount: "",
 };
 
 const datePickerSlice = createSlice({
@@ -22,17 +21,10 @@ const datePickerSlice = createSlice({
     setDuaLastDate: (state, action) => {
       state.dualDate.lastDate = action.payload;
     },
-    setModifyEquipAmount: (state, action) => {
-      state.modifyEquipAmount = action.payload;
-    },
   },
 });
 
-export const {
-  setSingularDate,
-  setDualFirstDate,
-  setDuaLastDate,
-  setModifyEquipAmount,
-} = datePickerSlice.actions;
+export const { setSingularDate, setDualFirstDate, setDuaLastDate } =
+  datePickerSlice.actions;
 
 export default datePickerSlice.reducer;

@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import useModal from "../../hook/useModal";
 import { category } from "../../data/category";
 import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
+import { useDispatch } from "react-redux";
+import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -26,6 +28,7 @@ export default function EquipmentList() {
   const [isCategory, setIsCategory] = useState(0);
   const { Modal, open, close } = useModal();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleSearch = (e) => {
     if (e.key === "Enter" || e.type === "click") {
@@ -67,6 +70,10 @@ export default function EquipmentList() {
     getProduct();
     if (isAuth) setViewMode("list");
   }, [page, viewMode, isCategory]);
+
+  useEffect(() => {
+    dispatch(resetEquip());
+  }, [])
 
   return (
     <S.Wrapper>
