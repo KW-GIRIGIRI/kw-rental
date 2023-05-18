@@ -441,10 +441,10 @@ export const getUserRentalHistory = async (fromDate, toDate) => {
 };
 
 // 관리자 기자재 히스토리 조회
-export const getAdminEquipHistory = async (fromDate, toDate) => {
+export const getAdminEquipHistory = async (url) => {
   try {
     const response = await instanceUtil.get(
-      `/admin/items/histories?size=15&from=${fromDate}&to=${toDate}`
+      `/admin/items/histories?size=15&${url}`
     );
 
     return response.data;

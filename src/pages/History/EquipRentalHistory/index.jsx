@@ -7,6 +7,7 @@ import iconExcel from "../../../assets/icon-excel.svg"
 import Image from "../../../modules/Image"
 import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
 import dayjs from "dayjs"
+import iconPageArrow from "../../../assets/icon-pageArrow.svg"
 import { useContext, useState, useEffect } from "react"
 import { AuthContext } from "../../../context/Context"
 import { category } from "../../../data/category"
@@ -39,18 +40,19 @@ export default function EquipmentRentalHistory() {
 
   const handleGetEquipHistory = async () => {
     if (dualDate.firstDate && dualDate.lastDate) {
-      const response = await getAdminEquipHistory(
-        dualDate.firstDate,
-        dualDate.lastDate
-      );
-  
+      const reqCategory = isCategory
+      ? `&category=${category.filter((_, i) => i + 1 === isCategory)[0]?.value}`
+      : "";
+      const reqUrl = `from=${dualDate.firstDate}&to=${dualDate.lastDate}&page=${page}${reqCategory}`
+      const response = await getAdminEquipHistory(reqUrl)
+      const data = response.histories
+
+      setPageArray(response.endpoints)
+
       window.scrollTo({
         top: 0,
       });
 
-      setPageArray(response.page)
-      const data = response.histories
-  
       if (isCategory) {
         setProductList(
           data.filter((i) => i.category === category[isCategory - 1].value)
@@ -122,7 +124,30 @@ export default function EquipmentRentalHistory() {
 
             <EquipStatistics data={productList} />
           </S.RentalWrap>
-          <div>페이지</div>
+          {pageArray && (
+            <S.PageBtnWrap>
+              <button onClick={() => setPage(page - 1)} disabled={page === 0}>
+                <img src={iconPageArrow} alt="이전 페이지" />
+              </button>
+              {pageArray?.map((_, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setPage(index)}
+                    className={page === index ? "on" : null}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              })}
+              <button
+                onClick={() => setPage(page + 1)}
+                disabled={page + 1 === pageArray.length}
+              >
+                <img src={iconPageArrow} alt="다음 페이지" />
+              </button>
+            </S.PageBtnWrap>
+          )}
         </>
       ) : (
         <>
