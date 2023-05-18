@@ -44,23 +44,25 @@ export default function LabRental() {
         );
       default:
         return (
-          <>
-            <Button
-              className={isFirst ? "main shadow" : "disable shadow"}
-              text="한울관"
-              padding="10px 29px"
-              borderRadius="20px"
-              margin="0 10px 0 0"
-              onClick={() => setIsFirst(true)}
-            />
-            <Button
-              className={isFirst ? "disable shadow" : "main shadow"}
-              text="화도관"
-              padding="10px 29px"
-              borderRadius="20px"
-              onClick={() => setIsFirst(false)}
-            />
-          </>
+          isAuth && pathname.includes("/status") ? <></>
+            :
+            <>
+              <Button
+                className={isFirst ? "main shadow" : "disable shadow"}
+                text="한울관"
+                padding="10px 29px"
+                borderRadius="20px"
+                margin="0 10px 0 0"
+                onClick={() => setIsFirst(true)}
+              />
+              <Button
+                className={isFirst ? "disable shadow" : "main shadow"}
+                text="화도관"
+                padding="10px 29px"
+                borderRadius="20px"
+                onClick={() => setIsFirst(false)}
+              />
+            </>
         );
     }
   };
@@ -72,12 +74,12 @@ export default function LabRental() {
           <TabNav
             onClick={() => navigate("/lab")}
             text="랩실 관리"
-            className={pathname.includes("lab/") ? "false" : "on"}
+            className={pathname.split("/").at(-1) === "lab" || pathname.split("/").at(-1) === "edit" ? "on" : "false"}
           />
           <TabNav
             onClick={() => navigate("/lab/status")}
             text="대여 관리"
-            className={pathname.includes("lab/") ? "on" : "false"}
+            className={pathname.includes("status") ? "on" : "false"}
           />
         </>
       ) : (
