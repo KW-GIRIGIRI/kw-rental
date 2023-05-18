@@ -4,13 +4,16 @@ import iconLeftArrow from "../../assets/icon-leftArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
 import dayjs from "dayjs";
 import * as S from "./style";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLabDate } from "../../store/reducer/LabControllerSlice";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
 const LabCalendar = () => {
   const [dayObj, setDayObj] = useState(dayjs());
   const hanul = useSelector(state => state.labControl.lab)
+  const selectDate = useSelector(state => state.labControl.date)
+  const dispatch = useDispatch()
 
   const thisYear = dayObj.year();
   const thisMonth = dayObj.month();
@@ -29,6 +32,10 @@ const LabCalendar = () => {
   const handleNext = () => {
     setDayObj(dayObj.add(1, "month"));
   };
+
+  const handleSetDate = e => {
+    dispatch(setLabDate(`${thisYear}-${thisMonth + 1}-${e.target.value}`))
+  }
 
   return (
     <S.Wrapper>
@@ -64,7 +71,9 @@ const LabCalendar = () => {
           .fill()
           .map((_, i) => (
             <S.ContCell
+              onClick={handleSetDate}
               key={i}
+              value={i + 1}
               className={
                 dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).format(
                   "YYMMDD"
@@ -72,8 +81,13 @@ const LabCalendar = () => {
               }
             >
               <span>{i + 1}</span>
-              {dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() <
-                4 && <p>{hanul ? "대여(0/20)" : "대여 가능"}</p>}
+              {
+                dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 && (
+                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
+                  <ins>{hanul ? "대여(0/20)" : "대여 가능"}</ins> :
+                  <p>{hanul ? "대여(0/20)" : "대여 가능"}</p>
+                )
+              }
             </S.ContCell>
           ))}
 
