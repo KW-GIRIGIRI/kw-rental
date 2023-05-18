@@ -6,7 +6,7 @@ import * as S from "./style";
 import { useDispatch } from "react-redux";
 import { setSingularDate } from "../../../store/reducer/datePickerSlice";
 
-export default function SingularDatePicker({ initial }) {
+export default function SingularDatePicker({ initial, className }) {
   const [calendar, setCalendar] = useState({
     visible: false,
     top: 0,
@@ -64,7 +64,7 @@ export default function SingularDatePicker({ initial }) {
       </S.DateCont>
       {calendar && (
         <DatePicker
-          className="user"
+          className={className || "user"}
           initial={initial}
           calendar={calendar}
           setCalendar={setCalendar}
