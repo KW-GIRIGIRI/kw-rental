@@ -21,7 +21,7 @@ export default function AddCartEquip({ modify, setModal }) {
   const handleGetProductAmount = async () => {
     const id = params.id 
     const res = await getProductAmountFromDate(id, selectDate.firstDate, selectDate.lastDate)
-    res.remainQuantities && setRentalAmount(res.remainQuantities[0].remainQuantity);
+    res.remainQuantities.length && setRentalAmount(res.remainQuantities[0].remainQuantity);
   }
 
   const handleAddCart = async () => {
@@ -49,16 +49,21 @@ export default function AddCartEquip({ modify, setModal }) {
         </S.InpWrapper>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>
-          <S.Select name="equipCount" id="" ref={amountRef}>
-            {Array(rentalAmount)
-              .fill()
-              .map((_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-          </S.Select>{" "}
-          대
+        {
+            rentalAmount ?
+              <>
+                <S.Select name="equipCount" id="" ref={amountRef}>
+                  {Array(rentalAmount)
+                    .fill()
+                    .map((_, i) => (
+                      <option key={i} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    ))}
+                </S.Select> 대
+              </>
+              : <S.WarnDesc>대여 가능 수량이 0개입니다.</S.WarnDesc>
+            }
         </S.InpWrapper>
       </S.Form>
       <Button

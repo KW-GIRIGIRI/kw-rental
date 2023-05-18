@@ -136,6 +136,7 @@ export default function WeekPicker({ modify, equipId }) {
         </S.DateCont>
         {calendar && (
           <DatePicker
+            className='user'
             checkWeek={true}
             calendar={calendar}
             setCalendar={setCalendar}

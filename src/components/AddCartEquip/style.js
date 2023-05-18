@@ -42,3 +42,7 @@ export const Select = styled.select`
   background: url(${iconDownArrow}) no-repeat right 8px top 50%;
   background-size: 10px;
 `;
+
+export const WarnDesc = styled.p`
+  font-size: 14px;
+`;
