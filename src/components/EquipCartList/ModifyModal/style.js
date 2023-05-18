@@ -28,6 +28,8 @@ export const SelectCount = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  outline: none;
+  margin-bottom: 26px;
 `;
 
 export const DateCont = styled.label`

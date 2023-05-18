@@ -7,10 +7,12 @@ import iconCalendar from "../../../assets/icon-calendar-black.svg";
 import * as S from "./style";
 import { InpWrapper } from "../../AddCartEquip/style";
 import { category } from "../../../data/category";
-import { getProductDetail } from "../../../api/api";
+import { getProductAmountFromDate, modifyCartEquip } from "../../../api/api";
 import DatePicker from "../../DatePicker";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
+import { useDispatch } from "react-redux";
+import { asyncGetCartList } from "../../../store/reducer/cartListSlice";
 
 dayjs.extend(updateLocale);
 
@@ -21,18 +23,18 @@ dayjs.updateLocale("en", {
 export default function ModifyModal({
   modal,
   setModal,
-  item,
-  handleModifyCartEquip,
+  cart,
 }) {
   const { Modal, open, close } = useModal();
-  const [equip, setEquip] = useState();
   const amountRef = useRef([]);
   const [calendar, setCalendar] = useState({
     visible: false,
     top: 0,
     left: 0,
-    date: dayjs(item.rentalStartDate),
+    date: dayjs(cart.rentalStartDate),
   });
+  const [rentalAmount, setRentalAmount] = useState()
+  const dispatch = useDispatch()
 
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -47,23 +49,26 @@ export default function ModifyModal({
     }));
   };
 
-  const handleGetEquip = async () => {
-    const response = await getProductDetail(item.equipmentId);
-    setEquip(response);
-  };
+  const handleGetProductAmount = async () => {
+    const startDate = calendar.date.format('YYYY-MM-DD')
+    const endDate = calendar.date.add(1, 'days').format('YYYY-MM-DD')
+
+    const res = await getProductAmountFromDate(cart.equipmentId, startDate, endDate)
+    res.remainQuantities && setRentalAmount(res.remainQuantities[0].remainQuantity);
+  }
 
   const handleClose = () => {
     close();
     setModal(false);
-  };
+  }
 
-  const handleModify = () => {
+  const handleModifyCartEquip = async () => {
     const data = {
-      rentalStartDate: dayjs(calendar.date)
+      rentalStartDate: calendar.date
         .format("YYYY-MM-DD")
         .split("-")
         .map((i) => parseInt(i)),
-      rentalEndDate: dayjs(calendar.date)
+      rentalEndDate: calendar.date
         .add(1, "days")
         .format("YYYY-MM-DD")
         .split("-")
@@ -71,14 +76,17 @@ export default function ModifyModal({
       amount: parseInt(amountRef.current.value),
     };
 
-    handleModifyCartEquip(item.id, JSON.stringify(data)) &&
-      close() &&
-      setModal(false);
+    const res = await modifyCartEquip(cart.id, JSON.stringify(data))
+    if (res === 200) {
+      close()
+      setModal(false)
+      dispatch(asyncGetCartList())
+    }
   };
 
   useEffect(() => {
-    handleGetEquip();
-  }, []);
+    handleGetProductAmount()
+  }, [calendar.date])
 
   useEffect(() => {
     modal && open();
@@ -86,7 +94,7 @@ export default function ModifyModal({
   }, [modal, close]);
 
   return (
-    equip && (
+    cart && (
       <Modal className="modify">
         <p>담은 기자재 수정</p>
         <S.Div className="item">
@@ -94,28 +102,21 @@ export default function ModifyModal({
             width="54px"
             height="54px"
             borderRadius="10px"
-            src={equip.imgUrl}
+            src={cart.imgUrl}
             alt=""
           />
           <S.ItemWrap>
             <p>
               {category.map(
-                (value) => value.value === equip.category && value.label
+                (value) => value.value === cart.category && value.label
               )}
             </p>
-            <p>{equip.modelName}</p>
+            <p>{cart.modelName}</p>
           </S.ItemWrap>
         </S.Div>
-        <p>대여 기자재 수정</p>
-        <S.SelectCount name="" id="" ref={amountRef} defaultValue={item.amount}>
-          {Array(equip.totalQuantity)
-            .fill()
-            .map((_, i) => (
-              <option key={i} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-        </S.SelectCount>
+        <p>대여 현황</p>
+        <WeekPicker equipId={cart.equipmentId} modify="true" />
+        
         <p>기자재 수령일~반납일</p>
         {calendar && (
           <DatePicker calendar={calendar} setCalendar={setCalendar} />
@@ -130,8 +131,18 @@ export default function ModifyModal({
             <span>{calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
           </S.DateCont>
         </InpWrapper>
-        <p>대여 현황</p>
-        <WeekPicker modify="true" />
+
+        <p>대여 기자재 수정</p>
+        <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount}>
+         {Array(rentalAmount)
+            .fill()
+            .map((_, i) => 
+              <option key={i + 1} value={i + 1}>
+                {i + 1}
+              </option>
+            )}
+        </S.SelectCount>
+         
         <div>
           <Button
             text="수정하기"
@@ -139,7 +150,7 @@ export default function ModifyModal({
             padding="11px 24px"
             borderRadius="5px"
             fontSize="14px"
-            onClick={handleModify}
+            onClick={handleModifyCartEquip}
           />
           <Button
             text="취소하기"

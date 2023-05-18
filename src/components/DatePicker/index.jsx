@@ -152,10 +152,11 @@ export default function DatePicker({
               getDate(d).day() > 4 ||
               getDate(d).day() === 0 ||
               (className === "user" &&
-                (!!initial
-                  ? getDate(d) < dayjs()
-                  : getDate(d) < dayjs().subtract(1, "days"))) ||
-              (className === "user" && getDate(d) > dayjs().add(31, "days"))
+                (!initial &&
+                  getDate(d) < dayjs())
+                // : getDate(d) < dayjs().subtract(1, "days"))
+              )
+                || (className === "user" && getDate(d) > dayjs().add(31, "days"))
                 ? "disabled"
                 : ""
             }

@@ -6,6 +6,7 @@ const initialState = {
     firstDate: "",
     lastDate: "",
   },
+  modifyEquipAmount: "",
 };
 
 const datePickerSlice = createSlice({
@@ -21,30 +22,17 @@ const datePickerSlice = createSlice({
     setDuaLastDate: (state, action) => {
       state.dualDate.lastDate = action.payload;
     },
-    // resetDate: () => {
-    //   return {
-    //     singularDate: "",
-    //     dualDate: {
-    //       firstDate: {
-    //         visible: false,
-    //         top: 0,
-    //         left: 0,
-    //         date: dayjs().toISOString(),
-    //       },
-    //       particularDate: "",
-    //       secondDate: {
-    //         visible: false,
-    //         top: 0,
-    //         left: 0,
-    //         date: dayjs().add(1, "days").toISOString(),
-    //       },
-    //     },
-    //   };
-    // },
+    setModifyEquipAmount: (state, action) => {
+      state.modifyEquipAmount = action.payload;
+    },
   },
 });
 
-export const { setSingularDate, setDualFirstDate, setDuaLastDate } =
-  datePickerSlice.actions;
+export const {
+  setSingularDate,
+  setDualFirstDate,
+  setDuaLastDate,
+  setModifyEquipAmount,
+} = datePickerSlice.actions;
 
 export default datePickerSlice.reducer;

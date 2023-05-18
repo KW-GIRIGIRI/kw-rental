@@ -151,7 +151,7 @@ export const modifyCartEquip = async (id, data) => {
   try {
     const response = await instanceUtil.patch(`/inventories/${id}`, data);
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.message);
     return err;
