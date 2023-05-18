@@ -55,8 +55,8 @@ export const HistWrap = styled.ul`
 
 export const Header = styled.li`
   padding: 10px 0;
-  background-color: #e0e4e9;
-  border: 1px solid #8b95a1;
+  background-color: ${(props) => props.theme.color.primary.sub};
+  border: 1px solid ${(props) => props.theme.color.primary.third};
   display: grid;
   align-items: center;
 
@@ -67,7 +67,7 @@ export const Header = styled.li`
 `;
 
 export const HistList = styled.li`
-  border: 1px solid #8b95a1;
+  border: 1px solid ${(props) => props.theme.color.primary.third};
   border-top: none;
   display: grid;
   align-items: center;

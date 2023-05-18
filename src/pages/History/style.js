@@ -54,7 +54,7 @@ export const DownloadModal = styled.div`
   position: absolute;
   right: 26px;
   margin-top: 25px;
-  background: #fff;
+  background: ${(props) => props.theme.color.text.white};
 
   & > p {
     padding: 12px 27px;
@@ -63,7 +63,7 @@ export const DownloadModal = styled.div`
     line-height: 16px;
 
     &:hover {
-      background: #f3f6fb;
+      background: ${(props) => props.theme.color.primary.lightsub};
     }
   }
 

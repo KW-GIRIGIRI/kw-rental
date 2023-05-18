@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Wrap = styled.div`
   font-size: 13px;
   width: 441px;
-  border: 1px solid #8b95a1;
+  border: 1px solid ${(props) => props.theme.color.primary.third};
 
   & > div {
     display: grid;
@@ -17,17 +17,17 @@ export const Wrap = styled.div`
     }
 
     & > p:first-child {
-      border-right: 1px solid #8b95a1;
+      border-right: 1px solid ${(props) => props.theme.color.primary.third};
     }
 
     &:first-child {
-      border-bottom: 1px solid #8b95a1;
+      border-bottom: 1px solid ${(props) => props.theme.color.primary.third};
     }
   }
 `;
 
 export const Header = styled.div`
-  background: #e0e4e9;
+  background: ${(props) => props.theme.color.primary.sub};
   padding: 10px 0;
   & > p {
     height: calc(100% + 20px);

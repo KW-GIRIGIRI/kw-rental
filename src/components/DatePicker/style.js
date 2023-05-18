@@ -13,7 +13,7 @@ export const Wrap = styled.div`
   position: absolute;
   top: ${(props) => props.top}px;
   left: ${(props) => props.left}px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.color.text.white};
   z-index: 99;
   width: 205px;
   padding: 16px;
@@ -28,7 +28,7 @@ export const Header = styled.div`
   align-items: center;
   font-size: 12px;
   margin-bottom: 12px;
-  color: #0e2b5a;
+  color: ${(props) => props.theme.color.primary.main};
   font-weight: 700;
 
   & > button {
@@ -39,7 +39,7 @@ export const Header = styled.div`
 `;
 
 export const DayWrap = styled.div`
-  color: #666666;
+  color: ${(props) => props.theme.color.gray.g3};
   font-weight: 600;
   font-size: 10px;
   display: flex;
@@ -67,7 +67,7 @@ export const RowWrap = styled.div`
           left: 26px;
           width: 96px;
           height: 18px;
-          background-color: #0e2b5a;
+          background-color: ${(props) => props.theme.color.primary.main};
           border-radius: 10px;
         }
       }
@@ -91,7 +91,7 @@ export const CellWrap = styled.span`
     css`
       &:hover {
         color: white;
-        background-color: #0e2b5a;
+        background-color: ${(props) => props.theme.color.primary.main};
         border-radius: 50px;
       }
     `}

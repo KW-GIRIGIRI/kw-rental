@@ -31,7 +31,7 @@ export const MonthWrap = styled.div`
   text-align: center;
   width: 150px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.color.text.white};
   border: 1px solid ${(props) => props.theme.color.text.black};
   font-weight: 500;
 
