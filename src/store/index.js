@@ -3,6 +3,7 @@ import authReceiveReducer from "./reducer/authReceiveSlice";
 import modifyEquipReducer from "./reducer/modifyEquipSlice";
 import datePickerReducer from "./reducer/datePickerSlice";
 import cartListReducer from "./reducer/cartListSlice";
+import labControlReducer from "./reducer/LabControllerSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     authReceive: authReceiveReducer,
     modifyEquip: modifyEquipReducer,
     datePicker: datePickerReducer,
+    labControl: labControlReducer,
   },
 });
 

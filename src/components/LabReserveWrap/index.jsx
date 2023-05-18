@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
@@ -8,8 +9,7 @@ import * as S from "./style";
 export default function LabReserveWrap() {
   const { isAuth } = useContext(AuthContext);
   const { Toggle, state, changeInitial } = useToggle();
-
-  const hanul = true; // 임시
+  const hanul = useSelector(state => state.labControl.lab)
 
   return (
     <S.Div>

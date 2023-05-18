@@ -4,13 +4,13 @@ import iconLeftArrow from "../../assets/icon-leftArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
 import dayjs from "dayjs";
 import * as S from "./style";
+import { useSelector } from "react-redux";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
 const LabCalendar = () => {
   const [dayObj, setDayObj] = useState(dayjs());
-
-  const hanul = false;
+  const hanul = useSelector(state => state.labControl.lab)
 
   const thisYear = dayObj.year();
   const thisMonth = dayObj.month();
