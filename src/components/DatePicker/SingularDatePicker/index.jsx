@@ -28,6 +28,30 @@ export default function SingularDatePicker({ initial }) {
     }));
   };
 
+  const handleSetMon = (num) => {
+    setCalendar((prev) => ({
+      ...prev,
+      date: prev.date.add(num, "days"),
+    }));
+  };
+
+  useEffect(() => {
+    switch (calendar.date.day()) {
+      case 5:
+        handleSetMon(3);
+        break;
+      case 6:
+        handleSetMon(2);
+        break;
+      case 0:
+        handleSetMon(1);
+        break;
+      default:
+        break;
+    }
+  }, []);
+
+
   useEffect(() => {
     dispatch(setSingularDate(dayjs(calendar.date).format("YYYY-MM-DD")));
   }, [calendar.date]);

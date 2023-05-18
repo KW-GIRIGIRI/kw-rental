@@ -15,11 +15,13 @@ export default function ListType({ item }) {
   const [remainAmount, setRemainAmount] = useState(item.rentalQuantity.remainingQuantity)
   
   useEffect(() => {
-  async function handleGetProductAmount() {
-    const res = await getProductAmountFromDate(item.id, singleDate, singleDate)
-    setRemainAmount(res.remainQuantities[0].remainQuantity);
-  }
-  handleGetProductAmount();
+    if (!isAuth) {
+      async function handleGetProductAmount() {
+        const res = await getProductAmountFromDate(item.id, singleDate, singleDate)
+        setRemainAmount(res.remainQuantities[0].remainQuantity);
+      }
+      handleGetProductAmount();
+    }
 }, [singleDate]);
 
   return (

@@ -2,13 +2,9 @@ import ListItem from "./ListItem";
 import { ListLi } from "./ListItem/style";
 import * as S from "./style";
 
-export default function EquipCartList({
-  cart,
-  handleDeleteInventory,
-  handleModifyCartEquip,
-}) {
+export default function EquipCartList({ cartList }) {
   return (
-    cart && (
+    cartList && (
       <S.ListUl>
         <ListLi>
           <p>사진</p>
@@ -18,12 +14,10 @@ export default function EquipCartList({
           <p>반납일</p>
           <p> </p>
         </ListLi>
-        {cart.map((item) => (
+        {cartList.map((cart) => (
           <ListItem
-            handleDeleteInventory={handleDeleteInventory}
-            handleModifyCartEquip={handleModifyCartEquip}
-            item={item}
-            key={item.id}
+            cart={cart}
+            key={cart.id}
           />
         ))}
       </S.ListUl>

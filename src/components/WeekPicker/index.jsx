@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { getProductAmountFromDate } from "../../api/api";
 import { useParams } from "react-router-dom";
 
-export default function WeekPicker({ modify }) {
+export default function WeekPicker({ modify, equipId }) {
   const [calendar, setCalendar] = useState({
     visible: false,
     top: 0,
@@ -80,8 +80,9 @@ export default function WeekPicker({ modify }) {
   const handleGetProductAmount = async () => {
     const startDate = calendar.date.startOf("week").add(1, "days").format('YYYY-MM-DD');
     const endDate = calendar.date.startOf("week").add(4, "days").format('YYYY-MM-DD');
+    const id = params.id ?? equipId
 
-    const res = await getProductAmountFromDate(params.id, startDate, endDate)
+    const res = await getProductAmountFromDate(id, startDate, endDate)
     setAmountArr(res.remainQuantities);
   }
 
@@ -135,6 +136,7 @@ export default function WeekPicker({ modify }) {
         </S.DateCont>
         {calendar && (
           <DatePicker
+            className='user'
             checkWeek={true}
             calendar={calendar}
             setCalendar={setCalendar}

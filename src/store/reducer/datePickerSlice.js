@@ -21,26 +21,6 @@ const datePickerSlice = createSlice({
     setDuaLastDate: (state, action) => {
       state.dualDate.lastDate = action.payload;
     },
-    // resetDate: () => {
-    //   return {
-    //     singularDate: "",
-    //     dualDate: {
-    //       firstDate: {
-    //         visible: false,
-    //         top: 0,
-    //         left: 0,
-    //         date: dayjs().toISOString(),
-    //       },
-    //       particularDate: "",
-    //       secondDate: {
-    //         visible: false,
-    //         top: 0,
-    //         left: 0,
-    //         date: dayjs().add(1, "days").toISOString(),
-    //       },
-    //     },
-    //   };
-    // },
   },
 });
 

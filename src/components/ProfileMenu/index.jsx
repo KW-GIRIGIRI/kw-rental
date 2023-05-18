@@ -30,7 +30,12 @@ export default function ProfileMenu({ visible, setVisible }) {
         <img src={iconMenu} alt="" />
         <p>계정 설정</p>
       </S.Li>
-      <S.Li>
+      <S.Li
+        onClick={() => {
+          window.open('https://www.kwmedia.info/notice/raebsilgongjisahang', '_blank');
+          setVisible(false)
+        }}
+      >
         <img src={iconMenu} alt="" />
         <p>공지사항</p>
       </S.Li>

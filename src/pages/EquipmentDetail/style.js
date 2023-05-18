@@ -21,8 +21,11 @@ export const DetailWrapper = styled.div`
 export const SimpleDesc = styled.div`
   font-size: 13px;
   margin-left: -25px;
-  & > span:not(:last-child)::after {
-    content: " > ";
+  & > span:not(:last-child) {
+    cursor: pointer;
+    &::after {
+      content: " > ";
+    }
   }
 `;
 

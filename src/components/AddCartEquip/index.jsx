@@ -1,21 +1,28 @@
 import Button from "../../modules/Button";
 import * as S from "./style";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { addCartEquip } from "../../api/api";
+import { addCartEquip, getProductAmountFromDate } from "../../api/api";
 import useModal from "../../hook/useModal";
 import { useSelector } from "react-redux";
 import DualDatePicker from "../DatePicker/DualDatePicker";
 
-export default function AddCartEquip() {
+export default function AddCartEquip({ modify, setModal }) {
   const amountRef = useRef();
   const navigate = useNavigate();
   const params = useParams();
   const { Modal, open, close } = useModal();
   const productCount = useSelector(
     (state) => state.modifyEquip.equip.totalQuantity
-  );
+    );
   const selectDate = useSelector((state) => state.datePicker.dualDate);
+  const [rentalAmount, setRentalAmount] = useState(productCount)
+
+  const handleGetProductAmount = async () => {
+    const id = params.id 
+    const res = await getProductAmountFromDate(id, selectDate.firstDate, selectDate.lastDate)
+    res.remainQuantities.length && setRentalAmount(res.remainQuantities[0].remainQuantity);
+  }
 
   const handleAddCart = async () => {
     const data = {
@@ -29,25 +36,34 @@ export default function AddCartEquip() {
     response.includes("/inventories") && open();
   };
 
+  useEffect(() => {
+    if (selectDate.firstDate) handleGetProductAmount()
+  }, [selectDate])
+
   return (
     <S.Wrapper>
       <S.Form>
-        <S.DescCont>대여 기자재 개수</S.DescCont>
-        <S.InpWrapper>
-          <S.Select name="equipCount" id="" ref={amountRef}>
-            {Array(productCount)
-              .fill()
-              .map((_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-          </S.Select>{" "}
-          대
-        </S.InpWrapper>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
           <DualDatePicker firstInitial={1} className="user" />
+        </S.InpWrapper>
+        <S.DescCont>대여 기자재 개수</S.DescCont>
+        <S.InpWrapper>
+        {
+            rentalAmount ?
+              <>
+                <S.Select name="equipCount" id="" ref={amountRef}>
+                  {Array(rentalAmount)
+                    .fill()
+                    .map((_, i) => (
+                      <option key={i} value={i + 1}>
+                        {i + 1}
+                      </option>
+                    ))}
+                </S.Select> 대
+              </>
+              : <S.WarnDesc>대여 가능 수량이 0개입니다.</S.WarnDesc>
+            }
         </S.InpWrapper>
       </S.Form>
       <Button

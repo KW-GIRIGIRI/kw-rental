@@ -2,48 +2,31 @@ import * as S from "./style";
 import Button from "../../../modules/Button";
 import { useNavigate } from "react-router-dom";
 import EquipCartList from "../../../components/EquipCartList";
-import {
-  deleteAllCartEquip,
-  deleteCartEquip,
-  getCartEquip,
-  modifyCartEquip,
-} from "../../../api/api";
-import { useEffect, useState } from "react";
+import { deleteAllCartEquip } from "../../../api/api";
+import { useEffect } from "react";
 import useModal from "../../../hook/useModal";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncGetCartList } from "../../../store/reducer/cartListSlice";
 
 export default function EquipmentBox() {
-  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
   const { Modal, open, close } = useModal();
+  const dispatch = useDispatch()
+  const cartList = useSelector(state => state.cartList.cartList)
 
   const handleDeleteCart = async () => {
     const response = await deleteAllCartEquip();
     response === 204 && close();
-    handleGetCart();
-  };
-
-  const handleGetCart = async () => {
-    const response = await getCartEquip();
-    setCart(response);
-  };
-
-  const handleDeleteInventory = async (id) => {
-    const response = await deleteCartEquip(id);
-    response === 204 && handleGetCart();
-  };
-
-  const handleModifyCartEquip = async (id, data) => {
-    await modifyCartEquip(id, data);
-    handleGetCart();
+    dispatch(asyncGetCartList())
   };
 
   useEffect(() => {
-    handleGetCart();
+    dispatch(asyncGetCartList())
   }, []);
 
   return (
     <>
-      {cart.length ? (
+      {cartList.length ? (
         <>
           <S.Div>
             <Button
@@ -54,11 +37,7 @@ export default function EquipmentBox() {
               borderRadius="50px"
             />
           </S.Div>
-          <EquipCartList
-            cart={cart}
-            handleDeleteInventory={handleDeleteInventory}
-            handleModifyCartEquip={handleModifyCartEquip}
-          />
+          <EquipCartList cartList={cartList} />
           <S.MainBtnWrap>
             <Button
               onClick={() => navigate("/equipment/inventory/application")}

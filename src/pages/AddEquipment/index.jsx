@@ -11,7 +11,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "../../modules/Image";
 import {
   addEquipment,
-  getProductDetail,
   postImage,
   modifyEquipment,
   changeItems,
@@ -20,6 +19,7 @@ import useModal from "../../hook/useModal";
 import useToggle from "../../hook/useToggle";
 import { useDispatch, useSelector } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function AddEquipment() {
   const location = useLocation();
@@ -29,19 +29,13 @@ export default function AddEquipment() {
   const [imgFile, setImgFile] = useState("");
   const [imgPreview, setImgPreview] = useState("");
   const { Modal, open, close } = useModal();
-  const addEqRef = useRef([]);
+  const addEqRef = useRef('');
   const { Toggle, state } = useToggle();
   const [data, setData] = useState([]);
   const product = useSelector((state) => state.modifyEquip.equip);
   const item = useSelector((state) => state.modifyEquip.itemList);
-  const dispatch = useDispatch();
-
-  const handleGetProduct = async (id) => {
-    const response = await getProductDetail(id);
-
-    setImgFile(response.imgUrl);
-    setIsEdit(true);
-  };
+  const dispatch = useDispatch()
+  const methods = useForm()
 
   const handleImgFile = async (e) => {
     const image = e.target.files[0];
@@ -53,72 +47,109 @@ export default function AddEquipment() {
     const response = await postImage(formData);
     setImgFile(response);
   };
+  
+  const handleSetError = (name) => {
+    if (!methods.watch(name) || (name === 'category' && methods.watch('category') === 'default'))
+        methods.setError(name, { type: "focus" }, { shouldFocus: true })
+    else methods.clearErrors(name)
+  }
 
-  const handleAddEquipment = async () => {
-    // description과 purpose components는 빈값이어도 된다. -> 수정
-    // if(addEqRef.current.filter(eq => eq.value === '' || eq.value === 'default').length) alert('빈 값이 있습니다.')
-    // else {
-    const item = [];
-    data.map((i) => item.push({ propertyNumber: i.propertyNumber }));
+  const handleAddEquipment = async (e) => {
+    e.preventDefault();
 
-    const sendData = {
-      equipment: {
-        imgUrl: imgFile,
-      },
-      items: item,
-    };
+    handleSetError('modelName')
+    handleSetError('maker')
+    handleSetError('category')
+    !state && handleSetError('totalQuantity')
 
-    addEqRef.current.map((eq) => (sendData.equipment[eq.name] = eq.value));
-    if (state) sendData.equipment.totalQuantity = data.length;
-
-    const response = await addEquipment(JSON.stringify(sendData));
-    response && navigate(`/equipment/${response.split("/")[3]}`);
-    // }
+    if (!imgFile.length) alert('이미지를 추가해주세요.')
+    else {
+      const item = [];
+      data.map((i) => item.push({ propertyNumber: i.propertyNumber }));
+  
+      const sendData = {
+        equipment: {
+          imgUrl: imgFile,
+          totalQuantity: methods.watch('totalQuantity'),
+          category: methods.watch('category'),
+          modelName: methods.watch('modelName'),
+          components: methods.watch('components'),
+          maker: methods.watch('maker'),
+          purpose: methods.watch('purpose'),
+          rentalPlace: '한울관 B120호',
+          maxRentalDays: 1,
+          description: addEqRef.current.value,
+        },
+        items: item,
+      };
+  
+      if (state) sendData.equipment.totalQuantity = data.length;
+  
+      const response = await addEquipment(JSON.stringify(sendData));
+      response && navigate(`/equipment/${response.split("/")[3]}`);
+      dispatch(resetEquip())
+    }
   };
 
-  const handleModifyEquipment = async () => {
-    // if (addEqRef.current.filter(eq => eq.value === '').length) alert('빈 값이 있습니다.')
-    // else {
-    const sendItem = [];
-    data.map((i) =>
-      sendItem.push({
-        id: i.id,
-        propertyNumber: i.propertyNumber,
-      })
-    );
+  const handleModifyEquipment = async e => {
+    e.preventDefault();
 
-    const itemData = {
-      items: sendItem,
-    };
+    handleSetError('modelName')
+    handleSetError('maker')
+    handleSetError('category')
+    !state && handleSetError('totalQuantity')
 
-    const sendData = {
-      imgUrl: imgFile,
-      totalQuantity: data.length,
-    };
+    if (!product.imgUrl || !imgFile.length) alert('이미지를 추가해주세요.')
+    else {
+      const sendItem = [];
+      data.map((i) =>
+        sendItem.push({
+          id: i.id,
+          propertyNumber: i.propertyNumber,
+        })
+      );
 
-    addEqRef.current.map((eq) => (sendData[eq.name] = eq.value));
+      const itemData = {
+        items: sendItem,
+      };
 
-    if (
-      !item.items.every((item) =>
-        itemData.items.some(
-          (otherItem) => otherItem.propertyNumber === item.propertyNumber
+      const sendData = {
+        imgUrl: product.imgUrl || imgFile,
+        totalQuantity: data.length,
+        category: methods.watch('category'),
+        modelName: methods.watch('modelName'),
+        components: methods.watch('components'),
+        maker: methods.watch('maker'),
+        purpose: methods.watch('purpose'),
+        rentalPlace: '한울관 B120호',
+        description: addEqRef.current.value,
+        maxRentalDays: 1,
+      }
+
+      if (
+        !item.items.every((item) =>
+          itemData.items.some(
+            (otherItem) => otherItem.propertyNumber === item.propertyNumber
+          )
         )
-      )
-    ) {
-      const itemRes = await changeItems(params.id, JSON.stringify(itemData));
-      const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+      ) {
+        const itemRes = await changeItems(params.id, JSON.stringify(itemData));
+        const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
 
-      itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
-    } else {
-      const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
-      eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
+        itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
+      } else {
+        const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+        eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
+      }
     }
-    // }
   };
 
   useEffect(() => {
-    if (location.pathname.includes("edit")) handleGetProduct(params.id);
-    else if (location.pathname.includes("add")) dispatch(resetEquip());
+    if (location.pathname.includes("edit")) {
+      setImgFile(product?.imgUrl)
+      setIsEdit(true)
+    }
+    else if (location.pathname.includes("add")) setIsEdit(false)
   }, []);
 
   return (
@@ -153,13 +184,12 @@ export default function AddEquipment() {
             <input type="file" accept="image/*" onChange={handleImgFile} />
           </S.FileLabel>
         )}
-        <DetailDescInput
-          state={state}
-          isEdit={isEdit}
-          itemLength={data.length}
-          product={product}
-          ref={addEqRef}
-        />
+        <FormProvider {...methods}>
+          <DetailDescInput
+            state={state}
+            itemLength={data.length}
+            />
+        </FormProvider>
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
       <Textarea
@@ -171,7 +201,7 @@ export default function AddEquipment() {
         rows="6"
         count="500"
         defaultValue={product?.description}
-        ref={(el) => (addEqRef.current[7] = el)}
+        ref={addEqRef}
       />
       {state && item ? (
         isEdit ? (
