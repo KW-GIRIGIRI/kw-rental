@@ -301,6 +301,21 @@ export const createRental = async (data) => {
   }
 };
 
+// 대여 취소
+export const cancelRentalSpec = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/reservations/specs/${id}`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
 // 특정 날짜에 대여 수령되어야 할 대여 예약들을 대여 상세와 함께 조회
 // acceptDateTime 과 rentalSpecs 가 null 이면 아직 수령되지 않음(즉 대여되지 않음)을 의미.
 export const getReceivedRentalList = async (date) => {

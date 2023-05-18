@@ -96,8 +96,7 @@ export default function SchedListComp({ id, receive }) {
         )}
       </S.RentalLi>
       <CancelModal
-        modelName={receiveItem.modelName}
-        count={receiveItem.count}
+        receiveItem={receiveItem}
         cancelModal={cancelModal}
         setCancelModal={setCancelModal}
       />
