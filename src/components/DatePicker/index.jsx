@@ -151,9 +151,8 @@ export default function DatePicker({
               !d.isCurrentMonth ||
               getDate(d).day() > 4 ||
               getDate(d).day() === 0 ||
-              (className === "user" &&  getDate(d) < dayjs())
-                // : getDate(d) < dayjs().subtract(1, "days"))
-              || (className === "user" && getDate(d) > dayjs().add(31, "days"))
+              (className === "user" &&  getDate(d) < dayjs()) ||
+              (className === "user" && getDate(d) > dayjs().add(31, "days"))
               ? "disabled"
               : ""
             }

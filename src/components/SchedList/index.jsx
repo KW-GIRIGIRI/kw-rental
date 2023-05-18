@@ -34,7 +34,7 @@ export default function SchedList({ user, receive }) {
       <S.Renter>
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
-        {!receive && !user.acceptDateTime && (
+        {!receive && user.returnDate && (
           <S.WarnCont>반납일 초과</S.WarnCont>
         )}
         {receive && user.acceptDateTime ? (
@@ -67,7 +67,7 @@ export default function SchedList({ user, receive }) {
       </S.Renter>
       <S.RentalUl>
         {user.reservationSpecs?.map((id) => (
-          <SchedListComp id={id} key={id} receive={receive} />
+          <SchedListComp acceptDateTime={user.acceptDateTime} id={id} key={id} receive={receive} />
         ))}
       </S.RentalUl>
       {!receive && (

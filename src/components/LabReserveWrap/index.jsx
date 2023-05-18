@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
@@ -8,12 +9,12 @@ import * as S from "./style";
 export default function LabReserveWrap() {
   const { isAuth } = useContext(AuthContext);
   const { Toggle, state, changeInitial } = useToggle();
-
-  const hanul = true; // 임시
+  const hanul = useSelector(state => state.labControl.lab)
+  const selectDate = useSelector(state => state.labControl.date)
 
   return (
     <S.Div>
-      <S.DateP>{dayjs().format("YY년 M월 D일(dd)")}</S.DateP>
+      <S.DateP>{dayjs(selectDate).format("YY년 M월 D일(dd)")}</S.DateP>
       {hanul ? (
         <S.ReserveUl hanul={hanul}>
           <S.ReserveLi>

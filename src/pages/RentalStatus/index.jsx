@@ -7,7 +7,7 @@ export default function RentalStatus() {
     <S.Wrapper>
       <S.Div>
         <S.Title>대여 현황</S.Title>
-        <SingularDatePicker />
+        <SingularDatePicker className='admin' />
       </S.Div>
       <EquipSched />
     </S.Wrapper>

@@ -6,7 +6,7 @@ import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { setReserveId } from "../../../store/reducer/authReceiveSlice";
 
-export default function SchedListComp({ id, receive }) {
+export default function SchedListComp({ acceptDateTime, id, receive }) {
   const [cancelModal, setCancelModal] = useState(false);
   const [itemLi, setItemLi] = useState([]);
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ export default function SchedListComp({ id, receive }) {
             )}
           </S.NumWrap>
         )}
-        {receive && (
+        {(receive && !acceptDateTime) && (
           <Button
             width="max-content"
             className="sub shadow"
@@ -96,8 +96,7 @@ export default function SchedListComp({ id, receive }) {
         )}
       </S.RentalLi>
       <CancelModal
-        modelName={receiveItem.modelName}
-        count={receiveItem.count}
+        receiveItem={receiveItem}
         cancelModal={cancelModal}
         setCancelModal={setCancelModal}
       />

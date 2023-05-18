@@ -1,16 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
 import Button from "../../modules/Button";
 import TabNav from "../../modules/TabNav";
 import * as S from "./style";
 import iconArrowRightSmall from "../../assets/icon-arrow-right-small.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { setLab } from "../../store/reducer/LabControllerSlice";
 
 export default function LabRental() {
   const { isAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
-  const [isFirst, setIsFirst] = useState(true);
+  const dispatch = useDispatch()
+  const lab = useSelector(state => state.labControl.lab)
 
   const SubTitle = () => {
     switch (pathname) {
@@ -48,19 +51,19 @@ export default function LabRental() {
             :
             <>
               <Button
-                className={isFirst ? "main shadow" : "disable shadow"}
+                className={lab ? "main shadow" : "disable shadow"}
                 text="한울관"
                 padding="10px 29px"
                 borderRadius="20px"
                 margin="0 10px 0 0"
-                onClick={() => setIsFirst(true)}
+                onClick={() => dispatch(setLab(true))} 
               />
               <Button
-                className={isFirst ? "disable shadow" : "main shadow"}
+                className={lab ? "disable shadow" : "main shadow"}
                 text="화도관"
                 padding="10px 29px"
                 borderRadius="20px"
-                onClick={() => setIsFirst(false)}
+                onClick={() => dispatch(setLab(false))}
               />
             </>
         );

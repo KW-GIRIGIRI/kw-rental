@@ -60,6 +60,15 @@ export const ContCell = styled.li`
   padding: 5px 6px;
   font-size: 11px;
 
+  & > ins {
+    color: ${(props) => props.theme.color.primary.main};
+  }
+
+  & > span,
+  & > p {
+    pointer-events: none;
+  }
+
   &:nth-child(7n + 1) {
     border-left: 1px solid #e8e8e8;
   }
