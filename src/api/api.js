@@ -18,6 +18,19 @@ const instancForm = axios.create({
   },
 });
 
+instanceUtil.interceptors.response.use(
+  (res) => {
+    return res;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      alert("로그인이 만료되었습니다. 다시 로그인 후, 시도해주세요.");
+      window.location.replace("/");
+    }
+    return Promise.reject(error);
+  }
+);
+
 // 기자재 관련
 export const getProductList = async (url) => {
   try {

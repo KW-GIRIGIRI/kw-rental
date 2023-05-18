@@ -67,7 +67,7 @@ export default function EquipmentDetail() {
         <>
           <S.NavDiv>
             <S.SimpleDesc>
-              <span>기자재 조회</span>
+              <span onClick={() => navigate('/equipment')}>기자재 조회</span>
               <span>
                 {category.map(
                   (value) => value.value === product.category && value.label
