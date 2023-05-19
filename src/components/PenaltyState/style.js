@@ -21,7 +21,7 @@ export const ItemUl = styled.ul`
 `;
 
 export const Header = styled.li`
-  background: #e0e4e9;
+  background: ${(props) => props.theme.color.primary.sub};
   font-size: 13px;
   text-align: center;
 `;
@@ -35,15 +35,15 @@ export const ItemLi = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid #e0e4e9;
-    border-bottom: 1px solid #e0e4e9;
+    border-right: 1px solid ${(props) => props.theme.color.primary.sub};
+    border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 
     &:first-child {
-      border-left: 1px solid #e0e4e9;
+      border-left: 1px solid ${(props) => props.theme.color.primary.sub};
     }
 
     & > p:last-child {
-      color: #0e2b5a;
+      color: ${(props) => props.theme.color.primary.main};
       &:hover {
         cursor: pointer;
       }

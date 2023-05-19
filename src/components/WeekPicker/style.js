@@ -24,7 +24,7 @@ export const DateInp = styled.input`
 `;
 
 export const NextBtn = styled.button`
-  color: #0e2b5a;
+  color: ${(props) => props.theme.color.primary.main};
   font-size: 18px;
   & > img {
     margin-top: 4px;
@@ -40,7 +40,7 @@ export const DateImg = styled.img`
 `;
 
 export const DateCont = styled.p`
-  border: 1px solid #000000;
+  border: 1px solid ${(props) => props.theme.color.text.black};
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   box-sizing: border-box;
   line-height: normal;

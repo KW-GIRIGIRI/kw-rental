@@ -54,7 +54,7 @@ export const DownloadModal = styled.div`
   position: absolute;
   right: 26px;
   margin-top: 25px;
-  background: #fff;
+  background: ${(props) => props.theme.color.text.white};
 
   & > p {
     padding: 12px 27px;
@@ -63,11 +63,41 @@ export const DownloadModal = styled.div`
     line-height: 16px;
 
     &:hover {
-      background: #f3f6fb;
+      background: ${(props) => props.theme.color.primary.lightsub};
     }
   }
 
   & a:hover {
     cursor: default;
+  }
+`;
+
+export const PageBtnWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  & > button {
+    color: ${(props) => props.theme.color.primary.main};
+    border: 1px solid ${(props) => props.theme.color.primary.sub};
+    width: 40px;
+    height: 40px;
+    margin-right: -1px;
+    cursor: pointer;
+    & > img {
+      vertical-align: middle;
+    }
+    &:first-of-type {
+      border-radius: 0 5px 5px 0;
+      transform: rotate(180deg);
+    }
+    &:last-of-type {
+      border-radius: 0 5px 5px 0;
+    }
+    &.on {
+      background-color: ${(props) => props.theme.color.primary.main};
+      color: ${(props) => props.theme.color.text.white};
+      transform: revert;
+    }
   }
 `;

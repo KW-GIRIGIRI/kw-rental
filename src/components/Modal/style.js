@@ -20,7 +20,7 @@ export const Div = styled.div`
   border-radius: ${(props) => props.theme.borderRadius.lv2};
   padding: 12px 10px;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.color.text.white};
 
   & > p {
     font-size: 14px;

@@ -14,13 +14,17 @@ export const ItemUl = styled.ul`
     & > span:nth-child(2) {
       text-align: left;
       justify-content: left;
-      padding-left: 26px;
+      padding: 0 26px;
+    }
+
+    &:hover:not(:first-child) {
+      background: ${(props) => props.theme.color.primary.lightSub};
     }
   }
 `;
 
 export const Header = styled.li`
-  background: #e0e4e9;
+  background: ${(props) => props.theme.color.primary.sub};
   font-size: 13px;
   text-align: center;
 `;
@@ -34,11 +38,11 @@ export const ItemLi = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid #e0e4e9;
-    border-bottom: 1px solid #e0e4e9;
+    border-right: 1px solid ${(props) => props.theme.color.primary.sub};
+    border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 
     &:first-child {
-      border-left: 1px solid #e0e4e9;
+      border-left: 1px solid ${(props) => props.theme.color.primary.sub};
     }
   }
 `;
