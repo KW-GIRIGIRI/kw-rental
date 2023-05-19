@@ -26,10 +26,6 @@ export const FileLabel = styled.label`
   }
 `;
 
-export const Div = styled.div`
-  float: right;
-`;
-
 export const BtnWrap = styled.div`
   text-align: center;
 `;

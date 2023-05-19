@@ -10,7 +10,7 @@ export const DetailWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 34px;
-  margin: 30px 0 55px;
+  margin-bottom: 55px;
   padding-bottom: 36px;
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   & > img {
