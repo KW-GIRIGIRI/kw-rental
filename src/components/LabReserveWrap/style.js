@@ -18,6 +18,11 @@ export const ReserveLi = styled.li`
   padding: 12px;
   text-align: center;
 
+  & > p {
+    width: max-content;
+    justify-self: center;
+  }
+
   &.auth {
     grid-template-columns: repeat(2, 1fr);
 
