@@ -16,7 +16,6 @@ import {
   changeItems,
 } from "../../api/api";
 import useModal from "../../hook/useModal";
-import useToggle from "../../hook/useToggle";
 import { useDispatch, useSelector } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import { FormProvider, useForm } from "react-hook-form";
@@ -30,7 +29,7 @@ export default function AddEquipment() {
   const [imgPreview, setImgPreview] = useState("");
   const { Modal, open, close } = useModal();
   const addEqRef = useRef('');
-  const { Toggle, state } = useToggle();
+  const [state, setState] = useState(true)
   const [data, setData] = useState([]);
   const product = useSelector((state) => state.modifyEquip.equip);
   const item = useSelector((state) => state.modifyEquip.itemList);
@@ -157,9 +156,23 @@ export default function AddEquipment() {
       {isEdit ? (
         <></>
       ) : (
-        <S.Div>
-          <Toggle on="기자재" off="소모품" />
-        </S.Div>
+        <>
+          <Button
+            className={state ? "main shadow" : "disable shadow"}
+            text="기자재"
+            padding="9px 29px"
+            borderRadius="20px"
+            margin='0 10px 0 0'
+            onClick={() => setState(true)}
+          />
+          <Button
+            className={state ? "disable shadow" : "main shadow"}
+            text="소모품"
+            padding="9px 29px"
+            borderRadius="20px"
+            onClick={() => setState(false)}
+          />
+        </>
       )}
       <DetailWrapper>
         {isEdit || imgPreview ? (
