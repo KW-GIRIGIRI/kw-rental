@@ -7,32 +7,17 @@ import UserPenaltyHist from "./UserPenaltyHist"
 
 export default function UserHist() {
   const location = useLocation()
+  const isEquipmentPath = location.pathname.includes("equipment")
+  const isLabPath = location.pathname.includes("lab")
+  const isPenaltyPath = location.pathname.includes("penalty")
 
   return (
     <>
-      {
-        location.pathname.includes("equipment") || location.pathname.includes("lab") ? (
-          <DualDatePicker firstInitial={-90} />
-        ) : (
-          <></>
-        )
-      }
+      {(isEquipmentPath || isLabPath) && <DualDatePicker firstInitial={-90} />}
       <S.Div>
-        {location.pathname.includes("equipment") ? (
-          <UserEquipHist />
-        ) : (
-          <></>
-        )}
-        {location.pathname.includes("lab") ? (
-          <UserLabHist />
-        ) : (
-          <></>
-        )}
-        {location.pathname.includes("penalty") ? (
-          <UserPenaltyHist />
-        ) : (
-          <></>
-        )}
+        {isEquipmentPath && <UserEquipHist />}
+        {isLabPath && <UserLabHist />}
+        {isPenaltyPath && <UserPenaltyHist />}
       </S.Div>
     </>
   )

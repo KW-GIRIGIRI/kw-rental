@@ -6,24 +6,15 @@ import UserPenaltyState from "./UserPenaltyState"
 
 export default function UserState() {
   const location = useLocation()
+  const isEquipmentPath = location.pathname.includes("equipment")
+  const isLabPath = location.pathname.includes("lab")
+  const isPenaltyPath = location.pathname.includes("penalty")
 
   return (
     <S.Div>
-      {location.pathname.includes("equipment") ? (
-        <UserEquipState />
-      ) : (
-        <></>
-      )}
-      {location.pathname.includes("lab") ? (
-        <UserLabState />
-      ) : (
-        <></>
-      )}
-      {location.pathname.includes("penalty") ? (
-        <UserPenaltyState />
-      ) : (
-        <></>
-      )}
+      {isEquipmentPath && <UserEquipState />}
+      {isLabPath && <UserLabState />}
+      {isPenaltyPath && <UserPenaltyState />}
     </S.Div>
   )
 }
