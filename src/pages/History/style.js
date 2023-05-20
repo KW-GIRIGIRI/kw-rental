@@ -4,10 +4,17 @@ export const Section = styled.div`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: ${(props) => props.theme.borderRadius.lv2};
   padding: 35px 25px;
+  position: relative;
 `;
 
 export const Title = styled.h1`
   font-size: 20px;
+  font-weight: 600;
+`;
+
+export const ButtonWrap = styled.h1`
+  margin-top: 24px;
+  margin-bottom: 62px;
 `;
 
 export const RentalWrap = styled.div`
@@ -35,8 +42,8 @@ export const RentalWrap = styled.div`
 
 export const Wrap = styled.div`
   display: flex;
-  align-items: center;
   gap: 20px;
+  align-items: center;
 `;
 
 export const FilterWrap = styled.div`
