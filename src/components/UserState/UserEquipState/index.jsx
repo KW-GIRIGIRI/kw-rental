@@ -11,12 +11,12 @@ export default function UserEquipState() {
   const [myRental, setMyRental] = useState([])
   const { Modal, open, close } = useModal()
 
-  const handleGetCurrentRental = async () => {
-    const res = await getCurrentRental()
-    setMyRental(res.reservations)
-  };
-
   useEffect(() => {
+    const handleGetCurrentRental = async () => {
+      const res = await getCurrentRental()
+      setMyRental(res.reservations)
+    }
+
     handleGetCurrentRental()
   }, [])
 
@@ -56,7 +56,7 @@ export default function UserEquipState() {
                 </S.NameEquip>
                 <span>{item.rentalAmount}</span>
                 <S.State>{rentalStatus[item.status]}</S.State>
-                {item.status === "RESERVED" ? (
+                {item.status === "RESERVED" && (
                   <Button
                     text="대여취소"
                     className="shadow sub"
@@ -66,8 +66,6 @@ export default function UserEquipState() {
                     height="27px"
                     onClick={open}
                   />
-                ) : (
-                  <></>
                 )}
               </S.ItemLi>
             ))}
