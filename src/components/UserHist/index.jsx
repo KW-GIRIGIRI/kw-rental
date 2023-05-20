@@ -1,33 +1,26 @@
-import DualDatePicker from "../DatePicker/DualDatePicker";
-import * as S from "./style";
-import { getUserRentalHistory } from "../../api/api";
-import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import { rentalStatus } from "../../data/rentalStatus";
+import DualDatePicker from "../DatePicker/DualDatePicker"
+import * as S from "./style"
+import { getUserRentalHistory } from "../../api/api"
+import dayjs from "dayjs"
+import { useEffect, useState } from "react"
+import { rentalStatus } from "../../data/rentalStatus"
+import { useSelector } from "react-redux"
 
 export default function UserHist({ isEquip, isLab }) {
   const [equipHistory, setEquipHistory] = useState([]);
-  const [{ fromDate, toDate }, setDateRange] = useState({
-    fromDate: dayjs().subtract(3, "month").format("YYYY-MM-DD"),
-    toDate: dayjs().format("YYYY-MM-DD"),
-  });
-
-  const handleFromDateChange = (e) => {
-    setDateRange({ fromDate: e.target.value, toDate });
-  };
-
-  const handleToDateChange = (e) => {
-    setDateRange({ fromDate, toDate: e.target.value });
-  };
+  const dualDate = useSelector((state) => state.datePicker.dualDate)
 
   useEffect(() => {
-    const handleGetRentalHistory = async () => {
-      const res = await getUserRentalHistory(fromDate, toDate);
-      setEquipHistory(res.rentals);
-    };
+    handleGetRentalHistory()
+  }, [dualDate])
 
-    handleGetRentalHistory();
-  }, [fromDate, toDate]);
+  const handleGetRentalHistory = async () => {
+    if (dualDate.firstDate && dualDate.lastDate) {
+      const res = await getUserRentalHistory(dualDate.firstDate, dualDate.lastDate)
+      setEquipHistory(res.rentals)
+    }
+
+  };
 
   const 랩실대여이력 = [
     {
@@ -83,29 +76,14 @@ export default function UserHist({ isEquip, isLab }) {
 
   return (
     <>
-      {/* (isEquip || isLab) &&
-      <DualDatePicker firstInitial={-90} /> */}
+      {
+        isEquip || isLab ? (
+          <DualDatePicker firstInitial={-90} />
+        ) : (
+          <></>
+        )
+      }
       <S.Div>
-        {
-          // 캘린더
-          isEquip || isLab ? (
-            <div>
-              <input
-                type="date"
-                defaultValue={fromDate}
-                onChange={handleFromDateChange}
-              />
-              <p>~</p>
-              <input
-                type="date"
-                defaultValue={toDate}
-                onChange={handleToDateChange}
-              />
-            </div>
-          ) : (
-            <></>
-          )
-        }
         {isEquip && equipHistory.length ? (
           <S.HistWrap>
             <S.Header className="equip">
@@ -183,5 +161,5 @@ export default function UserHist({ isEquip, isLab }) {
         )}
       </S.Div>
     </>
-  );
+  )
 }
