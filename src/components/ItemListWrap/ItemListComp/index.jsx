@@ -23,12 +23,21 @@ export default function ItemListComp({
     if (e.key === "Enter" && !!e.target.value) {
       setPreventAdd(true);
       setFinish(true);
-      setData(
-        data.concat({
-          id: null,
-          propertyNumber: e.target.value,
-        })
-      );
+      setData((prevData) => [
+        ...prevData,
+        { id: null, propertyNumber: e.target.value },
+      ]);
+    }
+  };
+
+  const handleBlur = () => {
+    if (isAdd && !!text) { 
+      setPreventAdd(true);
+      setFinish(true);
+      setData((prevData) => [
+        ...prevData,
+        { id: null, propertyNumber: text },
+      ]);
     }
   };
 
@@ -37,6 +46,7 @@ export default function ItemListComp({
       <S.ItemId>품목</S.ItemId>
       <S.InputId
         onChange={handleChange}
+        onBlur={handleBlur}
         value={num || text}
         onKeyDown={handleKeyDown}
         disabled={(!isEdit && !isAdd) || num || finish}
@@ -44,16 +54,10 @@ export default function ItemListComp({
         type="number"
       />
       {isEdit || isAdd ? (
-        <S.DelBtn
-          onClick={() => {
-            delItem(index);
-          }}
-        >
+        <S.DelBtn onClick={() => delItem(index)}>
           <S.MinusImg src={iconMinus} />
         </S.DelBtn>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </S.ItemWrap>
   );
 }
