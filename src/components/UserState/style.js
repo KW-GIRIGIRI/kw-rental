@@ -15,7 +15,7 @@ export const Div = styled.div`
   }
 
   & .lab {
-    grid-template-columns: 2.3fr repeat(4, 1fr);
+    grid-template-columns: 2fr 1.35fr 1fr 1.35fr 2.3fr;
   }
 
   & .labList {
@@ -37,10 +37,6 @@ export const Div = styled.div`
       justify-content: center;
       border-right: 1px solid ${(props) => props.theme.color.primary.third};
     }
-  }
-
-  & button {
-    margin: auto;
   }
 `;
 
@@ -76,6 +72,10 @@ export const ItemLi = styled.li`
   align-items: center;
   grid-template-columns: 1fr 2fr 1fr 1.2fr 1.1fr;
   padding: 12px 0;
+
+  & > button {
+    margin: auto;
+  }
 `;
 
 // 기자재 대여 정보
@@ -110,13 +110,8 @@ export const State = styled.span`
   color: ${(props) => props.theme.color.primary.main};
 `;
 
-// 랩실 대여 정보
-export const Location = styled.div`
-  text-align: left;
-  margin: auto;
-
-  & p:first-child {
-    color: ${(props) => props.theme.color.primary.main};
-    margin-bottom: 5px;
+export const BtnWrap = styled.div`
+  & > button:first-child {
+    margin-right: 5px;
   }
 `;

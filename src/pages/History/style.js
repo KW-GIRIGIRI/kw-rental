@@ -23,6 +23,7 @@ export const RentalWrap = styled.div`
 
   & > h2 {
     font-size: 18px;
+    font-weight: 600;
     margin: 27px 0 15px 0;
 
     &:nth-child(3) {

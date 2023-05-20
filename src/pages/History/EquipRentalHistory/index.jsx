@@ -154,9 +154,9 @@ export default function EquipmentRentalHistory() {
           <S.Title> 내 대여 정보</S.Title>
           <S.RentalWrap>
             <h2>기자재 대여</h2>
-            <UserState isEquip={true} />
+            <UserState />
             <h2>기자재 대여 이력</h2>
-            <UserHist isEquip={true} />
+            <UserHist />
           </S.RentalWrap>
         </>
       )}
