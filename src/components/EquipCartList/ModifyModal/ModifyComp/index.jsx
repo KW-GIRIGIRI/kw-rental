@@ -54,13 +54,14 @@ export default function ModifyComp({cart, close, modal, setModal }) {
   }
 
   const handleModifyCartEquip = async () => {
+    const endDate = calendar.date.day() === 4 ? calendar.date.add(4, 'days') : calendar.date.add(1, 'days')
+
     const data = {
       rentalStartDate: calendar.date
         .format("YYYY-MM-DD")
         .split("-")
         .map((i) => parseInt(i)),
-      rentalEndDate: calendar.date
-        .add(1, "days")
+      rentalEndDate: endDate
         .format("YYYY-MM-DD")
         .split("-")
         .map((i) => parseInt(i)),
@@ -92,7 +93,7 @@ export default function ModifyComp({cart, close, modal, setModal }) {
           </S.DateCont>
           <span>~</span>
           <S.DateCont>
-            <span>{calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
+            <span>{calendar.date.day() === 4 ? calendar.date.add(4, "days").format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
           </S.DateCont>
         </InpWrapper>
 
