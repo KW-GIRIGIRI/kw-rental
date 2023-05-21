@@ -3,7 +3,7 @@ import 'react-quill/dist/quill.snow.css'
 import ImageResize from 'quill-image-resize'
 import { EditorWrap, BtnWrap } from "../style"
 import { postImage } from "../../../api/api"
-import { useRef, useMemo, useState, useEffect } from "react"
+import { useRef, useMemo, useState } from "react"
 import Button from "../../../modules/Button"
 
 export default function QuillEditor({ content, setContent, setIsEdit }) {
@@ -39,8 +39,7 @@ export default function QuillEditor({ content, setContent, setIsEdit }) {
 
   const modules = useMemo(
     () => {
-      if(!content.includes("<img"))
-        Quill.register('modules/ImageResize', ImageResize)
+      Quill.register('modules/ImageResize', ImageResize, true)
 
       return {
         toolbar: {
