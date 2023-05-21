@@ -72,6 +72,10 @@ export default function EquipmentList() {
   }, [page, viewMode, isCategory]);
 
   useEffect(() => {
+    setPage(0);
+  }, [viewMode])
+
+  useEffect(() => {
     dispatch(resetEquip());
   }, [])
 
