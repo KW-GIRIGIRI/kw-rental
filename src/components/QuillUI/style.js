@@ -21,6 +21,24 @@ export const EditorWrap = styled.div`
 
     & .ql-blank::before {
       font-style: normal;
+      font-size: 13px;
+    }
+
+    & p {
+      font-size: 13px;
+    }
+
+    & li {
+      padding: 0 !important;
+      
+      &::before {
+        display: none;
+      }
+    }
+
+    & ul {
+      padding: 0 !important;
+      font-size: 13px;
     }
 
     & span {
@@ -60,6 +78,19 @@ export const ViewerWrap = styled.div`
 
   & h3 {
     font-size: 1.17em;
+  }
+
+  & p {
+    font-size: 13px;
+  }
+
+  & a {
+    text-decoration: underline;
+    color: #06c;
+  }
+
+  & ul {
+    font-size: 13px;
   }
 
   & strong {
