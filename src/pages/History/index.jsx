@@ -19,6 +19,11 @@ export default function History() {
             className={location.pathname.includes("equipment") ? "on" : "false"}
           />
           <TabNav
+            onClick={() => navigate("/history/lab")}
+            text="랩실 통계"
+            className={location.pathname.includes("lab") ? "on" : "false"}
+          />
+          <TabNav
             onClick={() => navigate("/history/penalty")}
             text="페널티 관리"
             className={location.pathname.includes("penalty") ? "on" : "false"}

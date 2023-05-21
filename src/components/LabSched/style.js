@@ -23,6 +23,8 @@ export const Header = styled.li`
   font-weight: 600;
   font-size: 15px;
   padding: 15px 0;
+  border-top-left-radius: ${(props) => props.theme.borderRadius.lv2};
+  border-top-right-radius: ${(props) => props.theme.borderRadius.lv2};
 `;
 
 export const WarnWrap = styled.div`

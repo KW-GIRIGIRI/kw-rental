@@ -11,7 +11,7 @@ export const Header = styled.div`
   gap: 8px;
   padding: 5px;
   border-radius: 10px 10px 0 0;
-  background-color: ${(props) => props.theme.color.primary.lightSub};
+  background-color: ${(props) => props.theme.color.primary.sub};
   border: 1px solid #e8e8e8;
 `;
 

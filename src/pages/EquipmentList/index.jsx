@@ -7,7 +7,6 @@ import iconList from "../../assets/icon-list.svg";
 import iconPlus from "../../assets/icon-plus.svg";
 import Button from "../../modules/Button";
 import EquipListWrap from "../../components/EquipListWrap";
-import iconPageArrow from "../../assets/icon-pageArrow.svg";
 import { useContext, useEffect, useState } from "react";
 import { getProductList } from "../../api/api";
 import { AuthContext } from "../../context/Context";
@@ -17,6 +16,7 @@ import { category } from "../../data/category";
 import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
 import { useDispatch } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
+import Pagination from "../../components/Pagination";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -155,28 +155,11 @@ export default function EquipmentList() {
       {productList && <EquipListWrap type={viewMode} data={productList} />}
 
       {pageArray && (
-        <S.PageBtnWrap>
-          <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-            <img src={iconPageArrow} alt="이전 페이지" />
-          </button>
-          {pageArray?.map((_, index) => {
-            return (
-              <button
-                key={index}
-                onClick={() => setPage(index)}
-                className={page === index ? "on" : null}
-              >
-                {index + 1}
-              </button>
-            );
-          })}
-          <button
-            onClick={() => setPage(page + 1)}
-            disabled={page + 1 === pageArray.length}
-          >
-            <img src={iconPageArrow} alt="다음 페이지" />
-          </button>
-        </S.PageBtnWrap>
+        <Pagination
+          page={page}
+          setPage={setPage}
+          pageArray={pageArray}
+        />
       )}
     </S.Wrapper>
   );

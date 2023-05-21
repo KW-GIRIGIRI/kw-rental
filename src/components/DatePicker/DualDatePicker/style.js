@@ -7,6 +7,17 @@ export const InpWrapper = styled.div`
 
   &.authHistory {
     gap: 7px;
+
+    & > div {
+      width: 150px;
+      padding: 7px 0;
+      box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    & > div > span {
+      margin-top: 0;
+      font-size: 13px;
+    }
   }
 `;
 

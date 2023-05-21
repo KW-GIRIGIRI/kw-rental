@@ -2,7 +2,7 @@ import styled from "styled-components";
 import iconDownArrow from "../../assets/icon-downArrow-black.svg";
 
 export const ListUl = styled.ul`
-  border: 1px solid ${(props) => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
 
 export const ListLi = styled.li`
@@ -11,11 +11,11 @@ export const ListLi = styled.li`
   align-items: center;
   font-size: 14px;
   text-align: center;
-  border-bottom: 1px solid ${(props) => props.theme.color.primary.third};
+  border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 
   & > p {
     padding: 10px 0;
-    border-right: 1px solid ${(props) => props.theme.color.primary.third};
+    border-right: 1px solid ${(props) => props.theme.color.primary.sub};
 
     &.faulty {
       color: ${(props) => props.theme.color.primary.red};
@@ -37,7 +37,7 @@ export const ListLi = styled.li`
 
 export const Select = styled.select`
   border-radius: ${(props) => props.theme.borderRadius.lv1};
-  width: 46px;
+  width: 50px;
   justify-self: center;
   font-size: 11px;
   padding: 4px 8px;

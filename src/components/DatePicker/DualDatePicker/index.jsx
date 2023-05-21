@@ -56,6 +56,10 @@ export default function DualDatePicker({
   };
 
   useEffect(() => {
+    handleSetMon(0) // 초기 렌더링 시 요일에 따라 날짜 조정
+  }, [])
+
+  useEffect(() => {
     switch (firstCalendar.date.day()) {
       case 5:
         handleSetMon(3);
@@ -69,7 +73,7 @@ export default function DualDatePicker({
       default:
         break;
     }
-  }, []);
+  }, [firstCalendar.date]);
 
   useEffect(() => {
     if (
@@ -83,11 +87,14 @@ export default function DualDatePicker({
     }
     dispatch(setDualFirstDate(dayjs(firstCalendar.date).format("YYYY-MM-DD")));
     if (className === "user") {
-      let sendDate =
-        // 목요일 대여 - 월요일 반납 서버에서 예외처리 끝나면 적용하기
-        // dayjs(firstCalendar.date).day() === 4 ?
-        //   dayjs(firstCalendar.date).add(4, 'days') :
-        dayjs(firstCalendar.date).add(1, "days");
+      let sendDate = dayjs(firstCalendar.date);
+
+      if (sendDate.day() === 4) {
+        // 목요일 선택 시 다음 주 월요일로 설정
+        sendDate = sendDate.add(4, "days");
+      } else {
+        sendDate = sendDate.add(1, "days");
+      }
 
       dispatch(setDualLastDate(sendDate.format("YYYY-MM-DD")));
     }

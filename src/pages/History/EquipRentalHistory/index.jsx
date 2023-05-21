@@ -3,69 +3,25 @@ import UserState from "../../../components/UserState"
 import UserHist from "../../../components/UserHist"
 import Button from "../../../modules/Button"
 import EquipStatistics from "../../../components/EquipStatistics"
-import iconExcel from "../../../assets/icon-excel.svg"
-import Image from "../../../modules/Image"
 import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
-import dayjs from "dayjs"
-import iconPageArrow from "../../../assets/icon-pageArrow.svg"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState } from "react"
 import { AuthContext } from "../../../context/Context"
 import { category } from "../../../data/category"
-import { CSVLink } from "react-csv"
-import { getAdminEquipHistory } from "../../../api/api"
-import { useSelector } from "react-redux"
+import Pagination from "../../../components/Pagination"
+import ExcelDownload from "../../../components/ExcelDownload"
 
 export default function EquipmentRentalHistory() {
-  const { isAuth } = useContext(AuthContext);
-  const [productList, setProductList] = useState([]);
-  const [isCategory, setIsCategory] = useState(0);
-  const [page, setPage] = useState(0);
-  const [pageArray, setPageArray] = useState([]);
-  const [onDownload, setOnDownload] = useState(false);
-  const dualDate = useSelector((state) => state.datePicker.dualDate);
+  const [productList, setProductList] = useState([])
+  const { isAuth } = useContext(AuthContext)
+  const [isCategory, setIsCategory] = useState(0)
+  const [page, setPage] = useState(0)
+  const [pageArray, setPageArray] = useState([])
+  const [onDownload, setOnDownload] = useState(false)
 
   const handleCategory = (e) => {
-    setIsCategory(parseInt(e.target.value));
-    setPage(0);
-  };
-
-  const handleDownloadXlsx = () => {
-    const xlsx = require("xlsx");
-    const book = xlsx.utils.book_new();
-    const data = xlsx.utils.json_to_sheet(productList);
-    xlsx.utils.book_append_sheet(book, data, "기자재 통계");
-    xlsx.writeFile(book, dayjs().format("기자재통계_YYMMDD_HHmmss") + ".xlsx");
-    setOnDownload(false);
-  };
-
-  const handleGetEquipHistory = async () => {
-    if (dualDate.firstDate && dualDate.lastDate) {
-      const reqCategory = isCategory
-      ? `&category=${category.filter((_, i) => i + 1 === isCategory)[0]?.value}`
-      : "";
-      const reqUrl = `from=${dualDate.firstDate}&to=${dualDate.lastDate}&page=${page}${reqCategory}`
-      const response = await getAdminEquipHistory(reqUrl)
-      const data = response.histories
-
-      setPageArray(response.endpoints)
-
-      window.scrollTo({
-        top: 0,
-      });
-
-      if (isCategory) {
-        setProductList(
-          data.filter((i) => i.category === category[isCategory - 1].value)
-        );
-      } else {
-        setProductList(data);
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleGetEquipHistory();
-  }, [page, isCategory, dualDate]);
+    setIsCategory(parseInt(e.target.value))
+    setPage(0)
+  }
 
   return (
     <>
@@ -99,54 +55,25 @@ export default function EquipmentRentalHistory() {
                 />
               ))}
             </S.FilterWrap>
-            <Image
-              src={iconExcel}
-              width="18px"
-              height="18px"
-              onClick={() => {
-                setOnDownload(!onDownload);
-              }}
-            ></Image>
-            {onDownload && (
-              <S.DownloadModal className="download">
-                <p onClick={handleDownloadXlsx}>엑셀 파일로 다운로드(.xlsx)</p>
-                <p
-                  onClick={() => {
-                    setOnDownload(false);
-                  }}
-                >
-                  <CSVLink data={productList} filename={dayjs().format("기자재통계_YYMMDD_HHmmss")}>
-                    엑셀 파일로 다운로드(.csv)
-                  </CSVLink>
-                </p>
-              </S.DownloadModal>
-            )}
-
-            <EquipStatistics data={productList} />
+            <ExcelDownload
+              onDownload={onDownload}
+              setOnDownload={setOnDownload}
+              productList={productList}
+            />
+            <EquipStatistics
+              productList={productList}
+              setProductList={setProductList}
+              page={page}
+              setPageArray={setPageArray}
+              isCategory={isCategory}
+            />
           </S.RentalWrap>
           {pageArray && (
-            <S.PageBtnWrap>
-              <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-                <img src={iconPageArrow} alt="이전 페이지" />
-              </button>
-              {pageArray?.map((_, index) => {
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setPage(index)}
-                    className={page === index ? "on" : null}
-                  >
-                    {index + 1}
-                  </button>
-                );
-              })}
-              <button
-                onClick={() => setPage(page + 1)}
-                disabled={page + 1 === pageArray.length}
-              >
-                <img src={iconPageArrow} alt="다음 페이지" />
-              </button>
-            </S.PageBtnWrap>
+            <Pagination
+              page={page}
+              setPage={setPage}
+              pageArray={pageArray}
+            />
           )}
         </>
       ) : (
@@ -154,9 +81,9 @@ export default function EquipmentRentalHistory() {
           <S.Title> 내 대여 정보</S.Title>
           <S.RentalWrap>
             <h2>기자재 대여</h2>
-            <UserState isEquip={true} />
+            <UserState />
             <h2>기자재 대여 이력</h2>
-            <UserHist isEquip={true} />
+            <UserHist />
           </S.RentalWrap>
         </>
       )}
