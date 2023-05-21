@@ -41,7 +41,7 @@ export const EditorWrap = styled.div`
       font-size: 13px;
     }
 
-    & span {
+    & > div > div > span {
       display: none !important;
     }
   }
