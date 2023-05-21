@@ -2,17 +2,17 @@ import styled from "styled-components";
 
 export const EditorWrap = styled.div`
   .ql-toolbar {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border: 1px solid #E0E4E9;
-    background-color: #E0E4E9;
+    border-top-left-radius: ${props => props.theme.borderRadius.lv2};
+    border-top-right-radius: ${props => props.theme.borderRadius.lv2};
+    border: 1px solid ${props => props.theme.color.primary.sub};
+    background-color: ${props => props.theme.color.primary.sub};
   }
 
   .ql-container {
     height: 358px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border: 1px solid #E0E4E9;
+    border-bottom-left-radius: ${props => props.theme.borderRadius.lv2};
+    border-bottom-right-radius: ${props => props.theme.borderRadius.lv2};
+    border: 1px solid ${props => props.theme.color.primary.sub};
     font: inherit !important;
 
     & strong {
@@ -51,14 +51,14 @@ export const EditorWrap = styled.div`
   }
 
   .ql-color-picker .ql-picker-options .ql-picker-item {
-    border-radius: 5px;
+    border-radius: ${props => props.theme.borderRadius.lv1};
   }
 `
 
 export const ViewerWrap = styled.div`
   position: relative;
   min-height: 400px;
-  border: 1px solid #E0E4E9;
+  border: 1px solid ${props => props.theme.color.primary.sub};
   border-radius: 10px;
   font-size: 13px;
   padding: 20px 15px;
