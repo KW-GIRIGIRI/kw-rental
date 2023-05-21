@@ -1,10 +1,10 @@
-import ToastUI from "../../../components/ToastUI";
+import QuillUI from "../../../components/QuillUI";
 import { Div } from "../style";
 
 export default function LabInformation() {
   return (
     <Div>
-      <ToastUI />
+      <QuillUI />
     </Div>
   );
 }
