@@ -14,7 +14,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
     setInfo(item)
     setCancelModal(true)
   }
-  
+
   const handleConfirmation = () => {
     // 수령 확정
 
@@ -24,7 +24,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   return (
     <S.SchedLi>
       <S.Lab>
-        <p>{lab}</p>
+        <p>{lab === "hanul" ? "한울관" : "화도관"}</p>
         {lab === "hanul" && <S.RenterNum>총 {renterList.reduce((a, c) => a + c.rentalAmount, 0)}명 대여</S.RenterNum>}
         {
           acceptTime ? 
@@ -54,9 +54,9 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
       </ul>
       {cancelModal &&
         <CancelModal
-          renter={info.renter}
-          ID={info.ID}
-          num={info.num}
+          renter={info.renterName}
+          ID={info.memberNumber}
+          num={info.rentalAmount}
           cancelModal={cancelModal}
           setCancelModal={setCancelModal}
         />}
