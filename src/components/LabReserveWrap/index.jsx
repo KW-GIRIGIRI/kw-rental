@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getLabRemainQuantities } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
@@ -13,6 +14,7 @@ export default function LabReserveWrap() {
   const { Toggle, state, changeInitial } = useToggle();
   const hanul = useSelector(state => state.labControl.lab)
   const selectDate = useSelector(state => state.labControl.date)
+  const navigate = useNavigate()
 
   const handleGetLabRemain = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
@@ -50,6 +52,7 @@ export default function LabReserveWrap() {
                 fontSize="12px"
                 fontWeight="500"
                 disabled={!seatAmount}
+                onClick={() => navigate('/lab/application')}
               />
             )}
           </S.ReserveLi>

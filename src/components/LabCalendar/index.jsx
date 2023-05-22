@@ -63,6 +63,13 @@ const LabCalendar = () => {
     }
   }
 
+  const handleCalendar = (i) => {
+    if(!isAuth) {
+      if (dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).valueOf() > dayjs().valueOf() && dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).valueOf() < dayjs().add(1, 'month').valueOf()) return true
+      else return false
+    } else return true
+  }
+
   useEffect(() => {
     handleGetLabRemain()
   }, [dayObj, hanul])
@@ -120,8 +127,7 @@ const LabCalendar = () => {
               {
                 (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 &&
-                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).valueOf() > dayjs().valueOf() &&
-                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).valueOf() < dayjs().add(1, 'month').valueOf()
+                  handleCalendar(i)
                 )
                 && (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
