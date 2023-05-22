@@ -14,6 +14,7 @@ export default function SchedListComp({ acceptDateTime, id, receive }) {
     (state) => state.authReceive.receiveSpecList.byId
   );
   const receiveItem = receiveSpecList[id] || null;
+  console.log(receiveItem);
 
   const handleGetEquip = async () => {
     const res = await getRentAvailabilityItemList(receiveItem.equipmentId);

@@ -60,12 +60,9 @@ export default function LabSched() {
           <S.SchedWrap>
             <S.Header>
               <span>랩실</span>
-              <span></span>
               <span>대여자</span>
-              <span></span>
               <span>인원</span>
               <span>연락처</span>
-              <span></span>
             </S.Header>
             {
               가짜랩실대여데이터.한울관.length ? 
