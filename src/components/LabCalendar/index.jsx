@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import iconRightArrow from "../../assets/icon-rightArrow.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
@@ -6,14 +6,32 @@ import dayjs from "dayjs";
 import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { setLabDate } from "../../store/reducer/LabControllerSlice";
+import { getLabRemainQuantities } from "../../api/api";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
 const LabCalendar = () => {
   const [dayObj, setDayObj] = useState(dayjs());
+  const [seatArray, setSeatArray] = useState({})
   const hanul = useSelector(state => state.labControl.lab)
   const selectDate = useSelector(state => state.labControl.date)
   const dispatch = useDispatch()
+
+  const handleGetLabRemain = async () => {
+    const startDate = dayObj.startOf('month').format('YYYY-MM-DD')
+    const endDate = dayObj.endOf('month').format('YYYY-MM-DD')
+    const lab = hanul ? 'hanul' : 'hwado'
+
+    const res = await getLabRemainQuantities(lab, startDate, endDate)
+
+    const newObj = {}
+    
+    res.remainQuantities.length && res.remainQuantities.forEach(item => {
+      newObj[~~item.date.split('-').slice(-1)[0]] = item.remainQuantity;
+    });
+    
+    setSeatArray(newObj)
+  }
 
   const thisYear = dayObj.year();
   const thisMonth = dayObj.month();
@@ -36,6 +54,10 @@ const LabCalendar = () => {
   const handleSetDate = e => {
     dispatch(setLabDate(`${thisYear}-${thisMonth + 1}-${e.target.value}`))
   }
+
+  useEffect(() => {
+    handleGetLabRemain()
+  }, [dayObj, hanul])
 
   return (
     <S.Wrapper>
@@ -84,8 +106,8 @@ const LabCalendar = () => {
               {
                 dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 && (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                  <ins>{hanul ? "대여(0/20)" : "대여 가능"}</ins> :
-                  <p>{hanul ? "대여(0/20)" : "대여 가능"}</p>
+                  <ins>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : "대여 가능"}</ins> :
+                  <p>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : "대여 가능"}</p>
                 )
               }
             </S.ContCell>
