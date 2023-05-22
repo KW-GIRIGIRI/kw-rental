@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import iconCheck from "../../../assets/icon-check-white.svg";
 
 export const SchedLi = styled.li`
   width: 100%;
