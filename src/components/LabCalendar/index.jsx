@@ -52,7 +52,7 @@ const LabCalendar = () => {
   };
 
   const handleSetDate = e => {
-    dispatch(setLabDate(`${thisYear}-${thisMonth + 1}-${e.target.value}`))
+    dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
   }
 
   useEffect(() => {
@@ -106,8 +106,8 @@ const LabCalendar = () => {
               {
                 dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 && (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                  <ins>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : "대여 가능"}</ins> :
-                  <p>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : "대여 가능"}</p>
+                  <ins>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] ? "대여 가능" :"대여 불가"}</ins> :
+                  <p>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] ? "대여 가능" :"대여 불가"}</p>
                 )
               }
             </S.ContCell>
