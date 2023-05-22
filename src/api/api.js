@@ -454,7 +454,7 @@ export const getAdminEquipHistory = async (url) => {
   }
 };
 
-// 랩실 관련 api
+// 랩실 관련
 
 // 랩실의 날짜별 남은 자리 조회 API - hanul or hwado
 export const getLabRemainQuantities = async (lab, startDate, endDate) => {

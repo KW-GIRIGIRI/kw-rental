@@ -6,7 +6,7 @@ export default function LabRentalManage() {
   return (
     <>
       <Cal>
-        <SingularDatePicker />
+        <SingularDatePicker className='admin' />
       </Cal>
       <LabSched />
     </>

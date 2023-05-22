@@ -6,7 +6,7 @@ export const AuthContext = createContext({
 });
 
 export const AuthStore = (props) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   // user(false) || admin(true)
 
   return (
