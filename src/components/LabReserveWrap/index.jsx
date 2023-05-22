@@ -26,7 +26,7 @@ export default function LabReserveWrap() {
 
   useEffect(() => {
     handleGetLabRemain()
-  }, [hanul])
+  }, [hanul, selectDate])
 
   return (
     <S.Div>
@@ -80,6 +80,7 @@ export default function LabReserveWrap() {
               fontSize="12px"
               fontWeight="500"
               disabled={!seatAmount}
+              onClick={() => navigate('/lab/application')}
             />
           )}
         </>

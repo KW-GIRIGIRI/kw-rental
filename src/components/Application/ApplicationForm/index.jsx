@@ -92,7 +92,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
         {props.isLab && (
           <S.Lab>
             <S.FormLi>대여 인원</S.FormLi>
-            <select>
+            <select ref={el => dataRef.current.renterCount = el}>
               {Array(10)
                 .fill()
                 .map((_, i) => (
