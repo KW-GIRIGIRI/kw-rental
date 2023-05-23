@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { postReservation } from "../../../api/api";
 import { useRef } from "react";
 import useModal from "../../../hook/useModal";
+import { useTitle } from "../../../hook/useTitle";
 
 export default function RentalApplication() {
   const { Modal, open, close } = useModal()
   const navigate = useNavigate();
   const dataRef = useRef([]);
+  useTitle('기자재 대여')
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {

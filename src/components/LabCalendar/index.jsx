@@ -57,9 +57,14 @@ const LabCalendar = () => {
     if (isAuth) {
       dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
     } else {
-      const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).valueOf()
+      const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`)
 
-      if(selectDate > dayjs().valueOf() && selectDate < dayjs().add(1, 'month').valueOf()) dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
+      if (selectDate.day() < 5 &&
+        selectDate.day() > 0 &&
+        ~~selectDate.format('YYMMDD') > ~~dayjs().format('YYMMDD') &&
+        ~~selectDate.format('YYMMDD') < ~~dayjs().add(1, 'month').format('YYMMDD')) {
+        dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
+      }
     }
   }
 
@@ -76,8 +81,9 @@ const LabCalendar = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      const date = dayjs().add(1, 'days').day() === 4 ? dayjs().add(4, 'days') : dayjs().add(1, 'days')
-  
+      const date = dayjs().day() === 4 ?
+        dayjs().add(4, 'days') : dayjs().add(1, 'days')
+
       setDayObj(date)
       dispatch(setLabDate(date.format('YYYY-MM-DD')))
     }

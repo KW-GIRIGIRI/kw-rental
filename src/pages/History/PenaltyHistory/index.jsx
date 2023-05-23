@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/Context";
 import PenaltyState from "../../../components/PenaltyState";
 import { useState } from "react";
+import { useTitle } from "../../../hook/useTitle";
 
 export default function PenaltyHistory() {
   //가짜페널티통계
@@ -41,6 +42,7 @@ export default function PenaltyHistory() {
 
   const [data, setData] = useState(가짜페널티);
   const { isAuth } = useContext(AuthContext);
+  useTitle(isAuth ? '페널티 관리' : '페널티 이력')
 
   return (
     <>

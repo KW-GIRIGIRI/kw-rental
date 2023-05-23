@@ -24,7 +24,6 @@ import LabRental from "../pages/LabRental";
 import LabInformation from "../pages/LabRental/LabInformation";
 import LabRentalSched from "../pages/LabRental/LabRentalSched";
 import LabRentalApplication from "../pages/LabRental/LabRentalApplication";
-import LabRentalSuccess from "../pages/LabRental/LabRentalSuccess";
 import { useContext } from "react";
 import { AuthContext } from "../context/Context";
 import LabRentalManage from "../pages/LabRental/LabAuthManage";
@@ -72,7 +71,7 @@ export default function Router() {
               element={isAuth ? <LabRentalManage /> : <LabRentalSched />}
             />
             <Route path="application" element={<LabRentalApplication />} />
-            <Route path="success" element={<LabRentalSuccess />} />
+            <Route path="success" element={<RentalSuccess />} />
             <Route path="edit" element={<LabInformation />} />
           </Route>
         </Route>

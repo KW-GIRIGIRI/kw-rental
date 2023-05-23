@@ -104,10 +104,3 @@ export const Policy = styled.p`
   color: ${(props) => props.theme.color.primary.third};
   margin-top: 30px;
 `;
-
-export const ErrText = styled.p`
-  color: ${(props) => props.theme.color.primary.red};
-  font-size: 13px;
-  text-align: left;
-  margin: 20px 5px;
-`;

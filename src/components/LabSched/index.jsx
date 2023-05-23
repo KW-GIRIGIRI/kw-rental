@@ -2,28 +2,27 @@ import * as S from "./style";
 import Button from "../../modules/Button";
 import { useEffect, useState } from "react";
 import iconWarning from "../../assets/icon-exclamation-gray.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LabSchedList from './LabSchedList';
-import { getLabRentalList } from "../../api/api";
+import { asyncGetLabReceived, asyncGetLabReturned } from "../../store/reducer/authReceiveSlice";
 
 export default function LabSched() {
   const [receive, setReceive] = useState(true);
-  const [rentalList, setRentalList] = useState([])
   const selectDate = useSelector((state) => state.datePicker.singularDate);
+  const dispatch = useDispatch()
+  const rentalList = useSelector(state => state.authReceive.labReceiveList)
 
-  const handleGetLabRentalList = async () => {
-    const res = await getLabRentalList(selectDate)
-    setRentalList(res.reservations);
+  const handleGetLabRentalList = (date) => {
+    dispatch(asyncGetLabReceived(date))
   }
 
-  const handleGetLabReturnedList = async () => {
-    // 랩실 퇴실 예정 리스트 반환
-    setRentalList([])
+  const handleGetLabReturnedList = (date) => {
+    dispatch(asyncGetLabReturned(date))
   }
 
   useEffect(() => {
     if (selectDate)
-     receive ? handleGetLabRentalList() : handleGetLabReturnedList()
+     receive ? handleGetLabRentalList(selectDate) : handleGetLabReturnedList(selectDate)
   }, [selectDate, receive])
 
   return (
@@ -60,14 +59,6 @@ export default function LabSched() {
                 <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} />
               ) 
             }
-            {/* {
-              rentalList[0].length ? 
-              <LabSchedList lab="한울관" renterList={가짜랩실대여데이터.한울관} receive={receive} /> : <></>
-            }
-            {
-              가짜랩실대여데이터.화도관.length ? 
-              <LabSchedList lab="화도관" renterList={가짜랩실대여데이터.화도관} receive={receive} /> : <></>
-            } */} 
           </S.SchedWrap>
         </>
       ) : (

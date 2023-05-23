@@ -17,6 +17,7 @@ import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
 import { useDispatch } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import Pagination from "../../components/Pagination";
+import { useTitle } from "../../hook/useTitle";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -29,6 +30,7 @@ export default function EquipmentList() {
   const { Modal, open, close } = useModal();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  useTitle('기자재 조회')
 
   const handleSearch = (e) => {
     if (e.key === "Enter" || e.type === "click") {

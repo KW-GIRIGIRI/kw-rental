@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
+import { useTitle } from "../../hook/useTitle";
 import Button from "../../modules/Button";
 import Input from "../../modules/Input";
 import * as S from "./style";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
+  useTitle('비밀번호 찾기')
 
   const handleFindPassword = (event) => {
     event.preventDefault();

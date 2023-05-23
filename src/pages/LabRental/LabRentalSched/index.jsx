@@ -4,6 +4,7 @@ import LabCalendar from "../../../components/LabCalendar";
 import LabPenalty from "../../../components/LabPenalty";
 import LabReserveWrap from "../../../components/LabReserveWrap";
 import { AuthContext } from "../../../context/Context";
+import { useTitle } from "../../../hook/useTitle";
 import useToggle from "../../../hook/useToggle";
 import * as S from "./style";
 
@@ -11,6 +12,7 @@ export default function LabRentalSched() {
   const { isAuth } = useContext(AuthContext);
   const navigate = useNavigate()
   const { Toggle, state, changeInitial } = useToggle();
+  useTitle(isAuth ? '랩실 관리' : '랩실 대여 현황')
 
   return (
     <>

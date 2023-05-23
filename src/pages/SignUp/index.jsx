@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
 import { getClassNum, Signup } from "../../api/api";
+import { useTitle } from "../../hook/useTitle";
 
 export default function SignUp() {
   const [showPw, setShowPw] = useState({
@@ -15,6 +16,7 @@ export default function SignUp() {
   });
   const navigate = useNavigate();
   const pwRef = useRef();
+  useTitle('회원가입')
 
   const {
     register,

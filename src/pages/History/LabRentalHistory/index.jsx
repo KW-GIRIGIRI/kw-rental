@@ -9,11 +9,13 @@ import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
 import Button from "../../../modules/Button"
 import { setLab } from "../../../store/reducer/LabControllerSlice"
 import LabStatistics from "../../../components/LabStatistics"
+import { useTitle } from "../../../hook/useTitle"
 
 export default function LabRentalHistory() {
   const { isAuth } = useContext(AuthContext)
   const dispatch = useDispatch()
   const lab = useSelector(state => state.labControl.lab)
+  useTitle(isAuth ?  '랩실 대여 통계' : '랩실 대여 이력')
 
   return (
     isAuth ?

@@ -9,6 +9,7 @@ import { AuthContext } from "../../../context/Context"
 import { category } from "../../../data/category"
 import Pagination from "../../../components/Pagination"
 import ExcelDownload from "../../../components/ExcelDownload"
+import { useTitle } from "../../../hook/useTitle"
 
 export default function EquipmentRentalHistory() {
   const [productList, setProductList] = useState([])
@@ -17,6 +18,7 @@ export default function EquipmentRentalHistory() {
   const [page, setPage] = useState(0)
   const [pageArray, setPageArray] = useState([])
   const [onDownload, setOnDownload] = useState(false)
+  useTitle(isAuth ?  '기자재 대여 통계' : '기자재 대여 이력')
 
   const handleCategory = (e) => {
     setIsCategory(parseInt(e.target.value))

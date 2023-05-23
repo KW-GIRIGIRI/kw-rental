@@ -15,7 +15,7 @@ export const Wrapper = styled.section`
 
 export const SimpleDesc = styled.div`
   font-size: 13px;
-  margin-bottom: 30px;
+  margin: -15px 0 30px;
 
   & > span:not(:last-child)::after {
     content: " > ";

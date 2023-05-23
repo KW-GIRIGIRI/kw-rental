@@ -1,7 +1,10 @@
 import dayjs from "dayjs"
 import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
+import { asyncGetLabReceived, asyncGetLabReturned } from "../../../store/reducer/authReceiveSlice"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
@@ -9,16 +12,34 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   const [info, setInfo] = useState({})
   const [cancelModal, setCancelModal] = useState(false)
   const { Modal, open, close } = useModal()
+  const dispatch = useDispatch()
+  const selectDate = useSelector((state) => state.datePicker.singularDate);
 
   const handleCancelModal = (item) => {
     setInfo(item)
     setCancelModal(true)
   }
 
-  const handleConfirmation = () => {
-    // 수령 확정
+  const handleReceive = async () => {
+    const data = {
+      "name" : lab,
+      "reservationSpecIds" : renterList.map(i => i.id)
+    }
 
-    // 반납 확정
+    const res = await setLabUsingConfirm(JSON.stringify(data))
+    res === 204 && close()
+    dispatch(asyncGetLabReceived(selectDate))
+  }
+
+  const handleReturn = async () => {
+    const data = {
+      "name": lab,
+      "reservationSpecIds": renterList.map(i => i.id)
+    }
+
+    const res = await setLabReturnConfirm(JSON.stringify(data))
+    res === 204 && close()
+    dispatch(asyncGetLabReturned(selectDate))
   }
 
   return (
@@ -27,15 +48,16 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
         <p>{lab === "hanul" ? "한울관" : "화도관"}</p>
         {lab === "hanul" && <S.RenterNum>총 {renterList.reduce((a, c) => a + c.rentalAmount, 0)}명 대여</S.RenterNum>}
         {
-          acceptTime ? 
+          acceptTime && receive ? 
           <S.TimeCont> { acceptTime.split("T")[1].slice(0, 5) }</S.TimeCont> : 
           <Button
-            className={"main"}
+            className={dayjs().format('YYYY-MM-DD') === selectDate ? "main" : "gray"}
             text={receive ? "키 수령" : "키 반납"}
             borderRadius="20px"
             padding="7px 9px"
             fontSize="13px"
             onClick={open}
+            disabled={dayjs().format('YYYY-MM-DD') !== selectDate}
           />
         }
 
@@ -47,16 +69,15 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
               <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>
-              <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} />
+              { (receive && !acceptTime)  && <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} /> }
             </S.RenterLi>
           ))
         }
       </ul>
       {cancelModal &&
         <CancelModal
-          renter={info.renterName}
-          ID={info.memberNumber}
-          num={info.rentalAmount}
+          info={info}
+          receive={receive}
           cancelModal={cancelModal}
           setCancelModal={setCancelModal}
         />}
@@ -81,7 +102,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
             padding="11px 24px"
             borderRadius="5px"
             fontSize="14px"
-            onClick={handleConfirmation}
+            onClick={receive ? handleReceive : handleReturn}
           />
         </div>
       </Modal>
