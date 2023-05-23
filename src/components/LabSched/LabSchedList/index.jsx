@@ -1,10 +1,10 @@
 import dayjs from "dayjs"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setLabUsingConfirm } from "../../../api/api"
+import { setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
-import { asyncGetLabReceived } from "../../../store/reducer/authReceiveSlice"
+import { asyncGetLabReceived, asyncGetLabReturned } from "../../../store/reducer/authReceiveSlice"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
@@ -31,8 +31,15 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
     dispatch(asyncGetLabReceived(selectDate))
   }
 
-  const handleReturn = () => {
-    // 반납 확정
+  const handleReturn = async () => {
+    const data = {
+      "name": lab,
+      "reservationSpecIds": renterList.map(i => i.id)
+    }
+
+    const res = await setLabReturnConfirm(JSON.stringify(data))
+    res === 204 && close()
+    dispatch(asyncGetLabReturned(selectDate))
   }
 
   return (
