@@ -5,7 +5,8 @@ import { TextareaStyle } from "../../../modules/Textarea/style";
 import useInput from "../../../hook/useInput";
 import { useEffect, useState } from "react";
 import { forwardRef } from "react";
-import { getUserInfo } from "../../../api/api";
+import { getLabRemainQuantities, getUserInfo } from "../../../api/api";
+import { useSelector } from "react-redux";
 
 const ApplicationForm = forwardRef((props, dataRef) => {
   const [visible, setVisible] = useState(true);
@@ -15,6 +16,16 @@ const ApplicationForm = forwardRef((props, dataRef) => {
     email: "",
   });
   const purposeInp = useInput("");
+  const [renterCount, setRenterCount] = useState(10)
+  const hanul = useSelector(state => state.labControl.lab)
+  const selectDate = useSelector(state => state.labControl.date)
+
+  const handleGetLabRemain = async () => {
+    const lab = hanul ? 'hanul' : 'hwado'
+    const res = await getLabRemainQuantities(lab, selectDate, selectDate)
+
+    if (hanul && res.remainQuantities[0].remainQuantity < 10) setRenterCount(res.remainQuantities[0].remainQuantity)
+  }
 
   const handleGetUserInfo = async () => {
     const res = await getUserInfo();
@@ -34,6 +45,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
 
   useEffect(() => {
     handleGetUserInfo();
+    handleGetLabRemain();
   }, []);
 
   return (
@@ -93,7 +105,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
           <S.Lab>
             <S.FormLi>대여 인원</S.FormLi>
             <select ref={el => dataRef.current.renterCount = el}>
-              {Array(10)
+              {Array(renterCount)
                 .fill()
                 .map((_, i) => (
                   <option key={i} value={i + 1}>
