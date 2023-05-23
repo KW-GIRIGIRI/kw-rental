@@ -1,11 +1,12 @@
 import dayjs from "dayjs"
 import { useState } from "react"
+import { setLabUsingConfirm } from "../../../api/api"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
-export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
+export default function LabSchedList({ setReceive, acceptTime, lab, renterList, receive }) {
   const [info, setInfo] = useState({})
   const [cancelModal, setCancelModal] = useState(false)
   const { Modal, open, close } = useModal()
@@ -15,9 +16,18 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
     setCancelModal(true)
   }
 
-  const handleConfirmation = () => {
-    // 수령 확정
+  const handleReceive = async () => {
+    const data = {
+      "name" : lab,
+      "reservationSpecIds" : renterList.map(i => i.id)
+    }
 
+    const res = await setLabUsingConfirm(JSON.stringify(data))
+    res === 204 && close()
+    // 대여 취소 api 나오면 테스팅
+  }
+
+  const handleReturn = () => {
     // 반납 확정
   }
 
@@ -81,7 +91,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
             padding="11px 24px"
             borderRadius="5px"
             fontSize="14px"
-            onClick={handleConfirmation}
+            onClick={receive ? handleReceive : handleReturn}
           />
         </div>
       </Modal>

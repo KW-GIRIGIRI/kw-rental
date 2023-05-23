@@ -57,17 +57,9 @@ export default function LabSched() {
             </S.Header>
             {
               rentalList.map(lab => 
-                <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} />
+                <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} setReceive={setReceive} />
               ) 
             }
-            {/* {
-              rentalList[0].length ? 
-              <LabSchedList lab="한울관" renterList={가짜랩실대여데이터.한울관} receive={receive} /> : <></>
-            }
-            {
-              가짜랩실대여데이터.화도관.length ? 
-              <LabSchedList lab="화도관" renterList={가짜랩실대여데이터.화도관} receive={receive} /> : <></>
-            } */} 
           </S.SchedWrap>
         </>
       ) : (

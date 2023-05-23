@@ -495,3 +495,18 @@ export const postLabRental = async (data) => {
     return err;
   }
 };
+
+// 랩실 대여 사용 처리 API
+export const setLabUsingConfirm = async (data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/reservations/labRooms`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
