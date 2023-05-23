@@ -51,12 +51,13 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
           acceptTime && receive ? 
           <S.TimeCont> { acceptTime.split("T")[1].slice(0, 5) }</S.TimeCont> : 
           <Button
-            className={"main"}
+            className={dayjs().format('YYYY-MM-DD') === selectDate ? "main" : "gray"}
             text={receive ? "키 수령" : "키 반납"}
             borderRadius="20px"
             padding="7px 9px"
             fontSize="13px"
             onClick={open}
+            disabled={dayjs().format('YYYY-MM-DD') !== selectDate}
           />
         }
 
