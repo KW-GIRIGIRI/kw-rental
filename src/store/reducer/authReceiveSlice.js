@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getReceivedRentalList, getReturnRentalList } from "../../api/api";
+import {
+  getLabRentalList,
+  getLabReturnList,
+  getReceivedRentalList,
+  getReturnRentalList,
+} from "../../api/api";
 
 export const asyncGetReceived = createAsyncThunk(
   "authReceive/asyncGetReceived",
@@ -20,6 +25,24 @@ export const asyncGetReturned = createAsyncThunk(
     );
 
     return newArr;
+  }
+);
+
+export const asyncGetLabReceived = createAsyncThunk(
+  "authReceive/asyncGetLabReceived",
+  async (date) => {
+    const response = await getLabRentalList(date);
+
+    return response.reservations;
+  }
+);
+
+export const asyncGetLabReturned = createAsyncThunk(
+  "authReceive/asyncGetLabReturned",
+  async (date) => {
+    const response = await getLabReturnList(date);
+
+    return response.reservations;
   }
 );
 
@@ -77,6 +100,10 @@ const handleFulfilled = (state, action) => {
   state.receiveCheckList = newItems;
 };
 
+const handleLabFulfilled = (state, action) => {
+  state.labReceiveList = action.payload;
+};
+
 const initialState = {
   receiveList: {
     byId: {},
@@ -87,6 +114,7 @@ const initialState = {
     allIds: [],
   },
   receiveCheckList: [],
+  labReceiveList: [],
 };
 
 const authReceiveSlice = createSlice({
@@ -120,6 +148,8 @@ const authReceiveSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(asyncGetReceived.fulfilled, handleFulfilled);
     builder.addCase(asyncGetReturned.fulfilled, handleFulfilled);
+    builder.addCase(asyncGetLabReceived.fulfilled, handleLabFulfilled);
+    builder.addCase(asyncGetLabReturned.fulfilled, handleLabFulfilled);
   },
 });
 

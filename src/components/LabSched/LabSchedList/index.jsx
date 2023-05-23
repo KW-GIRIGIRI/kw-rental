@@ -1,15 +1,19 @@
 import dayjs from "dayjs"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { setLabUsingConfirm } from "../../../api/api"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
+import { asyncGetLabReceived } from "../../../store/reducer/authReceiveSlice"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
-export default function LabSchedList({ setReceive, acceptTime, lab, renterList, receive }) {
+export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   const [info, setInfo] = useState({})
   const [cancelModal, setCancelModal] = useState(false)
   const { Modal, open, close } = useModal()
+  const dispatch = useDispatch()
+  const selectDate = useSelector((state) => state.datePicker.singularDate);
 
   const handleCancelModal = (item) => {
     setInfo(item)
@@ -24,7 +28,7 @@ export default function LabSchedList({ setReceive, acceptTime, lab, renterList, 
 
     const res = await setLabUsingConfirm(JSON.stringify(data))
     res === 204 && close()
-    // 대여 취소 api 나오면 테스팅
+    dispatch(asyncGetLabReceived(selectDate))
   }
 
   const handleReturn = () => {
@@ -57,16 +61,15 @@ export default function LabSchedList({ setReceive, acceptTime, lab, renterList, 
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
               <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>
-              { (receive && !acceptTime) && <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} /> }
+              { (receive && !acceptTime)  && <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} /> }
             </S.RenterLi>
           ))
         }
       </ul>
       {cancelModal &&
         <CancelModal
-          renter={info.renterName}
-          ID={info.memberNumber}
-          num={info.rentalAmount}
+          info={info}
+          receive={receive}
           cancelModal={cancelModal}
           setCancelModal={setCancelModal}
         />}

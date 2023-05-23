@@ -2,28 +2,27 @@ import * as S from "./style";
 import Button from "../../modules/Button";
 import { useEffect, useState } from "react";
 import iconWarning from "../../assets/icon-exclamation-gray.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LabSchedList from './LabSchedList';
-import { getLabRentalList, getLabReturnList } from "../../api/api";
+import { asyncGetLabReceived, asyncGetLabReturned } from "../../store/reducer/authReceiveSlice";
 
 export default function LabSched() {
   const [receive, setReceive] = useState(true);
-  const [rentalList, setRentalList] = useState([])
   const selectDate = useSelector((state) => state.datePicker.singularDate);
+  const dispatch = useDispatch()
+  const rentalList = useSelector(state => state.authReceive.labReceiveList)
 
-  const handleGetLabRentalList = async () => {
-    const res = await getLabRentalList(selectDate)
-    setRentalList(res.reservations);
+  const handleGetLabRentalList = (date) => {
+    dispatch(asyncGetLabReceived(date))
   }
 
-  const handleGetLabReturnedList = async () => {
-    const res = await getLabReturnList(selectDate)
-    setRentalList(res.reservations)
+  const handleGetLabReturnedList = (date) => {
+    dispatch(asyncGetLabReturned(date))
   }
 
   useEffect(() => {
     if (selectDate)
-     receive ? handleGetLabRentalList() : handleGetLabReturnedList()
+     receive ? handleGetLabRentalList(selectDate) : handleGetLabReturnedList(selectDate)
   }, [selectDate, receive])
 
   return (
@@ -57,7 +56,7 @@ export default function LabSched() {
             </S.Header>
             {
               rentalList.map(lab => 
-                <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} setReceive={setReceive} />
+                <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} />
               ) 
             }
           </S.SchedWrap>
