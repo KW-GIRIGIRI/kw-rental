@@ -16,9 +16,15 @@ export default function LabSched() {
     setRentalList(res.reservations);
   }
 
+  const handleGetLabReturnedList = async () => {
+    // 랩실 퇴실 예정 리스트 반환
+    setRentalList([])
+  }
+
   useEffect(() => {
-    selectDate && handleGetLabRentalList()
-  }, [selectDate])
+    if (selectDate)
+     receive ? handleGetLabRentalList() : handleGetLabReturnedList()
+  }, [selectDate, receive])
 
   return (
     <>
