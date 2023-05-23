@@ -37,7 +37,7 @@ export default function LabSchedList({ setReceive, acceptTime, lab, renterList, 
         <p>{lab === "hanul" ? "한울관" : "화도관"}</p>
         {lab === "hanul" && <S.RenterNum>총 {renterList.reduce((a, c) => a + c.rentalAmount, 0)}명 대여</S.RenterNum>}
         {
-          acceptTime ? 
+          acceptTime && receive ? 
           <S.TimeCont> { acceptTime.split("T")[1].slice(0, 5) }</S.TimeCont> : 
           <Button
             className={"main"}
@@ -57,7 +57,7 @@ export default function LabSchedList({ setReceive, acceptTime, lab, renterList, 
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
               <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>
-              <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} />
+              { (receive && !acceptTime) && <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} /> }
             </S.RenterLi>
           ))
         }

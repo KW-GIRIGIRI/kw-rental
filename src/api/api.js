@@ -470,11 +470,25 @@ export const getLabRemainQuantities = async (lab, startDate, endDate) => {
   }
 };
 
-// 랩실 대여 수령 조회 API
+// 특정 일이 사용일인 랩실 대여 조회 API
 export const getLabRentalList = async (startDate) => {
   try {
     const response = await instanceUtil.get(
       `/admin/reservations/labRooms?startDate=${startDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 특정 일이 퇴실일인 랩실 대여 조회 API
+export const getLabReturnList = async (endDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/labRooms?endDate=${endDate}`
     );
 
     return response.data;

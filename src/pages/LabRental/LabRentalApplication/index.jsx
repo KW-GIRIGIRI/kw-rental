@@ -18,14 +18,14 @@ export default function LabRentalApplication() {
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
       const enddate = dayjs(selectDate).day() === 4 ? dayjs(selectDate).add(4, 'days').format('YYYY-MM-DD') : selectDate
-      const date = '2023-05-23'
-      const date2 = '2023-05-24'
+      // const date = '2023-05-23'
+      // const date2 = '2023-05-24'
 
       const data = {
-        // "startDate" : selectDate.split('-').map(i => ~~i),
-        // "endDate" : enddate.split('-').map(i => ~~i),
-        "startDate" : date.split('-').map(i => ~~i),
-        "endDate" : date2.split('-').map(i => ~~i),
+        "startDate" : selectDate.split('-').map(i => ~~i),
+        "endDate" : enddate.split('-').map(i => ~~i),
+        // "startDate" : date.split('-').map(i => ~~i),
+        // "endDate" : date2.split('-').map(i => ~~i),
         "labRoomName" : hanul ? "hanul" : "hwado" ,
         "renterName" : dataRef.current.name.innerHTML,
         "renterPhoneNumber" : dataRef.current.pNumber.value,

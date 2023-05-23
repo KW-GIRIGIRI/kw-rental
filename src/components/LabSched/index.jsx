@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import iconWarning from "../../assets/icon-exclamation-gray.svg";
 import { useSelector } from "react-redux";
 import LabSchedList from './LabSchedList';
-import { getLabRentalList } from "../../api/api";
+import { getLabRentalList, getLabReturnList } from "../../api/api";
 
 export default function LabSched() {
   const [receive, setReceive] = useState(true);
@@ -17,8 +17,8 @@ export default function LabSched() {
   }
 
   const handleGetLabReturnedList = async () => {
-    // 랩실 퇴실 예정 리스트 반환
-    setRentalList([])
+    const res = await getLabReturnList(selectDate)
+    setRentalList(res.reservations)
   }
 
   useEffect(() => {
