@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import iconCheck from "../../../assets/icon-check-fill.svg";
+import { useTitle } from "../../../hook/useTitle";
 import Button from "../../../modules/Button";
 import * as S from "./style";
 
 export default function RentalSuccess() {
   const navigate = useNavigate();
+  useTitle('대여 완료')
 
   return (
     <S.Div>

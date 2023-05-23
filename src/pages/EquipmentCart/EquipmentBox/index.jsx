@@ -7,12 +7,14 @@ import { useEffect } from "react";
 import useModal from "../../../hook/useModal";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetCartList } from "../../../store/reducer/cartListSlice";
+import { useTitle } from "../../../hook/useTitle";
 
 export default function EquipmentBox() {
   const navigate = useNavigate();
   const { Modal, open, close } = useModal();
   const dispatch = useDispatch()
   const cartList = useSelector(state => state.cartList.cartList)
+  useTitle('담은 기자재')
 
   const handleDeleteCart = async () => {
     const response = await deleteAllCartEquip();

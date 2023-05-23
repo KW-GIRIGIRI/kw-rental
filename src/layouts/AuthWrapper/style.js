@@ -5,7 +5,6 @@ export const Section = styled.section`
   background-color: #fcfcfc;
   width: 100vw;
   min-width: 460px;
-  overflow-y: scroll;
   height: 100vh;
 `;
 

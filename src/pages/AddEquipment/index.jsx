@@ -19,6 +19,7 @@ import useModal from "../../hook/useModal";
 import { useDispatch, useSelector } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import { FormProvider, useForm } from "react-hook-form";
+import { useTitle } from "../../hook/useTitle";
 
 export default function AddEquipment() {
   const location = useLocation();
@@ -35,6 +36,7 @@ export default function AddEquipment() {
   const item = useSelector((state) => state.modifyEquip.itemList);
   const dispatch = useDispatch()
   const methods = useForm()
+  useTitle(isEdit ? '기자재 수정' : '기자재 추가')
 
   const handleImgFile = async (e) => {
     const image = e.target.files[0];

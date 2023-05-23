@@ -19,6 +19,7 @@ import {
   setEquip,
   setItemList,
 } from "../../store/reducer/modifyEquipSlice";
+import { useTitle } from "../../hook/useTitle";
 
 export default function EquipmentDetail() {
   const params = useParams();
@@ -29,6 +30,7 @@ export default function EquipmentDetail() {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const product = useSelector((state) => state.modifyEquip.equip);
+  useTitle(product.modelName)
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);

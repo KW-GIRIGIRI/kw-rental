@@ -17,6 +17,7 @@ import {
 import { useEffect } from "react";
 import { useRef } from "react";
 import useModal from "../../hook/useModal";
+import { useTitle } from "../../hook/useTitle";
 
 export default function EquipmentItemDetail() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function EquipmentItemDetail() {
   const propertyNumRef = useRef();
   const location = useLocation();
   const { Modal, open, close } = useModal();
+  useTitle(`${equip.modelName} 품목`)
 
   const handleChangeItem = (e) => {
     const pItem = itemList.filter(
