@@ -15,12 +15,11 @@ export const Wrapper = styled.header`
   }
 `;
 
-export const ImgLogo = styled.img`
+export const ImgLogo = styled.picture`
   margin-bottom: 5px;
-`;
 
-export const Desc = styled.p`
-  font-size: 1rem;
-  color: ${(props) => props.theme.color.primary.main};
-  font-weight: 600;
+  & > img,
+  source {
+    width: 133px;
+  }
 `;

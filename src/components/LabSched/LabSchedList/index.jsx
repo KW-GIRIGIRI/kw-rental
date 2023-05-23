@@ -5,31 +5,14 @@ import Button from "../../../modules/Button"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
-export default function LabSchedList({ lab, renterList, receive }) {
-  const [selectedCheckbox, setSelectedCheckbox] = useState(null)
+export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   const [info, setInfo] = useState({})
   const [cancelModal, setCancelModal] = useState(false)
   const { Modal, open, close } = useModal()
 
-  const handleCheckboxChange = (idx) => {
-    if (selectedCheckbox === idx)
-      setSelectedCheckbox(null)
-    else
-      setSelectedCheckbox(idx)
-  }
-
-  const handleCreateRental = (학번) => {
-    // 랩실키 수령 완료 api post
-  }
-
   const handleCancelModal = (item) => {
     setInfo(item)
     setCancelModal(true)
-  }
-
-  const handleProcess = () => {
-    if (selectedCheckbox !== null)
-      open()
   }
 
   const handleConfirmation = () => {
@@ -41,49 +24,39 @@ export default function LabSchedList({ lab, renterList, receive }) {
   return (
     <S.SchedLi>
       <S.Lab>
-        <p>{lab}</p>
+        <p>{lab === "hanul" ? "한울관" : "화도관"}</p>
+        {lab === "hanul" && <S.RenterNum>총 {renterList.reduce((a, c) => a + c.rentalAmount, 0)}명 대여</S.RenterNum>}
         {
-          lab === "한울관" ?
-            <S.RenterNum>총 {renterList.reduce((a, c) => a + c.num, 0)}명 대여</S.RenterNum> :
-            <></>
+          acceptTime ? 
+          <S.TimeCont> { acceptTime.split("T")[1].slice(0, 5) }</S.TimeCont> : 
+          <Button
+            className={"main"}
+            text={receive ? "키 수령" : "키 반납"}
+            borderRadius="20px"
+            padding="7px 9px"
+            fontSize="13px"
+            onClick={open}
+          />
         }
 
-        <S.TimeCont>
-          15:10
-        </S.TimeCont>
-        <Button
-          className={selectedCheckbox === null ? "gray" : "main"}
-          text={receive ? "키 수령" : "키 반납"}
-          borderRadius="20px"
-          padding="5.5px 7.5px"
-          fontSize="13px"
-          onClick={handleProcess}
-        />
-
       </S.Lab>
-      <S.RenterUl>
+      <ul>
         {
-          renterList.map((renterItem, idx) => (
-            <S.RenterLi className={renterList.length === 1 ? "only" : ""} key={idx}>
-              <S.CheckInp
-                type="checkbox"
-                onClick={() => handleCheckboxChange(idx)}
-                className={selectedCheckbox === idx ? "checked" : ""}
-              />
-              <p>{renterItem.renter}</p>
-              <p>{renterItem.ID}</p>
-              <p>{renterItem.num}</p>
+          renterList.map((renterItem) => (
+            <S.RenterLi className={renterList.length === 1 ? "only" : ""} key={renterItem.id}>
+              <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
+              <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>
               <Button text="대여취소" width="75px" borderRadius="20px" padding="5px 7px" className="sub" fontSize="14px" onClick={() => handleCancelModal(renterItem)} />
             </S.RenterLi>
           ))
         }
-      </S.RenterUl>
+      </ul>
       {cancelModal &&
         <CancelModal
-          renter={info.renter}
-          ID={info.ID}
-          num={info.num}
+          renter={info.renterName}
+          ID={info.memberNumber}
+          num={info.rentalAmount}
           cancelModal={cancelModal}
           setCancelModal={setCancelModal}
         />}
@@ -91,7 +64,7 @@ export default function LabSchedList({ lab, renterList, receive }) {
         <S.TimeModal>
           {receive ? "수령" : "반납"}을 확정하시겠습니까?
           <br />
-          {selectedCheckbox !== null ? renterList[selectedCheckbox].renter + " / " + dayjs().format("M월 D일(dd) HH:mm") : ""}
+          {dayjs().format("M월 D일(dd) HH:mm")}
         </S.TimeModal>
         <div>
           <Button

@@ -2,27 +2,36 @@ import * as S from "./style";
 import Application from "../../../components/Application";
 import Button from "../../../modules/Button";
 import { useNavigate } from "react-router-dom";
-import { postReservation } from "../../../api/api";
 import { useRef } from "react";
+import { postLabRental } from "../../../api/api";
+import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 
 export default function LabRentalApplication() {
   const navigate = useNavigate();
   const dataRef = useRef([]);
+  const hanul = useSelector(state => state.labControl.lab)
+  const selectDate = useSelector(state => state.labControl.date)
+
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
-      // api 나오면 바꾸기
+      const enddate = dayjs(selectDate).day() === 4 ? dayjs(selectDate).add(4, 'days').format('YYYY-MM-DD') : selectDate
 
-      // const data = {
-      //   "renterName" : dataRef.current.name.innerHTML,
-      //   "renterPhoneNumber" : dataRef.current.pNumber.value,
-      //   "renterEmail" :`${dataRef.current.id.value}@${dataRef.current.address.value}`,
-      //   "rentalPurpose" : dataRef.current.purpose.value
-      // }
+      const data = {
+        "startDate" : selectDate.split('-').map(i => ~~i),
+        "endDate" : enddate.split('-').map(i => ~~i),
+        "labRoomName" : hanul ? "hanul" : "hwado" ,
+        "renterName" : dataRef.current.name.innerHTML,
+        "renterPhoneNumber" : dataRef.current.pNumber.value,
+        "renterEmail" : `${dataRef.current.id.value}@${dataRef.current.address.value}`,
+        "rentalPurpose" : dataRef.current.purpose.value,
+        "renterCount" : ~~dataRef.current.renterCount.value,
+      }
 
-      // const response = await postReservation(JSON.stringify(data))
-      // response === 201 &&
-      navigate("/lab/success");
+      const response = await postLabRental(JSON.stringify(data))
+
+      response === 201 && navigate("/lab/success");
     }
   };
 

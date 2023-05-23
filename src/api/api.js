@@ -453,3 +453,45 @@ export const getAdminEquipHistory = async (url) => {
     return err;
   }
 };
+
+// 랩실 관련
+
+// 랩실의 날짜별 남은 자리 조회 API - hanul or hwado
+export const getLabRemainQuantities = async (lab, startDate, endDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/labRooms/${lab}/remainQuantities?from=${startDate}&to=${endDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 랩실 대여 수령 조회 API
+export const getLabRentalList = async (startDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/labRooms?startDate=${startDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 랩실 대여 예약 API
+export const postLabRental = async (data) => {
+  try {
+    const response = await instanceUtil.post(`/reservations/labRooms`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

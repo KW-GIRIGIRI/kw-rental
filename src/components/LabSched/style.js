@@ -19,12 +19,16 @@ export const SchedWrap = styled.ul`
 
 export const Header = styled.li`
   background: ${(props) => props.theme.color.primary.sub};
-  grid-template-columns: 1.3fr 1fr 1fr 1.6fr 1fr 1.6fr 2fr;
+  grid-template-columns: 1fr 2fr 1.2fr 1.9fr;
   font-weight: 600;
   font-size: 15px;
-  padding: 15px 0;
-  border-top-left-radius: ${(props) => props.theme.borderRadius.lv2};
-  border-top-right-radius: ${(props) => props.theme.borderRadius.lv2};
+  padding: 16px 44px;
+  border-radius: ${(props) => props.theme.borderRadius.lv2}
+    ${(props) => props.theme.borderRadius.lv2} 0 0;
+
+  & > span {
+    text-align: left;
+  }
 `;
 
 export const WarnWrap = styled.div`
