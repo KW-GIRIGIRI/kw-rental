@@ -36,12 +36,12 @@ export default function Login() {
     <>
       <S.Wrap>
         <h2>로그인</h2>
-        <S.Form>
-          <input type="text" placeholder="학번(아이디)" {...register("id")} />
+        <S.Form onKeyPress={e => e.key === 'Enter' && handleLogin()}>
+          <input type="text" placeholder="학번(아이디)" {...register("id", { required : true })} />
           <input
             type={showPw ? "password" : "text"}
             placeholder="비밀번호"
-            {...register("password")}
+            {...register("password", { required : true })}
           />
           <S.PwImg
             bottom={showPw ? "16px" : "18px"}
@@ -54,7 +54,6 @@ export default function Login() {
           {/* <S.CheckInp type="checkbox" id="check" /> */}
           {/* <label htmlFor="check">자동 로그인</label> */}
         </S.LoginDiv>
-        {/* <S.ErrText>아이디 또는 비밀번호를 잘못 입력했습니다.</S.ErrText> */}
         <Button
           width="100%"
           text="로그인"
