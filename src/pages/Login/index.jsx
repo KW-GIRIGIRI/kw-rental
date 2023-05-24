@@ -37,7 +37,7 @@ export default function Login() {
       <S.Wrap>
         <h2>로그인</h2>
         <S.Form onKeyPress={e => e.key === 'Enter' && handleLogin()}>
-          <input type="text" placeholder="학번(아이디)" {...register("id", { required : true })} />
+          <input autoFocus type="text" placeholder="학번(아이디)" {...register("id", { required : true })} />
           <input
             type={showPw ? "password" : "text"}
             placeholder="비밀번호"

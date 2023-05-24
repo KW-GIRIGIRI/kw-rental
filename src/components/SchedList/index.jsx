@@ -35,7 +35,7 @@ export default function SchedList({ user, receive }) {
         .filter((value) => value.reservationId === user.reservationId)[0]
         .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
         .includes(undefined) && dayjs().format('YYYY-MM-DD') === selectDate
-      
+      // 반납 확인 - acceptDateTime이 있다면 true 반환
     return result;
   }
 
