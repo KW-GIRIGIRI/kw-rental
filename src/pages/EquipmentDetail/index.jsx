@@ -19,7 +19,7 @@ import {
   setEquip,
   setItemList,
 } from "../../store/reducer/modifyEquipSlice";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 
 export default function EquipmentDetail() {
   const params = useParams();

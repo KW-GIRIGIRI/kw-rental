@@ -513,7 +513,7 @@ export const postLabRental = async (data) => {
 // 랩실 대여 사용 처리 API
 export const setLabUsingConfirm = async (data) => {
   try {
-    const response = await instanceUtil.patch(`/admin/rentals/labRooms`, data);
+    const response = await instanceUtil.post(`/admin/rentals/labRooms`, data);
 
     return response.status;
   } catch (err) {

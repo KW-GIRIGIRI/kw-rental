@@ -6,7 +6,8 @@ import { useRef } from "react";
 import { postLabRental } from "../../../api/api";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { useTitle } from "../../../hook/useTitle";
+import useTitle from "../../../hook/useTitle";
+import usePreventRefresh from "../../../hook/usePreventRefresh";
 
 export default function LabRentalApplication() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export default function LabRentalApplication() {
   const hanul = useSelector(state => state.labControl.lab)
   const selectDate = useSelector(state => state.labControl.date)
   useTitle('랩실 대여')
+  usePreventRefresh()
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {

@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/Context";
 import PenaltyState from "../../../components/PenaltyState";
 import { useState } from "react";
-import { useTitle } from "../../../hook/useTitle";
+import useTitle from "../../../hook/useTitle";
 
 export default function PenaltyHistory() {
   //가짜페널티통계

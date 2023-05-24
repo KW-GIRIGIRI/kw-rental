@@ -1,7 +1,7 @@
 import * as S from "./style";
 import EquipSched from "../../components/EquipSched";
 import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 
 export default function RentalStatus() {
   useTitle('기자재 대여 현황')

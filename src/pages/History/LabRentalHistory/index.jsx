@@ -9,7 +9,7 @@ import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
 import Button from "../../../modules/Button"
 import { setLab } from "../../../store/reducer/LabControllerSlice"
 import LabStatistics from "../../../components/LabStatistics"
-import { useTitle } from "../../../hook/useTitle"
+import useTitle from "../../../hook/useTitle"
 
 export default function LabRentalHistory() {
   const { isAuth } = useContext(AuthContext)

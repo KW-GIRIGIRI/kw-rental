@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useTitle } from "../../hook/useTitle"
+import useTitle from "../../hook/useTitle"
 import QuillEditor from "./QuillEditor"
 import QuillViewer from "./QuillViewer"
 import { useSelector } from "react-redux";

@@ -4,7 +4,7 @@ import LabCalendar from "../../../components/LabCalendar";
 import LabPenalty from "../../../components/LabPenalty";
 import LabReserveWrap from "../../../components/LabReserveWrap";
 import { AuthContext } from "../../../context/Context";
-import { useTitle } from "../../../hook/useTitle";
+import useTitle from "../../../hook/useTitle";
 import useToggle from "../../../hook/useToggle";
 import * as S from "./style";
 

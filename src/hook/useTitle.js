@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useTitle = (initialState) => {
+const useTitle = (initialState) => {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = `${initialState} | 미디어 대여 서비스`;
@@ -8,3 +8,5 @@ export const useTitle = (initialState) => {
     return () => (document.title = prevTitle);
   }, [initialState]);
 };
+
+export default useTitle;

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import useModal from "../../../hook/useModal";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetCartList } from "../../../store/reducer/cartListSlice";
-import { useTitle } from "../../../hook/useTitle";
+import useTitle from "../../../hook/useTitle";
 
 export default function EquipmentBox() {
   const navigate = useNavigate();

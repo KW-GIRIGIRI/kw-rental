@@ -17,7 +17,7 @@ import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
 import { useDispatch } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import Pagination from "../../components/Pagination";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");

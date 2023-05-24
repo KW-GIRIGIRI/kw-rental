@@ -1,6 +1,6 @@
 import SingularDatePicker from '../../../components/DatePicker/SingularDatePicker';
 import LabSched from '../../../components/LabSched';
-import { useTitle } from '../../../hook/useTitle';
+import useTitle from '../../../hook/useTitle';
 import { Cal } from "./style";
 
 export default function LabRentalManage() {
