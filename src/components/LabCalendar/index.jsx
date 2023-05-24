@@ -54,11 +54,11 @@ const LabCalendar = () => {
   };
 
   const handleSetDate = e => {
+    const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`)
+  
     if (isAuth) {
-      dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
+      (selectDate.day() < 5 && selectDate.day() > 0) && dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
     } else {
-      const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`)
-
       if (selectDate.day() < 5 &&
         selectDate.day() > 0 &&
         ~~selectDate.format('YYMMDD') > ~~dayjs().format('YYMMDD') &&
@@ -146,8 +146,8 @@ const LabCalendar = () => {
                 )
                 && (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                  <ins>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
-                  <p>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
+                  <ins>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
+                  <p>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
                 )
               }
             </S.ContCell>

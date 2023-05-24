@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import iconCheck from "../../../assets/icon-check-fill.svg";
-import { useTitle } from "../../../hook/useTitle";
+import useTitle from "../../../hook/useTitle";
 import Button from "../../../modules/Button";
 import * as S from "./style";
 

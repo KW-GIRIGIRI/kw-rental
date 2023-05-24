@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 import Button from "../../modules/Button";
 import Input from "../../modules/Input";
 import * as S from "./style";

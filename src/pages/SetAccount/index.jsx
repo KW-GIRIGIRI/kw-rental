@@ -1,5 +1,5 @@
 import AccountSettingComp from "../../components/AccountSettingComp";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 import * as S from "./style";
 
 export default function SetAccount() {

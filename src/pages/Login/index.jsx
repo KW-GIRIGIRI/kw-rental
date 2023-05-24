@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserLogin } from "../../api/api";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 
 export default function Login() {
   const [showPw, setShowPw] = useState(true);

@@ -9,7 +9,7 @@ import { AuthContext } from "../../../context/Context"
 import { category } from "../../../data/category"
 import Pagination from "../../../components/Pagination"
 import ExcelDownload from "../../../components/ExcelDownload"
-import { useTitle } from "../../../hook/useTitle"
+import useTitle from "../../../hook/useTitle"
 
 export default function EquipmentRentalHistory() {
   const [productList, setProductList] = useState([])

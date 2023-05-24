@@ -1,59 +1,53 @@
 import dayjs from "dayjs"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { getSpecificDateLabRental } from "../../api/api"
 import Button from "../../modules/Button"
 import * as S from "./style"
 
-const mock = [
-  {
-    id: 1,
-    state: true,
-    usingDate: '2023-05-19',
-    returnDate: '2023-05-20',
-    name: '박다은',
-  },
-  {
-    id: 2,
-    state: false,
-    usingDate: '2023-05-20',
-    returnDate: '2023-05-21',
-    name: '이영현',
-  },
-  {
-    id: 3,
-    state: true,
-    usingDate: '2023-05-21',
-    returnDate: '2023-05-22',
-    name: '김효리',
-  }
-]
-
 export default function LabPenalty() {
+  const selectDate = useSelector(state => state.labControl.date)
+  const [rentalList, setRentalList] = useState([])
+
+  const handleGetPenaltyList = async () => {
+    const res = await getSpecificDateLabRental(selectDate)
+    setRentalList(res.reservations);
+  }
+
+  useEffect(() => {
+    handleGetPenaltyList()
+  }, [selectDate])
+
   return (
-    <>
-      <S.ListUl>
-        <S.ListLi>
-          <p>상태</p>
-          <p>사용일</p>
-          <p>퇴실일</p>
-          <p>대여자</p>
-          <p>사유</p>
-        </S.ListLi>
-        {
-          mock.map(list => 
-            <S.ListLi key={list.id}>
-              <p className={list.state ? '' :'faulty'}>{list.state ? '정상 반납' : '불량 반납'}</p>
-              <p>{dayjs(list.usingDate).format('YY년 MM월 DD일')}</p>
-              <p>{dayjs(list.returnDate).format('YY년 MM월 DD일')}</p>
-              <p>{list.name}</p>
-              <S.Select name="" id="">
-                <option value="">분실</option>
-                <option value="">고장</option>
-                <option value="">연체</option>
-              </S.Select>
-            </S.ListLi>
-          )
-        }
-      </S.ListUl>
-      <Button text='저장' className='main' padding='7px 14px' borderRadius='5px' margin='10px 0'float='right'/>
-    </>
+    rentalList.length ?
+      <>
+        <S.ListUl>
+          <S.ListLi>
+            <p>상태</p>
+            <p>사용일</p>
+            <p>퇴실일</p>
+            <p>대여자</p>
+            <p>사유</p>
+          </S.ListLi>
+          {
+            rentalList.map(list => 
+              <S.ListLi key={list.reservationId}>
+                <p className={list.status.includes('정상') ? '' :'faulty'}>{list.status}</p>
+                <p>{dayjs(list.startDate).format('YY년 MM월 DD일')}</p>
+                <p>{dayjs(list.endDate).format('YY년 MM월 DD일')}</p>
+                <p>{list.renterName}</p>
+                <S.Select name="" id="" defaultValue={list.reason}>
+                  <option value="RETURNED">정상</option>
+                  <option value="LOST">분실</option>
+                  <option value="BROKEN">고장</option>
+                  <option value="OVERDUE_RENTED">연체</option>
+                </S.Select>
+              </S.ListLi>
+            )
+          }
+        </S.ListUl>
+        <Button text='저장' className='main' padding='7px 14px' borderRadius='5px' margin='10px 0'float='right'/>
+      </>
+      : <S.InfoDesc>조회한 일자의 대여 내역이 없습니다.</S.InfoDesc>
   )
 }

@@ -17,7 +17,7 @@ import SingularDatePicker from "../../components/DatePicker/SingularDatePicker";
 import { useDispatch } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import Pagination from "../../components/Pagination";
-import { useTitle } from "../../hook/useTitle";
+import useTitle from "../../hook/useTitle";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -71,7 +71,7 @@ export default function EquipmentList() {
   useEffect(() => {
     getProduct();
     if (isAuth) setViewMode("list");
-  }, [page, viewMode, isCategory]);
+  }, [page, viewMode, isCategory, isAuth]);
 
   useEffect(() => {
     setPage(0);
@@ -86,7 +86,6 @@ export default function EquipmentList() {
       <S.FilterWrap>
         <S.FilterWrap>
           <S.SearchCont>
-            {/* search inp 분리 */}
             <S.SearchInp
               type="text"
               value={searchKeyword}

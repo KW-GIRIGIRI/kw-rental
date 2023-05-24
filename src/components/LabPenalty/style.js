@@ -46,3 +46,10 @@ export const Select = styled.select`
   background: url(${iconDownArrow}) no-repeat right 4px top 50%;
   background-size: 10px;
 `;
+
+export const InfoDesc = styled.p`
+  font-size: 14px;
+  margin: 30px 0 60px;
+  color: ${(props) => props.theme.color.text.gray};
+  text-align: center;
+`;
