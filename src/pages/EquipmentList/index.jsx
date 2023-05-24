@@ -71,7 +71,7 @@ export default function EquipmentList() {
   useEffect(() => {
     getProduct();
     if (isAuth) setViewMode("list");
-  }, [page, viewMode, isCategory]);
+  }, [page, viewMode, isCategory, isAuth]);
 
   useEffect(() => {
     setPage(0);
@@ -86,7 +86,6 @@ export default function EquipmentList() {
       <S.FilterWrap>
         <S.FilterWrap>
           <S.SearchCont>
-            {/* search inp 분리 */}
             <S.SearchInp
               type="text"
               value={searchKeyword}
