@@ -513,10 +513,7 @@ export const postLabRental = async (data) => {
 // 랩실 대여 사용 처리 API
 export const setLabUsingConfirm = async (data) => {
   try {
-    const response = await instanceUtil.patch(
-      `/admin/reservations/labRooms`,
-      data
-    );
+    const response = await instanceUtil.patch(`/admin/rentals/labRooms`, data);
 
     return response.status;
   } catch (err) {
@@ -529,11 +526,25 @@ export const setLabUsingConfirm = async (data) => {
 export const setLabReturnConfirm = async (data) => {
   try {
     const response = await instanceUtil.patch(
-      `/admin/reservations/labRooms/return`,
+      `/admin/rentals/labRooms/returns`,
       data
     );
 
     return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 특정 날짜의 랩실 대여 기록 조회 API
+export const getSpecificDateLabRental = async (date) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/rentals/labRooms/hanul?date=${date}`
+    );
+
+    return response.data;
   } catch (err) {
     console.error(err.message);
     return err;
