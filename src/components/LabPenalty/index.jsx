@@ -7,11 +7,11 @@ import * as S from "./style"
 
 export default function LabPenalty() {
   const selectDate = useSelector(state => state.labControl.date)
-  const [rentalList, setRentalList] = useState([])
+  const [rentalList, setRentalList] = useState(null)
 
   const handleGetPenaltyList = async () => {
     const res = await getSpecificDateLabRental(selectDate)
-    setRentalList(res.reservations);
+    res.reservations.length && setRentalList(res.reservations);
   }
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function LabPenalty() {
 
 
   return (
-    rentalList.length ?
+    rentalList ?
       <>
         <S.ListUl>
           <S.ListLi>
