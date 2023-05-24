@@ -29,6 +29,16 @@ export default function SchedList({ user, receive }) {
     dispatch(asyncGetReceived(selectDate));
   };
 
+  const handleDateValid = () => {
+    let result = 
+      !receiveCheckList
+        .filter((value) => value.reservationId === user.reservationId)[0]
+        .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
+        .includes(undefined) && dayjs().format('YYYY-MM-DD') === selectDate
+      // 반납 확인 - acceptDateTime이 있다면 true 반환
+    return result;
+  }
+
   return (
     <S.SchedLi key={user.memberNumber}>
       <S.Renter>
@@ -43,20 +53,8 @@ export default function SchedList({ user, receive }) {
           </S.TimeCont>
         ) : (
           <Button
-            disabled={receiveCheckList
-              .filter((value) => value.reservationId === user.reservationId)[0]
-              .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
-              .includes(undefined)}
-            className={
-              receiveCheckList
-                .filter(
-                  (value) => value.reservationId === user.reservationId
-                )[0]
-                .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
-                .includes(undefined)
-                ? "gray shadow"
-                : "main shadow"
-            }
+            disabled={!handleDateValid()}
+            className={ handleDateValid() ? "main shadow" : "gray shadow" }
             text={receive ? "수령확인" : "반납확인"}
             borderRadius="20px"
             padding="5.5px 7.5px"

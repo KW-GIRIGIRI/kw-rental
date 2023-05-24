@@ -74,7 +74,7 @@ export default function SignUp() {
       <h2>회원가입</h2>
       <S.Form onSubmit={handleSubmit(handleSignUp)}>
         <label htmlFor="name">이름</label>
-        <S.Input
+        <S.Input autoFocus
           placeholder="홍길동"
           {...register("name", {
             required: {

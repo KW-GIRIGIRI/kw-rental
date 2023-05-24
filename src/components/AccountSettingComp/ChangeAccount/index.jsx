@@ -49,7 +49,7 @@ export default function ChangeAccount({ setCheckPw }) {
       <Form onSubmit={handleSubmit(handleAuthChangeAccount)}>
         <label>비밀번호</label>
         <InpWrap>
-          <Input
+          <Input autoFocus
             type={showPw.password ? "password" : "text"}
             {...register("password", {
               required: {
