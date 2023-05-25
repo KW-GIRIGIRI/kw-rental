@@ -60,14 +60,14 @@ export default function UserLabState() {
             <span>{랩실.사용인원}</span>
             <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
             <S.BtnWrap>
-              <Button
+              { 랩실.장소==="한울관" && <Button
                 text="대표자 연락망"
                 className="main shadow"
                 borderRadius="20px"
                 fontSize="14px"
                 padding="5px 7px"
                 onClick={contactsModal.open}
-              />
+              /> }
               {!랩실.대여중 && (
                 <Button
                   text="대여취소"

@@ -17,6 +17,7 @@ export const Wrapper = styled.header`
 
 export const ImgLogo = styled.picture`
   margin-bottom: 5px;
+  cursor: pointer;
 
   & > img,
   source {

@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const TabButton = styled.button`
   font-size: 1rem;
+  width: 100px;
   font-weight: 600;
   position: relative;
   padding: 0 9px 15px;
-  margin-right: 20px;
+  margin-right: 5px;
   &.on::after {
     content: "";
     position: absolute;
