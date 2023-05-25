@@ -32,6 +32,7 @@ export const asyncGetLabReceived = createAsyncThunk(
   "authReceive/asyncGetLabReceived",
   async (date) => {
     const response = await getLabRentalList(date);
+    response.reservations.sort((a, b) => (a.labRoomName === "hanul" ? -1 : 0));
 
     return response.reservations;
   }
@@ -41,6 +42,7 @@ export const asyncGetLabReturned = createAsyncThunk(
   "authReceive/asyncGetLabReturned",
   async (date) => {
     const response = await getLabReturnList(date);
+    response.reservations.sort((a, b) => (a.labRoomName === "hanul" ? -1 : 0));
 
     return response.reservations;
   }
