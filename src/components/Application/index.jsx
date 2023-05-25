@@ -7,7 +7,7 @@ import LabConfirmTable from "./LabConfirmTable";
 const Application = forwardRef((props, dataRef) => {
   return (
     <S.Div>
-      <h2>[필수] 이용약관 동의</h2>
+      <h3>[필수] 이용약관 동의</h3>
       <ToS ref={dataRef} />
       {props.isLab && (
         <S.Lab>
@@ -15,7 +15,7 @@ const Application = forwardRef((props, dataRef) => {
           <LabConfirmTable />
         </S.Lab>
       )}
-      <h2>대여신청서 작성</h2>
+      <h3>대여신청서 작성</h3>
       <ApplicationForm ref={dataRef} isLab={props.isLab} />
     </S.Div>
   );

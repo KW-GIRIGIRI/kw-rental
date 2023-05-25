@@ -4,9 +4,9 @@ export const Div = styled.div`
   margin: 0 auto;
   border-radius: 10px;
 
-  h2 {
+  h3 {
     font-size: 16px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     margin-top: 30px;
   }
 `;
