@@ -148,13 +148,6 @@ export default function EquipmentList() {
             onClick={handleCategory}
           />
         ))}
-        {isAuth ? (
-          <button className="add">
-            <img src={iconPlus} alt="기자재 카테고리 추가" />
-          </button>
-        ) : (
-          <></>
-        )}
       </S.FilterWrap>
 
       {productList && <EquipListWrap type={viewMode} data={productList} />}

@@ -14,6 +14,7 @@ export const Wrap = styled.ul`
 `;
 
 export const Li = styled.li`
+  cursor: pointer;
   padding: 18px 28px;
   display: flex;
   align-items: center;

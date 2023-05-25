@@ -49,6 +49,7 @@ export const Container = styled.ul`
 
 export const ContCell = styled.li`
   display: flex;
+  cursor: pointer;
   flex: 0 0 calc(100% / 7);
   flex-direction: column;
   justify-content: space-between;

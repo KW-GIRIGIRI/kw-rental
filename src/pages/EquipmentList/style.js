@@ -46,6 +46,7 @@ export const SearchInp = styled.input`
 `;
 
 export const SearchImg = styled.img`
+  cursor: pointer;
   position: absolute;
   right: 16px;
   top: 8px;

@@ -11,12 +11,6 @@ export const ItemUl = styled.ul`
     grid-template-columns: 1fr 1.45fr 1.45fr 1fr 1fr;
     padding: 11px 0;
 
-    & > span:nth-child(2) {
-      text-align: left;
-      justify-content: left;
-      padding: 0 26px;
-    }
-
     &:hover:not(:first-child) {
       background: ${(props) => props.theme.color.primary.lightSub};
     }

@@ -12,9 +12,9 @@ export const Title = styled.h1`
   font-weight: 600;
 `;
 
-export const ButtonWrap = styled.h1`
+export const ButtonWrap = styled.div`
   margin-top: 24px;
-  margin-bottom: 62px;
+  margin-bottom: 34px;
 `;
 
 export const RentalWrap = styled.div`
