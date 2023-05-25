@@ -81,8 +81,9 @@ const LabCalendar = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      const date = dayjs().day() === 4 ?
-        dayjs().add(4, 'days') : dayjs().add(1, 'days')
+      const date = dayjs().day() > 4 ?
+        dayjs().add(1, 'week').startOf('week').add(1, 'days')
+        : dayjs().add(1, 'days')
 
       setDayObj(date)
       dispatch(setLabDate(date.format('YYYY-MM-DD')))

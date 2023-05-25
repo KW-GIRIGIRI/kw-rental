@@ -45,7 +45,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
 
   useEffect(() => {
     handleGetUserInfo();
-    handleGetLabRemain();
+    props.isLab && handleGetLabRemain();
   }, []);
 
   return (

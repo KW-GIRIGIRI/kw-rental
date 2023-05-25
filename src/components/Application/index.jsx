@@ -11,7 +11,7 @@ const Application = forwardRef((props, dataRef) => {
       <ToS ref={dataRef} />
       {props.isLab && (
         <S.Lab>
-          <h2>대여 확인</h2>
+          <h3>대여 확인</h3>
           <LabConfirmTable />
         </S.Lab>
       )}
