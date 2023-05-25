@@ -45,8 +45,8 @@ export default function SchedList({ user, receive }) {
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
         {!receive && user.returnDate && (
-          <S.WarnCont>반납일 초과</S.WarnCont>
-        )}
+        <S.WarnCont>반납일 초과 <br /> D+1</S.WarnCont>
+        )} 
         {receive && user.acceptDateTime ? (
           <S.TimeCont>
             {user.acceptDateTime.split("T")[1].slice(0, 5)}
