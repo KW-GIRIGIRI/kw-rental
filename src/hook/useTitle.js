@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useTitle = (initialState) => {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = `${initialState} | 미디어 대여 서비스`;
+  const [title, setTitle] = useState(initialState);
 
-    return () => (document.title = prevTitle);
-  }, [initialState]);
+  const updateTitle = () => {
+    const htmlTitle = document.querySelector("title");
+    htmlTitle.innerText = `${title} | 미디어 대여 서비스`;
+  };
+  useEffect(updateTitle, [title]);
+
+  return setTitle;
 };
 
 export default useTitle;

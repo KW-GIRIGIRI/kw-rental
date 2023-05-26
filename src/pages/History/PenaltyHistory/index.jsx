@@ -7,7 +7,40 @@ import PenaltyState from "../../../components/PenaltyState"
 import useTitle from "../../../hook/useTitle"
 
 export default function PenaltyHistory() {
-  const { isAuth } = useContext(AuthContext)
+  //가짜페널티통계
+  const 가짜페널티 = [
+    {
+      대여자: "이영현",
+      상태: "12개월 이용 금지",
+      기간: "23년 03월 12일(목) ~ 23년 03월 19일(목)",
+      종류: "RF 24-70mm F2.8L IS USM",
+      사유: "연체",
+    },
+    {
+      대여자: "김효리",
+      상태: "3개월 이용 금지",
+      기간: "23년 03월 12일(목) ~ 24년 03월 12일(잉)",
+      종류: "MIRRORLESS SONY a6600",
+      사유: "고장",
+    },
+    {
+      대여자: "박다은",
+      상태: "7일 이용 금지",
+      기간: "23년 03월 12일(목) ~ 23년 09월 12일(목)",
+      종류: "한울관 B119호",
+      사유: "메롱",
+    },
+    {
+      대여자: "공주님",
+      상태: "1일 이용 금지",
+      기간: "23년 03월 12일(목) ~ 23년 04월 12일(목)",
+      종류: "PRINCESS",
+      사유: "공주라서",
+    },
+  ];
+
+  const [data, setData] = useState(가짜페널티);
+  const { isAuth } = useContext(AuthContext);
   useTitle(isAuth ? '페널티 관리' : '페널티 이력')
 
   return (

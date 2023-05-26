@@ -83,11 +83,12 @@ export default function PenaltyState() {
                 value={penalty.상태}
                 onChange={(e) => handelEditPenaltyState(e, idx)}
               >
-                <option value="하루 이용 금지">하루 이용 금지</option>
-                <option value="일주일 이용 금지">일주일 이용 금지</option>
-                <option value="한 달 이용 금지">한 달 이용 금지</option>
-                <option value="한 학기 이용 금지">한 학기 이용 금지</option>
-                <option value="1년 이용 금지">1년 이용 금지</option>
+                <option value="1일 이용 금지">1일 이용 금지</option>
+                <option value="7일 이용 금지">7일 이용 금지</option>
+                <option value="1개월 이용 금지">1개월 이용 금지</option>
+                <option value="3개월 이용 금지">3개월 이용 금지</option>
+                <option value="6개월 이용 금지">6개월 이용 금지</option>
+                <option value="12개월 이용 금지">12개월 이용 금지</option>
               </select>
             </form>
             <span>{penalty.기간}</span>

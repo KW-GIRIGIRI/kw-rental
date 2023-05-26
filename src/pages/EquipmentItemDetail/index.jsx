@@ -29,7 +29,9 @@ export default function EquipmentItemDetail() {
   const propertyNumRef = useRef();
   const location = useLocation();
   const { Modal, open, close } = useModal();
-  useTitle(`${equip.modelName} 품목`)
+  const titleUpdater = useTitle("Loading...")
+
+  setTimeout(() => titleUpdater(`${equip && equip.modelName} 품목`), 200)
 
   const handleChangeItem = (e) => {
     const pItem = itemList.filter(

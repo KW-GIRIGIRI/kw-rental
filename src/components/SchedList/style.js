@@ -52,6 +52,9 @@ export const TimeCont = styled.p`
 `;
 
 export const WarnCont = styled.p`
+  margin: -8px 0;
   font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
   color: ${(props) => props.theme.color.primary.red};
 `;

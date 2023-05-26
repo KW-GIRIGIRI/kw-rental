@@ -125,6 +125,6 @@ export default function UserLabState() {
           </div>
         </contactsModal.Modal>
       </>
-      : <EmptyData className="user-rental" content={["예정된 대여가 없습니다."]} />
+    : <EmptyData className="user-rental" content={["예정된 대여가 없습니다."]} />
   )
 }

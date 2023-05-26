@@ -2,6 +2,7 @@ import * as S from "./style";
 import iconExclamation from "../../../assets/icon-exclamation-circle.svg";
 import { useState } from "react";
 import { forwardRef } from "react";
+import ToSText from "./ToSText";
 
 const ToS = forwardRef((props, dataRef) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -11,9 +12,7 @@ const ToS = forwardRef((props, dataRef) => {
 
   return (
     <>
-      <S.ToSWrap>
-        <S.ToSText>이용약관</S.ToSText>
-      </S.ToSWrap>
+      <ToSText />
       <S.Label htmlFor="agree">
         <span>확인하였으며 동의합니다.</span>
         <S.Check

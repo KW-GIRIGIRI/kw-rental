@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import iconDownArrow from "../../assets/icon-downArrow-black.svg";
 
 export const ItemUl = styled.ul`
   box-sizing: border-box;
-  margin-top: 60px;
+  margin-top: 40px;
 
   & > li {
     display: grid;
     align-items: center;
 
-    grid-template-columns: 1.1fr 1.6fr 3.4fr 2.6fr 1fr 1fr;
+    grid-template-columns: 1.1fr 1.8fr 3.4fr 2.6fr 1fr 1fr;
     padding: 11px 0;
 
     & > span:nth-child(3),
@@ -51,8 +52,13 @@ export const ItemLi = styled.li`
   }
 
   & > form > select {
-    width: 101px;
-    height: 20px;
+    width: 105px;
     font-size: 12px;
+    padding: 3px 6px;
+    border-radius: ${(props) => props.theme.borderRadius.lv1};
+    appearance: none;
+    background: url(${iconDownArrow}) no-repeat right 3px top 50%;
+    background-size: 8px;
+    outline: none;
   }
 `;

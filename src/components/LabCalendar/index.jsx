@@ -81,8 +81,9 @@ const LabCalendar = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      const date = dayjs().day() === 4 ?
-        dayjs().add(4, 'days') : dayjs().add(1, 'days')
+      const date = dayjs().day() > 4 ?
+        dayjs().add(1, 'week').startOf('week').add(1, 'days')
+        : dayjs().add(1, 'days')
 
       setDayObj(date)
       dispatch(setLabDate(date.format('YYYY-MM-DD')))
@@ -146,8 +147,8 @@ const LabCalendar = () => {
                 )
                 && (
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                  <ins>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
-                  <p>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
+                  <ins>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
+                  <p>{hanul ? `대여(${seatArray[i+1] || 16}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
                 )
               }
             </S.ContCell>

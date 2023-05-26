@@ -2,22 +2,40 @@ import styled from "styled-components";
 import iconCheckWhite from "../../../assets/icon-check-white.svg";
 import iconCheckGray from "../../../assets/icon-check-gray.svg";
 
-export const ToSWrap = styled.ul`
-  height: 82px;
-  padding: 13px 26px;
+export const ToSWrap = styled.div`
+  height: 100px;
+  padding: 5px 18px;
+  box-sizing: border-box;
   border: 1px solid ${(props) => props.theme.color.gray.g3};
   border-radius: ${(props) => props.theme.borderRadius.lv1};
   margin-bottom: 15px;
-  overflow: scroll;
-  overflow-x: hidden;
-`;
-
-export const ToSText = styled.li`
-  list-style: disc;
-  margin-left: 15px;
-  font-size: 14px;
+  overflow-y: scroll;
   color: ${(props) => props.theme.color.text.black};
   line-height: 17px;
+
+  & > h4 {
+    font-size: 12.4px;
+    font-weight: 500;
+    margin: 3px 0;
+  }
+  & > p,
+  li {
+    letter-spacing: -0.3px;
+    font-size: 12px;
+    color: ${(props) => props.theme.color.text.gray};
+    margin-bottom: 4px;
+  }
+`;
+
+export const ToSUl = styled.ul`
+  & > li {
+    list-style: decimal inside;
+
+    & > ul > li {
+      list-style: disc inside;
+      margin-left: 5px;
+    }
+  }
 `;
 
 export const Check = styled.input`

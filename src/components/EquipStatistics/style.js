@@ -8,10 +8,11 @@ export const ItemUl = styled.ul`
     display: grid;
     align-items: center;
 
-    grid-template-columns: 1fr 1.45fr 1.45fr 1fr 1fr;
+    grid-template-columns: 1fr 1.6fr 1.4fr 1fr 1fr;
     padding: 11px 0;
 
-    & > span:nth-child(2) {
+    & > span:nth-child(2),
+    span:nth-child(3) {
       text-align: left;
       justify-content: left;
       padding: 0 26px;
