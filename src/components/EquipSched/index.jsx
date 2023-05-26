@@ -8,6 +8,7 @@ import {
   asyncGetReceived,
   asyncGetReturned,
 } from "../../store/reducer/authReceiveSlice";
+import EmptyData from '../EmptyData';
 
 export default function EquipSched() {
   const [receive, setReceive] = useState(true);
@@ -45,7 +46,7 @@ export default function EquipSched() {
         onClick={() => setReceive(false)}
       />
 
-      {Object.keys(receiveList).length ? (
+      {Object.keys(receiveList).length ?
         <>
           <S.SchedTitle>{receive ? "수령 예정" : "반납 예정"}</S.SchedTitle>
           <S.SchedWrap>
@@ -60,15 +61,8 @@ export default function EquipSched() {
             ))}
           </S.SchedWrap>
         </>
-      ) : (
-        <S.WarnWrap>
-          <img src={iconWarning} alt="" />
-          <p>
-            조회한 일자의 <br />
-            {receive ? "수령" : "반납"} 예정 기자재가 없습니다.
-          </p>
-        </S.WarnWrap>
-      )}
+        : <EmptyData content={["조회한 일자의", `${receive ? "수령" : "반납"} 예정 기자재가 없습니다.`]} />
+      }
     </>
   );
 }

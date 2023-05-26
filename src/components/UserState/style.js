@@ -12,6 +12,7 @@ export const Div = styled.div`
 
   & .equipList {
     grid-template-columns: 1.7fr 6.3fr;
+    min-height: 90px;
   }
 
   & .lab {
@@ -19,7 +20,7 @@ export const Div = styled.div`
   }
 
   & .labList {
-    padding: 33px 0;
+    padding: 15px 0;
   }
 
   & .penalty {
@@ -62,6 +63,10 @@ export const HistList = styled.li`
   & img {
     background: ${(props) => props.theme.color.gray.g4};
     margin: auto;
+  }
+
+  & > div > p:not(:last-child) {
+    margin-bottom: 10px;
   }
 `;
 
