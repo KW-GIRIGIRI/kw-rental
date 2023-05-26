@@ -5,6 +5,7 @@ import iconWarning from "../../assets/icon-exclamation-gray.svg";
 import { useDispatch, useSelector } from "react-redux";
 import LabSchedList from './LabSchedList';
 import { asyncGetLabReceived, asyncGetLabReturned } from "../../store/reducer/authReceiveSlice";
+import EmptyData from '../EmptyData';
 
 export default function LabSched() {
   const [receive, setReceive] = useState(true);
@@ -22,7 +23,7 @@ export default function LabSched() {
 
   useEffect(() => {
     if (selectDate)
-     receive ? handleGetLabRentalList(selectDate) : handleGetLabReturnedList(selectDate)
+      receive ? handleGetLabRentalList(selectDate) : handleGetLabReturnedList(selectDate)
   }, [selectDate, receive])
 
   return (
@@ -45,7 +46,7 @@ export default function LabSched() {
         onClick={() => setReceive(false)}
       />
 
-      {rentalList.length ? (
+      {rentalList.length ?
         <>
           <S.SchedWrap>
             <S.Header>
@@ -55,21 +56,15 @@ export default function LabSched() {
               <span>연락처</span>
             </S.Header>
             {
-              rentalList.map(lab => 
+              rentalList.map(lab =>
                 <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} />
-              ) 
+              )
             }
           </S.SchedWrap>
         </>
-      ) : (
-        <S.WarnWrap>
-          <img src={iconWarning} alt="" />
-          <p>
-            조회한 일자의 <br />
-            {receive ? "수령" : "반납"} 예정이 없습니다.
-          </p>
-        </S.WarnWrap>
-      )}
+        :
+        <EmptyData content={["조회한 일자의", `${receive ? "수령" : "반납"} 예정이 없습니다.`]} />
+      }
     </>
   );
 }

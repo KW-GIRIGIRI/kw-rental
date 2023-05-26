@@ -4,7 +4,6 @@ import * as S from "../style"
 import { AuthContext } from "../../../context/Context"
 import { useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import LabHist from "../../../components/LabHist"
 import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
 import Button from "../../../modules/Button"
 import { setLab } from "../../../store/reducer/LabControllerSlice"
@@ -42,7 +41,6 @@ export default function LabRentalHistory() {
           />
         </S.ButtonWrap>
         <S.RentalWrap>
-          <LabHist />
           <LabStatistics />
         </S.RentalWrap>
         {/* {pageArray && (

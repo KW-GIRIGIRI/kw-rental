@@ -1,11 +1,10 @@
-import UserState from "../../../components/UserState";
-import UserHist from "../../../components/UserHist";
-import * as S from "../style";
-import { useContext } from "react";
-import { AuthContext } from "../../../context/Context";
-import PenaltyState from "../../../components/PenaltyState";
-import { useState } from "react";
-import useTitle from "../../../hook/useTitle";
+import UserState from "../../../components/UserState"
+import UserHist from "../../../components/UserHist"
+import * as S from "../style"
+import { useContext } from "react"
+import { AuthContext } from "../../../context/Context"
+import PenaltyState from "../../../components/PenaltyState"
+import useTitle from "../../../hook/useTitle"
 
 export default function PenaltyHistory() {
   //가짜페널티통계
@@ -50,7 +49,7 @@ export default function PenaltyHistory() {
         <>
           <S.Title>페널티 관리</S.Title>
           <S.RentalWrap>
-            <PenaltyState data={data} setData={setData} />
+            <PenaltyState />
           </S.RentalWrap>
           <div>페이지</div>
         </>
@@ -66,5 +65,5 @@ export default function PenaltyHistory() {
         </>
       )}
     </>
-  );
+  )
 }

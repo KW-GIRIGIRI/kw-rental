@@ -1,6 +1,7 @@
 import * as S from "../style"
 import Button from "../../../modules/Button"
 import useModal from "../../../hook/useModal"
+import EmptyData from '../../EmptyData'
 
 export default function UserLabState() {
   const cancelModal = useModal()
@@ -40,86 +41,90 @@ export default function UserLabState() {
   }
 
   return (
-    <>
-      <S.HistWrap>
-        <S.Header className="lab">
-          <span>사용 기간</span>
-          <span>랩실</span>
-          <span>사용 인원</span>
-          <span>상태</span>
-          <span></span>
-        </S.Header>
-        {랩실대여.map((랩실, i) => (
-          <S.HistList key={i} className="lab labList">
-            <div>
-              <p>{랩실.대여일}</p>
-              <p>~</p>
-              <p>{랩실.반납일}</p>
-            </div>
-            <span>{랩실.장소}</span>
-            <span>{랩실.사용인원}</span>
-            <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
-            <S.BtnWrap>
-              { 랩실.장소==="한울관" && <Button
-                text="대표자 연락망"
-                className="main shadow"
-                borderRadius="20px"
-                fontSize="14px"
-                padding="5px 7px"
-                onClick={contactsModal.open}
-              /> }
-              {!랩실.대여중 && (
-                <Button
-                  text="대여취소"
-                  className="sub shadow"
-                  borderRadius="20px"
-                  fontSize="14px"
-                  padding="5px 7px"
-                  onClick={cancelModal.open}
-                />
-              )}
-            </S.BtnWrap>
-          </S.HistList>
-        ))}
-      </S.HistWrap>
-      <cancelModal.Modal>
-        <p>랩실 대여를 취소하시겠습니까?</p>
-        <div>
-          <Button
-            onClick={cancelModal.close}
-            text="아니오"
-            className="sub"
-            padding="11px 34px"
-            borderRadius="5px"
-          />
-          <Button
-            onClick={onCancel}
-            text="네"
-            className="main"
-            padding="12px 34px"
-            borderRadius="5px"
-          />
-        </div>
-      </cancelModal.Modal>
-      <contactsModal.Modal className="contacts">
-        <p>대표자 연락망</p>
-        <div>
-          {
-            대표자연락망.map((keyholder, idx) => (
-              <p key={idx}>{keyholder.이름} {keyholder.전화번호}</p>
-            ))
-          }
-        </div>
-        <div>
-          <Button
-            onClick={contactsModal.close}
-            text="확인"
-            className="main"
-            padding="10px 20px"
-            borderRadius="5px"
-          />
-        </div>
-      </contactsModal.Modal>
-    </>
+    랩실대여.length ?
+      <>
+        <S.HistWrap>
+          <S.Header className="lab">
+            <span>사용 기간</span>
+            <span>랩실</span>
+            <span>사용 인원</span>
+            <span>상태</span>
+            <span></span>
+          </S.Header>
+          {랩실대여.map((랩실, i) => (
+            <S.HistList key={i} className="lab labList">
+              <div>
+                <p>{랩실.대여일}</p>
+                <p>~</p>
+                <p>{랩실.반납일}</p>
+              </div>
+              <span>{랩실.장소}</span>
+              <span>{랩실.사용인원}</span>
+              <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
+              <S.BtnWrap>
+                {랩실.장소 === "한울관" && (
+                  <Button
+                    text="대표자 연락망"
+                    className="main shadow"
+                    borderRadius="20px"
+                    fontSize="14px"
+                    padding="5px 7px"
+                    onClick={contactsModal.open}
+                  />
+                )}
+                {!랩실.대여중 && (
+                  <Button
+                    text="대여취소"
+                    className="sub shadow"
+                    borderRadius="20px"
+                    fontSize="14px"
+                    padding="5px 7px"
+                    onClick={cancelModal.open}
+                  />
+                )}
+              </S.BtnWrap>
+            </S.HistList>
+          ))}
+        </S.HistWrap>
+        <cancelModal.Modal>
+          <p>랩실 대여를 취소하시겠습니까?</p>
+          <div>
+            <Button
+              onClick={cancelModal.close}
+              text="아니오"
+              className="sub"
+              padding="11px 34px"
+              borderRadius="5px"
+            />
+            <Button
+              onClick={onCancel}
+              text="네"
+              className="main"
+              padding="12px 34px"
+              borderRadius="5px"
+            />
+          </div>
+        </cancelModal.Modal>
+        <contactsModal.Modal className="contacts">
+          <p>대표자 연락망</p>
+          <div>
+            {
+              대표자연락망.map((keyholder, idx) => (
+                <p key={idx}>{keyholder.이름} {keyholder.전화번호}</p>
+              ))
+            }
+          </div>
+          <div>
+            <Button
+              onClick={contactsModal.close}
+              text="확인"
+              className="main"
+              padding="10px 20px"
+              borderRadius="5px"
+            />
+          </div>
+        </contactsModal.Modal>
+      </>
+    : <EmptyData className="user-rental" content={["예정된 대여가 없습니다."]} />
   )
 }
