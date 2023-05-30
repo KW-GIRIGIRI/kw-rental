@@ -61,7 +61,6 @@ export const HistList = styled.li`
   align-items: center;
 
   & img {
-    background: ${(props) => props.theme.color.gray.g4};
     margin: auto;
   }
 
