@@ -2,7 +2,6 @@ import * as S from "./style";
 import Button from "../../modules/Button";
 import { useEffect, useState } from "react";
 import SchedList from "../SchedList";
-import iconWarning from "../../assets/icon-exclamation-gray.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   asyncGetReceived,

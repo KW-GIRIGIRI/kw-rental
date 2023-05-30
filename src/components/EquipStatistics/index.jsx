@@ -14,36 +14,19 @@ export default function EquipStatistics({ productList, setProductList, page, set
         : ""
       const reqUrl = `from=${dualDate.firstDate}&to=${dualDate.lastDate}&page=${page}${reqCategory}`
       const response = await getAdminEquipHistory(reqUrl)
-      const data = response.histories
 
       setPageArray(response.endpoints)
+      setProductList(response.histories)
 
       window.scrollTo({
         top: 0,
       })
-
-      if (isCategory) {
-        setProductList(
-          data.filter((i) => i.category === category[isCategory - 1].value)
-        )
-      } else {
-        setProductList(data)
-      }
     }
   }
 
   useEffect(() => {
     handleGetEquipHistory()
   }, [page, isCategory, dualDate])
-
-  const equipCategory =
-  {
-    CAMERA: "카메라",
-    RECORDING: "녹음 장비",
-    FILMING_ASSIST: "촬영보조 장비",
-    VR: "VR 장비",
-    ETC: "기타"
-  }
 
   return (
     <S.ItemUl>
@@ -56,7 +39,7 @@ export default function EquipStatistics({ productList, setProductList, page, set
       </S.Header>
       {productList?.map((item, idx) => (
         <S.ItemLi key={idx}>
-          <span>{equipCategory[item.category]}</span>
+          <span>{category.map(i => i.value === item.category && i.label)}</span>
           <span>{item.modelName}</span>
           <span>{item.propertyNumber}</span>
           <span>{item.abnormalRentalCount + item.normalRentalCount}</span>

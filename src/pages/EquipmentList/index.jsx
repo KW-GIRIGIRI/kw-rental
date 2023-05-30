@@ -1,9 +1,6 @@
 import * as S from "./style";
 import iconSearch from "../../assets/icon-search.svg";
-import iconGalOn from "../../assets/icon-gal-on.svg";
-import iconGal from "../../assets/icon-gal.svg";
-import iconListOn from "../../assets/icon-list-on.svg";
-import iconList from "../../assets/icon-list.svg";
+import iconViewMode from "../../assets/icon-viewmode.svg"
 import iconPlus from "../../assets/icon-plus.svg";
 import Button from "../../modules/Button";
 import EquipListWrap from "../../components/EquipListWrap";
@@ -18,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import Pagination from "../../components/Pagination";
 import useTitle from "../../hook/useTitle";
+import SVGIcon from "../../modules/SVGIcon";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -117,10 +115,10 @@ export default function EquipmentList() {
         ) : (
           <S.FilterWrap>
             <S.TypeBtn onClick={() => setViewMode("gal")}>
-              <img src={viewMode === "gal" ? iconGalOn : iconGal} alt="" />
+              <SVGIcon iconUrl={iconViewMode} id={viewMode === "gal" ? "icon-gal-on" : "icon-gal"} />
             </S.TypeBtn>
             <S.TypeBtn onClick={() => setViewMode("list")}>
-              <img src={viewMode === "list" ? iconListOn : iconList} alt="" />
+              <SVGIcon iconUrl={iconViewMode} id={viewMode === "list" ? "icon-list-on" : "icon-list"} />
             </S.TypeBtn>
           </S.FilterWrap>
         )}

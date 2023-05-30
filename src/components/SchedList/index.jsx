@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import weekOfYear from "dayjs/plugin/weekOfYear"
 import { useState } from "react";
 import { createRental } from "../../api/api";
 import useModal from "../../hook/useModal";
@@ -8,6 +9,8 @@ import SchedListComp from "./SchedListComp";
 import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived } from "../../store/reducer/authReceiveSlice";
+
+dayjs.extend(weekOfYear)
 
 export default function SchedList({ user, receive }) {
   const [returnModal, setReturnModal] = useState(false);
@@ -35,7 +38,7 @@ export default function SchedList({ user, receive }) {
         .filter((value) => value.reservationId === user.reservationId)[0]
         .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
         .includes(undefined) && dayjs().format('YYYY-MM-DD') === selectDate
-      // 반납 확인 - acceptDateTime이 있다면 true 반환
+
     return result;
   }
 
@@ -44,8 +47,8 @@ export default function SchedList({ user, receive }) {
       <S.Renter>
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
-        {!receive && user.returnDate && (
-        <S.WarnCont>반납일 초과 <br /> D+1</S.WarnCont>
+        {!receive && user.overdueAcceptDateTime && (
+          <S.WarnCont>반납일 초과 <br /> D+{ (dayjs(selectDate).format('YYYYMMDD') - dayjs(user.overdueAcceptDateTime).format('YYYYMMDD') + 1) - ((dayjs(selectDate).week() - dayjs(user.overdueAcceptDateTime).week()) * 3) }</S.WarnCont>
         )} 
         {receive && user.acceptDateTime ? (
           <S.TimeCont>

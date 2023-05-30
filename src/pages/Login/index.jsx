@@ -5,8 +5,9 @@ import iconBlockPw from "../../assets/icon-blockPassword.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { UserLogin } from "../../api/api";
+import { getUserClassNum, userLogin } from "../../api/api";
 import useTitle from "../../hook/useTitle";
+import { useEffect } from "react";
 
 export default function Login() {
   const [showPw, setShowPw] = useState(true);
@@ -28,9 +29,17 @@ export default function Login() {
       password: watch("password"),
     };
 
-    const res = await UserLogin(JSON.stringify(data));
+    const res = await userLogin(JSON.stringify(data));
     res === 200 && navigate("/equipment");
   };
+
+  // 쿠키 있을 경우 자동으로 로그인 처리
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getUserClassNum();
+  //     !!res?.memberNumber && navigate('/equipment')
+  //   })();
+  // }, [])
 
   return (
     <>
