@@ -379,7 +379,7 @@ export const userSignup = async (data) => {
   }
 };
 
-export const UserLogin = async (data) => {
+export const userLogin = async (data) => {
   try {
     const response = await instanceUtil.post(`/members/login`, data);
 
