@@ -71,14 +71,15 @@ export const TypeBtn = styled.button`
   border: 1px solid ${(props) => props.theme.color.gray.g4};
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
   padding: 8px 10px;
-  & > img {
-    max-width: 12px;
-    max-height: 11px;
-    vertical-align: middle;
+
+  & > svg {
+    margin-bottom: -2px;
   }
+
   &:first-of-type {
     border-radius: 5px 0 0 5px;
   }
+
   &:last-of-type {
     border-radius: 0 5px 5px 0;
     margin-left: -1px;
