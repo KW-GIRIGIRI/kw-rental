@@ -2,27 +2,24 @@ import * as S from "../style"
 import Button from "../../../modules/Button"
 import useModal from "../../../hook/useModal"
 import EmptyData from '../../EmptyData'
+import { getCurrentLabReservation } from "../../../api/api"
+import { useState, useEffect } from "react"
+import { rentalStatus } from "../../../data/rentalStatus"
+import dayjs from "dayjs"
 
 export default function UserLabState() {
+  const [myRental, setMyRental] = useState([])
   const cancelModal = useModal()
   const contactsModal = useModal()
 
-  const 랩실대여 = [
-    {
-      대여일: "23년 03월 11일(수)",
-      반납일: "23년 03월 12일(목)",
-      장소: "한울관",
-      사용인원: 4,
-      대여중: false,
-    },
-    {
-      대여일: "23년 03월 11일(수)",
-      반납일: "23년 03월 12일(목)",
-      장소: "화도관",
-      사용인원: 6,
-      대여중: true,
-    },
-  ]
+  const handleGetCurrentRental = async () => {
+    const res = await getCurrentLabReservation()
+    setMyRental(res.reservations)
+  }
+
+  useEffect(() => {
+    handleGetCurrentRental()
+  }, [])
 
   const 대표자연락망 = [
     {
@@ -41,7 +38,7 @@ export default function UserLabState() {
   }
 
   return (
-    랩실대여.length ?
+    myRental.length ?
       <>
         <S.HistWrap>
           <S.Header className="lab">
@@ -51,18 +48,18 @@ export default function UserLabState() {
             <span>상태</span>
             <span></span>
           </S.Header>
-          {랩실대여.map((랩실, i) => (
+          {myRental.map((lab, i) => (
             <S.HistList key={i} className="lab labList">
               <div>
-                <p>{랩실.대여일}</p>
+                <p>{dayjs(lab.startDate).format("YY년 MM월 DD일(dd)")}</p>
                 <p>~</p>
-                <p>{랩실.반납일}</p>
+                <p>{dayjs(lab.startDate).format("YY년 MM월 DD일(dd)")}</p>
               </div>
-              <span>{랩실.장소}</span>
-              <span>{랩실.사용인원}</span>
-              <S.State>{랩실.대여중 ? "대여중" : "대여 신청"}</S.State>
+              <span>{lab.name === "hanul" ? "한울관" : "화도관"}</span>
+              <span>{lab.amount}</span>
+              <S.State>{rentalStatus[lab.status]}</S.State>
               <S.BtnWrap>
-                {랩실.장소 === "한울관" && (
+                {lab.name === "hanul" && (
                   <Button
                     text="대표자 연락망"
                     className="main shadow"
@@ -72,7 +69,7 @@ export default function UserLabState() {
                     onClick={contactsModal.open}
                   />
                 )}
-                {!랩실.대여중 && (
+                {lab.status === "RESERVED" && (
                   <Button
                     text="대여취소"
                     className="sub shadow"
