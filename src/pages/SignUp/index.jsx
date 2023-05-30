@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useRef } from "react";
-import { getClassNum, Signup } from "../../api/api";
+import { getClassNum, userSignup } from "../../api/api";
 import useTitle from "../../hook/useTitle";
 
 export default function SignUp() {
@@ -64,7 +64,7 @@ export default function SignUp() {
     )
       alert("값을 입력해주세요");
     else {
-      const res = await Signup(JSON.stringify(data));
+      const res = await userSignup(JSON.stringify(data));
       res === 201 && navigate("/success", { state: { isSignup: true } });
     }
   };

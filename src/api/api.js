@@ -368,7 +368,7 @@ export const getClassNum = async (data) => {
   }
 };
 
-export const Signup = async (data) => {
+export const userSignup = async (data) => {
   try {
     const response = await instanceUtil.post(`/members`, data);
 
@@ -382,6 +382,17 @@ export const Signup = async (data) => {
 export const UserLogin = async (data) => {
   try {
     const response = await instanceUtil.post(`/members/login`, data);
+
+    return response.status;
+  } catch (err) {
+    alert(err.response.data);
+    return err;
+  }
+};
+
+export const userLogout = async () => {
+  try {
+    const response = await instanceUtil.post(`/members/logout`);
 
     return response.status;
   } catch (err) {

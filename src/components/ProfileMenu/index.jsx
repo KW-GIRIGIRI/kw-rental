@@ -3,6 +3,7 @@ import iconMenu from "../../assets/icon-menu.svg";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { userLogout } from "../../api/api";
 
 export default function ProfileMenu({ visible, setVisible }) {
   const modalRef = useRef();
@@ -11,6 +12,11 @@ export default function ProfileMenu({ visible, setVisible }) {
   const handleClose = (e) => {
     if (!modalRef.current.contains(e.target)) setVisible(false);
   };
+
+  const handleLogout = async () => {
+    const res = await userLogout()
+    res === 204 && navigate('/')
+  }
 
   useEffect(() => {
     window.addEventListener("click", handleClose);
@@ -43,7 +49,7 @@ export default function ProfileMenu({ visible, setVisible }) {
         <img src={iconMenu} alt="" />
         <p>도움말</p>
       </S.Li>
-      <S.Li>
+      <S.Li onClick={handleLogout}>
         <img src={iconMenu} alt="" />
         <p>로그아웃</p>
       </S.Li>
