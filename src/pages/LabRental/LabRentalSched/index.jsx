@@ -30,7 +30,7 @@ export default function LabRentalSched() {
       {
         isAuth &&
         <>
-          <S.PenaltyTitle>패널티 관리</S.PenaltyTitle>
+          <S.PenaltyTitle>페널티 관리</S.PenaltyTitle>
           <LabPenalty />
           <S.BackBtn text='뒤로 가기' className='sub' padding='14px 30px' borderRadius='10px' fontSize='15px' margin='50px auto 0' onClick={() => navigate(-1)}/>
         </>
