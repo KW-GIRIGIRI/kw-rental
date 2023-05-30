@@ -561,3 +561,29 @@ export const getSpecificDateLabRental = async (date) => {
     return err;
   }
 };
+
+// 사용자 현재 내 랩실 대여 예약 조회 API
+export const getCurrentLabReservation = async () => {
+  try {
+    const response = await instanceUtil.get(`/reservations/labRooms?terminated=false`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 사용자 랩실 대여 이력 API
+export const getUserLabRentalHistory = async (fromDate, toDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/rentals/labRooms?from=${fromDate}&to=${toDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

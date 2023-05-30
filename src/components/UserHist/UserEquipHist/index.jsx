@@ -30,16 +30,16 @@ export default function UserEquipHist() {
           <span>기자재</span>
           <span>상태</span>
         </S.Header>
-        {equipHistory.map((history, i) => (
+        {equipHistory.map((rental, i) => (
           <S.HistList className="equipList" key={i}>
             <S.DateEquip>
-              {dayjs(history.startDate).format("YY년 MM월 DD일(dd)")}
+              {dayjs(rental.startDate).format("YY년 MM월 DD일(dd)")}
             </S.DateEquip>
             <S.DateEquip>
-              {dayjs(history.endDate).format("YY년 MM월 DD일(dd)")}
+              {dayjs(rental.endDate).format("YY년 MM월 DD일(dd)")}
             </S.DateEquip>
             <S.ItemUl>
-              {history.rentalSpecs.map((item, idx) => (
+              {rental.rentalSpecs.map((item, idx) => (
                 <S.ItemLi key={idx}>
                   <span>{item.modelName}</span>
                   <span className={!item.status === "RETURNED" ? "on" : ""}>
