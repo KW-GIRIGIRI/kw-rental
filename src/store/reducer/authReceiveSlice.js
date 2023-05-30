@@ -66,10 +66,10 @@ const handleFulfilled = (state, action) => {
       memberNumber,
       name,
       reservationSpecs,
-      returnDate,
+      overdueAcceptDateTime,
     }) => {
       state.receiveList.byId[reservationId] = {
-        returnDate,
+        overdueAcceptDateTime,
         acceptDateTime,
         name,
         memberNumber,

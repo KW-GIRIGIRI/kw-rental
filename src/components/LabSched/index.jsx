@@ -1,7 +1,6 @@
 import * as S from "./style";
 import Button from "../../modules/Button";
 import { useEffect, useState } from "react";
-import iconWarning from "../../assets/icon-exclamation-gray.svg";
 import { useDispatch, useSelector } from "react-redux";
 import LabSchedList from './LabSchedList';
 import { asyncGetLabReceived, asyncGetLabReturned } from "../../store/reducer/authReceiveSlice";
