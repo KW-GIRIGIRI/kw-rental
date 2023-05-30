@@ -54,8 +54,8 @@ export default function ItemListComp({
         type="number"
       />
       {isEdit || isAdd ? (
-        <S.DelBtn onClick={() => delItem(index)}>
-          <S.MinusImg src={iconMinus} />
+        <S.DelBtn aria-label="delete item" onClick={() => delItem(index)}>
+          <S.MinusImg src={iconMinus} alt="품목 삭제 버튼" />
         </S.DelBtn>
       ) : null}
     </S.ItemWrap>

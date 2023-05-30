@@ -5,6 +5,8 @@ export const FileLabel = styled.label`
   background-color: ${(props) => props.theme.color.primary.sub};
   border-radius: ${(props) => props.theme.borderRadius.lv2};
   text-align: center;
+  color: ${(props) => props.theme.color.text.gray};
+
   & > input {
     position: absolute;
     width: 1px;
@@ -15,12 +17,13 @@ export const FileLabel = styled.label`
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
   & > img {
     width: 48px;
     margin-bottom: 10px;
   }
+
   & > p {
-    color: ${(props) => props.theme.color.text.gray};
     font-size: 14px;
     width: max-content;
   }

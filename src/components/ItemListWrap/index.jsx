@@ -87,7 +87,7 @@ export default function ItemListWrap({ item, isEdit, isAdd, data, setData }) {
             {isAdd || isEdit ? (
               <S.ItemLi>
                 <S.AddBtn disabled={!preventAdd} onClick={addItem}>
-                  <S.PlusImg src={iconPlus} />
+                  <S.PlusImg src={iconPlus} alt="품목 추가 버튼" />
                   <p>New</p>
                 </S.AddBtn>
               </S.ItemLi>

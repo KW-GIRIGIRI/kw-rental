@@ -114,10 +114,10 @@ export default function EquipmentList() {
           </S.addBtn>
         ) : (
           <S.FilterWrap>
-            <S.TypeBtn onClick={() => setViewMode("gal")}>
+            <S.TypeBtn aria-label="select gallery type" onClick={() => setViewMode("gal")}>
               <SVGIcon iconUrl={iconViewMode} id={viewMode === "gal" ? "icon-gal-on" : "icon-gal"} />
             </S.TypeBtn>
-            <S.TypeBtn onClick={() => setViewMode("list")}>
+            <S.TypeBtn aria-label="select list type" onClick={() => setViewMode("list")}>
               <SVGIcon iconUrl={iconViewMode} id={viewMode === "list" ? "icon-list-on" : "icon-list"} />
             </S.TypeBtn>
           </S.FilterWrap>
