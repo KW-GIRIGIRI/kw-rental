@@ -81,7 +81,7 @@ const LabCalendar = () => {
 
   useEffect(() => {
     if (!isAuth) {
-      const date = dayjs().day() > 4 ?
+      const date = dayjs().day() >= 4 ?
         dayjs().add(1, 'week').startOf('week').add(1, 'days')
         : dayjs().add(1, 'days')
 
