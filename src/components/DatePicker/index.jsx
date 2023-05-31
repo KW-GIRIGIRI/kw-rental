@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import weekdayPlugin from "dayjs/plugin/weekday";
 import objectPlugin from "dayjs/plugin/toObject";
-import updateLocale from "dayjs/plugin/updateLocale";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import iconRightArrow from "../../assets/icon-rightArrow-gray.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow-gray.svg";
 import { useRef } from "react";
+import updateLocale from "dayjs/plugin/updateLocale";
 
 dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);

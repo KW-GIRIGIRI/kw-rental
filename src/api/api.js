@@ -603,3 +603,15 @@ export const getMyPenalty = async () => {
     return err;
   }
 };
+
+// 특정 회원의 페널티 현재 상태 조회
+export const getMyPenaltyStatus = async () => {
+  try {
+    const response = await instanceUtil.get(`/penalties/status`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

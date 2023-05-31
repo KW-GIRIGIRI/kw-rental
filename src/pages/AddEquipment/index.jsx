@@ -130,7 +130,7 @@ export default function AddEquipment() {
       }
 
       if (
-        !item.items.every((item) =>
+        item.items.every((item) =>
           itemData.items.some(
             (otherItem) => otherItem.propertyNumber === item.propertyNumber
           )
