@@ -629,3 +629,15 @@ export const getPenaltyHistory = async (size, page) => {
     return err;
   }
 };
+
+// 관리자 패널티 상태 변경
+export const modifyPenaltyStatus = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(`/admin/penalties/${id}`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

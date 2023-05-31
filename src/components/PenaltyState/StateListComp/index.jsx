@@ -1,33 +1,20 @@
 import dayjs from "dayjs"
-import { useState } from "react"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import { rentalStatus } from "../../../data/rentalStatus"
 import * as S from "../style"
+import { modifyPenaltyStatus } from "../../../api/api"
+import { penaltyStatus } from "../../../data/penaltyStatus"
 
 export default function StateListComp({ penalty }) {
   const { Modal, open, close } = useModal()
 
-  const handelEditPenaltyState = async (e, idx) => {
-    const newState = e.target.value
-    console.log(newState)
-  // setData((prevData) => {
-  //   const newData = [...prevData]
-  //   newData[idx].상태 = newState
-  //   return newData
-  // })
-  }
-  
-  
-  const onDelete = (idx) => {
-    // setIndex(idx)
-    open()
+  const handelEditPenaltyState = async (e) => {
+    const res = await modifyPenaltyStatus(penalty.id, { "status": e.target.value })
+    res === 204 && alert('페널티 상태가 변경되었습니다.')
   }
 
   const handleDeletePenalty = async () => {
-    // 나중에 api로 바꿔야함
-    // setData((prevData) => prevData.filter((_, i) => i !== index))
-    // setIndex(0)
     close()
   }
   
@@ -37,7 +24,7 @@ export default function StateListComp({ penalty }) {
       <form action="#">
         <select
           name="penalty"
-          defaultValue={penalty.status}
+          defaultValue={penaltyStatus.filter(i => i.value === penalty.status)[0].key}
           onChange={handelEditPenaltyState}
         >
           <option value="ONE_WEEK">7일 이용 금지</option>
@@ -51,7 +38,7 @@ export default function StateListComp({ penalty }) {
       <span>{penalty.assetName}</span>
       <span>{rentalStatus[penalty.reason]}</span>
       <span>
-        <p onClick={() => onDelete()}>삭제</p>
+        <p onClick={open}>삭제</p>
       </span>
       <Modal>
         <p>해당 패널티를 정말 삭제하시겠습니까?</p>
