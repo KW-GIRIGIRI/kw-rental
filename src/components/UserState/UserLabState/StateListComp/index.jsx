@@ -32,7 +32,7 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
       <div>
         <p>{dayjs(lab.startDate).format("YY년 MM월 DD일(dd)")}</p>
         <p>~</p>
-        <p>{dayjs(lab.startDate).format("YY년 MM월 DD일(dd)")}</p>
+        <p>{dayjs(lab.endDate).format("YY년 MM월 DD일(dd)")}</p>
       </div>
       <span>{lab.name === "hanul" ? "한울관" : "화도관"}</span>
       <span>{lab.amount}</span>

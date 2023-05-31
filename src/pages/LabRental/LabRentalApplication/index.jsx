@@ -19,7 +19,7 @@ export default function LabRentalApplication() {
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
-      const enddate = dayjs(selectDate).day() === 4 ? dayjs(selectDate).add(4, 'days').format('YYYY-MM-DD') : selectDate
+      const enddate = dayjs(selectDate).day() === 4 ? dayjs(selectDate).add(4, 'days').format('YYYY-MM-DD') : dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
 
       const data = {
         "startDate" : selectDate.split('-').map(i => ~~i),

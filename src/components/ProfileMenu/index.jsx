@@ -1,13 +1,15 @@
 import * as S from "./style";
 import iconMenu from "../../assets/icon-menu.svg";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../api/api";
+import { AuthContext } from "../../context/Context";
 
 export default function ProfileMenu({ setVisible }) {
   const modalRef = useRef();
   const navigate = useNavigate();
+  const { isAuth } = useContext(AuthContext)
 
   const handleClose = (e) => {
     if (!modalRef.current?.contains(e.target)) setVisible(false);
@@ -45,7 +47,12 @@ export default function ProfileMenu({ setVisible }) {
         <img src={iconMenu} alt="" />
         <p>공지사항</p>
       </S.Li>
-      <S.Li>
+      <S.Li
+       onClick={() => {
+          window.open(isAuth ? 'https://blyhry.notion.site/MEDIA-LAB-Admin-de66a69c22324a108ff840e32524deb9' : 'https://blyhry.notion.site/blyhry/MEDIA-LAB-8f1a67a171024f668c87470bb705fa01', '_blank');
+          setVisible(false)
+        }}
+      >
         <img src={iconMenu} alt="" />
         <p>도움말</p>
       </S.Li>
