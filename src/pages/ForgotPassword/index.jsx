@@ -20,13 +20,13 @@ export default function ForgotPassword() {
       <p>회원정보에 등록한 학번과 이메일을 입력해주세요</p>
 
       <S.Form>
-        <label htmlFor="">학번(아이디)</label>
-        <Input className="signup" />
+        <label htmlFor="classNum">학번(아이디)</label>
+        <Input id="classNum" className="signup" />
 
-        <label htmlFor="">이메일</label>
+        <label htmlFor="email">이메일</label>
         <S.InpWrap>
-          <Input className="signup" />
-          <Input className="signup" />
+          <Input id="email" className="signup" />
+          <Input id="" className="signup" />
         </S.InpWrap>
 
         <Button

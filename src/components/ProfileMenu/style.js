@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrap = styled.ul`
-  top: 30px;
+  top: 36px;
   right: 0;
   position: absolute;
   z-index: 99;
