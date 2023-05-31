@@ -1,10 +1,11 @@
 import dayjs from "dayjs"
+import { cancelRentalSpec } from "../../../../api/api"
 import { rentalStatus } from "../../../../data/rentalStatus"
 import useModal from "../../../../hook/useModal"
 import Button from "../../../../modules/Button"
 import * as S from "../../style"
 
-export default function StateListComp({ lab }) {
+export default function StateListComp({ lab, handleGetCurrentRental }) {
   const cancelModal = useModal()
   const contactsModal = useModal()
 
@@ -19,9 +20,10 @@ export default function StateListComp({ lab }) {
     },
   ]
 
-  const onCancel = () => {
-    // 취소 구현
-    cancelModal.close()
+  const onCancel = async () => {
+    const res = await cancelRentalSpec(lab.reservationSpecId, lab.amount)
+    res === 204 && cancelModal.close()
+    handleGetCurrentRental()
   }
 
 

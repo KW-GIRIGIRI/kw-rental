@@ -27,7 +27,7 @@ export default function UserLabState() {
           <span></span>
         </S.Header>
         {myRental.map((lab, i) => (
-          <StateListComp key={i} lab={lab} />
+          <StateListComp handleGetCurrentRental={handleGetCurrentRental} key={i} lab={lab} />
         ))}
       </S.HistWrap>
     : <EmptyData className="user-rental" content={["예정된 대여가 없습니다."]} />
