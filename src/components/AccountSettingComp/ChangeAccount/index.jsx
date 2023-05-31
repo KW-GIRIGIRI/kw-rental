@@ -47,9 +47,9 @@ export default function ChangeAccount({ setCheckPw }) {
         공동 관리자와 비밀번호를 <ins>반드시</ins> 공유하세요.
       </S.AuthTit>
       <Form onSubmit={handleSubmit(handleAuthChangeAccount)}>
-        <label>비밀번호</label>
+        <label htmlFor="pw">비밀번호</label>
         <InpWrap>
-          <Input autoFocus
+          <Input id="pw" autoFocus
             type={showPw.password ? "password" : "text"}
             {...register("password", {
               required: {
@@ -71,9 +71,9 @@ export default function ChangeAccount({ setCheckPw }) {
         </InpWrap>
         {errors.password && <ErrText>{errors.password.message}</ErrText>}
 
-        <label>비밀번호 확인</label>
+        <label htmlFor="checkPw">비밀번호 확인</label>
         <InpWrap>
-          <Input
+          <Input id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -113,9 +113,9 @@ export default function ChangeAccount({ setCheckPw }) {
     <>
       <S.SubTit>*이름, 생년월일, 학번(아이디)는 변경이 불가합니다.</S.SubTit>
       <Form onSubmit={handleSubmit(handleChangeAccount)}>
-        <label>비밀번호</label>
+        <label htmlFor="pw">비밀번호</label>
         <InpWrap>
-          <Input
+          <Input id="pw"
             type={showPw.password ? "password" : "text"}
             {...register("password", {
               required: {
@@ -137,9 +137,9 @@ export default function ChangeAccount({ setCheckPw }) {
         </InpWrap>
         {errors.password && <ErrText>{errors.password.message}</ErrText>}
 
-        <label>비밀번호 확인</label>
+        <label htmlFor="checkPw">비밀번호 확인</label>
         <InpWrap>
-          <Input
+          <Input id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -165,9 +165,9 @@ export default function ChangeAccount({ setCheckPw }) {
           <ErrText>{errors.passwordConfirm.message}</ErrText>
         )}
 
-        <label>이메일</label>
+        <label htmlFor="email">이메일</label>
         <InpWrap className="email">
-          <Input
+          <Input id="email"
             type="text"
             placeholder="gildong1234"
             {...register("emailF", {
@@ -197,8 +197,8 @@ export default function ChangeAccount({ setCheckPw }) {
           <ErrText>{errors.emailF?.message || errors.emailS?.message}</ErrText>
         )}
 
-        <label>연락처(전화번호)</label>
-        <Input
+        <label htmlFor="phoneNumber">연락처(전화번호)</label>
+        <Input id="phoneNumber"
           type="text"
           placeholder="01012341234"
           {...register("phoneNum", {

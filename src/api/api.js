@@ -565,7 +565,9 @@ export const getSpecificDateLabRental = async (date) => {
 // 사용자 현재 내 랩실 대여 예약 조회 API
 export const getCurrentLabReservation = async () => {
   try {
-    const response = await instanceUtil.get(`/reservations/labRooms?terminated=false`);
+    const response = await instanceUtil.get(
+      `/reservations/labRooms?terminated=false`
+    );
 
     return response.data;
   } catch (err) {
@@ -580,6 +582,20 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
     const response = await instanceUtil.get(
       `/rentals/labRooms?from=${fromDate}&to=${toDate}`
     );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 페널티 관련 API
+
+// 특정 회원의 페널티 이력 조회
+export const getMyPenalty = async () => {
+  try {
+    const response = await instanceUtil.get(`/penalties`);
 
     return response.data;
   } catch (err) {

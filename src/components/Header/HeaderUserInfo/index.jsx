@@ -17,7 +17,7 @@ export default function HeaderUserInfo({ classNum }) {
         <S.ClassNumP>{classNum}</S.ClassNumP>
         <S.NotiIcon src={iconDownArrow} alt="" />
       </S.Wrapper>
-      {visible && <ProfileMenu visible={visible} setVisible={setVisible} />}
+      {visible && <ProfileMenu setVisible={setVisible} />}
     </>
   );
 }

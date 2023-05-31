@@ -74,7 +74,7 @@ export default function SignUp() {
       <h2>회원가입</h2>
       <S.Form onSubmit={handleSubmit(handleSignUp)}>
         <label htmlFor="name">이름</label>
-        <S.Input autoFocus
+        <S.Input autoFocus id="name"
           placeholder="홍길동"
           {...register("name", {
             required: {
@@ -92,9 +92,9 @@ export default function SignUp() {
           })}
         />
         {errors.name && <S.ErrText>{errors.name.message}</S.ErrText>}
-        <label htmlFor="">생년월일</label>
+        <label htmlFor="birth">생년월일</label>
         <S.InpWrap>
-          <S.Input
+          <S.Input id="birth"
             type="number"
             placeholder="000429"
             {...register("birthDate", {
@@ -121,17 +121,17 @@ export default function SignUp() {
         </S.InpWrap>
         {errors.birthDate && <S.ErrText>{errors.birthDate.message}</S.ErrText>}
 
-        <label htmlFor="">학번(아이디)</label>
-        <S.Input
+        <label htmlFor="classNum">학번(아이디)</label>
+        <S.Input id="classNum"
           defaultValue={memberNumber}
           {...register("memberNumber")}
           placeholder="이름과 생년월일을 인증해주세요"
           disabled
         />
 
-        <label htmlFor="">비밀번호</label>
+        <label htmlFor="pw">비밀번호</label>
         <S.InpWrap>
-          <S.Input
+          <S.Input id="pw"
             type={showPw.password ? "password" : "text"}
             placeholder="8자 이상 작성해주세요"
             {...register("password", {
@@ -154,9 +154,9 @@ export default function SignUp() {
         </S.InpWrap>
         {errors.password && <S.ErrText>{errors.password.message}</S.ErrText>}
 
-        <label htmlFor="">비밀번호 확인</label>
+        <label htmlFor="checkPw">비밀번호 확인</label>
         <S.InpWrap>
-          <S.Input
+          <S.Input id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -182,9 +182,9 @@ export default function SignUp() {
           <S.ErrText>{errors.passwordConfirm.message}</S.ErrText>
         )}
 
-        <label htmlFor="">이메일</label>
+        <label htmlFor="email">이메일</label>
         <S.InpWrap className="email">
-          <S.Input
+          <S.Input id="email"
             {...register("emailF", {
               required: {
                 value: true,
@@ -192,7 +192,7 @@ export default function SignUp() {
               },
             })}
           />
-          <S.Input
+          <S.Input id=""
             {...register("emailS", {
               required: {
                 value: true,
@@ -212,8 +212,8 @@ export default function SignUp() {
           </S.ErrText>
         )}
 
-        <label htmlFor="">연락처(전화번호)</label>
-        <S.Input
+        <label htmlFor="phoneNumber">연락처(전화번호)</label>
+        <S.Input id="phoneNumber"
           placeholder="공백, - 제외 숫자만 작성해주세요."
           {...register("phoneNum", {
             required: {

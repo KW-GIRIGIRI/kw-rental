@@ -18,11 +18,11 @@ export default function CheckPw({ setCheckPw }) {
       <S.SubTit>계정 설정을 위해 비밀번호를 다시 한 번 입력해 주세요.</S.SubTit>
       <Form>
         <label htmlFor="pw">비밀번호 입력</label>
-        <Input autoFocus type={showPw ? "password" : "text"} />
+        <Input id="pw" autoFocus type={showPw ? "text" : "password"} />
         <PwImg
-          bottom={showPw ? "22px" : "24px"}
+          bottom={showPw ? "24px" : "22px"}
           onClick={() => setShowPw(!showPw)}
-          src={showPw ? iconBlockPw : iconShowPw}
+          src={showPw ? iconShowPw : iconBlockPw}
           alt=""
         />
       </Form>

@@ -5,12 +5,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../api/api";
 
-export default function ProfileMenu({ visible, setVisible }) {
+export default function ProfileMenu({ setVisible }) {
   const modalRef = useRef();
   const navigate = useNavigate();
 
   const handleClose = (e) => {
-    if (!modalRef.current.contains(e.target)) setVisible(false);
+    if (!modalRef.current?.contains(e.target)) setVisible(false);
   };
 
   const handleLogout = async () => {
