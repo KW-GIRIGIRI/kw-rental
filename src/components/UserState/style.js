@@ -24,11 +24,12 @@ export const Div = styled.div`
   }
 
   & .penalty {
-    width: 280px;
+    min-width: 280px;
+    max-width: 390px;
   }
 
   & .penalList {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     padding: 10px 0;
 
     & span:first-child {
@@ -42,7 +43,6 @@ export const Div = styled.div`
 `;
 
 export const HistWrap = styled.ul`
-  display: grid;
   align-items: center;
 `;
 
