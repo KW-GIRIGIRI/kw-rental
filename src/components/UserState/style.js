@@ -82,7 +82,6 @@ export const ItemLi = styled.li`
   }
 `;
 
-// 기자재 대여 정보
 export const DateEquip = styled.span`
   grid-row-start: 1;
   grid-row-end: -1;

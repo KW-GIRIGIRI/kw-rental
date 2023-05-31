@@ -81,27 +81,3 @@ export const numEditBtn = styled.button`
     line-height: 20px;
   }
 `;
-
-// export const Input = styled.input`
-//   width: 150px;
-//   font-size: 15px;
-//   text-align: center;
-//   border-radius: 5px;
-//   -moz-appearance: textfield;
-//   border: 1px solid ${(props) => props.theme.color.gray.g3};
-//   padding: 6px 0;
-
-//   &::-webkit-outer-spin-button,
-//   ::-webkit-inner-spin-button {
-//     -webkit-appearance: none;
-//     margin: 0;
-//   }
-//   &::placeholder {
-//     text-align: center;
-//   }
-
-//   &:disabled {
-//     background-color: ${(props) => props.theme.color.primary.sub};
-//     color: ${(props) => props.theme.color.gray.g5};
-//   }
-// `;
