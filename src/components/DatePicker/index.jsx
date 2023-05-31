@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import weekdayPlugin from "dayjs/plugin/weekday";
 import objectPlugin from "dayjs/plugin/toObject";
+import updateLocale from "dayjs/plugin/updateLocale";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import iconRightArrow from "../../assets/icon-rightArrow-gray.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow-gray.svg";
@@ -11,6 +12,11 @@ import { useRef } from "react";
 dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);
 dayjs.extend(weekOfYear);
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale("en", {
+  weekdays: ["일", "월", "화", "수", "목", "금", "토"],
+});
 
 export default function DatePicker({
   initial,
