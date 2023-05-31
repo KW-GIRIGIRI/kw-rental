@@ -7,8 +7,7 @@ export default function Pagination({ page, setPage, pageArray }) {
       <button onClick={() => setPage(page - 1)} disabled={page === 0}>
         <img src={iconPageArrow} alt="이전 페이지" />
       </button>
-      {pageArray?.map((_, index) => {
-        return (
+      {pageArray?.map((_, index) => 
           <button
             key={index}
             onClick={() => setPage(index)}
@@ -16,8 +15,7 @@ export default function Pagination({ page, setPage, pageArray }) {
           >
             {index + 1}
           </button>
-        );
-      })}
+      )}
       <button
         onClick={() => setPage(page + 1)}
         disabled={page + 1 === pageArray.length}

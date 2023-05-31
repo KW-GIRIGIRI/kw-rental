@@ -615,3 +615,17 @@ export const getMyPenaltyStatus = async () => {
     return err;
   }
 };
+
+// 관리자 페널티 히스토리 조회
+export const getPenaltyHistory = async (size, page) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/penalties/histories?size=${size}&page=${page}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
