@@ -12,7 +12,7 @@ export default createGlobalStyle`
  @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
-    src: local('Pretendard')
+    src: 
       url(${PretendardRegularWoff2}) format("woff2"), 
       url(${PretendardRegularWoff}) format("woff"); 
     font-display: swap;
@@ -21,7 +21,7 @@ export default createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
     font-weight: 500;
-    src: local('Pretendard')
+    src: 
       url(${PretendardMediumWoff2}) format("woff2"), 
       url(${PretendardMediumWoff}) format("woff");
     font-display: swap;
@@ -30,7 +30,7 @@ export default createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
     font-weight: 600;
-    src: local('Pretendard')
+    src: 
       url(${PretendardSemiBoldWoff2}) format("woff2"), 
       url(${PretendardSemiBoldWoff}) format("woff");
     font-display: swap;
@@ -39,7 +39,7 @@ export default createGlobalStyle`
   @font-face {
     font-family: 'Pretendard';
     font-weight: 700;
-    src: local('Pretendard')
+    src: 
       url(${PretendardBoldWoff2}) format("woff2"), 
       url(${PretendardBoldWoff}) format("woff"); 
     font-display: swap;

@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow-y: scroll;
   }
 
-  html, body, p, span {
+  html, body, p, span, button, a, li {
     font-family: 'Pretendard'; 
   }
 
