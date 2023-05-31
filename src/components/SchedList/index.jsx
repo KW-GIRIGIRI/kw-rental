@@ -48,7 +48,7 @@ export default function SchedList({ user, receive }) {
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
         {!receive && user.overdueAcceptDateTime && (
-          <S.WarnCont>반납일 초과 <br /> D+{ (dayjs(selectDate).format('YYYYMMDD') - dayjs(user.overdueAcceptDateTime).format('YYYYMMDD') + 1) - ((dayjs(selectDate).week() - dayjs(user.overdueAcceptDateTime).week()) * 3) }</S.WarnCont>
+          <S.WarnCont>반납일 초과 <br /> D+{ (dayjs(selectDate).diff(dayjs(user.overdueAcceptDateTime), 'days')) - ((dayjs(selectDate).week() - dayjs(user.overdueAcceptDateTime).week()) * 3) }</S.WarnCont>
         )} 
         {receive && user.acceptDateTime ? (
           <S.TimeCont>

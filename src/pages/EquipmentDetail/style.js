@@ -21,6 +21,8 @@ export const DetailWrapper = styled.div`
 export const SimpleDesc = styled.div`
   font-size: 13px;
   margin-left: -25px;
+  margin-bottom: 20px;
+
   & > span:not(:last-child) {
     cursor: pointer;
     &::after {
