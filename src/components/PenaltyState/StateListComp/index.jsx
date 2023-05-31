@@ -3,10 +3,10 @@ import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import { rentalStatus } from "../../../data/rentalStatus"
 import * as S from "../style"
-import { modifyPenaltyStatus } from "../../../api/api"
+import { deleteAdminPenalty, modifyPenaltyStatus } from "../../../api/api"
 import { penaltyStatus } from "../../../data/penaltyStatus"
 
-export default function StateListComp({ penalty }) {
+export default function StateListComp({ penalty, handleGetPenaltyHistory }) {
   const { Modal, open, close } = useModal()
 
   const handelEditPenaltyState = async (e) => {
@@ -15,7 +15,9 @@ export default function StateListComp({ penalty }) {
   }
 
   const handleDeletePenalty = async () => {
-    close()
+    const res = await deleteAdminPenalty(penalty.id)
+    res === 204 && close()
+    handleGetPenaltyHistory()
   }
   
   return (

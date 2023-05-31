@@ -641,3 +641,15 @@ export const modifyPenaltyStatus = async (id, data) => {
     return err;
   }
 };
+
+// 관리자 패널티 삭제
+export const deleteAdminPenalty = async (id) => {
+  try {
+    const response = await instanceUtil.delete(`/admin/penalties/${id}`);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

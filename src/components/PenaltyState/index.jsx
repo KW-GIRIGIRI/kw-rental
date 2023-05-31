@@ -33,8 +33,8 @@ export default function PenaltyState() {
           <span>사유</span>
           <span></span>
         </S.Header>
-          {penaltyList.map((penalty, idx) => 
-            <StateListComp penalty={penalty} key={idx} />
+          {penaltyList.map((penalty) => 
+            <StateListComp penalty={penalty} key={penalty.id} handleGetPenaltyHistory={handleGetPenaltyHistory} />
           )}
         </S.ItemUl>
         {pageArray && (
