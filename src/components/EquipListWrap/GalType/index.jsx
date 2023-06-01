@@ -15,7 +15,7 @@ export default function GalType({ item }) {
   useEffect(() => {
     async function handleGetProductAmount() {
       const res = await getProductAmountFromDate(item.id, singleDate, singleDate)
-      setRemainAmount(res.remainQuantities[0].remainQuantity);
+      res.remainQuantities && setRemainAmount(res.remainQuantities[0].remainQuantity);
     }
     handleGetProductAmount();
   }, [singleDate]);

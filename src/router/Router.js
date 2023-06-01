@@ -7,9 +7,9 @@ import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import ForgotPassword from "../pages/ForgotPassword";
 import AuthSuccess from "../pages/AuthSuccess";
+import EquipmentDetail from "../pages/EquipmentDetail";
 
 const EquipmentList = lazy(() => import("../pages/EquipmentList"));
-const EquipmentDetail = lazy(() => import("../pages/EquipmentDetail"));
 const AddEquipment = lazy(() => import("../pages/AddEquipment"));
 const EquipmentItemDetail = lazy(() => import("../pages/EquipmentItemDetail"));
 const RentalStatus = lazy(() => import("../pages/RentalStatus"));
