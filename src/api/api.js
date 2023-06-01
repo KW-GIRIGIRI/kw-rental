@@ -38,8 +38,7 @@ export const getProductList = async (url) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -49,8 +48,7 @@ export const getProductDetail = async (id) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -60,8 +58,7 @@ export const addEquipment = async (data) => {
 
     return response.headers.get("Location");
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -71,8 +68,7 @@ export const deleteEquipment = async (id) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -82,8 +78,7 @@ export const modifyEquipment = async (id, data) => {
 
     return response.headers.get("Location");
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -96,8 +91,7 @@ export const postImage = async (formData) => {
 
     return response.headers.get("Location");
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -110,8 +104,7 @@ export const getProductAmountFromDate = async (id, from, to) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -122,8 +115,7 @@ export const addCartEquip = async (data) => {
 
     return response.headers.get("Location");
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -133,8 +125,7 @@ export const getCartEquip = async () => {
 
     return response.data.inventories;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -144,8 +135,7 @@ export const deleteAllCartEquip = async () => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -155,8 +145,7 @@ export const deleteCartEquip = async (id) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -166,8 +155,7 @@ export const modifyCartEquip = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -178,8 +166,7 @@ export const getItemList = async (id) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -189,8 +176,7 @@ export const getItem = async (id) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -203,8 +189,7 @@ export const changeItemState = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -217,8 +202,7 @@ export const changePropertyNum = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -231,8 +215,7 @@ export const changeItems = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -242,8 +225,7 @@ export const deleteItem = async (id) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -256,8 +238,7 @@ export const getRentAvailabilityItemList = async (id) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -270,8 +251,7 @@ export const getEquipRentStatus = async (id, month) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -284,8 +264,7 @@ export const postReservation = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -296,8 +275,7 @@ export const createRental = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -311,8 +289,7 @@ export const cancelRentalSpec = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -324,8 +301,7 @@ export const getReceivedRentalList = async (date) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -337,8 +313,7 @@ export const getReturnRentalList = async (date) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -349,8 +324,7 @@ export const returnRental = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -363,8 +337,7 @@ export const getClassNum = async (data) => {
 
     return response.data[0];
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -374,8 +347,7 @@ export const userSignup = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -386,7 +358,6 @@ export const userLogin = async (data) => {
     return response.status;
   } catch (err) {
     alert(err.response.data);
-    return err;
   }
 };
 
@@ -397,7 +368,6 @@ export const userLogout = async () => {
     return response.status;
   } catch (err) {
     alert(err.response.data);
-    return err;
   }
 };
 
@@ -408,8 +378,7 @@ export const getUserInfo = async (date) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -420,8 +389,7 @@ export const getUserClassNum = async (date) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -432,8 +400,7 @@ export const getCurrentRental = async () => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -446,8 +413,7 @@ export const getUserRentalHistory = async (fromDate, toDate) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -460,8 +426,7 @@ export const getAdminEquipHistory = async (url) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -476,8 +441,7 @@ export const getLabRemainQuantities = async (lab, startDate, endDate) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -490,8 +454,7 @@ export const getLabRentalList = async (startDate) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -504,8 +467,7 @@ export const getLabReturnList = async (endDate) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -516,8 +478,7 @@ export const postLabRental = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -528,8 +489,7 @@ export const setLabUsingConfirm = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -543,8 +503,7 @@ export const setLabReturnConfirm = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -557,8 +516,7 @@ export const getSpecificDateLabRental = async (date) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -571,8 +529,7 @@ export const getCurrentLabReservation = async () => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -585,8 +542,7 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -599,8 +555,7 @@ export const getMyPenalty = async () => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -611,8 +566,7 @@ export const getMyPenaltyStatus = async () => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -625,8 +579,7 @@ export const getPenaltyHistory = async (size, page) => {
 
     return response.data;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -637,8 +590,7 @@ export const modifyPenaltyStatus = async (id, data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -649,8 +601,7 @@ export const deleteAdminPenalty = async (id) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
 
@@ -664,7 +615,6 @@ export const modifyLabPenaltyStatus = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.message);
-    return err;
+    console.error(err.response);
   }
 };
