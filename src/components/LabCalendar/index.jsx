@@ -80,19 +80,16 @@ const LabCalendar = () => {
   }, [dayObj, hanul])
 
   useEffect(() => {
-    if (!isAuth) {
-      const date = dayjs().day() >= 4 ?
-        dayjs().add(1, 'week').startOf('week').add(1, 'days')
-        : dayjs().add(1, 'days')
+    const date = dayjs().day() >= 4 ?
+      dayjs().add(1, 'week').startOf('week').add(1, 'days')
+      : dayjs().add(1, 'days')
 
-      setDayObj(date)
-      dispatch(setLabDate(date.format('YYYY-MM-DD')))
-    }
+    setDayObj(date)
+    dispatch(setLabDate(date.format('YYYY-MM-DD')))
     return () => {
-       dispatch(setLabDate(dayjs().format("YYYY-MM-DD")));
-    } 
+      dispatch(setLabDate(date.format("YYYY-MM-DD")));
+    }
   }, [])
-
 
   return (
     <S.Wrapper>
@@ -130,7 +127,8 @@ const LabCalendar = () => {
             </S.ContCell>
           ))}
 
-        {Array(daysInMonth)
+        {
+          Array(daysInMonth)
           .fill()
           .map((_, i) => (
             <S.ContCell
@@ -144,20 +142,20 @@ const LabCalendar = () => {
               }
             >
               <span>{i + 1}</span>
-              {
-                (
+              { Object.keys(seatArray).length ?
+                ((
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 &&
                   handleCalendar(i)
                 )
-                && (
+                && ( 
                   dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
                   <ins>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
                   <p>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
-                )
+                )) : <></>
               }
             </S.ContCell>
-          ))}
-
+          ))
+        }
         {Array(6 - weekDayOfLast)
           .fill()
           .map((_, i) => (
