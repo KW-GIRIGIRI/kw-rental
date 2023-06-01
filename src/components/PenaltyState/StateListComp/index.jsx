@@ -37,7 +37,7 @@ export default function StateListComp({ penalty, handleGetPenaltyHistory }) {
         </select>
       </form>
       <span>{dayjs(penalty.startDate).format('YY년 MM월 DD일(dd)')} ~ {dayjs(penalty.endDate).format('YY년 MM월 DD일(dd)')}</span>
-      <span>{penalty.assetName}</span>
+      <span>{penalty.assetName === 'hanul' ? '한울관 B119호' : penalty.assetName === 'hwado' ? '화도관 302호' : penalty.assetName}</span>
       <span>{rentalStatus[penalty.reason]}</span>
       <span>
         <p onClick={open}>삭제</p>
