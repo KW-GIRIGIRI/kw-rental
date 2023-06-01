@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { cancelRentalSpec } from "../../../api/api"
 import useModal from "../../../hook/useModal"
@@ -12,9 +12,10 @@ export default function CancelModal({
   cancelModal,
   setCancelModal,
 }) {
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close, isOpen } = useModal()
   const dispatch = useDispatch()
-  const selectDate = useSelector((state) => state.datePicker.singularDate);
+  const [isMounted, setIsMounted] = useState(false)
+  const selectDate = useSelector((state) => state.datePicker.singularDate)
 
   const handleCancelRental = async () => {
     const data = {
@@ -28,13 +29,17 @@ export default function CancelModal({
       close()
       receive ? dispatch(asyncGetLabReceived(selectDate)) : dispatch(asyncGetReturned(selectDate))
     }
-      
-    
   }
 
   useEffect(() => {
     cancelModal && open()
-  }, [cancelModal, open, close])
+  }, [cancelModal, open])
+
+  useEffect(() => {
+    setIsMounted(true)
+    if(isMounted && !isOpen)
+      setCancelModal(false)
+  }, [isOpen])
 
   return (
     <Modal className="modify">
