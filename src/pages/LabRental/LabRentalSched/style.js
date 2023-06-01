@@ -23,7 +23,3 @@ export const PenaltyTitle = styled.h3`
   font-weight: 600;
   margin: 60px 0 17px;
 `;
-
-export const BackBtn = styled(Button)`
-  display: flex;
-`;
