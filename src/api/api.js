@@ -603,3 +603,68 @@ export const getMyPenalty = async () => {
     return err;
   }
 };
+
+// 특정 회원의 페널티 현재 상태 조회
+export const getMyPenaltyStatus = async () => {
+  try {
+    const response = await instanceUtil.get(`/penalties/status`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 관리자 페널티 히스토리 조회
+export const getPenaltyHistory = async (size, page) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/penalties/histories?size=${size}&page=${page}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 관리자 패널티 상태 변경
+export const modifyPenaltyStatus = async (id, data) => {
+  try {
+    const response = await instanceUtil.patch(`/admin/penalties/${id}`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 관리자 패널티 삭제
+export const deleteAdminPenalty = async (id) => {
+  try {
+    const response = await instanceUtil.delete(`/admin/penalties/${id}`);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
+
+// 관리자 랩실 대여 상세 상태 변경 (랩실 대여 패널티 사유 변경)
+export const modifyLabPenaltyStatus = async (data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/rentals/labRooms/status`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};

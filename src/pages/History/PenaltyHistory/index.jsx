@@ -18,7 +18,6 @@ export default function PenaltyHistory() {
           <S.RentalWrap>
             <PenaltyState />
           </S.RentalWrap>
-          <div>페이지</div>
         </>
       ) : (
         <>

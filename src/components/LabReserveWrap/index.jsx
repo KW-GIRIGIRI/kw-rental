@@ -7,6 +7,13 @@ import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
 import * as S from "./style";
+import updateLocale from "dayjs/plugin/updateLocale";
+
+dayjs.extend(updateLocale);
+
+dayjs.updateLocale("en", {
+  weekdays: ["일", "월", "화", "수", "목", "금", "토"],
+});
 
 export default function LabReserveWrap() {
   const { isAuth } = useContext(AuthContext);

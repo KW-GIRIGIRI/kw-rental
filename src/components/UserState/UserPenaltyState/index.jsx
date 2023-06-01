@@ -1,10 +1,19 @@
+import dayjs from "dayjs"
+import { useEffect, useState } from "react"
+import { getMyPenaltyStatus } from "../../../api/api"
 import * as S from "../style"
 
 export default function UserPenaltyState() {
-  const 페널티 = {
-    이용가능: true,
-    사유: "",
+  const [penaltyStatus, setPenaltyStatus] = useState({})
+
+  const handleGetPenaltyStatus = async () => {
+    const res = await getMyPenaltyStatus()
+    setPenaltyStatus(res)
   }
+
+  useEffect(() => {
+    handleGetPenaltyStatus()
+  }, [])
 
   return (
     <S.HistWrap className="penalty">
@@ -14,8 +23,8 @@ export default function UserPenaltyState() {
       </S.Header>
 
       <S.HistList className="penalList">
-        <span>{페널티.이용가능 ? "정상 이용 가능" : "정지"}</span>
-        <span>{페널티.사유.length ? 페널티.사유 : "-"}</span>
+        <span>{penaltyStatus.canUse ? "정상 이용 가능" : penaltyStatus.status}</span>
+        <span>{penaltyStatus.canUse ? "-" : dayjs(penaltyStatus.endDate).format('YY년 M월 D일까지 이용 불가')}</span>
       </S.HistList>
     </S.HistWrap>
   )

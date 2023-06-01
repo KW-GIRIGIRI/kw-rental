@@ -23,6 +23,7 @@ export const PageBtnWrap = styled.div`
       border-radius: 0 5px 5px 0;
     }
     &.on {
+      border: 1px solid ${(props) => props.theme.color.primary.main};
       background-color: ${(props) => props.theme.color.primary.main};
       color: ${(props) => props.theme.color.text.white};
       transform: revert;
