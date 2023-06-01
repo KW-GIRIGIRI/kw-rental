@@ -78,7 +78,7 @@ const handleFulfilled = (state, action) => {
       };
       state.receiveList.allIds.push(reservationId);
 
-      reservationSpecs.forEach((item, idx) => {
+      reservationSpecs.forEach((item) => {
         state.receiveSpecList.byId[item.reservationSpecId] = { ...item };
         state.receiveSpecList.allIds.push(item.reservationSpecId);
       });

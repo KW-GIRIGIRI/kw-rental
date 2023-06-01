@@ -653,3 +653,18 @@ export const deleteAdminPenalty = async (id) => {
     return err;
   }
 };
+
+// 관리자 랩실 대여 상세 상태 변경 (랩실 대여 패널티 사유 변경)
+export const modifyLabPenaltyStatus = async (data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/rentals/labRooms/status`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.message);
+    return err;
+  }
+};
