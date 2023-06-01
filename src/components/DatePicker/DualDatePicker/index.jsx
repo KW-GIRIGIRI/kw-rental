@@ -56,7 +56,7 @@ export default function DualDatePicker({
   };
 
   useEffect(() => {
-    handleSetMon(0) // 초기 렌더링 시 요일에 따라 날짜 조정
+    handleSetMon(0)
   }, [])
 
   useEffect(() => {
@@ -90,7 +90,6 @@ export default function DualDatePicker({
       let sendDate = dayjs(firstCalendar.date);
 
       if (sendDate.day() === 4) {
-        // 목요일 선택 시 다음 주 월요일로 설정
         sendDate = sendDate.add(4, "days");
       } else {
         sendDate = sendDate.add(1, "days");

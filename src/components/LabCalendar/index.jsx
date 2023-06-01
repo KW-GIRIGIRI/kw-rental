@@ -88,7 +88,11 @@ const LabCalendar = () => {
       setDayObj(date)
       dispatch(setLabDate(date.format('YYYY-MM-DD')))
     }
+    return () => {
+       dispatch(setLabDate(dayjs().format("YYYY-MM-DD")));
+    } 
   }, [])
+
 
   return (
     <S.Wrapper>

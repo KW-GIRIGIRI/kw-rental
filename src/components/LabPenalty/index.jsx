@@ -26,16 +26,18 @@ export default function LabPenalty() {
   const handleModifyLabPenalty = async () => {
     const item = rentalList.map(({ reservationId, reason }) => ({ reservationId, rentalSpecStatus: reason }))
 
-    const filteredArr = sendData.filter(item2 => {
-      return !item.some(item1 =>
-        item1.rentalSpecStatus === item2.rentalSpecStatus &&
-        item1.reservationId === item2.reservationId
+    const filteredArr = sendData.filter(data => {
+      return !item.some(i => 
+        i.rentalSpecStatus === data.rentalSpecStatus &&
+        i.reservationId === data.reservationId
       );
     });
 
-    const res = await modifyLabPenaltyStatus(JSON.stringify({ reservations: filteredArr }))
-    res === 204 && alert('페널티 상태가 저장되었습니다.')
-    handleGetPenaltyList()
+    if (!!filteredArr.length) {
+      const res = await modifyLabPenaltyStatus(JSON.stringify({reservations : filteredArr}))
+      res === 204 && alert('페널티 상태가 저장되었습니다.')
+      handleGetPenaltyList()
+    } 
   }
 
   const handleGetPenaltyList = async () => {
