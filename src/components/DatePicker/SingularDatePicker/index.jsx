@@ -56,6 +56,13 @@ export default function SingularDatePicker({ initial, className }) {
     dispatch(setSingularDate(dayjs(calendar.date).format("YYYY-MM-DD")));
   }, [calendar.date]);
 
+  useEffect(() => {
+    dispatch(setSingularDate(dayjs().format("YYYY-MM-DD")));
+    return () => {
+       dispatch(setSingularDate(dayjs().format("YYYY-MM-DD")));
+    }
+  }, []);
+
   return (
     <>
       <S.DateCont onClick={handleGetDatePicker}>
