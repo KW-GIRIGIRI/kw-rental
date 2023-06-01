@@ -5,6 +5,7 @@ import CancelModal from "../../EquipSched/CancelModal";
 import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { setReserveId } from "../../../store/reducer/authReceiveSlice";
+import { category } from "../../../data/category";
 
 export default function SchedListComp({ acceptDateTime, id, receive }) {
   const [cancelModal, setCancelModal] = useState(false);
@@ -40,7 +41,7 @@ export default function SchedListComp({ acceptDateTime, id, receive }) {
       <S.RentalLi>
         <img src={receiveItem.imgUrl} alt={`${receiveItem.modelName} 이미지`} />
         <div>
-          <p>{receiveItem.category}</p>
+          <p>{category.map(i => i.value === receiveItem.category && i.label)}</p>
           <p>{receiveItem.modelName}</p>
         </div>
         <span>{receiveItem.amount}</span>
