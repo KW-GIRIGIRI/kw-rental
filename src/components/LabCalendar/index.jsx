@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { setLabDate } from "../../store/reducer/LabControllerSlice";
-import { getLabRemainQuantities } from "../../api/api";
+import { getHwadoLabRemainCounts, getLabRemainQuantities } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -24,15 +24,25 @@ const LabCalendar = () => {
     const endDate = dayObj.endOf('month').format('YYYY-MM-DD')
     const lab = hanul ? 'hanul' : 'hwado'
 
-    const res = await getLabRemainQuantities(lab, startDate, endDate)
+    if (hanul) {
+      const res = await getLabRemainQuantities(lab, startDate, endDate)
+      const newObj = {}
 
-    const newObj = {}
-    
-    res.remainQuantities.length && res.remainQuantities.forEach(item => {
-      newObj[~~item.date.split('-').slice(-1)[0]] = item.remainQuantity;
-    });
-    
-    setSeatArray(newObj)
+      res.remainQuantities.length && res.remainQuantities.forEach(item => {
+        newObj[~~item.date.split('-').slice(-1)[0]] = item.remainQuantity;
+      });
+      
+      setSeatArray(newObj)
+    } else {
+      const res = await getHwadoLabRemainCounts(lab, startDate, endDate)
+      const newObj = {}
+      
+      res.remainReservationCounts.length && res.remainReservationCounts.forEach(item => {
+        newObj[~~item.date.split('-').slice(-1)[0]] = item.remainReservationCount;
+      });
+
+      setSeatArray(newObj)
+    }
   }
 
   const thisYear = dayObj.year();
