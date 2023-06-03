@@ -1,4 +1,5 @@
 import { cancelRentalSpec } from "../../../../api/api"
+import { category } from "../../../../data/category"
 import { rentalStatus } from "../../../../data/rentalStatus"
 import useModal from "../../../../hook/useModal"
 import Button from "../../../../modules/Button"
@@ -28,7 +29,7 @@ export default function StateListComp({ item, handleGetCurrentRental }) {
         borderRadius="5px"
       />
       <S.NameEquip>
-        <p>{item.category}</p>
+        <p>{category.map(i => i.value === item.category && i.label)}</p>
         <p>{item.modelName}</p>
       </S.NameEquip>
       <span>{item.rentalAmount}</span>
