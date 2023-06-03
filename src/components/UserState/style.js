@@ -37,7 +37,7 @@ export const Div = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 1px solid ${(props) => props.theme.color.primary.third};
+      border-right: 1px solid ${(props) => props.theme.color.primary.sub};
     }
   }
 `;
@@ -49,13 +49,13 @@ export const HistWrap = styled.ul`
 export const Header = styled.li`
   background-color: ${(props) => props.theme.color.primary.sub};
   padding: 10px 0;
-  border: 1px solid ${(props) => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
   display: grid;
   align-items: center;
 `;
 
 export const HistList = styled.li`
-  border: 1px solid ${(props) => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-top: none;
   display: grid;
   align-items: center;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Section = styled.div`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: ${(props) => props.theme.borderRadius.lv2};
-  padding: 35px 25px;
+  padding: 35px 30px;
   position: relative;
 `;
 
@@ -18,7 +18,6 @@ export const ButtonWrap = styled.div`
 `;
 
 export const RentalWrap = styled.div`
-  padding: 0 14px;
   position: relative;
 
   & > h2 {

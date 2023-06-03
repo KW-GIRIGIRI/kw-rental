@@ -4,7 +4,7 @@ export const Div = styled.div`
   margin-top: 16px;
 
   span {
-    border-right: 1px solid ${(props) => props.theme.color.primary.third};
+    border-right: 1px solid ${(props) => props.theme.color.primary.sub};
     height: calc(100% + 20px);
     display: flex;
     align-items: center;
@@ -56,7 +56,7 @@ export const HistWrap = styled.ul`
 export const Header = styled.li`
   padding: 10px 0;
   background-color: ${(props) => props.theme.color.primary.sub};
-  border: 1px solid ${(props) => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
   display: grid;
   align-items: center;
 
@@ -67,7 +67,7 @@ export const Header = styled.li`
 `;
 
 export const HistList = styled.li`
-  border: 1px solid ${(props) => props.theme.color.primary.third};
+  border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-top: none;
   display: grid;
   align-items: center;
@@ -81,7 +81,7 @@ export const ItemLi = styled.li`
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid ${(props) => props.theme.color.primary.third};
+  border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 
   &:last-child {
     border-bottom: none;
@@ -109,5 +109,5 @@ export const DateEquip = styled.p`
   justify-content: center;
   grid-row-start: 1;
   grid-row-end: -1;
-  border-right: 1px solid ${(props) => props.theme.color.primary.third};
+  border-right: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
