@@ -67,7 +67,7 @@ export default function SingularDatePicker({ initial, className }) {
         date = dayjs().add(2, 'days')
         break;
       case 0:
-        date = date.add(1, 'days')
+        date = dayjs().add(1, 'days')
         break;
       default:
         break;

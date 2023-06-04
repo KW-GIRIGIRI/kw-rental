@@ -113,7 +113,7 @@ export default function EquipmentList() {
             <p>기자재 추가</p>
           </S.addBtn>
         ) : (
-          <S.FilterWrap>
+            <S.FilterWrap>
             <S.TypeBtn aria-label="select gallery type" onClick={() => setViewMode("gal")}>
               <SVGIcon iconUrl={iconViewMode} id={viewMode === "gal" ? "icon-gal-on" : "icon-gal"} />
             </S.TypeBtn>
