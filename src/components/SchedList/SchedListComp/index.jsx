@@ -71,7 +71,7 @@ export default function SchedListComp({ acceptDateTime, id, receive }) {
                 ))}
             </S.PropertyDiv>
           ) : (
-            <S.PropertyNull>소모품</S.PropertyNull>
+            <S.PropertyNull>대여 가능한 품목이 없습니다.</S.PropertyNull>
           )
         ) : (
           <S.NumWrap>
