@@ -5,7 +5,7 @@ import { category } from "../../../data/category";
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-const DetailDescInput = (({ state, itemLength }) => {
+const DetailDescInput = (({ itemLength }) => {
   const selectRef = useRef();
   const location = useLocation();
   const product = useSelector((state) => state.modifyEquip.equip);
@@ -79,15 +79,7 @@ const DetailDescInput = (({ state, itemLength }) => {
         </S.ProductLi>
         <S.ProductLi>
           <p>총 개수</p>
-          {state ? (
-            <p>{itemLength}</p>
-          ) : (
-              <S.Input
-              className={errors.totalQuantity ? 'err' : ''}
-              { ...register('totalQuantity') }
-              placeholder="ex. 10"
-            />
-          )}
+          <p>{itemLength}</p>
         </S.ProductLi>
         <S.ProductLi>
           <p>대여장소</p>

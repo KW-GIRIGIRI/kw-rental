@@ -3,12 +3,12 @@ import iconDownArrow from "../../../assets/icon-downArrow-gray.svg";
 
 export const RentalLi = styled.li`
   flex-grow: 1;
-  padding: 7px 60px 7px 30px;
+  padding: 7px 30px 7px 30px;
   box-sizing: border-box;
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   border-left: 1px solid ${(props) => props.theme.color.primary.sub};
   display: grid;
-  grid-template-columns: 1fr 2fr 0.3fr 2fr 1fr;
+  grid-template-columns: 1fr 3fr 30px 180px 64px;
   gap: 45px;
   align-items: center;
 
@@ -69,7 +69,6 @@ export const PropertyNull = styled.p`
   width: 170px;
   font-size: 12px;
   text-align: center;
-  margin-right: 3px;
 `;
 
 export const PropertyDiv = styled.div`

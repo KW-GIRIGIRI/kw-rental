@@ -31,7 +31,6 @@ export default function AddEquipment() {
   const [imgPreview, setImgPreview] = useState("");
   const { Modal, open, close } = useModal();
   const addEqRef = useRef('');
-  const [state, setState] = useState(true)
   const [data, setData] = useState([]);
   const product = useSelector((state) => state.modifyEquip.equip);
   const item = useSelector((state) => state.modifyEquip.itemList);
@@ -63,7 +62,6 @@ export default function AddEquipment() {
     handleSetError('modelName')
     handleSetError('maker')
     handleSetError('category')
-    !state && handleSetError('totalQuantity')
 
     if (!imgFile.length) alert('이미지를 추가해주세요.')
     else {
@@ -86,8 +84,6 @@ export default function AddEquipment() {
         items: item,
       };
   
-      if (state) sendData.equipment.totalQuantity = data.length;
-  
       const response = await addEquipment(JSON.stringify(sendData));
       response && navigate(`/equipment/${response.split("/")[3]}`);
       dispatch(resetEquip())
@@ -100,7 +96,6 @@ export default function AddEquipment() {
     handleSetError('modelName')
     handleSetError('maker')
     handleSetError('category')
-    !state && handleSetError('totalQuantity')
 
     if (!product.imgUrl || !imgFile.length) alert('이미지를 추가해주세요.')
     else {
@@ -157,27 +152,6 @@ export default function AddEquipment() {
 
   return (
     <Wrapper>
-      {isEdit ? (
-        <></>
-      ) : (
-        <>
-          <Button
-            className={state ? "main shadow" : "disable shadow"}
-            text="기자재"
-            padding="9px 29px"
-            borderRadius="20px"
-            margin='0 10px 0 0'
-            onClick={() => setState(true)}
-          />
-          <Button
-            className={state ? "disable shadow" : "main shadow"}
-            text="소모품"
-            padding="9px 29px"
-            borderRadius="20px"
-            onClick={() => setState(false)}
-          />
-        </>
-      )}
       <DetailWrapper>
         {isEdit || imgPreview ? (
           <>
@@ -203,7 +177,6 @@ export default function AddEquipment() {
         )}
         <FormProvider {...methods}>
           <DetailDescInput
-            state={state}
             itemLength={data.length}
             />
         </FormProvider>
@@ -220,11 +193,11 @@ export default function AddEquipment() {
         defaultValue={product?.description}
         ref={addEqRef}
       />
-      {state && item ? (
+      {item && (
         isEdit ? (
           <>
             <SubTitle>품목 추가 및 삭제</SubTitle>
-            {item ? (
+            {item && (
               <ItemListWrap
                 data={data}
                 setData={setData}
@@ -232,8 +205,6 @@ export default function AddEquipment() {
                 isEdit={isEdit}
                 isAdd={false}
               />
-            ) : (
-              <></>
             )}
           </>
         ) : (
@@ -247,8 +218,6 @@ export default function AddEquipment() {
             />
           </>
         )
-      ) : (
-        <></>
       )}
 
       <S.BtnWrap>
