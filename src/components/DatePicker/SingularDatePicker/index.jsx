@@ -57,9 +57,25 @@ export default function SingularDatePicker({ initial, className }) {
   }, [calendar.date]);
 
   useEffect(() => {
-    dispatch(setSingularDate(dayjs().format("YYYY-MM-DD")));
+    let date;
+
+    switch (dayjs().day()) {
+      case 5:
+        date = dayjs().add(3, 'days')
+        break;
+      case 6:
+        date = dayjs().add(2, 'days')
+        break;
+      case 0:
+        date = dayjs().add(1, 'days')
+        break;
+      default:
+        break;
+    }
+
+    dispatch(setSingularDate(date.format("YYYY-MM-DD")));
     return () => {
-       dispatch(setSingularDate(dayjs().format("YYYY-MM-DD")));
+       dispatch(setSingularDate(date.format("YYYY-MM-DD")));
     }
   }, []);
 

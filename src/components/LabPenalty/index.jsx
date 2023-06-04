@@ -73,7 +73,7 @@ export default function LabPenalty() {
                   <option value="RETURNED">정상</option>
                   <option value="LOST">분실</option>
                   <option value="BROKEN">고장</option>
-                  <option value="OVERDUE_RENTED">연체</option>
+                  <option value="OVERDUE_RETURNED">연체</option>
                 </S.Select>
               </S.ListLi>
             )

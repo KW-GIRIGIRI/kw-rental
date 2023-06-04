@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getLabRemainQuantities } from "../../api/api";
+import { getHwadoLabRemainCounts, getLabRemainQuantities } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
@@ -27,9 +27,16 @@ export default function LabReserveWrap() {
     const lab = hanul ? 'hanul' : 'hwado'
     const endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
 
-    const res = await getLabRemainQuantities(lab, selectDate, endDate)
+    if (hanul) {
+      const res = await getLabRemainQuantities(lab, selectDate, endDate)
+  
+      res.remainQuantities.length && setSeatAmount(res.remainQuantities[0].remainQuantity)
+    } else {
+      const res = await getHwadoLabRemainCounts(lab, selectDate, endDate)
 
-    res.remainQuantities.length && setSeatAmount(res.remainQuantities[0].remainQuantity)
+       res.remainReservationCounts.length && setSeatAmount(res.remainReservationCounts[0].remainReservationCount)
+    }
+
   }
 
   useEffect(() => {

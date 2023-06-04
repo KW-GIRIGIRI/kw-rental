@@ -432,11 +432,24 @@ export const getAdminEquipHistory = async (url) => {
 
 // 랩실 관련
 
-// 랩실의 날짜별 남은 자리 조회 API - hanul or hwado
+// 랩실의 날짜별 남은 자리 조회 API - hanul
 export const getLabRemainQuantities = async (lab, startDate, endDate) => {
   try {
     const response = await instanceUtil.get(
       `/admin/labRooms/${lab}/remainQuantities?from=${startDate}&to=${endDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실의 날짜별 남은 자리 조회 API - hwado
+export const getHwadoLabRemainCounts = async (lab, startDate, endDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/labRooms/${lab}/remainReservationCounts?from=${startDate}&to=${endDate}`
     );
 
     return response.data;

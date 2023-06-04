@@ -1,10 +1,11 @@
 import * as S from "./style";
-import iconMenu from "../../assets/icon-menu.svg";
 import { useContext, useRef } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../api/api";
 import { AuthContext } from "../../context/Context";
+import iconProfileMenu from "../../assets/icon-profile-menu.svg"
+import SVGIcon from "../../modules/SVGIcon";
 
 export default function ProfileMenu({ setVisible }) {
   const modalRef = useRef();
@@ -35,7 +36,7 @@ export default function ProfileMenu({ setVisible }) {
           setVisible(false);
         }}
       >
-        <img src={iconMenu} alt="" />
+        <SVGIcon iconUrl={iconProfileMenu} id="icon-setting" size="22" />
         <p>계정 설정</p>
       </S.Li>
       <S.Li
@@ -44,7 +45,7 @@ export default function ProfileMenu({ setVisible }) {
           setVisible(false)
         }}
       >
-        <img src={iconMenu} alt="" />
+        <SVGIcon iconUrl={iconProfileMenu} id="icon-notice" size="22" />
         <p>공지사항</p>
       </S.Li>
       <S.Li
@@ -53,11 +54,11 @@ export default function ProfileMenu({ setVisible }) {
           setVisible(false)
         }}
       >
-        <img src={iconMenu} alt="" />
+        <SVGIcon iconUrl={iconProfileMenu} id="icon-help" size="22" />
         <p>도움말</p>
       </S.Li>
       <S.Li onClick={handleLogout}>
-        <img src={iconMenu} alt="" />
+        <SVGIcon iconUrl={iconProfileMenu} id="icon-logout" size="22" />
         <p>로그아웃</p>
       </S.Li>
     </S.Wrap>
