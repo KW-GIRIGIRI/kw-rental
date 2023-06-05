@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { setLabAvailablePeriod } from "../../../api/api";
 import LabCalendar from "../../../components/LabCalendar";
 import LabPenalty from "../../../components/LabPenalty";
@@ -12,17 +13,19 @@ export default function LabRentalSched() {
   const { isAuth } = useContext(AuthContext);
   const { Toggle, state, changeInitial } = useToggle();
   useTitle(isAuth ? '랩실 관리' : '랩실 대여 현황')
+  const hanul = useSelector(state => state.labControl.lab)
 
 
   const handleSetLabAvailable = async () => {
+    const lab = hanul ? 'hanul' : 'hwado'
+
     const data ={
       "entirePeriod" : true,
       "date" : null,
       "available" : state ? false : true
     }
 
-    // 상태 조회 api 나오면 수정
-    const res = await setLabAvailablePeriod(JSON.stringify(data))
+    const res = await setLabAvailablePeriod(lab, JSON.stringify(data))
     res === 204 && alert('랩실 상태가 변경되었습니다.')
   }
 

@@ -559,15 +559,26 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
   }
 };
 
-// 특정 기간동안 랩실 사용 불가 처리
-export const setLabAvailablePeriod = async (data) => {
+// 특정 기간 랩실 사용 불가 처리
+export const setLabAvailablePeriod = async (lab, data) => {
   try {
     const response = await instanceUtil.patch(
-      `/admin/labRooms/hanul/available`,
+      `/admin/labRooms/${lab}/available`,
       data
     );
 
     return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 특정 기간 랩실 운영 여부 조회
+export const getLabAvailablePeriod = async (lab) => {
+  try {
+    const response = await instanceUtil.get(`/labRooms/${lab}/available`);
+
+    return response.data;
   } catch (err) {
     console.error(err.response);
   }
