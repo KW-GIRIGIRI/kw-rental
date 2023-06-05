@@ -559,6 +559,20 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
   }
 };
 
+// 특정 기간동안 랩실 사용 불가 처리
+export const setLabAvailablePeriod = async (data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/labRooms/hanul/available`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회
