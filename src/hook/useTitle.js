@@ -5,7 +5,7 @@ const useTitle = (initialState) => {
 
   const updateTitle = () => {
     const htmlTitle = document.querySelector("title");
-    htmlTitle.innerText = `${title} | 미디어 대여 서비스`;
+    htmlTitle.innerText = `${title} | 미디어커뮤니케이션학부 대여 서비스`;
   };
   useEffect(updateTitle, [title]);
 

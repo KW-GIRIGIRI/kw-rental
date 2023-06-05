@@ -32,7 +32,15 @@ export default function EquipmentDetail() {
   const product = useSelector((state) => state.modifyEquip.equip);
   const titleUpdater = useTitle("Loading...")
 
-  setTimeout(() => titleUpdater(`${product.modelName}`), 200)
+  useEffect(() => {
+    if (product.modelName) {
+      let timer = setTimeout(() => titleUpdater(`${product.modelName}`), 200)
+
+      return (() => {
+        clearTimeout(timer);
+      })
+    }
+  }, [product])
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);

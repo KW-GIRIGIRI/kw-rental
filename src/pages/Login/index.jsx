@@ -5,14 +5,12 @@ import iconBlockPw from "../../assets/icon-blockPassword.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { getUserClassNum, userLogin } from "../../api/api";
+import { userLogin } from "../../api/api";
 import useTitle from "../../hook/useTitle";
-import { useEffect } from "react";
 
 export default function Login() {
   const [showPw, setShowPw] = useState(true);
   const navigate = useNavigate();
-  useTitle('로그인')
 
   const {
     register,

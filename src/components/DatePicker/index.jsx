@@ -58,15 +58,19 @@ export default function DatePicker({
   };
 
   useEffect(() => {
-    if (calendar.visible) {
+  if (calendar.visible) {
+    const timer = setTimeout(() => {
       window.addEventListener("scroll", handleScrollClose);
       window.addEventListener("resize", handleScrollClose);
-      return () => {
-        window.removeEventListener("scroll", handleScrollClose);
-        window.removeEventListener("resize", handleScrollClose);
-      };
-    }
-  }, [calendar.visible]);
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScrollClose);
+      window.removeEventListener("resize", handleScrollClose);
+    };
+  }
+}, [calendar.visible]);
 
   const nextMonth = (e) => {
     const plus = currentMonth.add(1, "month");
