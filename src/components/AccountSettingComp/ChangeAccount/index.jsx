@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import * as S from "./style";
 import iconShowPw from "../../../assets/icon-showPassword.svg";
 import iconBlockPw from "../../../assets/icon-blockPassword.svg";
@@ -6,7 +6,7 @@ import { ErrText, Form, Input, InpWrap, PwImg } from "../style";
 import Button from "../../../modules/Button";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../context/Context";
-import { setAdminAccountInfo } from "../../../api/api";
+import { getUserInfo, setAdminAccountInfo, setUserAccountInfo } from "../../../api/api";
 
 export default function ChangeAccount({ setCheckPw }) {
   const { isAuth } = useContext(AuthContext);
@@ -19,10 +19,22 @@ export default function ChangeAccount({ setCheckPw }) {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({
+    mode: "onChange"
+  });
 
   pwRef.current = watch("password");
+
+  const handleGetUserInfo = async () => {
+    const res = await getUserInfo()
+    reset({
+      phoneNum: res.phoneNumber,
+      emailF: res.email.split('@')[0],
+      emailS: res.email.split('@')[1]
+    });
+  }
 
   const handleAuthChangeAccount = async () => {
     const res = await setAdminAccountInfo({ password: watch("password") })
@@ -33,15 +45,24 @@ export default function ChangeAccount({ setCheckPw }) {
     } else alert('잠시 후 다시 시도해주세요.')
   };
 
-  const handleChangeAccount = () => {
+  const handleChangeAccount = async () => {
     const data = {
       password: watch("password"),
       email: `${watch("emailF")}@${watch("emailS")}`,
       phoneNumber: watch("phoneNum"),
     };
 
-    setCheckPw(false);
+    const res = await setUserAccountInfo(data)
+
+    if (res === 204) {
+      alert('계정 정보가 변경되었습니다.');
+      setCheckPw(false)
+    } else alert('잠시 후 다시 시도해주세요.')
   };
+
+  useEffect(() => {
+    !isAuth && handleGetUserInfo()
+  }, [])
 
   return isAuth ? (
     <>
