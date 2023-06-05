@@ -586,7 +586,6 @@ export const getLabAvailableEntirePeriod = async (lab) => {
 
 // 특정 기간 랩실 운영 여부 조회
 export const getLabAvailableParticularPeriod = async (lab, date) => {
-  console.log(date);
   try {
     const response = await instanceUtil.get(
       `/labRooms/${lab}/available?date=${date}`
