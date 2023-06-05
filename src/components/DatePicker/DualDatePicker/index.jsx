@@ -33,19 +33,20 @@ export default function DualDatePicker({
     const position = e.target.getBoundingClientRect();
     const top = position.top + position.height,
       left = position.left;
-    bool
-      ? setFirstCalendar((prev) => ({
-          ...prev,
-          visible: true,
-          top: top,
-          left: left,
-        }))
-      : setLastCalendar((prev) => ({
-          ...prev,
-          visible: true,
-          top: top,
-          left: left,
-        }));
+    
+    bool ?
+      setFirstCalendar((prev) => ({
+        ...prev,
+        visible: true,
+        top: top,
+        left: left,
+      }))
+    : setLastCalendar((prev) => ({
+        ...prev,
+        visible: true,
+        top: top,
+        left: left,
+      }));
   };
 
   const handleSetMon = (num) => {
@@ -108,6 +109,17 @@ export default function DualDatePicker({
       dispatch(setDualLastDate(dayjs(lastCalendar.date).format("YYYY-MM-DD")));
   }, [lastCalendar.date]);
 
+  useEffect(() => {
+    return () => {
+      if (firstInitial) dispatch(setDualFirstDate(dayjs().add(firstInitial, "days").format('YYYY-MM-DD'))) 
+    else  dispatch(setDualFirstDate(dayjs().format('YYYY-MM-DD'))) 
+      
+      
+    if (lastInitial) dispatch(setDualLastDate(dayjs().add(lastInitial, "days").format('YYYY-MM-DD')))
+    else dispatch(setDualLastDate(dayjs().format('YYYY-MM-DD')))
+    }
+  }, [])
+
   return (
     <S.InpWrapper className={className}>
       <S.DateCont
@@ -142,7 +154,7 @@ export default function DualDatePicker({
             : dayjs(lastCalendar.date).format("YY년 M월 D일(dd)")}
         </span>
       </S.DateCont>
-      {className !== "user" && lastCalendar && (
+      {className !== "user" && lastCalendar && ( 
         <DatePicker calendar={lastCalendar} setCalendar={setLastCalendar} />
       )}
     </S.InpWrapper>

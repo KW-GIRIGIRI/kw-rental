@@ -32,7 +32,7 @@ export default function EquipmentItemDetail() {
   const titleUpdater = useTitle("Loading...")
 
   useEffect(() => {
-    if (equip.modelName) {
+    if (equip) {
       let timer = setTimeout(() => titleUpdater(`${equip.modelName} 품목`), 200)
 
       return (() => {
