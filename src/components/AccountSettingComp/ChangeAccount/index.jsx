@@ -6,6 +6,7 @@ import { ErrText, Form, Input, InpWrap, PwImg } from "../style";
 import Button from "../../../modules/Button";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../context/Context";
+import { setAdminAccountInfo } from "../../../api/api";
 
 export default function ChangeAccount({ setCheckPw }) {
   const { isAuth } = useContext(AuthContext);
@@ -23,12 +24,13 @@ export default function ChangeAccount({ setCheckPw }) {
 
   pwRef.current = watch("password");
 
-  const handleAuthChangeAccount = () => {
-    const data = {
-      password: watch("password"),
-    };
+  const handleAuthChangeAccount = async () => {
+    const res = await setAdminAccountInfo({ password: watch("password") })
 
-    setCheckPw(false);
+    if (res === 204) {
+      alert('비밀번호가 변경되었습니다.');
+      setCheckPw(false)
+    } else alert('잠시 후 다시 시도해주세요.')
   };
 
   const handleChangeAccount = () => {

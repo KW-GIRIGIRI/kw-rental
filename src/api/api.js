@@ -454,6 +454,28 @@ export const ConfirmPassword = async (data) => {
   }
 };
 
+// 사용자 정보 수정
+export const setUserAccountInfo = async (data) => {
+  try {
+    const response = await instanceUtil.patch(`/members`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 관리자 정보 수정
+export const setAdminAccountInfo = async (data) => {
+  try {
+    const response = await instanceUtil.patch(`/admin`, data);
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 랩실 관련
 
 // 랩실의 날짜별 남은 자리 조회 API - hanul
