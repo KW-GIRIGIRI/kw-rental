@@ -16,9 +16,9 @@ export default function LabRentalSched() {
 
   const handleSetLabAvailable = async () => {
     const data ={
-      "entirePeriod" : state ? false : true,
+      "entirePeriod" : true,
       "date" : null,
-      "available" : state ? true : false
+      "available" : state ? false : true
     }
 
     // 상태 조회 api 나오면 수정
