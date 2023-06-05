@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useEffect } from "react"
 import useTitle from "../../hook/useTitle"
 import QuillEditor from "./QuillEditor"
 import QuillViewer from "./QuillViewer"
@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { AuthContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
 import { BackBtn } from "./style"
+import { getLabNotice } from "../../api/api"
 
 export default function QuillUI() {
   const [content, setContent] = useState("")
@@ -15,12 +16,20 @@ export default function QuillUI() {
   const { isAuth } = useContext(AuthContext)
   const navigate = useNavigate()
 
+  const handleGetLabNotice = async () => {
+    const response = await getLabNotice(hanul ? "hanul" : "hwado")
+    setContent(response.notice)
+  }
+
+  useEffect(() => {
+    handleGetLabNotice()
+  }, [isEdit, hanul])
+
   return (
     <>
       {isEdit ?
         <QuillEditor
           content={content}
-          setContent={setContent}
           setIsEdit={setIsEdit}
         /> :
         <>

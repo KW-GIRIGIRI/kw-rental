@@ -568,6 +568,32 @@ export const setLabAvailablePeriod = async (lab, data) => {
     );
 
     return response.status;
+    } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 관리자 랩실 히스토리 조회
+export const getAdminLabHistory = async (labRoom, url) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/rentals/labRooms/${labRoom}/history?${url}&size=15`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 관리자 랩실 히스토리 통계 조회
+export const getAdminLabStatistics = async (url) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/histories/stat?name=${url}`
+    );
+
+    return response.data;
   } catch (err) {
     console.error(err.response);
   }
@@ -577,6 +603,19 @@ export const setLabAvailablePeriod = async (lab, data) => {
 export const getLabAvailableEntirePeriod = async (lab) => {
   try {
     const response = await instanceUtil.get(`/labRooms/${lab}/available`);
+    
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 공지사항 조회
+export const getLabNotice = async (labRoom) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/labRooms/${labRoom}/notice`
+    );
 
     return response.data;
   } catch (err) {
@@ -589,6 +628,33 @@ export const getLabAvailableParticularPeriod = async (lab, date) => {
   try {
     const response = await instanceUtil.get(
       `/labRooms/${lab}/available?date=${date}`
+      );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 공지사항 수정
+export const editLabNotice = async (labRoom, data) => {
+  try {
+    const response = await instanceUtil.put(
+      `/admin/labRooms/${labRoom}/notice`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 같은 날짜에 같은 랩실 대여하는 대여 정보 조회
+export const getLabRentalOnSameDate = async (id) => {
+  try {
+    const response = await instanceUtil.get(
+      `/reservations/${id}?related=true`
     );
 
     return response.data;

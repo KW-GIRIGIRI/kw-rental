@@ -1,24 +1,20 @@
 import dayjs from "dayjs"
-import { cancelRentalSpec } from "../../../../api/api"
+import { cancelRentalSpec, getLabRentalOnSameDate } from "../../../../api/api"
 import { rentalStatus } from "../../../../data/rentalStatus"
 import useModal from "../../../../hook/useModal"
 import Button from "../../../../modules/Button"
 import * as S from "../../style"
+import { useEffect, useState } from 'react'
 
 export default function StateListComp({ lab, handleGetCurrentRental }) {
+  const [contacts, setContacts] = useState([])
   const cancelModal = useModal()
   const contactsModal = useModal()
 
-  const 대표자연락망 = [
-    {
-      이름: "이영현",
-      전화번호: "01012341234"
-    },
-    {
-      이름: "박다은",
-      전화번호: "01098769876"
-    },
-  ]
+  const handleGetLabRental = async () => {
+    const res = await getLabRentalOnSameDate(lab.reservationId)
+    setContacts(res.reservations)
+  }
 
   const onCancel = async () => {
     const res = await cancelRentalSpec(lab.reservationSpecId, lab.amount)
@@ -26,6 +22,9 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
     handleGetCurrentRental()
   }
 
+  useEffect(() => {
+    handleGetLabRental()
+  }, [])
 
   return (
     <S.HistList className="lab labList">
@@ -82,8 +81,8 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
         <p>대표자 연락망</p>
         <div>
           {
-            대표자연락망.map((keyholder, idx) => (
-              <p key={idx}>{keyholder.이름} {keyholder.전화번호}</p>
+            contacts.map((keyholder, idx) => (
+              <p key={idx}>{keyholder.name} {keyholder.phoneNumber}</p>
             ))
           }
         </div>

@@ -5,8 +5,11 @@ import { EditorWrap, BtnWrap } from "../style"
 import { postImage } from "../../../api/api"
 import { useRef, useMemo, useState } from "react"
 import Button from "../../../modules/Button"
+import { editLabNotice } from "../../../api/api"
+import { useSelector } from "react-redux"
 
-export default function QuillEditor({ content, setContent, setIsEdit }) {
+export default function QuillEditor({ content, setIsEdit }) {
+  const hanul = useSelector(state => state.labControl.lab)
   const quillRef = useRef(null)
   const [input, setInput] = useState(content)
 
@@ -29,12 +32,12 @@ export default function QuillEditor({ content, setContent, setIsEdit }) {
   }
 
   const handleRegisterButton = () => {
-    setContent(input)
     handleEditState()
   }
 
-  const handleEditState = () => {
-    setIsEdit(false)
+  const handleEditState = async () => {
+    const res = await editLabNotice(hanul ? "hanul" : "hwado", { "notice": input })
+    res === 204 && setIsEdit(false)
   }
 
   const modules = useMemo(
