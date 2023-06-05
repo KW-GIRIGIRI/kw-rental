@@ -585,6 +585,33 @@ export const getAdminLabStatistics = async (url) => {
   }
 };
 
+// 랩실 공지사항 조회
+export const getLabNotice = async (labRoom) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/labRooms/${labRoom}/notice`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 공지사항 수정
+export const editLabNotice = async (labRoom, data) => {
+  try {
+    const response = await instanceUtil.put(
+      `/admin/labRooms/${labRoom}/notice`,
+      data
+    );
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회
