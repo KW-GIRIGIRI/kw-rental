@@ -328,6 +328,19 @@ export const returnRental = async (data) => {
   }
 };
 
+// 대여 목적 조회
+export const getRentalPurpose = async (id) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/${id}/purpose`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // auth 관련
 export const getClassNum = async (data) => {
   try {

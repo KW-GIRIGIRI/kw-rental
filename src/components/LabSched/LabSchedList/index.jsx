@@ -1,7 +1,7 @@
 import dayjs from "dayjs"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
+import { getRentalPurpose, setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
 import iconMsg from "../../../assets/icon-msg.svg"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
@@ -15,6 +15,11 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   const { Modal, open, close } = useModal()
   const dispatch = useDispatch()
   const selectDate = useSelector((state) => state.datePicker.singularDate);
+
+  const handleGetPurpose = async (id) => {
+    const res = await getRentalPurpose(id)
+    console.log(res)
+  }
 
   const handleCancelModal = (item) => {
     setInfo(item)
@@ -67,8 +72,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
         {
           renterList.map((renterItem) => (
             <S.RenterLi className={renterList.length === 1 ? "only" : ""} key={renterItem.id}>
-              
-              <S.PurposeBtn>
+              <S.PurposeBtn onClick={() => handleGetPurpose(renterItem.id)}>
                 <img src={iconMsg} alt="" />
               </S.PurposeBtn>
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>

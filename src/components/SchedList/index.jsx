@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import weekOfYear from "dayjs/plugin/weekOfYear"
 import { useState } from "react";
-import { createRental } from "../../api/api";
+import { createRental, getRentalPurpose } from "../../api/api";
 import useModal from "../../hook/useModal";
 import Button from "../../modules/Button";
 import ReturnModal from "../EquipSched/ReturnModal";
@@ -10,6 +10,7 @@ import * as S from "./style";
 import iconMsg from "../../assets/icon-msg.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived } from "../../store/reducer/authReceiveSlice";
+import PurposeModal from "../PurposeModal";
 
 dayjs.extend(weekOfYear)
 
@@ -21,6 +22,27 @@ export default function SchedList({ user, receive }) {
   );
   const selectDate = useSelector((state) => state.datePicker.singularDate);
   const dispatch = useDispatch();
+  const [purpose, setPurpose] = useState({
+    visible: false,
+    text: '',
+    top: 0,
+    left: 0
+  })
+
+  const handleGetPurpose = async (e, id) => {
+    const position = e.target.getBoundingClientRect();
+    const top = position.top,
+      left = position.right;
+    
+    const res = await getRentalPurpose(id)
+    setPurpose(prev => ({
+      ...prev,
+      visible: true,
+      text: res.purpose,
+      top: top,
+      left: left,
+    }))
+  }
 
   const handleCreateRental = async (reserveId) => {
     const sendData = receiveCheckList.find(
@@ -45,8 +67,9 @@ export default function SchedList({ user, receive }) {
 
   return (
     <S.SchedLi key={user.memberNumber}>
+      { purpose.visible && <PurposeModal purpose={purpose} setPurpose={setPurpose} /> }
       <S.Renter>
-        <S.PurposeBtn>
+        <S.PurposeBtn onClick={(e) => handleGetPurpose(e, user.reservationId)}>
           <img src={iconMsg} alt="대여목적 확인하기" />
         </S.PurposeBtn>
         <p>{user.name}</p>
