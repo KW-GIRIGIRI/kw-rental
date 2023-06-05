@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SchedLi = styled.li`
   width: 100%;
   grid-template-columns: 1.3fr 8.2fr;
-
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
 
@@ -40,14 +39,14 @@ export const TimeCont = styled.p`
 
 export const RenterLi = styled.li`
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr 1fr;
+  grid-template-columns: 0.5fr 2fr 1fr 2fr 1fr;
   align-items: center;
   font-size: 13px;
-  padding: 30px 50px;
+  padding: 30px 50px 30px 24px;
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
   border-left: 1px solid ${(props) => props.theme.color.primary.sub};
 
-  & :first-child {
+  & :nth-child(2) {
     text-align: left;
   }
 
@@ -61,6 +60,12 @@ export const RenterLi = styled.li`
 
   &.only {
     padding: 54px 50px;
+  }
+`;
+
+export const PurposeBtn = styled.button`
+  & > img {
+    vertical-align: text-top;
   }
 `;
 

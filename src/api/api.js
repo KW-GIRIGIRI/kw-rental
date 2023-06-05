@@ -328,6 +328,56 @@ export const returnRental = async (data) => {
   }
 };
 
+// 대여 목적 조회
+export const getRentalPurpose = async (id) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/${id}/purpose`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 현재 내 대여 상태 조회
+export const getCurrentRental = async () => {
+  try {
+    const response = await instanceUtil.get(`/reservations?terminated=false`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 사용자 기자재 대여 이력
+export const getUserRentalHistory = async (fromDate, toDate) => {
+  try {
+    const response = await instanceUtil.get(
+      `/rentals?from=${fromDate}&to=${toDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 관리자 기자재 히스토리 조회
+export const getAdminEquipHistory = async (url) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/items/histories?size=15&${url}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // auth 관련
 export const getClassNum = async (data) => {
   try {
@@ -393,38 +443,34 @@ export const getUserClassNum = async (date) => {
   }
 };
 
-// 현재 내 대여 상태 조회
-export const getCurrentRental = async () => {
+// 회원 비밀번호 확인
+export const ConfirmPassword = async (data) => {
   try {
-    const response = await instanceUtil.get(`/reservations?terminated=false`);
+    const response = await instanceUtil.post(`/members/password`, data);
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.response);
   }
 };
 
-// 사용자 기자재 대여 이력
-export const getUserRentalHistory = async (fromDate, toDate) => {
+// 사용자 정보 수정
+export const setUserAccountInfo = async (data) => {
   try {
-    const response = await instanceUtil.get(
-      `/rentals?from=${fromDate}&to=${toDate}`
-    );
+    const response = await instanceUtil.patch(`/members`, data);
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.response);
   }
 };
 
-// 관리자 기자재 히스토리 조회
-export const getAdminEquipHistory = async (url) => {
+// 관리자 정보 수정
+export const setAdminAccountInfo = async (data) => {
   try {
-    const response = await instanceUtil.get(
-      `/admin/items/histories?size=15&${url}`
-    );
+    const response = await instanceUtil.patch(`/admin`, data);
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.response);
   }

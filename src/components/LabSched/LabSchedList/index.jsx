@@ -1,10 +1,12 @@
 import dayjs from "dayjs"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
+import { getRentalPurpose, setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
+import iconMsg from "../../../assets/icon-msg.svg"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import { asyncGetLabReceived, asyncGetLabReturned } from "../../../store/reducer/authReceiveSlice"
+import PurposeModal from "../../PurposeModal"
 import CancelModal from "../CancelModal"
 import * as S from "./style"
 
@@ -14,6 +16,28 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
   const { Modal, open, close } = useModal()
   const dispatch = useDispatch()
   const selectDate = useSelector((state) => state.datePicker.singularDate);
+  const [purpose, setPurpose] = useState({
+    visible: false,
+    text: '',
+    top: 0,
+    left: 0
+  })
+
+  const handleGetPurpose = async (e, id) => {
+    const position = e.target.getBoundingClientRect();
+    const top = position.top,
+      left = position.right;
+    
+    const res = await getRentalPurpose(id)
+    setPurpose(prev => ({
+      ...prev,
+      visible: true,
+      text: res.purpose,
+      top: top,
+      left: left,
+    }))
+  }
+
 
   const handleCancelModal = (item) => {
     setInfo(item)
@@ -66,6 +90,9 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
         {
           renterList.map((renterItem) => (
             <S.RenterLi className={renterList.length === 1 ? "only" : ""} key={renterItem.id}>
+              <S.PurposeBtn onClick={(e) => handleGetPurpose(e, renterItem.reservationId)}>
+                <img src={iconMsg} alt="" />
+              </S.PurposeBtn>
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
               <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>
@@ -106,6 +133,7 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
           />
         </div>
       </Modal>
+      { purpose.visible && <PurposeModal purpose={purpose} setPurpose={setPurpose} /> }
     </S.SchedLi>
   );
 }

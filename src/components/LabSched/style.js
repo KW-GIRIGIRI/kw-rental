@@ -19,7 +19,7 @@ export const SchedWrap = styled.ul`
 
 export const Header = styled.li`
   background: ${(props) => props.theme.color.primary.sub};
-  grid-template-columns: 1fr 2fr 1.2fr 1.9fr;
+  grid-template-columns: 1.2fr 2fr 1.2fr 1.9fr;
   font-weight: 600;
   font-size: 15px;
   padding: 16px 44px;

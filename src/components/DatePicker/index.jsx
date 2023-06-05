@@ -19,7 +19,6 @@ dayjs.updateLocale("en", {
 });
 
 export default function DatePicker({
-  initial,
   className,
   checkWeek,
   calendar,
