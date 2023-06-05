@@ -22,8 +22,8 @@ export default function LabRentalSched() {
     }
 
     // 상태 조회 api 나오면 수정
-    // const res = await setLabAvailablePeriod(JSON.stringify(data))
-    // res === 204 && alert('랩실 상태가 변경되었습니다.')
+    const res = await setLabAvailablePeriod(JSON.stringify(data))
+    res === 204 && alert('랩실 상태가 변경되었습니다.')
   }
 
   return (

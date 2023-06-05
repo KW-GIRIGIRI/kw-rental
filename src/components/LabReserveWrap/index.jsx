@@ -66,8 +66,8 @@ export default function LabReserveWrap() {
             {isAuth && <p>대여 ON/OFF</p>}
           </S.ReserveLi>
           <S.ReserveLi>
+            <p>{16 - seatAmount}</p>
             <p>{seatAmount}</p>
-            <p>16</p>
             {isAuth ? (
               <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
             ) : (

@@ -558,7 +558,7 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
     console.error(err.response);
   }
 };
-// 특정 일자 사용 불가하려면 entirePeriod 가 false 이고, date 가 특정 일자 이어야 한다. 사용 가능 처리는 available 을 true 로 전달한다.
+
 // 특정 기간동안 랩실 사용 불가 처리
 export const setLabAvailablePeriod = async (data) => {
   try {
