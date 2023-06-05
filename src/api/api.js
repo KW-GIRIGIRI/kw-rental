@@ -521,10 +521,10 @@ export const setLabReturnConfirm = async (data) => {
 };
 
 // 특정 날짜의 랩실 대여 기록 조회 API
-export const getSpecificDateLabRental = async (date) => {
+export const getSpecificDateLabRental = async (lab, date) => {
   try {
     const response = await instanceUtil.get(
-      `/admin/rentals/labRooms/hanul?date=${date}`
+      `/admin/rentals/labRooms/${lab}?date=${date}`
     );
 
     return response.data;
@@ -568,7 +568,7 @@ export const setLabAvailablePeriod = async (lab, data) => {
     );
 
     return response.status;
-    } catch (err) {
+  } catch (err) {
     console.error(err.response);
   }
 };
@@ -603,7 +603,7 @@ export const getAdminLabStatistics = async (url) => {
 export const getLabAvailableEntirePeriod = async (lab) => {
   try {
     const response = await instanceUtil.get(`/labRooms/${lab}/available`);
-    
+
     return response.data;
   } catch (err) {
     console.error(err.response);
@@ -628,7 +628,7 @@ export const getLabAvailableParticularPeriod = async (lab, date) => {
   try {
     const response = await instanceUtil.get(
       `/labRooms/${lab}/available?date=${date}`
-      );
+    );
 
     return response.data;
   } catch (err) {
@@ -653,9 +653,7 @@ export const editLabNotice = async (labRoom, data) => {
 // 랩실 같은 날짜에 같은 랩실 대여하는 대여 정보 조회
 export const getLabRentalOnSameDate = async (id) => {
   try {
-    const response = await instanceUtil.get(
-      `/reservations/${id}?related=true`
-    );
+    const response = await instanceUtil.get(`/reservations/${id}?related=true`);
 
     return response.data;
   } catch (err) {

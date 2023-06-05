@@ -59,7 +59,7 @@ export default function LabReserveWrap() {
 
   useEffect(() => {
     handleGetLabRemain()
-    isAuth && handleGetLabAvailable()
+    if(~~dayjs(selectDate).format('YYMMDD') >= ~~dayjs().format('YYMMDD') && isAuth) handleGetLabAvailable()
   }, [hanul, selectDate])
 
   return (
@@ -76,7 +76,7 @@ export default function LabReserveWrap() {
             <p>{16 - seatAmount}</p>
             <p>{seatAmount}</p>
             {isAuth ? (
-              (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
+              (~~dayjs(selectDate).format('YYMMDD') >= ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
             ) : (
               <Button
                 text="대여신청"

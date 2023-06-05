@@ -7,8 +7,10 @@ import * as S from "./style"
 
 export default function LabPenalty() {
   const selectDate = useSelector(state => state.labControl.date)
+  const hanul = useSelector(state => state.labControl.lab)
   const [rentalList, setRentalList] = useState([])
   const [sendData, setSendData] = useState([])
+
 
   const handleSetPenaltyStatus = (e, id) => {
     const newArr = sendData
@@ -41,7 +43,8 @@ export default function LabPenalty() {
   }
 
   const handleGetPenaltyList = async () => {
-    const res = await getSpecificDateLabRental(selectDate)
+    const lab = hanul ? 'hanul': 'hwado'
+    const res = await getSpecificDateLabRental(lab, selectDate)
 
     setRentalList(res.reservations);
   }
