@@ -14,13 +14,13 @@ export default function QuillEditor({ content, setIsEdit }) {
   const [input, setInput] = useState(content)
 
   const imageHandler = () => {
-    const input = document.createElement('input')
-    input.setAttribute('type', 'file')
-    input.setAttribute('accept', 'image/*')
-    input.click()
+    const img = document.createElement('input')
+    img.setAttribute('type', 'file')
+    img.setAttribute('accept', 'image/*')
+    img.click()
 
-    input.addEventListener('change', async () => {
-      const file = input.files[0]
+    img.addEventListener('change', async () => {
+      const file = img.files[0]
       const formData = new FormData()
       formData.append("file", file)
       const imgUrl = await postImage(formData)

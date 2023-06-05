@@ -67,6 +67,7 @@ export const ViewerWrap = styled.div`
 
   & img {
     cursor: default !important;
+    max-width: 786px;
   }
 
   & h1 {
