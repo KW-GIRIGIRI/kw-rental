@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SchedLi = styled.li`
   width: 100%;
   grid-template-columns: 1.3fr 8.2fr;
-
   border-bottom: 1px solid ${(props) => props.theme.color.primary.sub};
 `;
 

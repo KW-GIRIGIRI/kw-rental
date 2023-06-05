@@ -23,6 +23,7 @@ export const Div = styled.div`
   width: 200px;
   font-size: 12px;
   overflow-y: scroll;
+  text-align: left;
 
   &::-webkit-scrollbar {
     border-radius: ${(props) => props.theme.borderRadius.lv2};
