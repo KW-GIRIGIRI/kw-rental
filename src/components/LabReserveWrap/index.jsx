@@ -35,7 +35,6 @@ export default function LabReserveWrap() {
     // res === 204 && alert('랩실 상태가 변경되었습니다.')
   }
 
-
   const handleGetLabRemain = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
     const endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
@@ -63,13 +62,13 @@ export default function LabReserveWrap() {
           <S.ReserveLi>
             <p>현재 대여 인원수</p>
             <p>대여 가능 인원수</p>
-            {isAuth && <p>대여 ON/OFF</p>}
+            {isAuth && (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <p>대여 ON/OFF</p>}
           </S.ReserveLi>
           <S.ReserveLi>
             <p>{16 - seatAmount}</p>
             <p>{seatAmount}</p>
             {isAuth ? (
-              <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
+              (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
             ) : (
               <Button
                 text="대여신청"
