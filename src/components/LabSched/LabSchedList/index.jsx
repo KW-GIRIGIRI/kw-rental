@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setLabReturnConfirm, setLabUsingConfirm } from "../../../api/api"
+import iconMsg from "../../../assets/icon-msg.svg"
 import useModal from "../../../hook/useModal"
 import Button from "../../../modules/Button"
 import { asyncGetLabReceived, asyncGetLabReturned } from "../../../store/reducer/authReceiveSlice"
@@ -66,6 +67,10 @@ export default function LabSchedList({ acceptTime, lab, renterList, receive }) {
         {
           renterList.map((renterItem) => (
             <S.RenterLi className={renterList.length === 1 ? "only" : ""} key={renterItem.id}>
+              
+              <S.PurposeBtn>
+                <img src={iconMsg} alt="" />
+              </S.PurposeBtn>
               <p>{renterItem.renterName} &emsp; {renterItem.memberNumber}</p>
               <p>{renterItem.rentalAmount}</p>
               <p>{renterItem.phoneNumber}</p>

@@ -7,6 +7,7 @@ import Button from "../../modules/Button";
 import ReturnModal from "../EquipSched/ReturnModal";
 import SchedListComp from "./SchedListComp";
 import * as S from "./style";
+import iconMsg from "../../assets/icon-msg.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived } from "../../store/reducer/authReceiveSlice";
 
@@ -45,6 +46,9 @@ export default function SchedList({ user, receive }) {
   return (
     <S.SchedLi key={user.memberNumber}>
       <S.Renter>
+        <S.PurposeBtn>
+          <img src={iconMsg} alt="대여목적 확인하기" />
+        </S.PurposeBtn>
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
         {!receive && user.overdueAcceptDateTime && (

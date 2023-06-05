@@ -7,7 +7,7 @@ export const SchedLi = styled.li`
 `;
 
 export const Renter = styled.div`
-  padding: 18px 0;
+  padding: 20px 0;
   text-align: center;
   width: 112px;
   flex-grow: 1;
@@ -17,19 +17,19 @@ export const Renter = styled.div`
     font-size: 12px;
   }
 
-  & p:first-child {
+  & p:nth-child(2) {
     font-weight: 600;
     font-size: 15px;
   }
 
-  & p:nth-child(2) {
+  & p:nth-child(3) {
     margin: 7px 0 18px;
     color: ${(props) => props.theme.color.primary.main};
   }
+`;
 
-  & Button {
-    margin-top: 14px;
-  }
+export const PurposeBtn = styled.button`
+  margin-bottom: 8px;
 `;
 
 export const RentalUl = styled.ul`
@@ -52,7 +52,7 @@ export const TimeCont = styled.p`
 `;
 
 export const WarnCont = styled.p`
-  margin: -8px 0;
+  margin: -10px 0 8px;
   font-size: 13px;
   font-weight: 600;
   line-height: 18px;
