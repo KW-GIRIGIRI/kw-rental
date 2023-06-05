@@ -6,6 +6,7 @@ import { addCartEquip, getProductAmountFromDate } from "../../api/api";
 import useModal from "../../hook/useModal";
 import { useSelector } from "react-redux";
 import DualDatePicker from "../DatePicker/DualDatePicker";
+import dayjs from "dayjs";
 
 export default function AddCartEquip({ modify, setModal }) {
   const amountRef = useRef();
@@ -20,7 +21,7 @@ export default function AddCartEquip({ modify, setModal }) {
 
   const handleGetProductAmount = async () => {
     const id = params.id 
-    const res = await getProductAmountFromDate(id, selectDate.firstDate, selectDate.lastDate)
+    const res = await getProductAmountFromDate(id, selectDate.firstDate, dayjs(selectDate.firstDate).add(1, 'days').format('YYYY-MM-DD'))
     res.remainQuantities.length && setRentalAmount(res.remainQuantities[0].remainQuantity);
   }
 
@@ -45,7 +46,7 @@ export default function AddCartEquip({ modify, setModal }) {
       <S.Form>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
-          <DualDatePicker firstInitial={1} className="user" />
+          <DualDatePicker firstInitial={1} lastInitial={2} className="user" />
         </S.InpWrapper>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>

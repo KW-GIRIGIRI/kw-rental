@@ -56,10 +56,6 @@ export default function DualDatePicker({
   };
 
   useEffect(() => {
-    handleSetMon(0)
-  }, [])
-
-  useEffect(() => {
     switch (firstCalendar.date.day()) {
       case 5:
         handleSetMon(3);

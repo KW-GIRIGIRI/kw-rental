@@ -31,7 +31,15 @@ export default function EquipmentItemDetail() {
   const { Modal, open, close } = useModal();
   const titleUpdater = useTitle("Loading...")
 
-  setTimeout(() => titleUpdater(`${equip && equip.modelName} 품목`), 200)
+  useEffect(() => {
+    if (equip.modelName) {
+      let timer = setTimeout(() => titleUpdater(`${equip.modelName} 품목`), 200)
+
+      return (() => {
+        clearTimeout(timer);
+      })
+    }
+  }, [equip])
 
   const handleChangeItem = (e) => {
     const pItem = itemList.filter(
