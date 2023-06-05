@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getHwadoLabRemainCounts, getLabAvailablePeriod, getLabRemainQuantities, setLabAvailablePeriod } from "../../api/api";
+import { getHwadoLabRemainCounts, getLabAvailableParticularPeriod, getLabRemainQuantities, setLabAvailablePeriod } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
@@ -25,9 +25,8 @@ export default function LabReserveWrap() {
 
   const handleGetLabAvailable = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
-    const param = `?date=${selectDate}`
 
-    const res = await getLabAvailablePeriod(lab, param)
+    const res = await getLabAvailableParticularPeriod(lab, selectDate)
     changeInitial(res.available)
   }
 

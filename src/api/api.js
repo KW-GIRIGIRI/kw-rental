@@ -573,10 +573,24 @@ export const setLabAvailablePeriod = async (lab, data) => {
   }
 };
 
-// 특정 기간 랩실 운영 여부 조회
-export const getLabAvailablePeriod = async (lab) => {
+// 전체 기간 랩실 운영 여부 조회
+export const getLabAvailableEntirePeriod = async (lab) => {
   try {
     const response = await instanceUtil.get(`/labRooms/${lab}/available`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 특정 기간 랩실 운영 여부 조회
+export const getLabAvailableParticularPeriod = async (lab, date) => {
+  console.log(date);
+  try {
+    const response = await instanceUtil.get(
+      `/labRooms/${lab}/available?date=${date}`
+    );
 
     return response.data;
   } catch (err) {

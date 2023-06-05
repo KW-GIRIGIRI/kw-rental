@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { setLabAvailablePeriod } from "../../../api/api";
+import { getLabAvailableEntirePeriod, setLabAvailablePeriod } from "../../../api/api";
 import LabCalendar from "../../../components/LabCalendar";
 import LabPenalty from "../../../components/LabPenalty";
 import LabReserveWrap from "../../../components/LabReserveWrap";
@@ -15,6 +15,12 @@ export default function LabRentalSched() {
   useTitle(isAuth ? '랩실 관리' : '랩실 대여 현황')
   const hanul = useSelector(state => state.labControl.lab)
 
+  const handleGetLabAvailable = async () => {
+    const lab = hanul ? 'hanul' : 'hwado'
+
+    const res = await getLabAvailableEntirePeriod(lab)
+    changeInitial(res.available)
+  }
 
   const handleSetLabAvailable = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
@@ -28,6 +34,10 @@ export default function LabRentalSched() {
     const res = await setLabAvailablePeriod(lab, JSON.stringify(data))
     res === 204 && alert('랩실 상태가 변경되었습니다.')
   }
+
+  useEffect(() => {
+    handleGetLabAvailable()
+  }, [])
 
   return (
     <>
