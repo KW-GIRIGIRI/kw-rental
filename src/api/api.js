@@ -612,6 +612,19 @@ export const editLabNotice = async (labRoom, data) => {
   }
 };
 
+// 랩실 같은 날짜에 같은 랩실 대여하는 대여 정보 조회
+export const getLabRentalOnSameDate = async (id) => {
+  try {
+    const response = await instanceUtil.get(
+      `/reservations/${id}?related=true`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회
