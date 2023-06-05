@@ -559,6 +559,20 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
   }
 };
 
+// 특정 기간 랩실 사용 불가 처리
+export const setLabAvailablePeriod = async (lab, data) => {
+  try {
+    const response = await instanceUtil.patch(
+      `/admin/labRooms/${lab}/available`,
+      data
+    );
+
+    return response.status;
+    } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 관리자 랩실 히스토리 조회
 export const getAdminLabHistory = async (labRoom, url) => {
   try {
@@ -585,12 +599,36 @@ export const getAdminLabStatistics = async (url) => {
   }
 };
 
+// 전체 기간 랩실 운영 여부 조회
+export const getLabAvailableEntirePeriod = async (lab) => {
+  try {
+    const response = await instanceUtil.get(`/labRooms/${lab}/available`);
+    
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 랩실 공지사항 조회
 export const getLabNotice = async (labRoom) => {
   try {
     const response = await instanceUtil.get(
       `/admin/labRooms/${labRoom}/notice`
     );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 특정 기간 랩실 운영 여부 조회
+export const getLabAvailableParticularPeriod = async (lab, date) => {
+  try {
+    const response = await instanceUtil.get(
+      `/labRooms/${lab}/available?date=${date}`
+      );
 
     return response.data;
   } catch (err) {

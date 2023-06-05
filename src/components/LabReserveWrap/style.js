@@ -15,7 +15,7 @@ export const ReserveLi = styled.li`
   gap: 10px;
   align-items: center;
   font-size: 13px;
-  padding: 12px;
+  padding: 0 12px;
   text-align: center;
 
   & > p {
@@ -35,6 +35,10 @@ export const ReserveLi = styled.li`
     font-size: 12px;
     padding: 8px;
     background-color: ${(props) => props.theme.color.primary.sub};
+  }
+
+  &:not(:first-of-type) {
+    height: 46px;
   }
 
   & > button {

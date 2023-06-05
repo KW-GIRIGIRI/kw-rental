@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getHwadoLabRemainCounts, getLabRemainQuantities } from "../../api/api";
+import { getHwadoLabRemainCounts, getLabAvailableParticularPeriod, getLabRemainQuantities, setLabAvailablePeriod } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
@@ -23,6 +23,25 @@ export default function LabReserveWrap() {
   const selectDate = useSelector(state => state.labControl.date)
   const navigate = useNavigate()
 
+  const handleGetLabAvailable = async () => {
+    const lab = hanul ? 'hanul' : 'hwado'
+
+    const res = await getLabAvailableParticularPeriod(lab, selectDate)
+    changeInitial(res.available)
+  }
+
+  const handleSetLabAvailable = async () => { 
+    const lab = hanul ? 'hanul' : 'hwado'
+    const data ={
+      "entirePeriod" : false,
+      "date" : selectDate.split('-').map(i => ~~i),
+      "available" : state ? false : true
+    }
+
+    const res = await setLabAvailablePeriod(lab, JSON.stringify(data))
+    res === 204 && alert('랩실 상태가 변경되었습니다.')
+  }
+
   const handleGetLabRemain = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
     const endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
@@ -36,11 +55,11 @@ export default function LabReserveWrap() {
 
        res.remainReservationCounts.length && setSeatAmount(res.remainReservationCounts[0].remainReservationCount)
     }
-
   }
 
   useEffect(() => {
     handleGetLabRemain()
+    isAuth && handleGetLabAvailable()
   }, [hanul, selectDate])
 
   return (
@@ -51,13 +70,13 @@ export default function LabReserveWrap() {
           <S.ReserveLi>
             <p>현재 대여 인원수</p>
             <p>대여 가능 인원수</p>
-            {isAuth && <p>대여 ON/OFF</p>}
+            {isAuth && (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <p>대여 ON/OFF</p>}
           </S.ReserveLi>
           <S.ReserveLi>
+            <p>{16 - seatAmount}</p>
             <p>{seatAmount}</p>
-            <p>16</p>
             {isAuth ? (
-              <Toggle on="대여 가능" off="대여 불가" className="rental" />
+              (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
             ) : (
               <Button
                 text="대여신청"

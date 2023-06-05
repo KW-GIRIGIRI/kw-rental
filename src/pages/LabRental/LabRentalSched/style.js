@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "../../../modules/Button";
 
 export const Section = styled.section`
   display: grid;
