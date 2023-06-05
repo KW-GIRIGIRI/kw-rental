@@ -559,6 +559,19 @@ export const getUserLabRentalHistory = async (fromDate, toDate) => {
   }
 };
 
+// 관리자 랩실 히스토리 조회
+export const getAdminLabHistory = async (labRoom, url) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/rentals/labRooms/${labRoom}/history?${url}&size=15`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회

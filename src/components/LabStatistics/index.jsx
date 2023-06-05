@@ -1,50 +1,36 @@
-import { useSelector } from 'react-redux';
-import * as S from "./style";
-import EmptyData from '../EmptyData';
+import * as S from "./style"
+import EmptyData from '../EmptyData'
+import { useSelector } from 'react-redux'
+import { getAdminLabHistory } from "../../api/api"
+import { useEffect, useState } from 'react'
+import { rentalStatus } from "../../data/rentalStatus"
+import dayjs from "dayjs"
 
-export default function LabStatistics() {
+export default function LabStatistics({ page, setPageArray }) {
   const hanul = useSelector(state => state.labControl.lab)
+  const dualDate = useSelector((state) => state.datePicker.dualDate)
+  const [labHistoryList, setLabHistoryList] = useState([])
 
-  const data = [
-    {
-      상태: "정상 반납",
-      사용일: "23년 05월 10일",
-      퇴실일: "23년 05월 11일",
-      대여자: "박다은",
-      사유: "-",
-    },
-    {
-      상태: "정상 반납",
-      사용일: "23년 05월 10일",
-      퇴실일: "23년 05월 11일",
-      대여자: "박다은",
-      사유: "-",
-    },
-    {
-      상태: "불량 반납",
-      사용일: "23년 05월 10일",
-      퇴실일: "23년 05월 11일",
-      대여자: "박다은",
-      사유: "연체",
-    },
-    {
-      상태: "정상 반납",
-      사용일: "23년 05월 10일",
-      퇴실일: "23년 05월 11일",
-      대여자: "박다은",
-      사유: "-",
-    },
-    {
-      상태: "정상 반납",
-      사용일: "23년 05월 10일",
-      퇴실일: "23년 05월 11일",
-      대여자: "박다은",
-      사유: "-",
-    },
-  ]
+  const handleGetLabHistory = async () => {
+    if (dualDate.firstDate && dualDate.lastDate) {
+      const reqUrl = `startDate=${dualDate.firstDate}&endDate=${dualDate.lastDate}&page=${page}`
+      const response = await getAdminLabHistory(hanul ? "hanul" : "hwado", reqUrl)
+      setPageArray(response.endPoints)
+      setLabHistoryList(response.labRoomReservations)
+
+      window.scrollTo({
+        top: 0,
+      })
+    }
+  }
+
+  useEffect(() => {
+    handleGetLabHistory()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dualDate, hanul])
 
   return (
-    data.length ?
+    labHistoryList.length ?
       <>
         <S.Wrap>
           <S.HistHeader>
@@ -69,13 +55,13 @@ export default function LabStatistics() {
             <span>대여자</span>
             <span>사유</span>
           </S.ItemHeader>
-          {data.map((item, idx) => (
+          {labHistoryList.map((lab, idx) => (
             <S.ItemLi key={idx}>
-              <span>{item.상태}</span>
-              <span>{item.사용일}</span>
-              <span>{item.퇴실일}</span>
-              <span>{item.대여자}</span>
-              <span>{item.사유}</span>
+              <span>{lab.status}</span>
+              <span>{dayjs(lab.startDate).format("YY년 MM월 DD일")}</span>
+              <span>{dayjs(lab.endDate).format("YY년 MM월 DD일")}</span>
+              <span>{lab.renterName}</span>
+              <span>{lab.reason === "RETURNED" ? "" : rentalStatus[lab.reason]}</span>
             </S.ItemLi>
           ))}
         </S.ItemUl>
