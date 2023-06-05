@@ -49,7 +49,7 @@ export default function LabRentalHistory() {
             setPageArray={setPageArray}
           />
         </S.RentalWrap>
-        {pageArray && (
+        {pageArray.length && (
           <Pagination
             page={page}
             setPage={setPage}
