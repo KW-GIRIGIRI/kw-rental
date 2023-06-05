@@ -2,19 +2,22 @@ import UserState from "../../../components/UserState"
 import UserHist from "../../../components/UserHist"
 import * as S from "../style"
 import { AuthContext } from "../../../context/Context"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
 import Button from "../../../modules/Button"
 import { setLab } from "../../../store/reducer/LabControllerSlice"
 import LabStatistics from "../../../components/LabStatistics"
 import useTitle from "../../../hook/useTitle"
+import Pagination from '../../../components/Pagination'
 
 export default function LabRentalHistory() {
   const { isAuth } = useContext(AuthContext)
   const dispatch = useDispatch()
+  const [page, setPage] = useState(0)
+  const [pageArray, setPageArray] = useState([])
   const lab = useSelector(state => state.labControl.lab)
-  useTitle(isAuth ?  '랩실 대여 통계' : '랩실 대여 이력')
+  useTitle(isAuth ? '랩실 대여 통계' : '랩실 대여 이력')
 
   return (
     isAuth ?
@@ -41,32 +44,18 @@ export default function LabRentalHistory() {
           />
         </S.ButtonWrap>
         <S.RentalWrap>
-          <LabStatistics />
+          <LabStatistics
+            page={page}
+            setPageArray={setPageArray}
+          />
         </S.RentalWrap>
-        {/* {pageArray && (
-          <S.PageBtnWrap>
-            <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-              <img src={iconPageArrow} alt="이전 페이지" />
-            </button>
-            {pageArray?.map((_, index) => {
-              return (
-                <button
-                  key={index}
-                  onClick={() => setPage(index)}
-                  className={page === index ? "on" : null}
-                >
-                  {index + 1}
-                </button>
-              );
-            })}
-            <button
-              onClick={() => setPage(page + 1)}
-              disabled={page + 1 === pageArray.length}
-            >
-              <img src={iconPageArrow} alt="다음 페이지" />
-            </button>
-          </S.PageBtnWrap>
-        )} */}
+        {pageArray.length && (
+          <Pagination
+            page={page}
+            setPage={setPage}
+            pageArray={pageArray}
+          />
+        )}
       </>
       :
       <>
