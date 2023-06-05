@@ -572,6 +572,19 @@ export const getAdminLabHistory = async (labRoom, url) => {
   }
 };
 
+// 관리자 랩실 히스토리 통계 조회
+export const getAdminLabStatistics = async (url) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/reservations/histories/stat?name=${url}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회

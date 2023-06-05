@@ -1,7 +1,7 @@
 import * as S from "./style"
 import EmptyData from '../EmptyData'
 import { useSelector } from 'react-redux'
-import { getAdminLabHistory } from "../../api/api"
+import { getAdminLabHistory, getAdminLabStatistics } from "../../api/api"
 import { useEffect, useState } from 'react'
 import { rentalStatus } from "../../data/rentalStatus"
 import dayjs from "dayjs"
@@ -10,13 +10,18 @@ export default function LabStatistics({ page, setPageArray }) {
   const hanul = useSelector(state => state.labControl.lab)
   const dualDate = useSelector((state) => state.datePicker.dualDate)
   const [labHistoryList, setLabHistoryList] = useState([])
+  const [labStatisticsList, setLabStatisticsList] = useState([])
 
   const handleGetLabHistory = async () => {
     if (dualDate.firstDate && dualDate.lastDate) {
-      const reqUrl = `startDate=${dualDate.firstDate}&endDate=${dualDate.lastDate}&page=${page}`
-      const response = await getAdminLabHistory(hanul ? "hanul" : "hwado", reqUrl)
-      setPageArray(response.endPoints)
-      setLabHistoryList(response.labRoomReservations)
+      const reqUrlHist = `startDate=${dualDate.firstDate}&endDate=${dualDate.lastDate}&page=${page}`
+      const reqUrlStat = `${hanul ? "hanul" : "hwado"}&startDate=${dualDate.firstDate}&endDate=${dualDate.lastDate}`
+      const responseHist = await getAdminLabHistory(hanul ? "hanul" : "hwado", reqUrlHist)
+      const responseStat = await getAdminLabStatistics(reqUrlStat)
+
+      setPageArray(responseHist.endPoints)
+      setLabHistoryList(responseHist.labRoomReservations)
+      setLabStatisticsList(responseStat)
 
       window.scrollTo({
         top: 0,
@@ -26,7 +31,6 @@ export default function LabStatistics({ page, setPageArray }) {
 
   useEffect(() => {
     handleGetLabHistory()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dualDate, hanul])
 
   return (
@@ -41,9 +45,9 @@ export default function LabStatistics({ page, setPageArray }) {
           </S.HistHeader>
           <S.Content>
             <span>{hanul ? "한울관" : "화도관"}</span>
-            <span>8</span>
-            <span>24</span>
-            <span>2</span>
+            <span>{labStatisticsList.reservationCount}</span>
+            <span>{labStatisticsList.userCount}</span>
+            <span>{labStatisticsList.abnormalReturnCount}</span>
           </S.Content>
         </S.Wrap>
 
