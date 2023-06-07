@@ -44,14 +44,15 @@ export default function LabReserveWrap() {
 
   const handleGetLabRemain = async () => {
     const lab = hanul ? 'hanul' : 'hwado'
-    const endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
 
     if (hanul) {
-      const res = await getLabRemainQuantities(lab, selectDate, endDate)
+      const res = await getLabRemainQuantities(lab, selectDate, selectDate)
+
+      console.log(res.remainQuantities)
   
       res.remainQuantities.length && setSeatAmount(res.remainQuantities[0].remainQuantity)
     } else {
-      const res = await getHwadoLabRemainCounts(lab, selectDate, endDate)
+      const res = await getHwadoLabRemainCounts(lab, selectDate, selectDate)
 
        res.remainReservationCounts.length && setSeatAmount(res.remainReservationCounts[0].remainReservationCount)
     }
