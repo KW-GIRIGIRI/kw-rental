@@ -43,10 +43,12 @@ export default function LabPenalty() {
   }
 
   const handleGetPenaltyList = async () => {
-    const lab = hanul ? 'hanul': 'hwado'
-    const res = await getSpecificDateLabRental(lab, selectDate)
-
-    setRentalList(res.reservations);
+    if (selectDate) {
+      const lab = hanul ? 'hanul': 'hwado'
+      const res = await getSpecificDateLabRental(lab, selectDate)
+  
+      setRentalList(res.reservations);
+    }
   }
 
   useEffect(() => {
