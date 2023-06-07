@@ -59,7 +59,7 @@ export const RenterLi = styled.li`
   }
 
   &.only {
-    padding: 54px 50px;
+    padding: 54px 50px 54px 24px;
   }
 `;
 

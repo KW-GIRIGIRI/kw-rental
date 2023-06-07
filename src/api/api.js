@@ -66,7 +66,7 @@ export const deleteEquipment = async (id) => {
   try {
     const response = await instanceUtil.delete(`/admin/equipments/${id}`);
 
-    return response.data;
+    return response.status;
   } catch (err) {
     console.error(err.response);
   }

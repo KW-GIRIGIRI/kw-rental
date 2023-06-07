@@ -56,7 +56,13 @@ export default function EquipmentDetail() {
 
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id);
-    !response && navigate("/equipment");
+    if (response === 204) {
+      close()
+      navigate("/equipment")
+    } else {
+      close()
+      alert('잠시 후 다시 시도해주세요.')
+    }
   };
 
   useEffect(() => {
