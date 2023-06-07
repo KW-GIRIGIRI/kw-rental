@@ -470,6 +470,17 @@ export const setAdminAccountInfo = async (data) => {
   try {
     const response = await instanceUtil.patch(`/admin`, data);
 
+    return response;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 비밀번호 초기화
+export const setInitializePw = async (data) => {
+  try {
+    const response = await instanceUtil.patch(`/members/password`, data);
+
     return response.status;
   } catch (err) {
     console.error(err.response);
