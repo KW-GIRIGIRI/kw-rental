@@ -96,9 +96,6 @@ const LabCalendar = () => {
 
     setDayObj(date)
     dispatch(setLabDate(date.format('YYYY-MM-DD')))
-    return () => {
-      dispatch(setLabDate(date.format("YYYY-MM-DD")));
-    }
   }, [])
 
   return (

@@ -549,6 +549,7 @@ export const postLabRental = async (data) => {
     return response.status;
   } catch (err) {
     console.error(err.response);
+    return err.response;
   }
 };
 

@@ -34,8 +34,12 @@ export default function LabRentalApplication() {
 
       const response = await postLabRental(JSON.stringify(data))
 
-      response === 201 && navigate("/lab/success");
-    }
+      if (response === 201) navigate("/lab/success")
+      else {
+        alert(response.data);
+        navigate("/lab/status");
+      }
+    } 
   };
 
   return (
