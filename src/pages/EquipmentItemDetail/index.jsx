@@ -165,7 +165,7 @@ export default function EquipmentItemDetail() {
         <S.Div>
           <S.SubTitle>품목 예약/사용 이력</S.SubTitle>
         </S.Div>
-        <ItemReserveHist />
+        <ItemReserveHist propertyNumber={item.propertyNumber} />
         <BtnWrap>
           <Button
             onClick={() => navigate(-1)}

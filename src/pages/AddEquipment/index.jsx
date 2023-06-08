@@ -36,7 +36,7 @@ export default function AddEquipment() {
   const item = useSelector((state) => state.modifyEquip.itemList);
   const dispatch = useDispatch()
   const methods = useForm()
-  useTitle(isEdit ? '기자재 수정' : '기자재 추가')
+  useTitle(location.pathname.includes('edit') ? '기자재 수정' : '기자재 추가')
   usePreventRefresh()
 
   const handleImgFile = async (e) => {
@@ -71,7 +71,7 @@ export default function AddEquipment() {
       const sendData = {
         equipment: {
           imgUrl: imgFile,
-          totalQuantity: methods.watch('totalQuantity'),
+          totalQuantity: item.length,
           category: methods.watch('category'),
           modelName: methods.watch('modelName'),
           components: methods.watch('components'),
@@ -124,13 +124,7 @@ export default function AddEquipment() {
         maxRentalDays: 1,
       }
 
-      if (
-        item.items.every((item) =>
-          itemData.items.some(
-            (otherItem) => otherItem.propertyNumber === item.propertyNumber
-          )
-        )
-      ) {
+      if(item.items.length !== itemData.items.length) {
         const itemRes = await changeItems(params.id, JSON.stringify(itemData));
         const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
 

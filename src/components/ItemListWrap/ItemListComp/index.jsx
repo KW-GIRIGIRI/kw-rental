@@ -31,7 +31,7 @@ export default function ItemListComp({
   };
 
   const handleBlur = () => {
-    if (isAdd && !!text) { 
+    if ((isAdd || isEdit) && !!text) { 
       setPreventAdd(true);
       setFinish(true);
       setData((prevData) => [
