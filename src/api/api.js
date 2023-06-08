@@ -255,6 +255,23 @@ export const getEquipRentStatus = async (id, month) => {
   }
 };
 
+// 특정 날짜 기간의 품목 사용 이력 조회
+export const getItemUsageHistory = async (
+  propertyNumber,
+  startDate,
+  endDate
+) => {
+  try {
+    const response = await instanceUtil.get(
+      `/admin/rentals/returns?propertyNumber=${propertyNumber}&startDate=${startDate}&endDate=${endDate}`
+    );
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 대여 관련
 
 // 대여 예약
