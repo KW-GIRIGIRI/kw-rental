@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
 
 const initialState = {
   lab: true,
-  date: dayjs().format("YYYY-MM-DD"),
+  date: "",
 };
 
 const labControlSlice = createSlice({

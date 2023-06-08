@@ -90,15 +90,25 @@ const LabCalendar = () => {
   }, [dayObj, hanul])
 
   useEffect(() => {
-    const date = dayjs().day() >= 4 ?
-      dayjs().add(1, 'week').startOf('week').add(1, 'days')
-      : isAuth ? dayjs() : dayjs().add(1, 'days')
+    let date;
+
+    switch (dayjs().day()) {
+      case 0:
+        date = dayjs().add(1, 'days')
+        break;
+      case 4:
+        date = isAuth ? dayjs() : dayjs().add(1, 'week').startOf('week').add(1, 'days')
+        break;
+      case 5: case 6:
+        date = dayjs().add(1, 'week').startOf('week').add(1, 'days')
+        break;
+      default:
+        date = dayjs();
+        break;
+    }
 
     setDayObj(date)
     dispatch(setLabDate(date.format('YYYY-MM-DD')))
-    return () => {
-      dispatch(setLabDate(date.format("YYYY-MM-DD")));
-    }
   }, [])
 
   return (

@@ -40,7 +40,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
   };
 
   useEffect(() => {
-    purposeInp.value.length > 10 ? setVisible(false) : setVisible(true);
+    purposeInp.value.trim().length > 10 ? setVisible(false) : setVisible(true);
   }, [purposeInp]);
 
   useEffect(() => {

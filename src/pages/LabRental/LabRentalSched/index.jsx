@@ -36,7 +36,7 @@ export default function LabRentalSched() {
   }
 
   useEffect(() => {
-    handleGetLabAvailable()
+    isAuth && handleGetLabAvailable()
   }, [])
 
   return (
