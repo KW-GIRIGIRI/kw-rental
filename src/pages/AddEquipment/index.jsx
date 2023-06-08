@@ -124,13 +124,7 @@ export default function AddEquipment() {
         maxRentalDays: 1,
       }
 
-      if (
-        item.items.every((item) =>
-          itemData.items.some(
-            (otherItem) => otherItem.propertyNumber === item.propertyNumber
-          )
-        )
-      ) {
+      if(item.items.length !== itemData.items.length) {
         const itemRes = await changeItems(params.id, JSON.stringify(itemData));
         const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
 
