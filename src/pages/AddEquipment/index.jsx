@@ -36,7 +36,7 @@ export default function AddEquipment() {
   const item = useSelector((state) => state.modifyEquip.itemList);
   const dispatch = useDispatch()
   const methods = useForm()
-  useTitle(isEdit ? '기자재 수정' : '기자재 추가')
+  useTitle(location.pathname.includes('edit') ? '기자재 수정' : '기자재 추가')
   usePreventRefresh()
 
   const handleImgFile = async (e) => {
@@ -71,7 +71,7 @@ export default function AddEquipment() {
       const sendData = {
         equipment: {
           imgUrl: imgFile,
-          totalQuantity: methods.watch('totalQuantity'),
+          totalQuantity: item.length,
           category: methods.watch('category'),
           modelName: methods.watch('modelName'),
           components: methods.watch('components'),

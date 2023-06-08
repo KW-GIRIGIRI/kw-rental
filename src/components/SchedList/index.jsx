@@ -60,7 +60,7 @@ export default function SchedList({ user, receive }) {
       !receiveCheckList
         .filter((value) => value.reservationId === user.reservationId)[0]
         .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
-        .includes(undefined) && dayjs().format('YYYY-MM-DD') === selectDate
+        .includes(undefined) && dayjs().format('YYYY-MM-DD') >= selectDate
 
     return result;
   }
