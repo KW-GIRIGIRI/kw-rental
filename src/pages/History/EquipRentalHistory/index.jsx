@@ -10,7 +10,8 @@ import { category } from "../../../data/category"
 import Pagination from "../../../components/Pagination"
 import ExcelDownload from "../../../components/ExcelDownload"
 import useTitle from "../../../hook/useTitle"
-import EmptyData from "../../../components/EmptyData"
+import Image from "../../../modules/Image"
+import iconExcel from "../../../assets/icon-excel.svg"
 
 export default function EquipmentRentalHistory() {
   const [productList, setProductList] = useState([])
@@ -58,11 +59,19 @@ export default function EquipmentRentalHistory() {
                 />
               ))}
             </S.FilterWrap>
-            <ExcelDownload
-              onDownload={onDownload}
+            {!!productList.length && <Image
+              src={iconExcel}
+              width="18px"
+              height="18px"
+              onClick={e => {
+                e.stopPropagation();
+                setOnDownload(true)
+              }}
+            />}
+            {onDownload && <ExcelDownload
               setOnDownload={setOnDownload}
               productList={productList}
-            />
+            /> }
             <EquipStatistics
               productList={productList}
               setProductList={setProductList}

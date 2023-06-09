@@ -4,11 +4,18 @@ import dayjs from "dayjs"
 import { CSVLink } from "react-csv"
 import Image from "../../modules/Image"
 import { useSelector } from "react-redux"
+import { useEffect, useRef } from "react"
 
-export default function ExcelDownload({ onDownload, setOnDownload, productList }) {
+export default function ExcelDownload({ setOnDownload, productList }) {
   const dualDate = useSelector((state) => state.datePicker.dualDate)
+  const modalRef = useRef()
+
+  const handleClose = (e) => {
+    if (!modalRef.current?.contains(e.target)) setOnDownload(false);
+  };
 
   const handleDownloadXlsx = () => {
+    setOnDownload(false)
     const totalData = handleFilterList()
     const xlsx = require("xlsx")
     const book = xlsx.utils.book_new()
@@ -26,38 +33,34 @@ export default function ExcelDownload({ onDownload, setOnDownload, productList }
       const totalRentalCount = normalRentalCount + abnormalRentalCount;
 
       return {
-        카테고리: category,
-        기자재명: modelName,
-        품목: propertyNumber,
+        '카테고리': category,
+        '기자재명': modelName,
+        '품목': propertyNumber,
         '총 대여 수': totalRentalCount,
-        정상반납수: normalRentalCount,
-        불량반납수: abnormalRentalCount,
+        '정상반납 수': normalRentalCount,
+        '불량반납 수': abnormalRentalCount,
       };
     });
     return transformedArr;
   }
 
+  useEffect(() => {
+    window.addEventListener("click", handleClose);
+    return () => {
+      window.removeEventListener("click", handleClose);
+    };
+  }, []);
+
   return (
-    !!productList.length &&
-    <>
-      <Image
-        src={iconExcel}
-        width="18px"
-        height="18px"
-        onClick={() => setOnDownload(!onDownload)}
-      />
-      {onDownload && (
-        <S.DownloadModal className="download">
-          <p onClick={handleDownloadXlsx}>
-            엑셀 파일로 다운로드(.xlsx)
-          </p>
-          <p onClick={() => { setOnDownload(false) }}>
-            <CSVLink data={handleFilterList()} filename={`기자재통계_${dayjs(dualDate.firstDate).format('YYMMDD')}-${dayjs(dualDate.lastDate).format('YYMMDD')}`}>
-              엑셀 파일로 다운로드(.csv)
-            </CSVLink>
-          </p>
-        </S.DownloadModal>
-      )}
-    </>
+    <S.DownloadModal ref={modalRef}>
+      <p onClick={handleDownloadXlsx}>
+        엑셀 파일로 다운로드(.xlsx)
+      </p>
+      <p onClick={() => { setOnDownload(false) }}>
+        <CSVLink data={handleFilterList()} filename={`기자재통계_${dayjs(dualDate.firstDate).format('YYMMDD')}-${dayjs(dualDate.lastDate).format('YYMMDD')}`}>
+          엑셀 파일로 다운로드(.csv)
+        </CSVLink>
+      </p>
+    </S.DownloadModal>
   )
 }
