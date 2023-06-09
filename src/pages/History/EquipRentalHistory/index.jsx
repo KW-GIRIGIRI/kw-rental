@@ -10,6 +10,7 @@ import { category } from "../../../data/category"
 import Pagination from "../../../components/Pagination"
 import ExcelDownload from "../../../components/ExcelDownload"
 import useTitle from "../../../hook/useTitle"
+import EmptyData from "../../../components/EmptyData"
 
 export default function EquipmentRentalHistory() {
   const [productList, setProductList] = useState([])
@@ -70,7 +71,7 @@ export default function EquipmentRentalHistory() {
               isCategory={isCategory}
             />
           </S.RentalWrap>
-          {pageArray && (
+          {!!pageArray.length && (
             <Pagination
               page={page}
               setPage={setPage}
