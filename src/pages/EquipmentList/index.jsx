@@ -16,6 +16,7 @@ import { resetEquip } from "../../store/reducer/modifyEquipSlice";
 import Pagination from "../../components/Pagination";
 import useTitle from "../../hook/useTitle";
 import SVGIcon from "../../modules/SVGIcon";
+import EmptyData from "../../components/EmptyData";
 
 export default function EquipmentList() {
   const [viewMode, setViewMode] = useState("gal");
@@ -148,9 +149,13 @@ export default function EquipmentList() {
         ))}
       </S.FilterWrap>
 
-      {productList && <EquipListWrap type={viewMode} data={productList} />}
+      {
+        !!productList.length ?
+        <EquipListWrap type={viewMode} data={productList} />
+        : <EmptyData content={['해당하는 카테고리에 기자재가 없습니다.']} />
+      }
 
-      {pageArray && (
+      {!!pageArray.length && (
         <Pagination
           page={page}
           setPage={setPage}
