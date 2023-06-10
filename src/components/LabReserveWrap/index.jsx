@@ -98,11 +98,13 @@ export default function LabReserveWrap() {
             <S.ReserveUl>
               <S.ReserveLi className="auth">
                 <p>대여 상태</p>
-                <p>대여 가능 ON/OFF</p>
+                {(~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <p>대여 ON/OFF</p>}
               </S.ReserveLi>
               <S.ReserveLi className="auth">
-                <p>{seatAmount ? "대여 없음": "대여 완료"}</p>
-                <Toggle on="대여 가능" off="대여 불가" className="rental" />
+                <p>{seatAmount ? "대여 없음" : "대여 완료"}</p>
+                {
+                  (~~dayjs(selectDate).format('YYMMDD') >= ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={handleSetLabAvailable} />
+                }
               </S.ReserveLi>
             </S.ReserveUl>
             ) : (
