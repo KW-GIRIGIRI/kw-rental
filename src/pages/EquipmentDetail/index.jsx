@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteEquipment, getProductDetail, getItemList } from "../../api/api";
 import AddCartEquip from "../../components/AddCartEquip";
@@ -75,7 +75,7 @@ export default function EquipmentDetail() {
     getItem();
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setItem(data);
   }, [data]);
 

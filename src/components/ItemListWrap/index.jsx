@@ -2,14 +2,14 @@ import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import ItemListComp from "./ItemListComp";
 import iconPlus from "../../assets/icon-plus-mono.svg";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 export default function ItemListWrap({ item, isEdit, isAdd, data, setData }) {
   const navigate = useNavigate();
   const [length, setLength] = useState(item?.length || 1);
   const [preventAdd, setPreventAdd] = useState(!!item);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (item) {
       setPreventAdd(!!item);
       setData(item);

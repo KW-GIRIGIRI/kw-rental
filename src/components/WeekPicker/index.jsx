@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import iconLeftArrow from "../../assets/icon-leftArrow.svg";
 import iconRightArrow from "../../assets/icon-rightArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
@@ -104,18 +104,16 @@ export default function WeekPicker({ modify, equipId }) {
 
 
   useEffect(() => {
-    CalcDate();
     handleGetProductAmount()
   }, [calendar]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (calendar.date.day() > 4 || calendar.date.day() === 0) {
       setCalendar((prev) => ({
         ...prev,
         date: calendar.date.add(1, "week"),
       }));
     }
-    CalcDate();
   }, []);
 
   return (

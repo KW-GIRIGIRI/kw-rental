@@ -16,6 +16,7 @@ export default function UserPenaltyHist() {
   useEffect(() => {
     handleGetMyPenalty()
   }, [])
+  
   return (
     penaltyList.length ?
       <S.HistWrap>

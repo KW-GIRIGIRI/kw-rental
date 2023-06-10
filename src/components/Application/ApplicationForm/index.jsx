@@ -3,7 +3,7 @@ import iconExclamation from "../../../assets/icon-exclamation-circle.svg";
 import Input from "../../../modules/Input";
 import { TextareaStyle } from "../../../modules/Textarea/style";
 import useInput from "../../../hook/useInput";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { forwardRef } from "react";
 import { getLabRemainQuantities, getUserInfo } from "../../../api/api";
 import { useSelector } from "react-redux";
@@ -39,7 +39,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
     });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     purposeInp.value.trim().length > 10 ? setVisible(false) : setVisible(true);
   }, [purposeInp]);
 
