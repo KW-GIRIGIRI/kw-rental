@@ -32,7 +32,7 @@ export const RentalWrap = styled.div`
 
   & > img {
     position: absolute;
-    right: 26px;
+    right: 0;
 
     &:hover {
       cursor: pointer;

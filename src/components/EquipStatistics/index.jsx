@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { getAdminEquipHistory } from "../../api/api"
 import { category } from "../../data/category"
+import EmptyData from "../EmptyData"
 
 export default function EquipStatistics({ productList, setProductList, page, setPageArray, isCategory }) {
   const dualDate = useSelector((state) => state.datePicker.dualDate)
@@ -29,6 +30,7 @@ export default function EquipStatistics({ productList, setProductList, page, set
   }, [page, isCategory, dualDate])
 
   return (
+    !! productList.length ?
     <S.ItemUl>
       <S.Header>
         <span>카테고리</span>
@@ -46,6 +48,7 @@ export default function EquipStatistics({ productList, setProductList, page, set
           <span>{item.abnormalRentalCount}</span>
         </S.ItemLi>
       ))}
-    </S.ItemUl>
+      </S.ItemUl>
+    : <EmptyData content={['선택한 날짜에 해당하는 데이터가 없습니다.']} /> 
   );
 }

@@ -65,7 +65,9 @@ export default function SignUp() {
       alert("값을 입력해주세요");
     else {
       const res = await userSignup(JSON.stringify(data));
-      res === 201 && navigate("/success", { state: { isSignup: true } });
+      res === 201 ?
+        navigate("/success", { state: { isSignup: true } })
+        : alert(res.data)
     }
   };
 
