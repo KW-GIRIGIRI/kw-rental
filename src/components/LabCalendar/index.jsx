@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from "react";
 import iconRightArrow from "../../assets/icon-rightArrow.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow.svg";
 import iconCalendar from "../../assets/icon-calendar.svg";
@@ -11,7 +11,7 @@ import { AuthContext } from "../../context/Context";
 
 const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
 
-const LabCalendar = () => {
+const LabCalendar = forwardRef((props, ref) => {
   const [dayObj, setDayObj] = useState(dayjs());
   const [seatArray, setSeatArray] = useState({})
   const hanul = useSelector(state => state.labControl.lab)
@@ -19,7 +19,11 @@ const LabCalendar = () => {
   const dispatch = useDispatch()
   const { isAuth } = useContext(AuthContext);
 
-  const handleGetLabRemain = async () => {
+  useImperativeHandle(ref, () => ({
+    handleGetCalendarLabRemain
+  }))
+
+  const handleGetCalendarLabRemain = async () => {
     const startDate = dayObj.startOf('month').format('YYYY-MM-DD')
     const endDate = dayObj.endOf('month').format('YYYY-MM-DD')
     const lab = hanul ? 'hanul' : 'hwado'
@@ -79,14 +83,14 @@ const LabCalendar = () => {
   }
 
   const handleCalendar = (i) => {
-    if(!isAuth) {
+    if (!isAuth) {
       if (dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).valueOf() > dayjs().valueOf() && dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).valueOf() < dayjs().add(1, 'month').valueOf()) return true
       else return false
     } else return true
   }
 
   useEffect(() => {
-    handleGetLabRemain()
+    handleGetCalendarLabRemain()
   }, [dayObj, hanul])
 
   useEffect(() => {
@@ -149,32 +153,32 @@ const LabCalendar = () => {
 
         {
           Array(daysInMonth)
-          .fill()
-          .map((_, i) => (
-            <S.ContCell
-              onClick={handleSetDate}
-              key={i}
-              value={i + 1}
-              className={
-                dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).format(
-                  "YYMMDD"
-                ) === dayjs().format("YYMMDD") && "today"
-              }
-            >
-              <span>{i + 1}</span>
-              { Object.keys(seatArray).length ?
-                ((
-                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 &&
-                  handleCalendar(i)
-                )
-                && ( 
-                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                  <ins>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</ins> :
-                  <p>{hanul ? `대여(${seatArray[i+1]}/16)` : seatArray[i+1] > 0 ? "대여 가능" :"대여 불가"}</p>
-                )) : <></>
-              }
-            </S.ContCell>
-          ))
+            .fill()
+            .map((_, i) => (
+              <S.ContCell
+                onClick={handleSetDate}
+                key={i}
+                value={i + 1}
+                className={
+                  dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).format(
+                    "YYMMDD"
+                  ) === dayjs().format("YYMMDD") && "today"
+                }
+              >
+                <span>{i + 1}</span>
+                {Object.keys(seatArray).length ?
+                  ((
+                    dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 &&
+                    handleCalendar(i)
+                  )
+                    && (
+                      dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
+                        <ins>{hanul ? `대여(${seatArray[i + 1]}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</ins> :
+                        <p>{hanul ? `대여(${seatArray[i + 1]}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</p>
+                    )) : <></>
+                }
+              </S.ContCell>
+            ))
         }
         {Array(6 - weekDayOfLast)
           .fill()
@@ -186,6 +190,6 @@ const LabCalendar = () => {
       </S.Container>
     </S.Wrapper>
   );
-};
+});
 
 export default LabCalendar;
