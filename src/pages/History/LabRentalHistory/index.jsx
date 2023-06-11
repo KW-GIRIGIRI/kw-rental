@@ -24,7 +24,12 @@ export default function LabRentalHistory() {
       <>
         <S.Wrap>
           <S.Title>랩실 통계</S.Title>
-          <DualDatePicker firstInitial={-31} lastInitial={0} className="authHistory" />
+          <DualDatePicker
+            firstInitial={-1}
+            lastInitial={0}
+            className="authHistory"
+            initialMonth={true}
+          />
         </S.Wrap>
         <S.ButtonWrap>
           <Button

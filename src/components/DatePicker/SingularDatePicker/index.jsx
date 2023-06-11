@@ -74,9 +74,8 @@ export default function SingularDatePicker({ initial, className }) {
         break;
     }
 
-    dispatch(setSingularDate(date.format("YYYY-MM-DD")));
     return () => {
-       dispatch(setSingularDate(date.format("YYYY-MM-DD")));
+      dispatch(setSingularDate(date.format("YYYY-MM-DD")));
     }
   }, []);
 
