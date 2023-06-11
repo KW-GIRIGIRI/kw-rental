@@ -4,7 +4,7 @@ import { getMyPenaltyStatus } from "../../../api/api"
 import * as S from "../style"
 
 export default function UserPenaltyState() {
-  const [penaltyStatus, setPenaltyStatus] = useState({})
+  const [penaltyStatus, setPenaltyStatus] = useState(null)
 
   const handleGetPenaltyStatus = async () => {
     const res = await getMyPenaltyStatus()
@@ -22,10 +22,13 @@ export default function UserPenaltyState() {
         <span>비고</span>
       </S.Header>
 
-      <S.HistList className="penalList">
-        <span>{penaltyStatus.canUse ? "정상 이용 가능" : penaltyStatus.status}</span>
-        <span>{penaltyStatus.canUse ? "-" : dayjs(penaltyStatus.endDate).format('YY년 M월 D일까지 이용 불가')}</span>
-      </S.HistList>
+      {
+        penaltyStatus &&
+        <S.HistList className="penalList">
+          <span>{penaltyStatus.canUse ? "정상 이용 가능" : penaltyStatus.status}</span>
+          <span>{(penaltyStatus.canUse)? "-" : dayjs(penaltyStatus.endDate).format('YY년 M월 D일까지 이용 불가')}</span>
+        </S.HistList>
+      }
     </S.HistWrap>
   )
 }

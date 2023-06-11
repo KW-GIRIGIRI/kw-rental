@@ -90,6 +90,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
               ref={(el) => (dataRef.current.purpose = el)}
               placeholder="최소 10자 이상 입력하세요."
               rows="4"
+              maxLength='50'
             ></TextareaStyle>
             {visible ? (
               <S.Exclam>
