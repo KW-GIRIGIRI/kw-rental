@@ -97,7 +97,9 @@ export default function EquipmentItemDetail() {
   const handleDeleteItem = async () => {
     if (itemList.length > 1) {
       const response = await deleteItem(location.state.id);
-      response === 204 && navigate(`/equipment/${location.state.equipmentId}`);
+
+      if (response === 204) navigate(`/equipment/${location.state.equipmentId}`);
+      else alert(response.data)
     } else {
       alert("품목이 1개일 경우, 삭제가 불가능합니다.");
       close();

@@ -61,12 +61,10 @@ const LabReserveWrap = forwardRef(({ handleSetLabAvailable }, ref) => {
       {hanul ? (
         <S.ReserveUl hanul={hanul}>
           <S.ReserveLi>
-            <p>현재 대여 인원수</p>
             <p>대여 가능 인원수</p>
             {isAuth && (~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <p>대여 ON/OFF</p>}
           </S.ReserveLi>
           <S.ReserveLi>
-            <p>{16 - seatAmount}</p>
             <p>{seatAmount}</p>
             {isAuth ? (
               (~~dayjs(selectDate).format('YYMMDD') >= ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={() => handleSetLabAvailable(state, selectDate)} />
@@ -88,11 +86,11 @@ const LabReserveWrap = forwardRef(({ handleSetLabAvailable }, ref) => {
         <>
           {isAuth ? (
             <S.ReserveUl>
-              <S.ReserveLi className="auth">
+              <S.ReserveLi >
                 <p>대여 상태</p>
                 {(~~dayjs(selectDate).format('YYMMDD') > ~~dayjs().format('YYMMDD')) && <p>대여 ON/OFF</p>}
               </S.ReserveLi>
-              <S.ReserveLi className="auth">
+              <S.ReserveLi >
                 <p>{seatAmount ? "대여 없음" : "대여 완료"}</p>
                 {
                   (~~dayjs(selectDate).format('YYMMDD') >= ~~dayjs().format('YYMMDD')) && <Toggle on="대여 가능" off="대여 불가" className="rental" onClickFunc={() => handleSetLabAvailable(state, selectDate)} />
