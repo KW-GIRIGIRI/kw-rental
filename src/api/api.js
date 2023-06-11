@@ -69,6 +69,7 @@ export const deleteEquipment = async (id) => {
     return response.status;
   } catch (err) {
     console.error(err.response);
+    return err.response;
   }
 };
 

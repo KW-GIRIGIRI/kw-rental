@@ -106,12 +106,13 @@ export default function ModifyComp({cart, close, modal, setModal }) {
                 {i + 1}
               </option> 
             )}
-        </S.SelectCount>
-         
+      </S.SelectCount>
+      
         <div>
           <Button
-            text="수정하기"
-            className="main"
+            text="수정하기" 
+            className={!!rentalAmount ? 'main' : 'gray'} 
+            disabled={!!rentalAmount ? 'main' : 'gray'}
             padding="11px 24px"
             borderRadius="5px"
             fontSize="14px"
