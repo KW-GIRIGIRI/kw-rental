@@ -1,10 +1,8 @@
 import * as S from "./style"
-import iconExcel from "../../assets/icon-excel.svg"
 import dayjs from "dayjs"
 import { CSVLink } from "react-csv"
-import Image from "../../modules/Image"
 import { useSelector } from "react-redux"
-import { useEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 
 export default function ExcelDownload({ setOnDownload, productList }) {
   const dualDate = useSelector((state) => state.datePicker.dualDate)
@@ -44,7 +42,7 @@ export default function ExcelDownload({ setOnDownload, productList }) {
     return transformedArr;
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     window.addEventListener("click", handleClose);
     return () => {
       window.removeEventListener("click", handleClose);

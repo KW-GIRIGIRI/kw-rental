@@ -7,7 +7,7 @@ import ItemListWrap from "../../components/ItemListWrap";
 import iconFileImgWhite from "../../assets/icon-fileImg-white.svg";
 import Textarea from "../../modules/Textarea";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "../../modules/Image";
 import {
   addEquipment,
@@ -136,7 +136,7 @@ export default function AddEquipment() {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (location.pathname.includes("edit")) {
       setImgFile(product?.imgUrl)
       setIsEdit(true)

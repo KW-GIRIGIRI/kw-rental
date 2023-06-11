@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import iconCalendar from "../../../assets/icon-calendar.svg";
 import DatePicker from "..";
 import * as S from "./style";
@@ -35,7 +35,7 @@ export default function SingularDatePicker({ initial, className }) {
     }));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     switch (calendar.date.day()) {
       case 5:
         handleSetMon(3);

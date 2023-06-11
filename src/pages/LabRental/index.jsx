@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Context";
 import Button from "../../modules/Button";
@@ -69,6 +69,11 @@ export default function LabRental() {
         );
     }
   };
+
+  useEffect(() => {
+    dispatch(setLab(true))
+    return() => dispatch(setLab(true))
+  }, [])
 
   return (
     <>

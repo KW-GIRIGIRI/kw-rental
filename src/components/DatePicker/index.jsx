@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import dayjs from "dayjs";
 import weekdayPlugin from "dayjs/plugin/weekday";
 import objectPlugin from "dayjs/plugin/toObject";
@@ -56,7 +56,7 @@ export default function DatePicker({
     }));
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
   if (calendar.visible) {
     const timer = setTimeout(() => {
       window.addEventListener("scroll", handleScrollClose);
@@ -181,11 +181,11 @@ export default function DatePicker({
     return <>{rows}</>;
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setCurrentMonth(calendar.date);
   }, [calendar.date]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getAllDays();
   }, [currentMonth]);
 

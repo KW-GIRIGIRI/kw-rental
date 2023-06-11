@@ -4,7 +4,7 @@ import iconViewMode from "../../assets/icon-viewmode.svg"
 import iconPlus from "../../assets/icon-plus.svg";
 import Button from "../../modules/Button";
 import EquipListWrap from "../../components/EquipListWrap";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { getProductList } from "../../api/api";
 import { AuthContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
@@ -72,7 +72,7 @@ export default function EquipmentList() {
     if (isAuth) setViewMode("list");
   }, [page, viewMode, isCategory, isAuth]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setPage(0);
   }, [viewMode])
 
