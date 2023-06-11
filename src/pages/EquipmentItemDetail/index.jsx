@@ -157,6 +157,7 @@ export default function EquipmentItemDetail() {
         <Input
           placeholder="20190500260004"
           maxLen="14"
+          type="number"
           className="propertyNum"
           defaultValue={item.propertyNumber}
           ref={propertyNumRef}
