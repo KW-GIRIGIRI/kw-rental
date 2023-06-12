@@ -62,18 +62,20 @@ export default function DualDatePicker({
   };
 
   useLayoutEffect(() => {
-    switch (firstCalendar.date.day()) {
-      case 5:
-        handleSetMon(3);
-        break;
-      case 6:
-        handleSetMon(2);
-        break;
-      case 0:
-        handleSetMon(1);
-        break;
-      default:
-        break;
+    if (!initialMonth) {
+      switch (firstCalendar.date.day()) {
+        case 5:
+          handleSetMon(3);
+          break;
+        case 6:
+          handleSetMon(2);
+          break;
+        case 0:
+          handleSetMon(1);
+          break;
+        default:
+          break;
+      }
     }
   }, [firstCalendar.date]);
 
@@ -103,8 +105,8 @@ export default function DualDatePicker({
 
   useEffect(() => {
     if (
-      className !== "user" &&
-      lastCalendar.date.valueOf() < firstCalendar.date.valueOf()
+      !initialMonth && (className !== "user" &&
+      lastCalendar.date.valueOf() < firstCalendar.date.valueOf())
     ) {
       setFirstCalendar((prev) => ({
         ...prev,
