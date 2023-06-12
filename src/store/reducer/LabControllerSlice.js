@@ -15,9 +15,12 @@ const labControlSlice = createSlice({
     setLabDate: (state, action) => {
       state.date = action.payload;
     },
+    preventLabEvent: (state) => {
+      state.lab = !state.lab;
+    },
   },
 });
 
-export const { setLab, setLabDate } = labControlSlice.actions;
+export const { setLab, setLabDate, preventLabEvent } = labControlSlice.actions;
 
 export default labControlSlice.reducer;

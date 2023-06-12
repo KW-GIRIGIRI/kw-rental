@@ -7,11 +7,13 @@ import { useRef, useMemo, useState } from "react"
 import Button from "../../../modules/Button"
 import { editLabNotice } from "../../../api/api"
 import { useSelector } from "react-redux"
+import usePreventRefresh from "../../../hook/usePreventRefresh"
 
 export default function QuillEditor({ content, setIsEdit }) {
   const hanul = useSelector(state => state.labControl.lab)
   const quillRef = useRef(null)
   const [input, setInput] = useState(content)
+  usePreventRefresh()
 
   const imageHandler = () => {
     const img = document.createElement('input')
@@ -31,10 +33,6 @@ export default function QuillEditor({ content, setIsEdit }) {
     })
   }
 
-  const handleRegisterButton = () => {
-    handleEditState()
-  }
-
   const handleEditState = async () => {
     const res = await editLabNotice(hanul ? "hanul" : "hwado", { "notice": input })
     res === 204 && setIsEdit(false)
@@ -47,10 +45,11 @@ export default function QuillEditor({ content, setIsEdit }) {
       return {
         toolbar: {
           container: [
-            [{ 'header': [1, 2, 3, false] }],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             [{ 'color': ['#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff', '#ffffff', '#facccc', '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5', '#ebd6ff', '#bbbbbb', '#f06666', '#ffc266', '#ffff66', '#66b966', '#66a3e0', '#c285ff', '#888888', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2', '#444444', '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466', 'custom-color'] }, { 'background': [] }],
             [{ 'align': [] }],
-            ['bold', 'underline', 'strike'],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{'list': 'bullet'}],
             ['link'],
             ['image'],
             ['clean']
@@ -79,7 +78,7 @@ export default function QuillEditor({ content, setIsEdit }) {
       <BtnWrap>
         <Button
           text="저장하기"
-          onClick={handleRegisterButton}
+          onClick={handleEditState}
           padding="15px 30px"
           fontSize="15px"
           fontWeight="600"
@@ -88,7 +87,7 @@ export default function QuillEditor({ content, setIsEdit }) {
         />
         <Button
           text="취소하기"
-          onClick={handleEditState}
+          onClick={() => setIsEdit(false)}
           padding="15px 30px"
           fontSize="15px"
           fontWeight="600"
