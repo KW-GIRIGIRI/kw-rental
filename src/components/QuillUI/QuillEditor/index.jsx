@@ -31,10 +31,6 @@ export default function QuillEditor({ content, setIsEdit }) {
     })
   }
 
-  const handleRegisterButton = () => {
-    handleEditState()
-  }
-
   const handleEditState = async () => {
     const res = await editLabNotice(hanul ? "hanul" : "hwado", { "notice": input })
     res === 204 && setIsEdit(false)
@@ -80,7 +76,7 @@ export default function QuillEditor({ content, setIsEdit }) {
       <BtnWrap>
         <Button
           text="저장하기"
-          onClick={handleRegisterButton}
+          onClick={handleEditState}
           padding="15px 30px"
           fontSize="15px"
           fontWeight="600"
@@ -89,7 +85,7 @@ export default function QuillEditor({ content, setIsEdit }) {
         />
         <Button
           text="취소하기"
-          onClick={handleEditState}
+          onClick={() => setIsEdit(false)}
           padding="15px 30px"
           fontSize="15px"
           fontWeight="600"
