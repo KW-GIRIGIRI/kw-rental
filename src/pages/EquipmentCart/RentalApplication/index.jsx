@@ -25,7 +25,9 @@ export default function RentalApplication() {
       };
 
       const response = await postReservation(JSON.stringify(data));
-      response === 201 && navigate("/equipment/inventory/success");
+
+      if (response === 201) navigate("/equipment/inventory/success");
+      else alert(response.data)
     }
   };
 

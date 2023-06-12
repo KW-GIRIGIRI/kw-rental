@@ -83,48 +83,49 @@ export default function ModifyComp({cart, close, modal, setModal }) {
   return (
     <>
       <p>기자재 수령일~반납일</p>
-        {calendar && (
-          <DatePicker calendar={calendar} setCalendar={setCalendar} className='user'/>
-        )}
-        <InpWrapper className="item">
-          <S.DateCont onClick={handleGetDatePicker}>
-            <S.DateImg src={iconCalendar} alt="" />
-            <span>{calendar.date.format("M월 D일(dd)")} </span>
-          </S.DateCont>
-          <span>~</span>
-          <S.DateCont>
-            <span>{calendar.date.day() === 4 ? calendar.date.add(4, "days").format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
-          </S.DateCont>
-        </InpWrapper>
+      {calendar && (
+        <DatePicker calendar={calendar} setCalendar={setCalendar} className='user'/>
+      )}
+      <InpWrapper className="item">
+        <S.DateCont onClick={handleGetDatePicker}>
+          <S.DateImg src={iconCalendar} alt="" />
+          <span>{calendar.date.format("M월 D일(dd)")} </span>
+        </S.DateCont>
+        <span>~</span>
+        <S.DateCont>
+          <span>{calendar.date.day() === 4 ? calendar.date.add(4, "days").format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
+        </S.DateCont>
+      </InpWrapper>
 
-        <p>대여 기자재 수정</p>
-        <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount} >
-         {Array(rentalAmount)
-            .fill()
-            .map((_, i) => 
-              <option key={i + 1} value={i + 1}>
-                {i + 1}
-              </option> 
-            )}
-        </S.SelectCount>
-         
-        <div>
-          <Button
-            text="수정하기"
-            className="main"
-            padding="11px 24px"
-            borderRadius="5px"
-            fontSize="14px"
-            onClick={handleModifyCartEquip}
-          />
-          <Button
-            text="취소하기"
-            className="sub"
-            padding="10px 24px"
-            borderRadius="5px"
-            fontSize="14px"
-            onClick={handleClose}
-          />
+      <p>대여 기자재 수정</p>
+      <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount} >
+        {Array(rentalAmount)
+          .fill()
+          .map((_, i) => 
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option> 
+          )}
+      </S.SelectCount>
+
+      <div>
+        <Button
+          text="수정하기" 
+          className={!!rentalAmount ? 'main' : 'gray'} 
+          disabled={!rentalAmount}
+          padding="11px 24px"
+          borderRadius="5px"
+          fontSize="14px"
+          onClick={handleModifyCartEquip}
+        />
+        <Button
+          text="취소하기"
+          className="sub"
+          padding="10px 24px"
+          borderRadius="5px"
+          fontSize="14px"
+          onClick={handleClose}
+        />
       </div>
     </>
   )

@@ -13,19 +13,24 @@ export default function DualDatePicker({
   firstInitial,
   lastInitial,
   className,
+  initialMonth
 }) {
   const [firstCalendar, setFirstCalendar] = useState({
     visible: false,
     top: 0,
     left: 0,
-    date: dayjs().add(firstInitial || 0, "days"),
+    date: initialMonth ?
+      dayjs().add(firstInitial || 0, "month") :
+      dayjs().add(firstInitial || 0, "days"),
   });
 
   const [lastCalendar, setLastCalendar] = useState({
     visible: false,
     top: 0,
     left: 0,
-    date: dayjs().add(lastInitial || 0, "days"),
+    date: initialMonth ?
+      dayjs().add(lastInitial || 0, "month") :
+      dayjs().add(lastInitial || 0, "days"),
   });
   const dispatch = useDispatch();
 
@@ -57,18 +62,20 @@ export default function DualDatePicker({
   };
 
   useLayoutEffect(() => {
-    switch (firstCalendar.date.day()) {
-      case 5:
-        handleSetMon(3);
-        break;
-      case 6:
-        handleSetMon(2);
-        break;
-      case 0:
-        handleSetMon(1);
-        break;
-      default:
-        break;
+    if (!initialMonth) {
+      switch (firstCalendar.date.day()) {
+        case 5:
+          handleSetMon(3);
+          break;
+        case 6:
+          handleSetMon(2);
+          break;
+        case 0:
+          handleSetMon(1);
+          break;
+        default:
+          break;
+      }
     }
   }, [firstCalendar.date]);
 
@@ -98,8 +105,8 @@ export default function DualDatePicker({
 
   useEffect(() => {
     if (
-      className !== "user" &&
-      lastCalendar.date.valueOf() < firstCalendar.date.valueOf()
+      !initialMonth && (className !== "user" &&
+      lastCalendar.date.valueOf() < firstCalendar.date.valueOf())
     ) {
       setFirstCalendar((prev) => ({
         ...prev,
@@ -110,13 +117,20 @@ export default function DualDatePicker({
   }, [lastCalendar.date]);
 
   useEffect(() => {
+    const firstInitialDate = initialMonth ?
+      dayjs().add(firstInitial || 0, "month") :
+      dayjs().add(firstInitial || 0, "days")
+    
+    const lastInitialDate = initialMonth ?
+      dayjs().add(lastInitial || 0, "month") :
+      dayjs().add(lastInitial || 0, "days")
+      
     return () => {
-      if (firstInitial) dispatch(setDualFirstDate(dayjs().add(firstInitial, "days").format('YYYY-MM-DD'))) 
-    else  dispatch(setDualFirstDate(dayjs().format('YYYY-MM-DD'))) 
+      if (firstInitial) dispatch(setDualFirstDate(firstInitialDate.format('YYYY-MM-DD'))) 
+      else  dispatch(setDualFirstDate(dayjs().format('YYYY-MM-DD'))) 
       
-      
-    if (lastInitial) dispatch(setDualLastDate(dayjs().add(lastInitial, "days").format('YYYY-MM-DD')))
-    else dispatch(setDualLastDate(dayjs().format('YYYY-MM-DD')))
+      if (lastInitial) dispatch(setDualLastDate(lastInitialDate.format('YYYY-MM-DD')))
+      else dispatch(setDualLastDate(dayjs().format('YYYY-MM-DD')))
     }
   }, [])
 

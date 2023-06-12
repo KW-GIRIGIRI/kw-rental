@@ -75,6 +75,7 @@ const DetailDescInput = (({ itemLength }) => {
             { ...register('purpose') }
             placeholder="ex. 사진 촬영, 동영상 촬영"
             defaultValue={product?.purpose}
+            maxLength="100"
           />
         </S.ProductLi>
         <S.ProductLi>

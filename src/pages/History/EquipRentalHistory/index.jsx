@@ -33,7 +33,12 @@ export default function EquipmentRentalHistory() {
         <>
           <S.Wrap>
             <S.Title>기자재 통계</S.Title>
-            <DualDatePicker firstInitial={-31} lastInitial={0} className="authHistory" />
+            <DualDatePicker
+              firstInitial={-1}
+              lastInitial={0}
+              className="authHistory"
+              initialMonth={true}
+            />
           </S.Wrap>
           <S.RentalWrap>
             <S.FilterWrap className="mode">

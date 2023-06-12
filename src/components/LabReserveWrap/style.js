@@ -6,12 +6,12 @@ export const Div = styled.div`
 
 export const ReserveUl = styled.ul`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
-  width: ${(props) => (props?.hanul ? "100%" : "210px")};
+  width: 210px;
 `;
 
 export const ReserveLi = styled.li`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   align-items: center;
   font-size: 13px;
@@ -23,12 +23,8 @@ export const ReserveLi = styled.li`
     justify-self: center;
   }
 
-  &.auth {
-    grid-template-columns: repeat(2, 1fr);
-
-    & > button {
-      margin: 0 auto;
-    }
+  & > button {
+    margin: 0 auto;
   }
 
   &:first-of-type {

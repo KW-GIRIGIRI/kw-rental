@@ -69,6 +69,7 @@ export const deleteEquipment = async (id) => {
     return response.status;
   } catch (err) {
     console.error(err.response);
+    return err.response;
   }
 };
 
@@ -226,6 +227,7 @@ export const deleteItem = async (id) => {
     return response.status;
   } catch (err) {
     console.error(err.response);
+    return err.response;
   }
 };
 
@@ -281,7 +283,7 @@ export const postReservation = async (data) => {
 
     return response.status;
   } catch (err) {
-    console.error(err.response);
+    return err.response;
   }
 };
 
