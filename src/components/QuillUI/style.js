@@ -5,6 +5,7 @@ export const EditorWrap = styled.div`
   .ql-toolbar {
     border-top-left-radius: ${(props) => props.theme.borderRadius.lv2};
     border-top-right-radius: ${(props) => props.theme.borderRadius.lv2};
+    font-size: 1rem;
     border: 1px solid ${(props) => props.theme.color.primary.sub};
     background-color: ${(props) => props.theme.color.primary.sub};
   }
@@ -22,15 +23,18 @@ export const EditorWrap = styled.div`
 
     & .ql-blank::before {
       font-style: normal;
-      font-size: 13px;
+      font-size: 1rem;
     }
 
     & p {
-      font-size: 13px;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     & li {
       padding: 0 !important;
+      list-style: disc inside;
+      line-height: 1.6;
 
       &::before {
         display: none;
@@ -39,7 +43,7 @@ export const EditorWrap = styled.div`
 
     & ul {
       padding: 0 !important;
-      font-size: 13px;
+      font-size: 1rem;
     }
 
     & > div > div > span {
@@ -61,7 +65,7 @@ export const ViewerWrap = styled.div`
   min-height: 400px;
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 1rem;
   padding: 20px 15px;
   font: initial !important;
 
@@ -83,7 +87,8 @@ export const ViewerWrap = styled.div`
   }
 
   & p {
-    font-size: 13px;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   & a {
@@ -92,7 +97,12 @@ export const ViewerWrap = styled.div`
   }
 
   & ul {
-    font-size: 13px;
+    font-size: 1rem;
+  }
+
+  & li {
+    list-style: disc inside;
+    line-height: 1.6;
   }
 
   & strong {
