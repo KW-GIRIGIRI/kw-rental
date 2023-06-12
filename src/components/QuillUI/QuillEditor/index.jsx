@@ -7,11 +7,13 @@ import { useRef, useMemo, useState } from "react"
 import Button from "../../../modules/Button"
 import { editLabNotice } from "../../../api/api"
 import { useSelector } from "react-redux"
+import usePreventRefresh from "../../../hook/usePreventRefresh"
 
 export default function QuillEditor({ content, setIsEdit }) {
   const hanul = useSelector(state => state.labControl.lab)
   const quillRef = useRef(null)
   const [input, setInput] = useState(content)
+  usePreventRefresh()
 
   const imageHandler = () => {
     const img = document.createElement('input')
