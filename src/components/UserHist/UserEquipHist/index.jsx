@@ -38,7 +38,7 @@ export default function UserEquipHist() {
             <S.DateEquip>
               {dayjs(rental.endDate).format("YY년 MM월 DD일(dd)")}
             </S.DateEquip>
-            <S.ItemUl>
+            <ul>
               {rental.rentalSpecs.map((item, idx) => (
                 <S.ItemLi key={idx}>
                   <span>{item.modelName}</span>
@@ -47,7 +47,7 @@ export default function UserEquipHist() {
                   </span>
                 </S.ItemLi>
               ))}
-            </S.ItemUl>
+            </ul>
           </S.HistList>
         ))}
       </S.HistWrap>
