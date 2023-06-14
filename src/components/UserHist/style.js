@@ -73,8 +73,6 @@ export const HistList = styled.li`
   align-items: center;
 `;
 
-export const ItemUl = styled.ul``;
-
 export const ItemLi = styled.li`
   padding: 10px 0;
   height: 100%;

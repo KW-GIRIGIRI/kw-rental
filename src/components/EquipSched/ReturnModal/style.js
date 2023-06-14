@@ -10,7 +10,7 @@ export const ProductUl = styled.ul`
 export const ProductLi = styled.li`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  padding: 7px 0;
+  align-items: center;
   text-align: center;
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   margin-top: -1px;
@@ -22,22 +22,10 @@ export const ProductLi = styled.li`
     background-color: ${(props) => props.theme.color.primary.sub};
   }
 
-  & :nth-child(2),
-  & :nth-child(3) {
-    position: relative;
-    &::before {
-      content: "";
-      background-color: ${(props) => props.theme.color.primary.sub};
-      width: 1px;
-      height: 30px;
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-    }
-  }
-
-  & :nth-child(2)::before {
-    left: 5px;
+  & :nth-child(2) {
+    padding: 7px 0;
+    border-left: 1px solid ${(props) => props.theme.color.primary.sub};
+    border-right: 1px solid ${(props) => props.theme.color.primary.sub};
   }
 `;
 

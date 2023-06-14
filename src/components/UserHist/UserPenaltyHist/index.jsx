@@ -30,8 +30,8 @@ export default function UserPenaltyHist() {
 
         {penaltyList.map((penalty) => (
           <S.HistList className="penalty" key={penalty.id}>
-            <span>{penalty.startDate}</span>
-            <span>{penalty.endDate}</span>
+            <span>{penalty.acceptDate}</span>
+            <span>{penalty.returnDate}</span>
             <span>{penalty.status}</span>
             <span>{penalty.assetName === 'hanul' ? '한울관 B119호' : penalty.assetName === 'hwado' ? '화도관 302호' : penalty.assetName}</span>
             <span>{rentalStatus[penalty.reason]}</span>

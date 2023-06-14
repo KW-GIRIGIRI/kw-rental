@@ -8,7 +8,7 @@ export const ItemUl = styled.ul`
     display: grid;
     align-items: center;
 
-    grid-template-columns: 1fr 1.6fr 1.4fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1.4fr 1fr 1fr;
     padding: 11px 0;
 
     & > span:nth-child(2),
