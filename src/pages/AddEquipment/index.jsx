@@ -85,7 +85,11 @@ export default function AddEquipment() {
       };
   
       const response = await addEquipment(JSON.stringify(sendData));
-      response && navigate(`/equipment/${response.split("/")[3]}`);
+
+      if (response.includes('api')) navigate(`/equipment/${response.split("/")[3]}`);
+      else if(response.includes('중복')) alert('기자재명과 자산번호는 다른 기자재와 중복이 불가능합니다.')
+      else if (response.includes('addEquipmentWithItemsRequest')) alert('카테고리, 기자재 이미지, 기자재명, 제조사, 자산번호는 필수 입력값입니다.')
+      else alert(response)
       dispatch(resetEquip())
     }
   };
