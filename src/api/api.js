@@ -490,7 +490,7 @@ export const setAdminAccountInfo = async (data) => {
   try {
     const response = await instanceUtil.patch(`/admin`, data);
 
-    return response;
+    return response.status;
   } catch (err) {
     console.error(err.response);
   }
