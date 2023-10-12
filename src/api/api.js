@@ -765,9 +765,11 @@ export const setLabOperation = async (data) => {
 };
 
 // 랩실 전체 운영 설정
-export const shutdownLab = async (id) => {
+export const shutdownLab = async (data) => {
   try {
-    const response = await instanceUtil.put(`/admin/operations`);
+    const response = await instanceUtil.put(`/admin/operations`, {
+      isRunning: data,
+    });
 
     return response.status;
   } catch (err) {
@@ -776,7 +778,7 @@ export const shutdownLab = async (id) => {
 };
 
 // 랩실 전체 운영 조회
-export const getLabStatus = async (id) => {
+export const getLabStatus = async () => {
   try {
     const response = await instanceUtil.get(`/admin/operations`);
 
