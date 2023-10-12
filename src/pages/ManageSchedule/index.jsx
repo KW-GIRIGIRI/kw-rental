@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { getLabStatus, shutdownLab } from "../../api/api";
+import { useEffect, useState } from "react";
+import { checkLabOperation, getLabStatus, setLabOperation, shutdownLab } from "../../api/api";
+import { dayArr } from "../../data/weekDay";
 import useModal from "../../hook/useModal";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
 import * as S from "./style"
 
-const dayArr = ['월', '화', '수', '목', '금']
-
 export default function ManageSchedule() {
   const { Toggle, state, changeInitial } = useToggle();
+  const [week, setWeek] = useState([])
   const { Modal, open, close } = useModal()
 
   const handleGetLabStatus = async () => {
@@ -24,8 +24,21 @@ export default function ManageSchedule() {
     handleGetLabStatus()
   }
 
+  const handleGetLabDay = async () => {
+    const res = await checkLabOperation()
+    setWeek(res.schedules)
+  }
+
+  const handleSetLabDay = async () => {
+    if (!!week.length) {
+      const res = await setLabOperation(week)
+      res === 204 && alert('운영 일자가 저장되었습니다.')
+    } else alert('운영 일자는 하루 이상이어야 합니다.')
+  }
+
   useEffect(() => {
     handleGetLabStatus()
+    handleGetLabDay()
   }, [])
 
   return (
@@ -37,9 +50,18 @@ export default function ManageSchedule() {
       <S.SubTitle>운영 일자</S.SubTitle>
       <S.SubExp>랩실 관리자의 근무 시간에 맞춰 일자를 선택해주세요.</S.SubExp>
       {
-        dayArr.map(val => <S.DayBtn className="" key={val}>{val}</S.DayBtn>)
+        dayArr.map(day =>
+          <S.DayBtn
+            onClick={() => {
+              !week.includes(day.value) 
+                ? setWeek(week => [...week, day.value])
+                : setWeek(week.filter(val => val !== day.value))
+            }}
+            className={week.includes(day.value) && 'on'}
+            key={day.value}>{day.label}
+          </S.DayBtn>)
       }
-      <Button text='저장' className='main' fontSize='14px' padding='10px 18px' borderRadius='5px' />
+      <Button text='저장' className='main' fontSize='14px' padding='10px 18px' borderRadius='5px' onClick={handleSetLabDay} />
       <Modal>
         <p>정말 전체 관리 상태를 변경하시겠습니까?</p>
          <div>

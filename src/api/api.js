@@ -304,7 +304,7 @@ export const cancelRentalSpec = async (id, data) => {
   try {
     const response = await instanceUtil.patch(
       `/admin/reservations/specs/${id}`,
-      data
+      { amount: data }
     );
 
     return response.status;
@@ -753,10 +753,9 @@ export const checkLabOperation = async (id) => {
 // 랩실 운영 요일 설정
 export const setLabOperation = async (data) => {
   try {
-    const response = await instanceUtil.put(
-      `/api/admin/operations/schedules`,
-      data
-    );
+    const response = await instanceUtil.put(`/admin/operations/schedules`, {
+      schedules: data,
+    });
 
     return response.status;
   } catch (err) {
