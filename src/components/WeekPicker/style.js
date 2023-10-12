@@ -9,7 +9,15 @@ export const DateWrap = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+  position: relative;
   padding: ${(props) => (props.modify ? "3px 0" : "6px 0")};
+`;
+
+export const DateP = styled.p`
+  font-size: 12px;
+  position: absolute;
+  right: 14px;
+  color: ${(props) => props.theme.color.gray.g3};
 `;
 
 export const DateInp = styled.input`
@@ -69,8 +77,8 @@ export const DateLi = styled.li`
 
 export const DateTit = styled.p`
   text-align: center;
-  padding: ${(props) => (props.modify ? "14px 0" : "16px 0")};
-  font-size: ${(props) => (props.modify ? "12px" : "14px")};
+  padding: ${(props) => (props.modify ? "11px 0" : "16px 0")};
+  font-size: ${(props) => (props.modify ? "10px" : "14px")};
   background-color: ${(props) => props.theme.color.primary.sub};
   border-radius: 10px 10px 0 0;
   border: 0.5px solid ${(props) => props.theme.color.primary.sub};
@@ -78,7 +86,7 @@ export const DateTit = styled.p`
 
 export const DateSubTit = styled.p`
   text-align: center;
-  height: ${(props) => (props.modify ? "48px" : "84px")};
+  height: ${(props) => (props.modify ? "46px" : "84px")};
   display: flex;
   justify-content: center;
   align-items: center;

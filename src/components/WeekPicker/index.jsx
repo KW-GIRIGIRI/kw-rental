@@ -79,7 +79,7 @@ export default function WeekPicker({ modify, equipId }) {
 
   const handleGetProductAmount = async () => {
     const startDate = calendar.date.startOf("week").add(1, "days").format('YYYY-MM-DD');
-    const endDate = calendar.date.startOf("week").add(4, "days").format('YYYY-MM-DD');
+    const endDate = calendar.date.startOf("week").add(5, "days").format('YYYY-MM-DD');
     const id = params.id ?? equipId
 
     const res = await getProductAmountFromDate(id, startDate, endDate)
@@ -101,7 +101,6 @@ export default function WeekPicker({ modify, equipId }) {
       </S.DateLi>
     );
   };
-
 
   useEffect(() => {
     handleGetProductAmount()
@@ -147,17 +146,10 @@ export default function WeekPicker({ modify, equipId }) {
         >
           <img src={iconRightArrow} alt="다음 주 보기" />
         </S.NextBtn>
+        {!modify && <S.DateP>날짜 / 대여 가능 개수</S.DateP>}
       </S.DateWrap>
       <S.DateUl modify={modify}>
-        {modify ? (
-          <></>
-        ) : (
-          <S.DateLi>
-            <S.DateTit>날짜</S.DateTit>
-            <S.DateSubTit className="text">대여 가능 개수</S.DateSubTit>
-          </S.DateLi>
-        )}
-        {[...Array(4)].map((v, i) => i + 1).map((i) => handleWeekPrint(i))}
+        {[...Array(5)].map((v, i) => i + 1).map((i) => handleWeekPrint(i))}
       </S.DateUl>
     </>
   );
