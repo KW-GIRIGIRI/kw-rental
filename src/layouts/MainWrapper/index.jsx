@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
-import { getUserClassNum } from "../../api/api";
+import { Outlet, useNavigate } from "react-router-dom";
+import { getLabStatus, getUserClassNum } from "../../api/api";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
 import { AuthContext } from "../../context/Context";

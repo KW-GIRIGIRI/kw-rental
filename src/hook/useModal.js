@@ -16,26 +16,27 @@ const useModal = ({ useBlur = true } = {}) => {
 
   const preventScroll = () => {
     const currentScrollY = window.scrollY;
+    const currentScrollX = window.scrollX;
     document.body.style.position = "fixed";
     document.body.style.width = "100%";
     document.body.style.top = `-${currentScrollY}px`;
-    return currentScrollY;
+    return [currentScrollX, currentScrollY];
   };
 
-  const allowScroll = (prevScrollY) => {
+  const allowScroll = (prevScrollX, prevScrollY) => {
     document.body.style.position = "";
     document.body.style.width = "";
     document.body.style.top = "";
-    window.scrollTo(0, prevScrollY);
+    window.scrollTo(prevScrollX, prevScrollY);
   };
 
   useEffect(() => {
-    if (isOpen) {
-      const prevScrollY = preventScroll();
-      return () => {
-        allowScroll(prevScrollY);
-      };
-    }
+    // if (isOpen) {
+    //   const [prevScrollX, prevScrollY] = preventScroll();
+    //   return () => {
+    //     allowScroll(prevScrollX, prevScrollY);
+    //   };
+    // }
   }, [isOpen]);
 
   return {

@@ -9,7 +9,7 @@ import * as S from "./style"
 export default function ManageSchedule() {
   const { Toggle, state, changeInitial } = useToggle();
   const [week, setWeek] = useState([])
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal({useBlur : false})
 
   const handleGetLabStatus = async () => {
     const res = await getLabStatus()
@@ -66,7 +66,10 @@ export default function ManageSchedule() {
         <p>정말 전체 관리 상태를 변경하시겠습니까?</p>
          <div>
           <Button
-            onClick={close}
+            onClick={() => {
+              changeInitial(!state)
+              close()
+            }}
             text="취소"
             className="sub"
             padding="11px 34px"

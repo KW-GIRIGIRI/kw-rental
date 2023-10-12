@@ -304,7 +304,7 @@ export const cancelRentalSpec = async (id, data) => {
   try {
     const response = await instanceUtil.patch(
       `/admin/reservations/specs/${id}`,
-      { amount: data }
+      data
     );
 
     return response.status;

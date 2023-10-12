@@ -104,3 +104,7 @@ export const Policy = styled.p`
   color: ${(props) => props.theme.color.primary.third};
   margin-top: 30px;
 `;
+
+export const ModalP = styled.p`
+  line-height: 140%;
+`;
