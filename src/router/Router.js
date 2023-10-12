@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import ForgotPassword from "../pages/ForgotPassword";
 import AuthSuccess from "../pages/AuthSuccess";
 import EquipmentDetail from "../pages/EquipmentDetail";
+import ManageSchedule from "../pages/ManageSchedule";
 
 const EquipmentList = lazy(() => import("../pages/EquipmentList"));
 const AddEquipment = lazy(() => import("../pages/AddEquipment"));
@@ -87,6 +88,7 @@ export default function Router() {
               <Route path="success" element={<RentalSuccess />} />
               <Route path="edit" element={<LabInformation />} />
             </Route>
+            <Route path="/schedule" element={<ManageSchedule />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
