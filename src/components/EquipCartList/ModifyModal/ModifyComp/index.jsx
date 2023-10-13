@@ -7,7 +7,7 @@ import { getProductAmountFromDate, modifyCartEquip } from "../../../../api/api";
 import DatePicker from "../../../DatePicker";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { asyncGetCartList } from "../../../../store/reducer/cartListSlice";
 
 dayjs.extend(updateLocale);
@@ -26,6 +26,7 @@ export default function ModifyComp({cart, close, modal, setModal }) {
   const [rentalAmount, setRentalAmount] = useState()
   const amountRef = useRef();
   const dispatch = useDispatch()
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
   
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -54,8 +55,9 @@ export default function ModifyComp({cart, close, modal, setModal }) {
   }
 
   const handleModifyCartEquip = async () => {
-    const endDate = calendar.date.day() === 4 ? calendar.date.add(4, 'days') : calendar.date.add(1, 'days')
-
+    let endDate = calendar.date.add(1, 'days')
+    if (calendar.date.day() >= operationDay[operationDay.length-1]) endDate = endDate.add(1, 'week').day(operationDay[0])
+    
     const data = {
       rentalStartDate: calendar.date
         .format("YYYY-MM-DD")
@@ -93,7 +95,7 @@ export default function ModifyComp({cart, close, modal, setModal }) {
         </S.DateCont>
         <span>~</span>
         <S.DateCont>
-          <span>{calendar.date.day() === 4 ? calendar.date.add(4, "days").format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
+          <span>{calendar.date.day() >= operationDay[operationDay.length-1] ? calendar.date.add(1, "week").day(operationDay[0]).format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
         </S.DateCont>
       </InpWrapper>
 

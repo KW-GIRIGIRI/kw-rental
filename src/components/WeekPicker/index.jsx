@@ -7,6 +7,7 @@ import DatePicker from "../DatePicker";
 import dayjs from "dayjs";
 import { getProductAmountFromDate } from "../../api/api";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function WeekPicker({ modify, equipId }) {
   const [calendar, setCalendar] = useState({
@@ -17,6 +18,7 @@ export default function WeekPicker({ modify, equipId }) {
   });
   const params = useParams()
   const [amountArr, setAmountArr] = useState([])
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -94,7 +96,7 @@ export default function WeekPicker({ modify, equipId }) {
         <S.DateTit modify={modify}>{pDate.format("M월 D일(dd)")}</S.DateTit>
         <S.DateSubTit
           modify={modify}
-          className={pDate >= dayjs() ? false : "disabled"}
+          className={pDate < dayjs() || !operationDay.includes(num) ? "disabled" : ""}
         >
           {amountArr[num-1]?.remainQuantity}
         </S.DateSubTit>

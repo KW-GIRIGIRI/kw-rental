@@ -65,7 +65,7 @@ export const RowWrap = styled.div`
           position: absolute;
           top: 1px;
           left: 26px;
-          width: 96px;
+          width: 120px;
           height: 18px;
           background-color: ${(props) => props.theme.color.primary.main};
           border-radius: 10px;

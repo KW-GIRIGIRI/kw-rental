@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import iconCalendar from "../../../assets/icon-calendar.svg";
 import DatePicker from "..";
 import * as S from "./style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSingularDate } from "../../../store/reducer/datePickerSlice";
 
 export default function SingularDatePicker({ initial, className }) {
@@ -13,8 +13,8 @@ export default function SingularDatePicker({ initial, className }) {
     left: 0,
     date: dayjs().add(initial || 0, "days"),
   });
-
   const dispatch = useDispatch();
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   const handleGetDatePicker = (e) => {
     const position = e.target.getBoundingClientRect();
@@ -28,56 +28,25 @@ export default function SingularDatePicker({ initial, className }) {
     }));
   };
 
-  const handleSetMon = (num) => {
-    setCalendar((prev) => ({
-      ...prev,
-      date: prev.date.add(num, "days"),
-    }));
-  };
-
-  useLayoutEffect(() => {
-    switch (calendar.date.day()) {
-      case 5:
-        handleSetMon(3);
-        break;
-      case 6:
-        handleSetMon(2);
-        break;
-      case 0:
-        handleSetMon(1);
-        break;
-      default:
-        break;
+  useEffect(() => {
+    if (!!operationDay.length) {
+      if (calendar.date.day() < operationDay[0]) {
+        setCalendar((prev) => ({
+        ...prev,
+        date: prev.date.day(operationDay[0])
+        }));
+      } else if (calendar.date.day() > operationDay[operationDay.length - 1]) {
+        setCalendar((prev) => ({
+        ...prev,
+        date: prev.date.add(1, 'week').day(operationDay[0])
+        }));
+      }
     }
-  }, []);
-
-
+  }, [operationDay]);
+  
   useEffect(() => {
     dispatch(setSingularDate(dayjs(calendar.date).format("YYYY-MM-DD")));
   }, [calendar.date]);
-
-  useEffect(() => {
-    let date;
-
-    switch (dayjs().day()) {
-      case 5:
-        date = dayjs().add(3, 'days')
-        break;
-      case 6:
-        date = dayjs().add(2, 'days')
-        break;
-      case 0:
-        date = dayjs().add(1, 'days')
-        break;
-      default:
-        date = dayjs()
-        break;
-    }
-
-    return () => {
-      dispatch(setSingularDate(date.format("YYYY-MM-DD")));
-    }
-  }, []);
 
   return (
     <>

@@ -12,6 +12,7 @@ import modifyEquipReducer from "./reducer/modifyEquipSlice";
 import datePickerReducer from "./reducer/datePickerSlice";
 import cartListReducer from "./reducer/cartListSlice";
 import labControlReducer from "./reducer/LabControllerSlice";
+import operationDayReducer from "./reducer/operationDaySlice";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   modifyEquip: modifyEquipReducer,
   datePicker: datePickerReducer,
   labControl: labControlReducer,
+  operationDay: operationDayReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

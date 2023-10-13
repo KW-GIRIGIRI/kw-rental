@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import iconCalendar from "../../../assets/icon-calendar.svg";
 import DatePicker from "..";
 import * as S from "./style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setDualLastDate,
   setDualFirstDate,
@@ -33,6 +33,7 @@ export default function DualDatePicker({
       dayjs().add(lastInitial || 0, "days"),
   });
   const dispatch = useDispatch();
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   const handleGetDatePicker = (e, bool) => {
     const position = e.target.getBoundingClientRect();
@@ -54,32 +55,21 @@ export default function DualDatePicker({
       }));
   };
 
-  const handleSetMon = (num) => {
-    setFirstCalendar((prev) => ({
-      ...prev,
-      date: prev.date.add(num, "days"),
-    }));
-  };
-
-  useLayoutEffect(() => {
-    if (!initialMonth) {
-      switch (firstCalendar.date.day()) {
-        case 5:
-          handleSetMon(3);
-          break;
-        case 6:
-          handleSetMon(2);
-          break;
-        case 0:
-          handleSetMon(1);
-          break;
-        default:
-          break;
+  useEffect(() => {
+    if (!initialMonth && !!operationDay.length) {
+      if (firstCalendar.date.day() < operationDay[0]) {
+        setFirstCalendar((prev) => ({
+        ...prev,
+        date: prev.date.day(operationDay[0])
+        }));
+      } else if (firstCalendar.date.day() > operationDay[operationDay.length - 1]) {
+        setFirstCalendar((prev) => ({
+        ...prev,
+        date: prev.date.add(1, 'week').day(operationDay[0])
+        }));
       }
     }
-  }, [firstCalendar.date]);
-
-  useEffect(() => {
+    
     if (
       className !== "user" &&
       lastCalendar.date.valueOf() < firstCalendar.date.valueOf()
@@ -93,11 +83,8 @@ export default function DualDatePicker({
     if (className === "user") {
       let sendDate = dayjs(firstCalendar.date);
 
-      if (sendDate.day() === 4) {
-        sendDate = sendDate.add(4, "days");
-      } else {
-        sendDate = sendDate.add(1, "days");
-      }
+      if (sendDate.day() >= operationDay[operationDay.length-1]) sendDate = sendDate.add(1, 'week').day(operationDay[0])
+      else sendDate = sendDate.add(1, 'days')
 
       dispatch(setDualLastDate(sendDate.format("YYYY-MM-DD")));
     }
@@ -135,6 +122,7 @@ export default function DualDatePicker({
   }, [])
 
   return (
+    operationDay &&
     <S.InpWrapper className={className}>
       <S.DateCont
         onClick={(e) => handleGetDatePicker(e, 1)}
@@ -162,8 +150,8 @@ export default function DualDatePicker({
         {className !== "user" && <img src={iconCalendar} alt="" />}
         <span>
           {className === "user"
-            ? dayjs(firstCalendar.date).day() === 4
-              ? dayjs(firstCalendar.date).add(4, "days").format("M월 D일(dd)")
+            ? dayjs(firstCalendar.date).day() >= operationDay[operationDay.length-1]
+              ? dayjs(firstCalendar.date).add(1, "week").day(operationDay[0]).format("M월 D일(dd)")
               : dayjs(firstCalendar.date).add(1, "days").format("M월 D일(dd)")
             : dayjs(lastCalendar.date).format("YY년 M월 D일(dd)")}
         </span>
