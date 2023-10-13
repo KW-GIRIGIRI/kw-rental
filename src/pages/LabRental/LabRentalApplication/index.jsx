@@ -14,16 +14,18 @@ export default function LabRentalApplication() {
   const dataRef = useRef([]);
   const hanul = useSelector(state => state.labControl.lab)
   const selectDate = useSelector(state => state.labControl.date)
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
   useTitle('랩실 대여')
   usePreventRefresh()
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
-      const enddate = dayjs(selectDate).day() === 4 ? dayjs(selectDate).add(4, 'days').format('YYYY-MM-DD') : dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
+      let endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
+      if(dayjs(endDate).day() >= operationDay[operationDay.length-1]) endDate = dayjs(endDate).add(1, 'week').day(operationDay[0]).format('YYYY-MM-DD')
 
       const data = {
         "startDate" : selectDate.split('-').map(i => ~~i),
-        "endDate": enddate.split('-').map(i => ~~i),
+        "endDate": endDate.split('-').map(i => ~~i),
         "labRoomName": hanul ? "hanul" : "hwado",
         "renterName" : dataRef.current.name.innerHTML,
         "renterPhoneNumber" : dataRef.current.pNumber.value,

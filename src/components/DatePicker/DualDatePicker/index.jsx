@@ -114,7 +114,7 @@ export default function DualDatePicker({
       
     return () => {
       if (firstInitial) dispatch(setDualFirstDate(firstInitialDate.format('YYYY-MM-DD'))) 
-      else  dispatch(setDualFirstDate(dayjs().format('YYYY-MM-DD'))) 
+      else dispatch(setDualFirstDate(dayjs().format('YYYY-MM-DD'))) 
       
       if (lastInitial) dispatch(setDualLastDate(lastInitialDate.format('YYYY-MM-DD')))
       else dispatch(setDualLastDate(dayjs().format('YYYY-MM-DD')))
