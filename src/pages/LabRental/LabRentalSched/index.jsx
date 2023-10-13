@@ -34,7 +34,11 @@ export default function LabRentalSched() {
     }
 
     const res = await setLabAvailablePeriod(lab, JSON.stringify(data))
-    res === 204 && alert('랩실 상태가 변경되었습니다.')
+    if (res === 204) alert('랩실 상태가 변경되었습니다.')
+    else {
+      changeInitial(state)
+      alert('다시 시도해주세요.')
+    }
 
     calendarRef.current.handleGetCalendarLabRemain()
     reserveWrapRef.current.handleGetLabAvailable()

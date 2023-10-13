@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { checkLabOperation, getLabStatus, setLabOperation, shutdownLab } from "../../api/api";
 import { dayArr } from "../../data/weekDay";
 import useModal from "../../hook/useModal";
 import useToggle from "../../hook/useToggle";
 import Button from "../../modules/Button";
+import { setOperationDay } from "../../store/reducer/operationDaySlice";
 import * as S from "./style"
 
 export default function ManageSchedule() {
   const { Toggle, state, changeInitial } = useToggle();
   const [week, setWeek] = useState([])
-  const { Modal, open, close } = useModal({useBlur : false})
+  const { Modal, open, close } = useModal({ useBlur: false })
+  const dispatch = useDispatch()
 
   const handleGetLabStatus = async () => {
     const res = await getLabStatus()
@@ -27,12 +30,17 @@ export default function ManageSchedule() {
   const handleGetLabDay = async () => {
     const res = await checkLabOperation()
     setWeek(res.schedules)
+
+    if (!!res.schedules.length) dispatch(setOperationDay(res.schedules))
   }
 
   const handleSetLabDay = async () => {
     if (!!week.length) {
       const res = await setLabOperation(week)
-      res === 204 && alert('운영 일자가 저장되었습니다.')
+      if (res === 204) {
+        handleGetLabDay()
+        alert('운영 일자가 저장되었습니다.')
+      }
     } else alert('운영 일자는 하루 이상이어야 합니다.')
   }
 
