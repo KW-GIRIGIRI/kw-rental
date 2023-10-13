@@ -17,7 +17,11 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
   }
 
   const onCancel = async () => {
-    const res = await cancelRentalSpec(lab.reservationSpecId, lab.amount)
+    const data = {
+      "amount": lab.amount
+    }
+    
+    const res = await cancelRentalSpec(lab.reservationSpecId, JSON.stringify(data))
     res === 204 && cancelModal.close()
     handleGetCurrentRental()
   }
