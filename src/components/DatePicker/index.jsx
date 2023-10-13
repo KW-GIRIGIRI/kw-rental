@@ -8,6 +8,7 @@ import iconRightArrow from "../../assets/icon-rightArrow-gray.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow-gray.svg";
 import { useRef } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
+import { useSelector } from "react-redux";
 
 dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);
@@ -27,6 +28,7 @@ export default function DatePicker({
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef();
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   const handleOutsideClick = (e) => {
     if (WrapRef.current === e.target) {
@@ -158,8 +160,8 @@ export default function DatePicker({
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth ||
-              getDate(d).day() > 4 ||
-              getDate(d).day() === 0 ||
+              getDate(d).day() > operationDay[operationDay.length-1] ||
+              getDate(d).day() < operationDay[0] ||
               (className === "user" &&  getDate(d) < dayjs()) ||
               (className === "user" && getDate(d) > dayjs().add(31, "days"))
               ? "disabled"

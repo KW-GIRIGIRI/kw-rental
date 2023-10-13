@@ -739,6 +739,54 @@ export const getLabRentalOnSameDate = async (id) => {
   }
 };
 
+// 랩실 운영 요일 조회
+export const checkLabOperation = async (id) => {
+  try {
+    const response = await instanceUtil.get(`/admin/operations/schedules`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 운영 요일 설정
+export const setLabOperation = async (data) => {
+  try {
+    const response = await instanceUtil.put(`/admin/operations/schedules`, {
+      schedules: data,
+    });
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 전체 운영 설정
+export const shutdownLab = async (data) => {
+  try {
+    const response = await instanceUtil.put(`/admin/operations`, {
+      isRunning: data,
+    });
+
+    return response.status;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
+// 랩실 전체 운영 조회
+export const getLabStatus = async () => {
+  try {
+    const response = await instanceUtil.get(`/admin/operations`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err.response);
+  }
+};
+
 // 페널티 관련 API
 
 // 특정 회원의 페널티 이력 조회

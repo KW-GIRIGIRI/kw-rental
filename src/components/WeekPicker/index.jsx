@@ -7,6 +7,7 @@ import DatePicker from "../DatePicker";
 import dayjs from "dayjs";
 import { getProductAmountFromDate } from "../../api/api";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function WeekPicker({ modify, equipId }) {
   const [calendar, setCalendar] = useState({
@@ -17,6 +18,7 @@ export default function WeekPicker({ modify, equipId }) {
   });
   const params = useParams()
   const [amountArr, setAmountArr] = useState([])
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -79,7 +81,7 @@ export default function WeekPicker({ modify, equipId }) {
 
   const handleGetProductAmount = async () => {
     const startDate = calendar.date.startOf("week").add(1, "days").format('YYYY-MM-DD');
-    const endDate = calendar.date.startOf("week").add(4, "days").format('YYYY-MM-DD');
+    const endDate = calendar.date.startOf("week").add(5, "days").format('YYYY-MM-DD');
     const id = params.id ?? equipId
 
     const res = await getProductAmountFromDate(id, startDate, endDate)
@@ -94,14 +96,13 @@ export default function WeekPicker({ modify, equipId }) {
         <S.DateTit modify={modify}>{pDate.format("M월 D일(dd)")}</S.DateTit>
         <S.DateSubTit
           modify={modify}
-          className={pDate >= dayjs() ? false : "disabled"}
+          className={pDate < dayjs() || !operationDay.includes(num) ? "disabled" : ""}
         >
           {amountArr[num-1]?.remainQuantity}
         </S.DateSubTit>
       </S.DateLi>
     );
   };
-
 
   useEffect(() => {
     handleGetProductAmount()
@@ -147,17 +148,10 @@ export default function WeekPicker({ modify, equipId }) {
         >
           <img src={iconRightArrow} alt="다음 주 보기" />
         </S.NextBtn>
+        {!modify && <S.DateP>날짜 / 대여 가능 개수</S.DateP>}
       </S.DateWrap>
       <S.DateUl modify={modify}>
-        {modify ? (
-          <></>
-        ) : (
-          <S.DateLi>
-            <S.DateTit>날짜</S.DateTit>
-            <S.DateSubTit className="text">대여 가능 개수</S.DateSubTit>
-          </S.DateLi>
-        )}
-        {[...Array(4)].map((v, i) => i + 1).map((i) => handleWeekPrint(i))}
+        {[...Array(5)].map((v, i) => i + 1).map((i) => handleWeekPrint(i))}
       </S.DateUl>
     </>
   );

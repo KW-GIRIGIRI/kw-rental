@@ -15,6 +15,7 @@ export default function NavBar() {
           className={
             !location.pathname.includes("/history") &&
             !location.pathname.includes("/lab") &&
+            !location.pathname.includes("/schedule") &&
             !location.pathname.includes("/setaccount")
               ? "on"
               : "off"
@@ -40,6 +41,15 @@ export default function NavBar() {
         >
           <p>{isAuth ? "히스토리" : "내 대여 정보"}</p>
         </S.NavLi>
+        {
+          isAuth &&
+          <S.NavLi
+            className={location.pathname.includes("/schedule") ? "on" : "off"}
+            onClick={() => navigate("/schedule")}
+          >
+              <p>일정 관리</p>
+            </S.NavLi>
+        }
       </S.NavUl>
     </S.NavWrap>
   );

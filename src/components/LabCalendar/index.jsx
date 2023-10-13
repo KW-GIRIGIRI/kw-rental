@@ -18,6 +18,7 @@ const LabCalendar = forwardRef((props, ref) => {
   const selectDate = useSelector(state => state.labControl.date)
   const dispatch = useDispatch()
   const { isAuth } = useContext(AuthContext);
+  const operationDay = useSelector(state => state.operationDay.operationDayArr)
 
   useImperativeHandle(ref, () => ({
     handleGetCalendarLabRemain
@@ -69,12 +70,12 @@ const LabCalendar = forwardRef((props, ref) => {
 
   const handleSetDate = e => {
     const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`)
-  
+
     if (isAuth) {
-      (selectDate.day() < 5 && selectDate.day() > 0) && dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
+      (selectDate.day() <= operationDay[operationDay.length-1] && selectDate.day() >= operationDay[0]) && dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
     } else {
-      if (selectDate.day() < 5 &&
-        selectDate.day() > 0 &&
+      if (selectDate.day() <= operationDay[operationDay.length-1] &&
+        selectDate.day() >= operationDay[0] &&
         ~~selectDate.format('YYMMDD') > ~~dayjs().format('YYMMDD') &&
         ~~selectDate.format('YYMMDD') < ~~dayjs().add(1, 'month').format('YYMMDD')) {
         dispatch(setLabDate(dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format('YYYY-MM-DD')))
@@ -94,26 +95,16 @@ const LabCalendar = forwardRef((props, ref) => {
   }, [dayObj, hanul])
 
   useEffect(() => {
-    let date;
+    let date = dayjs();
 
-    switch (dayjs().day()) {
-      case 0:
-        date = dayjs().add(1, 'days')
-        break;
-      case 4:
-        date = isAuth ? dayjs() : dayjs().add(1, 'week').startOf('week').add(1, 'days')
-        break;
-      case 5: case 6:
-        date = dayjs().add(1, 'week').startOf('week').add(1, 'days')
-        break;
-      default:
-        date = dayjs();
-        break;
+    if (!!operationDay.length) {
+      if (dayjs().day() <= operationDay[0]) date = dayjs().day(operationDay[0]).add(1, 'days')
+      else if(dayjs().day() >= operationDay[operationDay.length-1]) date = dayjs().add(1, 'week').day(operationDay[0])
     }
 
     setDayObj(date)
     dispatch(setLabDate(date.format('YYYY-MM-DD')))
-  }, [])
+  }, [operationDay])
 
   return (
     <S.Wrapper>
@@ -168,13 +159,14 @@ const LabCalendar = forwardRef((props, ref) => {
                 <span>{i + 1}</span>
                 {Object.keys(seatArray).length ?
                   ((
-                    dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i}`).day() < 4 &&
+                    dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).day() <= operationDay[operationDay.length - 1] &&
+                    dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i+1}`).day() >= operationDay[0] &&
                     handleCalendar(i)
                   )
                     && (
                       dayjs(`${dayObj.year()}-${dayObj.month() + 1}-${i + 1}`).format('YYMMDD') === dayjs(selectDate).format('YYMMDD') ?
-                        <ins>{hanul ? `대여(${seatArray[i + 1]}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</ins> :
-                        <p>{hanul ? `대여(${seatArray[i + 1]}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</p>
+                        <ins>{hanul ? `대여(${seatArray[i + 1] || 0}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</ins> :
+                        <p>{hanul ? `대여(${seatArray[i + 1] || 0}/16)` : seatArray[i + 1] > 0 ? "대여 가능" : "대여 불가"}</p>
                     )) : <></>
                 }
               </S.ContCell>
