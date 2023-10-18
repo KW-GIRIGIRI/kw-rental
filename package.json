@@ -28,7 +28,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync ./build s3://kw-girigiri-web --profile=frontend"
+    "deploy": "aws s3 sync ./build s3://kw-girigiri-web --profile=frontend",
+    "prettier": "prettier --write --config ./.prettierrc ./src"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.2",
+    "prettier": "^3.0.3"
   }
 }
