@@ -1,31 +1,31 @@
-import * as S from "../style"
-import UserState from "../../../components/UserState"
-import UserHist from "../../../components/UserHist"
-import Button from "../../../modules/Button"
-import EquipStatistics from "../../../components/EquipStatistics"
-import DualDatePicker from "../../../components/DatePicker/DualDatePicker"
-import { useContext, useState } from "react"
-import { AuthContext } from "../../../context/Context"
-import { category } from "../../../data/category"
-import Pagination from "../../../components/Pagination"
-import ExcelDownload from "../../../components/ExcelDownload"
-import useTitle from "../../../hook/useTitle"
-import Image from "../../../modules/Image"
-import iconExcel from "../../../assets/icon-excel.svg"
+import * as S from "../style";
+import UserState from "../../../components/UserState";
+import UserHist from "../../../components/UserHist";
+import Button from "../../../modules/Button";
+import EquipStatistics from "../../../components/EquipStatistics";
+import DualDatePicker from "../../../components/DatePicker/DualDatePicker";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../context/Context";
+import { category } from "../../../data/category";
+import Pagination from "../../../components/Pagination";
+import ExcelDownload from "../../../components/ExcelDownload";
+import useTitle from "../../../hook/useTitle";
+import Image from "../../../modules/Image";
+import iconExcel from "../../../assets/icon-excel.svg";
 
 export default function EquipmentRentalHistory() {
-  const [productList, setProductList] = useState([])
-  const { isAuth } = useContext(AuthContext)
-  const [isCategory, setIsCategory] = useState(0)
-  const [page, setPage] = useState(0)
-  const [pageArray, setPageArray] = useState([])
-  const [onDownload, setOnDownload] = useState(false)
-  useTitle(isAuth ?  '기자재 대여 통계' : '기자재 대여 이력')
+  const [productList, setProductList] = useState([]);
+  const { isAuth } = useContext(AuthContext);
+  const [isCategory, setIsCategory] = useState(0);
+  const [page, setPage] = useState(0);
+  const [pageArray, setPageArray] = useState([]);
+  const [onDownload, setOnDownload] = useState(false);
+  useTitle(isAuth ? "기자재 대여 통계" : "기자재 대여 이력");
 
   const handleCategory = (e) => {
-    setIsCategory(parseInt(e.target.value))
-    setPage(0)
-  }
+    setIsCategory(parseInt(e.target.value));
+    setPage(0);
+  };
 
   return (
     <>
@@ -64,19 +64,23 @@ export default function EquipmentRentalHistory() {
                 />
               ))}
             </S.FilterWrap>
-            {!!productList.length && <Image
-              src={iconExcel}
-              width="18px"
-              height="18px"
-              onClick={e => {
-                e.stopPropagation();
-                setOnDownload(true)
-              }}
-            />}
-            {onDownload && <ExcelDownload
-              setOnDownload={setOnDownload}
-              productList={productList}
-            /> }
+            {!!productList.length && (
+              <Image
+                src={iconExcel}
+                width="18px"
+                height="18px"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOnDownload(true);
+                }}
+              />
+            )}
+            {onDownload && (
+              <ExcelDownload
+                setOnDownload={setOnDownload}
+                productList={productList}
+              />
+            )}
             <EquipStatistics
               productList={productList}
               setProductList={setProductList}
@@ -86,11 +90,7 @@ export default function EquipmentRentalHistory() {
             />
           </S.RentalWrap>
           {!!pageArray.length && (
-            <Pagination
-              page={page}
-              setPage={setPage}
-              pageArray={pageArray}
-            />
+            <Pagination page={page} setPage={setPage} pageArray={pageArray} />
           )}
         </>
       ) : (

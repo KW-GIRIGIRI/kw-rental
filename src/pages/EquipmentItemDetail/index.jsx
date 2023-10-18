@@ -29,17 +29,20 @@ export default function EquipmentItemDetail() {
   const propertyNumRef = useRef();
   const location = useLocation();
   const { Modal, open, close } = useModal();
-  const titleUpdater = useTitle("Loading...")
+  const titleUpdater = useTitle("Loading...");
 
   useEffect(() => {
     if (equip) {
-      let timer = setTimeout(() => titleUpdater(`${equip.modelName} 품목`), 200)
+      let timer = setTimeout(
+        () => titleUpdater(`${equip.modelName} 품목`),
+        200
+      );
 
-      return (() => {
+      return () => {
         clearTimeout(timer);
-      })
+      };
     }
-  }, [equip])
+  }, [equip]);
 
   const handleChangeItem = (e) => {
     const pItem = itemList.filter(
@@ -98,8 +101,9 @@ export default function EquipmentItemDetail() {
     if (itemList.length > 1) {
       const response = await deleteItem(location.state.id);
 
-      if (response === 204) navigate(`/equipment/${location.state.equipmentId}`);
-      else alert(response.data)
+      if (response === 204)
+        navigate(`/equipment/${location.state.equipmentId}`);
+      else alert(response.data);
     } else {
       alert("품목이 1개일 경우, 삭제가 불가능합니다.");
       close();

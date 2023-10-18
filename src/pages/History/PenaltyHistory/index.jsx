@@ -1,14 +1,14 @@
-import UserState from "../../../components/UserState"
-import UserHist from "../../../components/UserHist"
-import * as S from "../style"
-import { useContext } from "react"
-import { AuthContext } from "../../../context/Context"
-import PenaltyState from "../../../components/PenaltyState"
-import useTitle from "../../../hook/useTitle"
+import UserState from "../../../components/UserState";
+import UserHist from "../../../components/UserHist";
+import * as S from "../style";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/Context";
+import PenaltyState from "../../../components/PenaltyState";
+import useTitle from "../../../hook/useTitle";
 
 export default function PenaltyHistory() {
   const { isAuth } = useContext(AuthContext);
-  useTitle(isAuth ? '페널티 관리' : '페널티 이력')
+  useTitle(isAuth ? "페널티 관리" : "페널티 이력");
 
   return (
     <>
@@ -31,5 +31,5 @@ export default function PenaltyHistory() {
         </>
       )}
     </>
-  )
+  );
 }

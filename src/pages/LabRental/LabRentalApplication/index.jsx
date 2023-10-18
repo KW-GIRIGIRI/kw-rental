@@ -12,36 +12,42 @@ import usePreventRefresh from "../../../hook/usePreventRefresh";
 export default function LabRentalApplication() {
   const navigate = useNavigate();
   const dataRef = useRef([]);
-  const hanul = useSelector(state => state.labControl.lab)
-  const selectDate = useSelector(state => state.labControl.date)
-  const operationDay = useSelector(state => state.operationDay.operationDayArr)
-  useTitle('랩실 대여')
-  usePreventRefresh()
+  const hanul = useSelector((state) => state.labControl.lab);
+  const selectDate = useSelector((state) => state.labControl.date);
+  const operationDay = useSelector(
+    (state) => state.operationDay.operationDayArr
+  );
+  useTitle("랩실 대여");
+  usePreventRefresh();
 
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
-      let endDate = dayjs(selectDate).add(1, 'days').format('YYYY-MM-DD')
-      if(dayjs(endDate).day() >= operationDay[operationDay.length-1]) endDate = dayjs(endDate).add(1, 'week').day(operationDay[0]).format('YYYY-MM-DD')
+      let endDate = dayjs(selectDate).add(1, "days").format("YYYY-MM-DD");
+      if (dayjs(endDate).day() >= operationDay[operationDay.length - 1])
+        endDate = dayjs(endDate)
+          .add(1, "week")
+          .day(operationDay[0])
+          .format("YYYY-MM-DD");
 
       const data = {
-        "startDate" : selectDate.split('-').map(i => ~~i),
-        "endDate": endDate.split('-').map(i => ~~i),
-        "labRoomName": hanul ? "hanul" : "hwado",
-        "renterName" : dataRef.current.name.innerHTML,
-        "renterPhoneNumber" : dataRef.current.pNumber.value,
-        "renterEmail" : `${dataRef.current.id.value}@${dataRef.current.address.value}`,
-        "rentalPurpose" : dataRef.current.purpose.value,
-        "renterCount" : ~~dataRef.current.renterCount.value,
-      }
+        startDate: selectDate.split("-").map((i) => ~~i),
+        endDate: endDate.split("-").map((i) => ~~i),
+        labRoomName: hanul ? "hanul" : "hwado",
+        renterName: dataRef.current.name.innerHTML,
+        renterPhoneNumber: dataRef.current.pNumber.value,
+        renterEmail: `${dataRef.current.id.value}@${dataRef.current.address.value}`,
+        rentalPurpose: dataRef.current.purpose.value,
+        renterCount: ~~dataRef.current.renterCount.value,
+      };
 
-      const response = await postLabRental(JSON.stringify(data))
+      const response = await postLabRental(JSON.stringify(data));
 
-      if (response === 201) navigate("/lab/success")
+      if (response === 201) navigate("/lab/success");
       else {
         alert(response.data);
         navigate("/lab/status");
       }
-    } 
+    }
   };
 
   return (

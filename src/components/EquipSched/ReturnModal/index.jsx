@@ -85,7 +85,7 @@ export default function ReturnModal({ user, returnModal, setReturnModal }) {
   useEffect(() => {
     returnModal && open();
     setReturnModal(false);
-    setFaulty([])
+    setFaulty([]);
   }, [returnModal, close]);
 
   return (

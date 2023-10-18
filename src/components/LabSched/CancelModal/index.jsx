@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { cancelRentalSpec } from "../../../api/api"
-import useModal from "../../../hook/useModal"
-import Button from "../../../modules/Button"
-import { asyncGetLabReceived, asyncGetReturned } from "../../../store/reducer/authReceiveSlice"
-import * as S from "./style"
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cancelRentalSpec } from "../../../api/api";
+import useModal from "../../../hook/useModal";
+import Button from "../../../modules/Button";
+import {
+  asyncGetLabReceived,
+  asyncGetReturned,
+} from "../../../store/reducer/authReceiveSlice";
+import * as S from "./style";
 
 export default function CancelModal({
   info,
@@ -12,34 +15,35 @@ export default function CancelModal({
   cancelModal,
   setCancelModal,
 }) {
-  const { Modal, open, close, isOpen } = useModal()
-  const dispatch = useDispatch()
-  const [isMounted, setIsMounted] = useState(false)
-  const selectDate = useSelector((state) => state.datePicker.singularDate)
+  const { Modal, open, close, isOpen } = useModal();
+  const dispatch = useDispatch();
+  const [isMounted, setIsMounted] = useState(false);
+  const selectDate = useSelector((state) => state.datePicker.singularDate);
 
   const handleCancelRental = async () => {
     const data = {
-      "amount" : info.rentalAmount
-    }
+      amount: info.rentalAmount,
+    };
 
-    const res = await cancelRentalSpec(info.id, JSON.stringify(data))
+    const res = await cancelRentalSpec(info.id, JSON.stringify(data));
 
     if (res === 204) {
-      setCancelModal(false)
-      close()
-      receive ? dispatch(asyncGetLabReceived(selectDate)) : dispatch(asyncGetReturned(selectDate))
+      setCancelModal(false);
+      close();
+      receive
+        ? dispatch(asyncGetLabReceived(selectDate))
+        : dispatch(asyncGetReturned(selectDate));
     }
-  }
+  };
 
   useEffect(() => {
-    cancelModal && open()
-  }, [cancelModal, open])
+    cancelModal && open();
+  }, [cancelModal, open]);
 
   useEffect(() => {
-    setIsMounted(true)
-    if(isMounted && !isOpen)
-      setCancelModal(false)
-  }, [isOpen])
+    setIsMounted(true);
+    if (isMounted && !isOpen) setCancelModal(false);
+  }, [isOpen]);
 
   return (
     <Modal className="modify">
@@ -51,7 +55,9 @@ export default function CancelModal({
           <p>인원</p>
         </S.ProductLi>
         <S.ProductLi>
-          <p>{info.renterName} {info.memberNumber}</p>
+          <p>
+            {info.renterName} {info.memberNumber}
+          </p>
           <p>{info.rentalAmount}</p>
         </S.ProductLi>
       </S.ProductUl>
@@ -66,5 +72,5 @@ export default function CancelModal({
         />
       </div>
     </Modal>
-  )
+  );
 }

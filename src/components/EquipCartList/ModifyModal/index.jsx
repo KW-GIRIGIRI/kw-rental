@@ -6,11 +6,7 @@ import * as S from "./style";
 import { category } from "../../../data/category";
 import ModifyComp from "./ModifyComp";
 
-export default function ModifyModal({
-  modal,
-  setModal,
-  cart,
-}) {
+export default function ModifyModal({ modal, setModal, cart }) {
   const { Modal, open, close } = useModal();
 
   useEffect(() => {
@@ -41,7 +37,12 @@ export default function ModifyModal({
         </S.Div>
         <p>대여 현황</p>
         <WeekPicker equipId={cart.equipmentId} modify="true" />
-        <ModifyComp cart={cart} close={close} modal={modal} setModal={setModal} />
+        <ModifyComp
+          cart={cart}
+          close={close}
+          modal={modal}
+          setModal={setModal}
+        />
       </Modal>
     )
   );

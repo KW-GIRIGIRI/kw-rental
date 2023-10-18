@@ -15,15 +15,20 @@ export default function AddCartEquip({ modify, setModal }) {
   const { Modal, open, close } = useModal();
   const productCount = useSelector(
     (state) => state.modifyEquip.equip.totalQuantity
-    );
+  );
   const selectDate = useSelector((state) => state.datePicker.dualDate);
-  const [rentalAmount, setRentalAmount] = useState(productCount)
+  const [rentalAmount, setRentalAmount] = useState(productCount);
 
   const handleGetProductAmount = async () => {
-    const id = params.id 
-    const res = await getProductAmountFromDate(id, selectDate.firstDate, dayjs(selectDate.firstDate).add(1, 'days').format('YYYY-MM-DD'))
-    res.remainQuantities.length && setRentalAmount(res.remainQuantities[0].remainQuantity);
-  }
+    const id = params.id;
+    const res = await getProductAmountFromDate(
+      id,
+      selectDate.firstDate,
+      dayjs(selectDate.firstDate).add(1, "days").format("YYYY-MM-DD")
+    );
+    res.remainQuantities.length &&
+      setRentalAmount(res.remainQuantities[0].remainQuantity);
+  };
 
   const handleAddCart = async () => {
     const data = {
@@ -38,37 +43,34 @@ export default function AddCartEquip({ modify, setModal }) {
   };
 
   useEffect(() => {
-    if (selectDate.firstDate) handleGetProductAmount()
-  }, [selectDate])
+    if (selectDate.firstDate) handleGetProductAmount();
+  }, [selectDate]);
 
   return (
     <S.Wrapper>
       <S.Form>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
-          <DualDatePicker
-            firstInitial={1}
-            lastInitial={2}
-            className="user"
-          />
+          <DualDatePicker firstInitial={1} lastInitial={2} className="user" />
         </S.InpWrapper>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>
-        {
-            rentalAmount ?
-              <>
-                <S.Select name="equipCount" id="" ref={amountRef}>
-                  {Array(rentalAmount)
-                    .fill()
-                    .map((_, i) => (
-                      <option key={i} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                </S.Select> 대
-              </>
-              : <S.WarnDesc>대여 가능 수량이 0개입니다.</S.WarnDesc>
-            }
+          {rentalAmount ? (
+            <>
+              <S.Select name="equipCount" id="" ref={amountRef}>
+                {Array(rentalAmount)
+                  .fill()
+                  .map((_, i) => (
+                    <option key={i} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  ))}
+              </S.Select>{" "}
+              대
+            </>
+          ) : (
+            <S.WarnDesc>대여 가능 수량이 0개입니다.</S.WarnDesc>
+          )}
         </S.InpWrapper>
       </S.Form>
       <Button

@@ -1,6 +1,6 @@
 import * as S from "./style";
 import iconSearch from "../../assets/icon-search.svg";
-import iconViewMode from "../../assets/icon-viewmode.svg"
+import iconViewMode from "../../assets/icon-viewmode.svg";
 import iconPlus from "../../assets/icon-plus.svg";
 import Button from "../../modules/Button";
 import EquipListWrap from "../../components/EquipListWrap";
@@ -28,8 +28,8 @@ export default function EquipmentList() {
   const [isCategory, setIsCategory] = useState(0);
   const { Modal, open, close } = useModal();
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  useTitle('기자재 조회')
+  const dispatch = useDispatch();
+  useTitle("기자재 조회");
 
   const handleSearch = (e) => {
     if (e.key === "Enter" || e.type === "click") {
@@ -74,11 +74,11 @@ export default function EquipmentList() {
 
   useLayoutEffect(() => {
     setPage(0);
-  }, [viewMode])
+  }, [viewMode]);
 
   useEffect(() => {
     dispatch(resetEquip());
-  }, [])
+  }, []);
 
   return (
     <S.Wrapper>
@@ -114,12 +114,24 @@ export default function EquipmentList() {
             <p>기자재 추가</p>
           </S.addBtn>
         ) : (
-            <S.FilterWrap>
-            <S.TypeBtn aria-label="select gallery type" onClick={() => setViewMode("gal")}>
-              <SVGIcon iconUrl={iconViewMode} id={viewMode === "gal" ? "icon-gal-on" : "icon-gal"} />
+          <S.FilterWrap>
+            <S.TypeBtn
+              aria-label="select gallery type"
+              onClick={() => setViewMode("gal")}
+            >
+              <SVGIcon
+                iconUrl={iconViewMode}
+                id={viewMode === "gal" ? "icon-gal-on" : "icon-gal"}
+              />
             </S.TypeBtn>
-            <S.TypeBtn aria-label="select list type" onClick={() => setViewMode("list")}>
-              <SVGIcon iconUrl={iconViewMode} id={viewMode === "list" ? "icon-list-on" : "icon-list"} />
+            <S.TypeBtn
+              aria-label="select list type"
+              onClick={() => setViewMode("list")}
+            >
+              <SVGIcon
+                iconUrl={iconViewMode}
+                id={viewMode === "list" ? "icon-list-on" : "icon-list"}
+              />
             </S.TypeBtn>
           </S.FilterWrap>
         )}
@@ -149,18 +161,14 @@ export default function EquipmentList() {
         ))}
       </S.FilterWrap>
 
-      {
-        !!productList.length ?
+      {!!productList.length ? (
         <EquipListWrap type={viewMode} data={productList} />
-        : <EmptyData content={['해당하는 카테고리에 기자재가 없습니다.']} />
-      }
+      ) : (
+        <EmptyData content={["해당하는 카테고리에 기자재가 없습니다."]} />
+      )}
 
       {!!pageArray.length && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          pageArray={pageArray}
-        />
+        <Pagination page={page} setPage={setPage} pageArray={pageArray} />
       )}
     </S.Wrapper>
   );

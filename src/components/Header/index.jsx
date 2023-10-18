@@ -14,10 +14,12 @@ export default function Header({ classNum }) {
 
   return (
     <Wrapper>
-      <ImgLogo
-        onClick={() => navigate("/equipment")}>
+      <ImgLogo onClick={() => navigate("/equipment")}>
         <source srcSet={isAuth ? AdminLogoWebp : LogoWebp} type="image/webp" />
-        <img src={isAuth ? AdminLogo : Logo} alt="광운대학교 미디어커뮤니케이션학부 랩실 관리 시스템" />
+        <img
+          src={isAuth ? AdminLogo : Logo}
+          alt="광운대학교 미디어커뮤니케이션학부 랩실 관리 시스템"
+        />
       </ImgLogo>
       <HeaderUserInfo classNum={classNum} />
     </Wrapper>

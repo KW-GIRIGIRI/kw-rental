@@ -5,14 +5,14 @@ import { category } from "../../../data/category";
 import { useFormContext } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-const DetailDescInput = (({ itemLength }) => {
+const DetailDescInput = ({ itemLength }) => {
   const selectRef = useRef();
   const location = useLocation();
   const product = useSelector((state) => state.modifyEquip.equip);
   const {
     register,
     formState: { errors },
-  } = useFormContext({mode: "onBlur"}); 
+  } = useFormContext({ mode: "onBlur" });
 
   const handleSelectWidth = (e) => {
     e.target.style.padding = `5px ${
@@ -26,7 +26,7 @@ const DetailDescInput = (({ itemLength }) => {
         onChange={handleSelectWidth}
         className={errors.category ? "err" : ""}
         ref={selectRef}
-         {...register("category")}
+        {...register("category")}
         name="category"
         id=""
         defaultValue={product?.category || "default"}
@@ -43,26 +43,25 @@ const DetailDescInput = (({ itemLength }) => {
         ))}
       </S.CategoryDropdown>
       <S.Input
-        className={errors.modelName ? 'title err' : 'title'}
+        className={errors.modelName ? "title err" : "title"}
         placeholder="기자재명을 입력하세요."
-        {...register('modelName', { required: true })} 
+        {...register("modelName", { required: true })}
         defaultValue={product?.modelName}
       />
       <S.ProductOl>
         <S.ProductLi>
           <p>제조사</p>
           <S.Input
-            className={errors.maker ? 'err' : ''}
+            className={errors.maker ? "err" : ""}
             placeholder="ex. SONY"
-            {...register('maker', { required: true }) } 
+            {...register("maker", { required: true })}
             defaultValue={product?.maker}
           />
-
         </S.ProductLi>
         <S.ProductLi>
           <p>구성품</p>
           <S.Textarea
-            { ...register('components') }
+            {...register("components")}
             id=""
             rows="3"
             placeholder="ex. 줌렌즈(18-105mm), 단렌즈(35mm), 전용 가방, 배터리&충전기"
@@ -72,7 +71,7 @@ const DetailDescInput = (({ itemLength }) => {
         <S.ProductLi>
           <p>사용 목적</p>
           <S.Input
-            { ...register('purpose') }
+            {...register("purpose")}
             placeholder="ex. 사진 촬영, 동영상 촬영"
             defaultValue={product?.purpose}
             maxLength="100"
@@ -96,7 +95,7 @@ const DetailDescInput = (({ itemLength }) => {
         <S.ProductLi>
           <p>최대 대여 가능일</p>
           <S.Input
-            { ...register('maxRentalDays') }
+            {...register("maxRentalDays")}
             disabled
             placeholder="ex. 1"
             defaultValue={product?.maxRentalDays || 1}
@@ -105,6 +104,6 @@ const DetailDescInput = (({ itemLength }) => {
       </S.ProductOl>
     </S.Div>
   );
-});
+};
 
 export default DetailDescInput;

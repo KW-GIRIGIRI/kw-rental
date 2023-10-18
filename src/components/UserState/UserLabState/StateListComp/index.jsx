@@ -1,34 +1,37 @@
-import dayjs from "dayjs"
-import { cancelRentalSpec, getLabRentalOnSameDate } from "../../../../api/api"
-import { rentalStatus } from "../../../../data/rentalStatus"
-import useModal from "../../../../hook/useModal"
-import Button from "../../../../modules/Button"
-import * as S from "../../style"
-import { useEffect, useState } from 'react'
+import dayjs from "dayjs";
+import { cancelRentalSpec, getLabRentalOnSameDate } from "../../../../api/api";
+import { rentalStatus } from "../../../../data/rentalStatus";
+import useModal from "../../../../hook/useModal";
+import Button from "../../../../modules/Button";
+import * as S from "../../style";
+import { useEffect, useState } from "react";
 
 export default function StateListComp({ lab, handleGetCurrentRental }) {
-  const [contacts, setContacts] = useState([])
-  const cancelModal = useModal()
-  const contactsModal = useModal()
+  const [contacts, setContacts] = useState([]);
+  const cancelModal = useModal();
+  const contactsModal = useModal();
 
   const handleGetLabRental = async () => {
-    const res = await getLabRentalOnSameDate(lab.reservationId)
-    setContacts(res.reservations)
-  }
+    const res = await getLabRentalOnSameDate(lab.reservationId);
+    setContacts(res.reservations);
+  };
 
   const onCancel = async () => {
     const data = {
-      "amount": lab.amount
-    }
-    
-    const res = await cancelRentalSpec(lab.reservationSpecId, JSON.stringify(data))
-    res === 204 && cancelModal.close()
-    handleGetCurrentRental()
-  }
+      amount: lab.amount,
+    };
+
+    const res = await cancelRentalSpec(
+      lab.reservationSpecId,
+      JSON.stringify(data)
+    );
+    res === 204 && cancelModal.close();
+    handleGetCurrentRental();
+  };
 
   useEffect(() => {
-    handleGetLabRental()
-  }, [])
+    handleGetLabRental();
+  }, []);
 
   return (
     <S.HistList className="lab labList">
@@ -84,11 +87,11 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
       <contactsModal.Modal className="contacts">
         <p>대표자 연락망</p>
         <div>
-          {
-            contacts.map((keyholder, idx) => (
-              <p key={idx}>{keyholder.name} {keyholder.phoneNumber}</p>
-            ))
-          }
+          {contacts.map((keyholder, idx) => (
+            <p key={idx}>
+              {keyholder.name} {keyholder.phoneNumber}
+            </p>
+          ))}
         </div>
         <div>
           <Button
@@ -101,5 +104,5 @@ export default function StateListComp({ lab, handleGetCurrentRental }) {
         </div>
       </contactsModal.Modal>
     </S.HistList>
-  )
+  );
 }

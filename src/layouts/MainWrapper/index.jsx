@@ -10,19 +10,19 @@ import { AuthContext } from "../../context/Context";
 
 export default function MainWrapper() {
   const [classNum, setClassNum] = useState("");
-  const dispatch = useDispatch()
-  const { setIsAuth } = useContext(AuthContext)
+  const dispatch = useDispatch();
+  const { setIsAuth } = useContext(AuthContext);
 
   const handleGetClassNum = async () => {
     const res = await getUserClassNum();
     setClassNum(res.memberNumber);
-    res.role === "ADMIN" ? setIsAuth(true) : setIsAuth(false)
+    res.role === "ADMIN" ? setIsAuth(true) : setIsAuth(false);
   };
 
   const handleGetOperationDay = async () => {
-    const res = await checkLabOperation()
-    if(!!res.schedules.length) dispatch(setOperationDay(res.schedules))
-  }
+    const res = await checkLabOperation();
+    if (!!res.schedules.length) dispatch(setOperationDay(res.schedules));
+  };
 
   useEffect(() => {
     handleGetClassNum();

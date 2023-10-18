@@ -16,9 +16,11 @@ export default function WeekPicker({ modify, equipId }) {
     left: 0,
     date: dayjs().add(1, "days"),
   });
-  const params = useParams()
-  const [amountArr, setAmountArr] = useState([])
-  const operationDay = useSelector(state => state.operationDay.operationDayArr)
+  const params = useParams();
+  const [amountArr, setAmountArr] = useState([]);
+  const operationDay = useSelector(
+    (state) => state.operationDay.operationDayArr
+  );
 
   const handleGetDatePicker = (e) => {
     e.preventDefault();
@@ -80,13 +82,19 @@ export default function WeekPicker({ modify, equipId }) {
   };
 
   const handleGetProductAmount = async () => {
-    const startDate = calendar.date.startOf("week").add(1, "days").format('YYYY-MM-DD');
-    const endDate = calendar.date.startOf("week").add(5, "days").format('YYYY-MM-DD');
-    const id = params.id ?? equipId
+    const startDate = calendar.date
+      .startOf("week")
+      .add(1, "days")
+      .format("YYYY-MM-DD");
+    const endDate = calendar.date
+      .startOf("week")
+      .add(5, "days")
+      .format("YYYY-MM-DD");
+    const id = params.id ?? equipId;
 
-    const res = await getProductAmountFromDate(id, startDate, endDate)
+    const res = await getProductAmountFromDate(id, startDate, endDate);
     setAmountArr(res.remainQuantities);
-  }
+  };
 
   const handleWeekPrint = (num) => {
     const pDate = calendar.date.startOf("week").add(num, "days");
@@ -96,16 +104,18 @@ export default function WeekPicker({ modify, equipId }) {
         <S.DateTit modify={modify}>{pDate.format("M월 D일(dd)")}</S.DateTit>
         <S.DateSubTit
           modify={modify}
-          className={pDate < dayjs() || !operationDay.includes(num) ? "disabled" : ""}
+          className={
+            pDate < dayjs() || !operationDay.includes(num) ? "disabled" : ""
+          }
         >
-          {amountArr[num-1]?.remainQuantity}
+          {amountArr[num - 1]?.remainQuantity}
         </S.DateSubTit>
       </S.DateLi>
     );
   };
 
   useEffect(() => {
-    handleGetProductAmount()
+    handleGetProductAmount();
   }, [calendar]);
 
   useLayoutEffect(() => {
@@ -135,7 +145,7 @@ export default function WeekPicker({ modify, equipId }) {
         </S.DateCont>
         {calendar && (
           <DatePicker
-            className='user'
+            className="user"
             checkWeek={true}
             calendar={calendar}
             setCalendar={setCalendar}

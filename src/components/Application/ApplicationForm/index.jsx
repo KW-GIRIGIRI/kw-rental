@@ -16,16 +16,17 @@ const ApplicationForm = forwardRef((props, dataRef) => {
     email: "",
   });
   const purposeInp = useInput("");
-  const [renterCount, setRenterCount] = useState(10)
-  const hanul = useSelector(state => state.labControl.lab)
-  const selectDate = useSelector(state => state.labControl.date)
+  const [renterCount, setRenterCount] = useState(10);
+  const hanul = useSelector((state) => state.labControl.lab);
+  const selectDate = useSelector((state) => state.labControl.date);
 
   const handleGetLabRemain = async () => {
-    const lab = hanul ? 'hanul' : 'hwado'
-    const res = await getLabRemainQuantities(lab, selectDate, selectDate)
+    const lab = hanul ? "hanul" : "hwado";
+    const res = await getLabRemainQuantities(lab, selectDate, selectDate);
 
-    if (hanul && res.remainQuantities[0].remainQuantity < 10) setRenterCount(res.remainQuantities[0].remainQuantity)
-  }
+    if (hanul && res.remainQuantities[0].remainQuantity < 10)
+      setRenterCount(res.remainQuantities[0].remainQuantity);
+  };
 
   const handleGetUserInfo = async () => {
     const res = await getUserInfo();
@@ -90,7 +91,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
               ref={(el) => (dataRef.current.purpose = el)}
               placeholder="최소 10자 이상 입력하세요."
               rows="4"
-              maxLength='50'
+              maxLength="50"
             ></TextareaStyle>
             {visible ? (
               <S.Exclam>
@@ -105,7 +106,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
         {props.isLab && (
           <S.Lab>
             <S.FormLi>대여 인원</S.FormLi>
-            <select ref={el => dataRef.current.renterCount = el}>
+            <select ref={(el) => (dataRef.current.renterCount = el)}>
               {Array(renterCount)
                 .fill()
                 .map((_, i) => (

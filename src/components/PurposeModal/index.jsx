@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react"
-import * as S from "./style"
+import { useEffect, useRef } from "react";
+import * as S from "./style";
 
 export default function PurposeModal({ purpose, setPurpose }) {
-  const wrapRef = useRef()
-  
-    const handleScrollClose = (e) => {
+  const wrapRef = useRef();
+
+  const handleScrollClose = (e) => {
     setPurpose((prev) => ({
       ...prev,
       visible: false,
@@ -21,19 +21,19 @@ export default function PurposeModal({ purpose, setPurpose }) {
   };
 
   useEffect(() => {
-  if (purpose.visible) {
-    const timer = setTimeout(() => {
-      window.addEventListener("scroll", handleScrollClose);
-      window.addEventListener("resize", handleScrollClose);
-    }, 200);
+    if (purpose.visible) {
+      const timer = setTimeout(() => {
+        window.addEventListener("scroll", handleScrollClose);
+        window.addEventListener("resize", handleScrollClose);
+      }, 200);
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScrollClose);
-      window.removeEventListener("resize", handleScrollClose);
-    };
-  }
-}, [purpose.visible]);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("scroll", handleScrollClose);
+        window.removeEventListener("resize", handleScrollClose);
+      };
+    }
+  }, [purpose.visible]);
 
   return (
     <S.Section ref={wrapRef} onClick={handleOutsideClick}>
@@ -41,5 +41,5 @@ export default function PurposeModal({ purpose, setPurpose }) {
         <p>{purpose.text}</p>
       </S.Div>
     </S.Section>
-  )
+  );
 }

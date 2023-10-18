@@ -30,14 +30,14 @@ export default function AddEquipment() {
   const [imgFile, setImgFile] = useState("");
   const [imgPreview, setImgPreview] = useState("");
   const { Modal, open, close } = useModal();
-  const addEqRef = useRef('');
+  const addEqRef = useRef("");
   const [data, setData] = useState([]);
   const product = useSelector((state) => state.modifyEquip.equip);
   const item = useSelector((state) => state.modifyEquip.itemList);
-  const dispatch = useDispatch()
-  const methods = useForm()
-  useTitle(location.pathname.includes('edit') ? '기자재 수정' : '기자재 추가')
-  usePreventRefresh()
+  const dispatch = useDispatch();
+  const methods = useForm();
+  useTitle(location.pathname.includes("edit") ? "기자재 수정" : "기자재 추가");
+  usePreventRefresh();
 
   const handleImgFile = async (e) => {
     const image = e.target.files[0];
@@ -49,59 +49,67 @@ export default function AddEquipment() {
     const response = await postImage(formData);
     setImgFile(response);
   };
-  
+
   const handleSetError = (name) => {
-    if (!methods.watch(name) || (name === 'category' && methods.watch('category') === 'default'))
-        methods.setError(name, { type: "focus" }, { shouldFocus: true })
-    else methods.clearErrors(name)
-  }
+    if (
+      !methods.watch(name) ||
+      (name === "category" && methods.watch("category") === "default")
+    )
+      methods.setError(name, { type: "focus" }, { shouldFocus: true });
+    else methods.clearErrors(name);
+  };
 
   const handleAddEquipment = async (e) => {
     e.preventDefault();
 
-    handleSetError('modelName')
-    handleSetError('maker')
-    handleSetError('category')
+    handleSetError("modelName");
+    handleSetError("maker");
+    handleSetError("category");
 
-    if (!imgFile.length) alert('이미지를 추가해주세요.')
+    if (!imgFile.length) alert("이미지를 추가해주세요.");
     else {
       const item = [];
       data.map((i) => item.push({ propertyNumber: i.propertyNumber }));
-  
+
       const sendData = {
         equipment: {
           imgUrl: imgFile,
           totalQuantity: item.length,
-          category: methods.watch('category'),
-          modelName: methods.watch('modelName'),
-          components: methods.watch('components'),
-          maker: methods.watch('maker'),
-          purpose: methods.watch('purpose'),
-          rentalPlace: '한울관 B120호',
+          category: methods.watch("category"),
+          modelName: methods.watch("modelName"),
+          components: methods.watch("components"),
+          maker: methods.watch("maker"),
+          purpose: methods.watch("purpose"),
+          rentalPlace: "한울관 B120호",
           maxRentalDays: 1,
           description: addEqRef.current.value,
         },
         items: item,
       };
-  
+
       const response = await addEquipment(JSON.stringify(sendData));
 
-      if (response.includes('api')) navigate(`/equipment/${response.split("/")[3]}`);
-      else if(response.includes('중복')) alert('기자재명과 자산번호는 다른 기자재와 중복이 불가능합니다.')
-      else if (response.includes('addEquipmentWithItemsRequest')) alert('카테고리, 기자재 이미지, 기자재명, 제조사, 자산번호는 필수 입력값입니다.')
-      else alert(response)
-      dispatch(resetEquip())
+      if (response.includes("api"))
+        navigate(`/equipment/${response.split("/")[3]}`);
+      else if (response.includes("중복"))
+        alert("기자재명과 자산번호는 다른 기자재와 중복이 불가능합니다.");
+      else if (response.includes("addEquipmentWithItemsRequest"))
+        alert(
+          "카테고리, 기자재 이미지, 기자재명, 제조사, 자산번호는 필수 입력값입니다."
+        );
+      else alert(response);
+      dispatch(resetEquip());
     }
   };
 
-  const handleModifyEquipment = async e => {
+  const handleModifyEquipment = async (e) => {
     e.preventDefault();
 
-    handleSetError('modelName')
-    handleSetError('maker')
-    handleSetError('category')
+    handleSetError("modelName");
+    handleSetError("maker");
+    handleSetError("category");
 
-    if (!product.imgUrl || !imgFile.length) alert('이미지를 추가해주세요.')
+    if (!product.imgUrl || !imgFile.length) alert("이미지를 추가해주세요.");
     else {
       const sendItem = [];
       data.map((i) =>
@@ -118,23 +126,31 @@ export default function AddEquipment() {
       const sendData = {
         imgUrl: product.imgUrl || imgFile,
         totalQuantity: data.length,
-        category: methods.watch('category'),
-        modelName: methods.watch('modelName'),
-        components: methods.watch('components'),
-        maker: methods.watch('maker'),
-        purpose: methods.watch('purpose'),
-        rentalPlace: '한울관 B120호',
+        category: methods.watch("category"),
+        modelName: methods.watch("modelName"),
+        components: methods.watch("components"),
+        maker: methods.watch("maker"),
+        purpose: methods.watch("purpose"),
+        rentalPlace: "한울관 B120호",
         description: addEqRef.current.value,
         maxRentalDays: 1,
-      }
+      };
 
-      if(item.items.length !== itemData.items.length) {
+      if (item.items.length !== itemData.items.length) {
         const itemRes = await changeItems(params.id, JSON.stringify(itemData));
-        const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+        const eqRes = await modifyEquipment(
+          params.id,
+          JSON.stringify(sendData)
+        );
 
-        itemRes === 204 && eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
+        itemRes === 204 &&
+          eqRes &&
+          navigate(`/equipment/${eqRes.split("/")[3]}`);
       } else {
-        const eqRes = await modifyEquipment(params.id, JSON.stringify(sendData));
+        const eqRes = await modifyEquipment(
+          params.id,
+          JSON.stringify(sendData)
+        );
         eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
       }
     }
@@ -142,10 +158,9 @@ export default function AddEquipment() {
 
   useLayoutEffect(() => {
     if (location.pathname.includes("edit")) {
-      setImgFile(product?.imgUrl)
-      setIsEdit(true)
-    }
-    else if (location.pathname.includes("add")) setIsEdit(false)
+      setImgFile(product?.imgUrl);
+      setIsEdit(true);
+    } else if (location.pathname.includes("add")) setIsEdit(false);
   }, []);
 
   return (
@@ -174,9 +189,7 @@ export default function AddEquipment() {
           </S.FileLabel>
         )}
         <FormProvider {...methods}>
-          <DetailDescInput
-            itemLength={data.length}
-            />
+          <DetailDescInput itemLength={data.length} />
         </FormProvider>
       </DetailWrapper>
       <SubTitle>안내사항</SubTitle>
@@ -191,8 +204,8 @@ export default function AddEquipment() {
         defaultValue={product?.description}
         ref={addEqRef}
       />
-      {item && (
-        isEdit ? (
+      {item &&
+        (isEdit ? (
           <>
             <SubTitle>품목 추가 및 삭제</SubTitle>
             {item && (
@@ -215,8 +228,7 @@ export default function AddEquipment() {
               isAdd={true}
             />
           </>
-        )
-      )}
+        ))}
 
       <S.BtnWrap>
         <Button
