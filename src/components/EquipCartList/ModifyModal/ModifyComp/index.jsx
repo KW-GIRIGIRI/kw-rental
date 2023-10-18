@@ -16,18 +16,20 @@ dayjs.updateLocale("en", {
   weekdays: ["일", "월", "화", "수", "목", "금", "토"],
 });
 
-export default function ModifyComp({cart, close, modal, setModal }) {
+export default function ModifyComp({ cart, close, modal, setModal }) {
   const [calendar, setCalendar] = useState({
     visible: false,
     top: 0,
     left: 0,
     date: dayjs(cart.rentalStartDate),
   });
-  const [rentalAmount, setRentalAmount] = useState()
+  const [rentalAmount, setRentalAmount] = useState();
   const amountRef = useRef();
-  const dispatch = useDispatch()
-  const operationDay = useSelector(state => state.operationDay.operationDayArr)
-  
+  const dispatch = useDispatch();
+  const operationDay = useSelector(
+    (state) => state.operationDay.operationDayArr
+  );
+
   const handleGetDatePicker = (e) => {
     e.preventDefault();
     const position = e.target.getBoundingClientRect();
@@ -42,22 +44,28 @@ export default function ModifyComp({cart, close, modal, setModal }) {
   };
 
   const handleGetProductAmount = async () => {
-    const startDate = calendar.date.format('YYYY-MM-DD')
-    const endDate = calendar.date.add(1, 'days').format('YYYY-MM-DD')
+    const startDate = calendar.date.format("YYYY-MM-DD");
+    const endDate = calendar.date.add(1, "days").format("YYYY-MM-DD");
 
-    const res = await getProductAmountFromDate(cart.equipmentId, startDate, endDate)
-    res.remainQuantities.length && setRentalAmount(res.remainQuantities[0].remainQuantity);
-  }
+    const res = await getProductAmountFromDate(
+      cart.equipmentId,
+      startDate,
+      endDate
+    );
+    res.remainQuantities.length &&
+      setRentalAmount(res.remainQuantities[0].remainQuantity);
+  };
 
   const handleClose = () => {
     close();
     setModal(false);
-  }
+  };
 
   const handleModifyCartEquip = async () => {
-    let endDate = calendar.date.add(1, 'days')
-    if (calendar.date.day() >= operationDay[operationDay.length-1]) endDate = endDate.add(1, 'week').day(operationDay[0])
-    
+    let endDate = calendar.date.add(1, "days");
+    if (calendar.date.day() >= operationDay[operationDay.length - 1])
+      endDate = endDate.add(1, "week").day(operationDay[0]);
+
     const data = {
       rentalStartDate: calendar.date
         .format("YYYY-MM-DD")
@@ -70,23 +78,27 @@ export default function ModifyComp({cart, close, modal, setModal }) {
       amount: parseInt(amountRef.current.value),
     };
 
-    const res = await modifyCartEquip(cart.id, JSON.stringify(data))
+    const res = await modifyCartEquip(cart.id, JSON.stringify(data));
     if (res === 200) {
-      close()
-      setModal(false)
-      dispatch(asyncGetCartList())
+      close();
+      setModal(false);
+      dispatch(asyncGetCartList());
     }
   };
 
   useEffect(() => {
-    handleGetProductAmount()
-  }, [calendar.date])
+    handleGetProductAmount();
+  }, [calendar.date]);
 
   return (
     <>
       <p>기자재 수령일~반납일</p>
       {calendar && (
-        <DatePicker calendar={calendar} setCalendar={setCalendar} className='user'/>
+        <DatePicker
+          calendar={calendar}
+          setCalendar={setCalendar}
+          className="user"
+        />
       )}
       <InpWrapper className="item">
         <S.DateCont onClick={handleGetDatePicker}>
@@ -95,25 +107,32 @@ export default function ModifyComp({cart, close, modal, setModal }) {
         </S.DateCont>
         <span>~</span>
         <S.DateCont>
-          <span>{calendar.date.day() >= operationDay[operationDay.length-1] ? calendar.date.add(1, "week").day(operationDay[0]).format("M월 D일(dd)") : calendar.date.add(1, "days").format("M월 D일(dd)")}</span>
+          <span>
+            {calendar.date.day() >= operationDay[operationDay.length - 1]
+              ? calendar.date
+                  .add(1, "week")
+                  .day(operationDay[0])
+                  .format("M월 D일(dd)")
+              : calendar.date.add(1, "days").format("M월 D일(dd)")}
+          </span>
         </S.DateCont>
       </InpWrapper>
 
       <p>대여 기자재 수정</p>
-      <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount} >
+      <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount}>
         {Array(rentalAmount)
           .fill()
-          .map((_, i) => 
+          .map((_, i) => (
             <option key={i + 1} value={i + 1}>
               {i + 1}
-            </option> 
-          )}
+            </option>
+          ))}
       </S.SelectCount>
 
       <div>
         <Button
-          text="수정하기" 
-          className={!!rentalAmount ? 'main' : 'gray'} 
+          text="수정하기"
+          className={!!rentalAmount ? "main" : "gray"}
           disabled={!rentalAmount}
           padding="11px 24px"
           borderRadius="5px"
@@ -130,5 +149,5 @@ export default function ModifyComp({cart, close, modal, setModal }) {
         />
       </div>
     </>
-  )
+  );
 }

@@ -8,26 +8,22 @@ import * as S from "./style";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
-  useTitle('비밀번호 찾기')
+  useTitle("비밀번호 찾기");
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-  } = useForm();
+  const { register, handleSubmit, watch } = useForm();
 
   const handleFindPassword = async (e) => {
     e.preventDefault();
 
     const data = {
-      "memberNumber" : watch('memberNumber'),
-      "email" : `${watch('emailF')}@${watch('emailS')}`,
-    }
+      memberNumber: watch("memberNumber"),
+      email: `${watch("emailF")}@${watch("emailS")}`,
+    };
 
-    const res = await setInitializePw(data)
+    const res = await setInitializePw(data);
 
     if (res === 204) navigate("/success", { state: { isSignup: false } });
-    else alert('회원정보를 찾지 못했습니다.')
+    else alert("회원정보를 찾지 못했습니다.");
   };
 
   return (
@@ -37,18 +33,17 @@ export default function ForgotPassword() {
 
       <S.Form onSubmit={handleSubmit(handleFindPassword)}>
         <label htmlFor="classNum">학번(아이디)</label>
-        <Input id="classNum" type='number' autoFocus
+        <Input
+          id="classNum"
+          type="number"
+          autoFocus
           {...register("memberNumber", { required: true })}
         />
 
         <label htmlFor="email">이메일</label>
         <S.InpWrap>
-          <Input id="email" 
-            {...register("emailF", { required: true })}
-          />
-          <Input id="" 
-            {...register("emailS", { required: true })}
-          />
+          <Input id="email" {...register("emailF", { required: true })} />
+          <Input id="" {...register("emailS", { required: true })} />
         </S.InpWrap>
 
         <Button

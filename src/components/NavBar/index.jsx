@@ -41,15 +41,14 @@ export default function NavBar() {
         >
           <p>{isAuth ? "히스토리" : "내 대여 정보"}</p>
         </S.NavLi>
-        {
-          isAuth &&
+        {isAuth && (
           <S.NavLi
             className={location.pathname.includes("/schedule") ? "on" : "off"}
             onClick={() => navigate("/schedule")}
           >
-              <p>일정 관리</p>
-            </S.NavLi>
-        }
+            <p>일정 관리</p>
+          </S.NavLi>
+        )}
       </S.NavUl>
     </S.NavWrap>
   );

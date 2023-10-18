@@ -9,13 +9,20 @@ import { getProductAmountFromDate } from "../../../api/api";
 export default function GalType({ item }) {
   const navigate = useNavigate();
 
-  const singleDate = useSelector(state => state.datePicker.singularDate)
-  const [remainAmount, setRemainAmount] = useState(item.rentalQuantity.remainingQuantity)
-  
+  const singleDate = useSelector((state) => state.datePicker.singularDate);
+  const [remainAmount, setRemainAmount] = useState(
+    item.rentalQuantity.remainingQuantity
+  );
+
   useEffect(() => {
     async function handleGetProductAmount() {
-      const res = await getProductAmountFromDate(item.id, singleDate, singleDate)
-      res.remainQuantities && setRemainAmount(res.remainQuantities[0].remainQuantity);
+      const res = await getProductAmountFromDate(
+        item.id,
+        singleDate,
+        singleDate
+      );
+      res.remainQuantities &&
+        setRemainAmount(res.remainQuantities[0].remainQuantity);
     }
     handleGetProductAmount();
   }, [singleDate]);
@@ -33,9 +40,7 @@ export default function GalType({ item }) {
         alt={`${item.modelName} 이미지`}
       />
       <S.Category>
-        {category.map(
-          (value) => value.value === item.category && value.label
-        )}
+        {category.map((value) => value.value === item.category && value.label)}
       </S.Category>
       <S.Title>{item.modelName}</S.Title>
     </S.GalLi>

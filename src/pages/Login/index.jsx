@@ -11,9 +11,9 @@ import { AuthContext } from "../../context/Context";
 
 export default function Login() {
   const [showPw, setShowPw] = useState(true);
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal();
   const navigate = useNavigate();
-  const { setIsAuth } = useContext(AuthContext)
+  const { setIsAuth } = useContext(AuthContext);
 
   const {
     register,
@@ -31,14 +31,13 @@ export default function Login() {
     };
 
     const res = await userLogin(JSON.stringify(data));
-    const isAuth = await getUserClassNum()
-    const labStatus = await getLabStatus()
+    const isAuth = await getUserClassNum();
+    const labStatus = await getLabStatus();
 
-    isAuth.role === "ADMIN" ? setIsAuth(true) : setIsAuth(false)
+    isAuth.role === "ADMIN" ? setIsAuth(true) : setIsAuth(false);
 
-    if (isAuth.role !== 'ADMIN' && !labStatus.isRunning) open()
+    if (isAuth.role !== "ADMIN" && !labStatus.isRunning) open();
     else res === 200 && navigate("/equipment");
-
   };
 
   // 쿠키 있을 경우 자동으로 로그인 처리
@@ -53,12 +52,17 @@ export default function Login() {
     <>
       <S.Wrap>
         <h2>로그인</h2>
-        <S.Form onKeyPress={e => e.key === 'Enter' && handleLogin()}>
-          <input autoFocus type="text" placeholder="학번(아이디)" {...register("id", { required : true })} />
+        <S.Form onKeyPress={(e) => e.key === "Enter" && handleLogin()}>
+          <input
+            autoFocus
+            type="text"
+            placeholder="학번(아이디)"
+            {...register("id", { required: true })}
+          />
           <input
             type={showPw ? "password" : "text"}
             placeholder="비밀번호"
-            {...register("password", { required : true })}
+            {...register("password", { required: true })}
           />
           <S.PwImg
             bottom={showPw ? "16px" : "18px"}
@@ -87,16 +91,20 @@ export default function Login() {
       </S.Wrap>
       <S.Policy>개인정보처리방침</S.Policy>
       <Modal>
-        <S.ModalP>현재 시스템이 일시 중단되었습니다.<br />자세한 사항은 관리자에게 문의해주세요.</S.ModalP>
+        <S.ModalP>
+          현재 시스템이 일시 중단되었습니다.
+          <br />
+          자세한 사항은 관리자에게 문의해주세요.
+        </S.ModalP>
         <Button
-            onClick={close}
-            text="확인"
-            float="right"
-            margin="-10px 5px 0"  
-            className="main"
-            padding="9px 20px"
-            borderRadius="5px"
-          />
+          onClick={close}
+          text="확인"
+          float="right"
+          margin="-10px 5px 0"
+          className="main"
+          padding="9px 20px"
+          borderRadius="5px"
+        />
       </Modal>
     </>
   );

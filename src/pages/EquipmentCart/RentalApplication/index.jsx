@@ -9,12 +9,12 @@ import useTitle from "../../../hook/useTitle";
 import usePreventRefresh from "../../../hook/usePreventRefresh";
 
 export default function RentalApplication() {
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal();
   const navigate = useNavigate();
   const dataRef = useRef([]);
-  useTitle('기자재 대여')
-  usePreventRefresh()
-  
+  useTitle("기자재 대여");
+  usePreventRefresh();
+
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
       const data = {
@@ -27,7 +27,7 @@ export default function RentalApplication() {
       const response = await postReservation(JSON.stringify(data));
 
       if (response === 201) navigate("/equipment/inventory/success");
-      else alert(response.data)
+      else alert(response.data);
     }
   };
 

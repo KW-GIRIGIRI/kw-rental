@@ -31,13 +31,10 @@ export default function ItemListComp({
   };
 
   const handleBlur = () => {
-    if ((isAdd || isEdit) && !!text) { 
+    if ((isAdd || isEdit) && !!text) {
       setPreventAdd(true);
       setFinish(true);
-      setData((prevData) => [
-        ...prevData,
-        { id: null, propertyNumber: text },
-      ]);
+      setData((prevData) => [...prevData, { id: null, propertyNumber: text }]);
     }
   };
 

@@ -12,8 +12,8 @@ export default function LabRental() {
   const { isAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
-  const dispatch = useDispatch()
-  const lab = useSelector(state => state.labControl.lab)
+  const dispatch = useDispatch();
+  const lab = useSelector((state) => state.labControl.lab);
 
   const SubTitle = () => {
     switch (pathname) {
@@ -46,34 +46,34 @@ export default function LabRental() {
           </>
         );
       default:
-        return (
-          isAuth && pathname.includes("/status") ? <></>
-            :
-            <>
-              <Button
-                className={lab ? "main shadow" : "disable shadow"}
-                text="한울관"
-                padding="10px 29px"
-                borderRadius="20px"
-                margin="0 10px 0 0"
-                onClick={() => dispatch(setLab(true))} 
-              />
-              <Button
-                className={lab ? "disable shadow" : "main shadow"}
-                text="화도관"
-                padding="10px 29px"
-                borderRadius="20px"
-                onClick={() => dispatch(setLab(false))}
-              />
-            </>
+        return isAuth && pathname.includes("/status") ? (
+          <></>
+        ) : (
+          <>
+            <Button
+              className={lab ? "main shadow" : "disable shadow"}
+              text="한울관"
+              padding="10px 29px"
+              borderRadius="20px"
+              margin="0 10px 0 0"
+              onClick={() => dispatch(setLab(true))}
+            />
+            <Button
+              className={lab ? "disable shadow" : "main shadow"}
+              text="화도관"
+              padding="10px 29px"
+              borderRadius="20px"
+              onClick={() => dispatch(setLab(false))}
+            />
+          </>
         );
     }
   };
 
   useEffect(() => {
-    dispatch(setLab(true))
-    return() => dispatch(setLab(true))
-  }, [])
+    dispatch(setLab(true));
+    return () => dispatch(setLab(true));
+  }, []);
 
   return (
     <>
@@ -82,7 +82,12 @@ export default function LabRental() {
           <TabNav
             onClick={() => navigate("/lab")}
             text="랩실 관리"
-            className={pathname.split("/").at(-1) === "lab" || pathname.split("/").at(-1) === "edit" ? "on" : "false"}
+            className={
+              pathname.split("/").at(-1) === "lab" ||
+              pathname.split("/").at(-1) === "edit"
+                ? "on"
+                : "false"
+            }
           />
           <TabNav
             onClick={() => navigate("/lab/status")}

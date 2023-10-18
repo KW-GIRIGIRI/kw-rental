@@ -15,10 +15,7 @@ export default function EquipCartList({ cartList }) {
           <p> </p>
         </ListLi>
         {cartList.map((cart) => (
-          <ListItem
-            cart={cart}
-            key={cart.id}
-          />
+          <ListItem cart={cart} key={cart.id} />
         ))}
       </S.ListUl>
     )

@@ -28,7 +28,9 @@ export default function DatePicker({
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef();
-  const operationDay = useSelector(state => state.operationDay.operationDayArr)
+  const operationDay = useSelector(
+    (state) => state.operationDay.operationDayArr
+  );
 
   const handleOutsideClick = (e) => {
     if (WrapRef.current === e.target) {
@@ -59,19 +61,19 @@ export default function DatePicker({
   };
 
   useLayoutEffect(() => {
-  if (calendar.visible) {
-    const timer = setTimeout(() => {
-      window.addEventListener("scroll", handleScrollClose);
-      window.addEventListener("resize", handleScrollClose);
-    }, 200);
+    if (calendar.visible) {
+      const timer = setTimeout(() => {
+        window.addEventListener("scroll", handleScrollClose);
+        window.addEventListener("resize", handleScrollClose);
+      }, 200);
 
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("scroll", handleScrollClose);
-      window.removeEventListener("resize", handleScrollClose);
-    };
-  }
-}, [calendar.visible]);
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("scroll", handleScrollClose);
+        window.removeEventListener("resize", handleScrollClose);
+      };
+    }
+  }, [calendar.visible]);
 
   const nextMonth = (e) => {
     const plus = currentMonth.add(1, "month");
@@ -160,12 +162,12 @@ export default function DatePicker({
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth ||
-              getDate(d).day() > operationDay[operationDay.length-1] ||
+              getDate(d).day() > operationDay[operationDay.length - 1] ||
               getDate(d).day() < operationDay[0] ||
-              (className === "user" &&  getDate(d) < dayjs()) ||
+              (className === "user" && getDate(d) < dayjs()) ||
               (className === "user" && getDate(d) > dayjs().add(31, "days"))
-              ? "disabled"
-              : ""
+                ? "disabled"
+                : ""
             }
             key={i}
           >

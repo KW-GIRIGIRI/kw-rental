@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Wrap = styled.div`
   text-align: center;
@@ -16,4 +16,4 @@ export const Wrap = styled.div`
   &.user-rental {
     padding: 80px 0;
   }
-`
+`;

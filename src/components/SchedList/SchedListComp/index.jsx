@@ -41,7 +41,9 @@ export default function SchedListComp({ acceptDateTime, id, receive }) {
       <S.RentalLi>
         <img src={receiveItem.imgUrl} alt={`${receiveItem.modelName} 이미지`} />
         <div>
-          <p>{category.map(i => i.value === receiveItem.category && i.label)}</p>
+          <p>
+            {category.map((i) => i.value === receiveItem.category && i.label)}
+          </p>
           <p>{receiveItem.modelName}</p>
         </div>
         <span>{receiveItem.amount}</span>
@@ -84,7 +86,7 @@ export default function SchedListComp({ acceptDateTime, id, receive }) {
             )}
           </S.NumWrap>
         )}
-        {(receive && !acceptDateTime) && (
+        {receive && !acceptDateTime && (
           <Button
             width="max-content"
             className="sub shadow"
