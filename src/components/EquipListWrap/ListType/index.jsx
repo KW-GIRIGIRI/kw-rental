@@ -11,18 +11,24 @@ import { getProductAmountFromDate } from "../../../api/api";
 export default function ListType({ item }) {
   const navigate = useNavigate();
   const { isAuth } = useContext(AuthContext);
-  const singleDate = useSelector(state => state.datePicker.singularDate)
-  const [remainAmount, setRemainAmount] = useState(item.rentalQuantity.remainingQuantity)
-  
+  const singleDate = useSelector((state) => state.datePicker.singularDate);
+  const [remainAmount, setRemainAmount] = useState(
+    item.rentalQuantity.remainingQuantity
+  );
+
   useEffect(() => {
     if (!isAuth) {
       async function handleGetProductAmount() {
-        const res = await getProductAmountFromDate(item.id, singleDate, singleDate)
+        const res = await getProductAmountFromDate(
+          item.id,
+          singleDate,
+          singleDate
+        );
         setRemainAmount(res.remainQuantities[0].remainQuantity);
       }
       handleGetProductAmount();
     }
-}, [singleDate]);
+  }, [singleDate]);
 
   return (
     <S.ListLi key={item.id} onClick={() => navigate(`/equipment/${item.id}`)}>

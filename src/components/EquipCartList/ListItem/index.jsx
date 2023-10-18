@@ -12,21 +12,17 @@ import * as S from "./style";
 export default function ListItem({ cart }) {
   const [modal, setModal] = useState(false);
   const { Modal, open, close } = useModal();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDeleteInventory = async () => {
-    const res = await deleteCartEquip(cart.id)
-    res === 204 && close()
-    dispatch(asyncGetCartList())
-  }
+    const res = await deleteCartEquip(cart.id);
+    res === 204 && close();
+    dispatch(asyncGetCartList());
+  };
 
   return (
     <S.ListLi>
-      <ModifyModal
-        cart={cart}
-        modal={modal}
-        setModal={setModal}
-      />
+      <ModifyModal cart={cart} modal={modal} setModal={setModal} />
       <Modal>
         <p>정말 삭제하시겠습니까?</p>
         <div>

@@ -6,7 +6,11 @@ import { ErrText, Form, Input, InpWrap, PwImg } from "../style";
 import Button from "../../../modules/Button";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../context/Context";
-import { getUserInfo, setAdminAccountInfo, setUserAccountInfo } from "../../../api/api";
+import {
+  getUserInfo,
+  setAdminAccountInfo,
+  setUserAccountInfo,
+} from "../../../api/api";
 
 export default function ChangeAccount({ setCheckPw }) {
   const { isAuth } = useContext(AuthContext);
@@ -22,27 +26,27 @@ export default function ChangeAccount({ setCheckPw }) {
     reset,
     formState: { errors },
   } = useForm({
-    mode: "onChange"
+    mode: "onChange",
   });
 
   pwRef.current = watch("password");
 
   const handleGetUserInfo = async () => {
-    const res = await getUserInfo()
+    const res = await getUserInfo();
     reset({
       phoneNum: res.phoneNumber,
-      emailF: res.email.split('@')[0],
-      emailS: res.email.split('@')[1]
+      emailF: res.email.split("@")[0],
+      emailS: res.email.split("@")[1],
     });
-  }
+  };
 
   const handleAuthChangeAccount = async () => {
-    const res = await setAdminAccountInfo({ password: watch("password") })
+    const res = await setAdminAccountInfo({ password: watch("password") });
 
     if (res === 204) {
-      alert('비밀번호가 변경되었습니다.');
-      setCheckPw(false)
-    } else alert('잠시 후 다시 시도해주세요.')
+      alert("비밀번호가 변경되었습니다.");
+      setCheckPw(false);
+    } else alert("잠시 후 다시 시도해주세요.");
   };
 
   const handleChangeAccount = async () => {
@@ -52,17 +56,17 @@ export default function ChangeAccount({ setCheckPw }) {
       phoneNumber: watch("phoneNum"),
     };
 
-    const res = await setUserAccountInfo(data)
+    const res = await setUserAccountInfo(data);
 
     if (res === 204) {
-      alert('계정 정보가 변경되었습니다.');
-      setCheckPw(false)
-    } else alert('잠시 후 다시 시도해주세요.')
+      alert("계정 정보가 변경되었습니다.");
+      setCheckPw(false);
+    } else alert("잠시 후 다시 시도해주세요.");
   };
 
   useEffect(() => {
-    !isAuth && handleGetUserInfo()
-  }, [])
+    !isAuth && handleGetUserInfo();
+  }, []);
 
   return isAuth ? (
     <>
@@ -72,7 +76,9 @@ export default function ChangeAccount({ setCheckPw }) {
       <Form onSubmit={handleSubmit(handleAuthChangeAccount)}>
         <label htmlFor="pw">비밀번호</label>
         <InpWrap>
-          <Input id="pw" autoFocus
+          <Input
+            id="pw"
+            autoFocus
             type={showPw.password ? "password" : "text"}
             {...register("password", {
               required: {
@@ -96,7 +102,8 @@ export default function ChangeAccount({ setCheckPw }) {
 
         <label htmlFor="checkPw">비밀번호 확인</label>
         <InpWrap>
-          <Input id="checkPw"
+          <Input
+            id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -138,7 +145,8 @@ export default function ChangeAccount({ setCheckPw }) {
       <Form onSubmit={handleSubmit(handleChangeAccount)}>
         <label htmlFor="pw">비밀번호</label>
         <InpWrap>
-          <Input id="pw"
+          <Input
+            id="pw"
             type={showPw.password ? "password" : "text"}
             {...register("password", {
               required: {
@@ -162,7 +170,8 @@ export default function ChangeAccount({ setCheckPw }) {
 
         <label htmlFor="checkPw">비밀번호 확인</label>
         <InpWrap>
-          <Input id="checkPw"
+          <Input
+            id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -190,7 +199,8 @@ export default function ChangeAccount({ setCheckPw }) {
 
         <label htmlFor="email">이메일</label>
         <InpWrap className="email">
-          <Input id="email"
+          <Input
+            id="email"
             type="text"
             placeholder="gildong1234"
             {...register("emailF", {
@@ -221,7 +231,8 @@ export default function ChangeAccount({ setCheckPw }) {
         )}
 
         <label htmlFor="phoneNumber">연락처(전화번호)</label>
-        <Input id="phoneNumber"
+        <Input
+          id="phoneNumber"
           type="text"
           placeholder="01012341234"
           {...register("phoneNum", {

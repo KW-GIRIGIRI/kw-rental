@@ -1,32 +1,36 @@
-import dayjs from "dayjs"
-import useModal from "../../../hook/useModal"
-import Button from "../../../modules/Button"
-import { rentalStatus } from "../../../data/rentalStatus"
-import * as S from "../style"
-import { deleteAdminPenalty, modifyPenaltyStatus } from "../../../api/api"
-import { penaltyStatus } from "../../../data/penaltyStatus"
+import dayjs from "dayjs";
+import useModal from "../../../hook/useModal";
+import Button from "../../../modules/Button";
+import { rentalStatus } from "../../../data/rentalStatus";
+import * as S from "../style";
+import { deleteAdminPenalty, modifyPenaltyStatus } from "../../../api/api";
+import { penaltyStatus } from "../../../data/penaltyStatus";
 
 export default function StateListComp({ penalty, handleGetPenaltyHistory }) {
-  const { Modal, open, close } = useModal()
+  const { Modal, open, close } = useModal();
 
   const handelEditPenaltyState = async (e) => {
-    const res = await modifyPenaltyStatus(penalty.id, { "status": e.target.value })
-    res === 204 && alert('페널티 상태가 변경되었습니다.')
-  }
+    const res = await modifyPenaltyStatus(penalty.id, {
+      status: e.target.value,
+    });
+    res === 204 && alert("페널티 상태가 변경되었습니다.");
+  };
 
   const handleDeletePenalty = async () => {
-    const res = await deleteAdminPenalty(penalty.id)
-    res === 204 && close()
-    handleGetPenaltyHistory()
-  }
-  
+    const res = await deleteAdminPenalty(penalty.id);
+    res === 204 && close();
+    handleGetPenaltyHistory();
+  };
+
   return (
     <S.ItemLi>
       <span>{penalty.renterName}</span>
       <form action="#">
         <select
           name="penalty"
-          defaultValue={penaltyStatus.filter(i => i.value === penalty.status)[0].key}
+          defaultValue={
+            penaltyStatus.filter((i) => i.value === penalty.status)[0].key
+          }
           onChange={handelEditPenaltyState}
         >
           <option value="ONE_WEEK">7일 이용 금지</option>
@@ -36,8 +40,17 @@ export default function StateListComp({ penalty, handleGetPenaltyHistory }) {
           <option value="ONE_YEAR">12개월 이용 금지</option>
         </select>
       </form>
-      <span>{dayjs(penalty.startDate).format('YY년 MM월 DD일(dd)')} ~ {dayjs(penalty.endDate).format('YY년 MM월 DD일(dd)')}</span>
-      <span>{penalty.assetName === 'hanul' ? '한울관 B119호' : penalty.assetName === 'hwado' ? '화도관 302호' : penalty.assetName}</span>
+      <span>
+        {dayjs(penalty.startDate).format("YY년 MM월 DD일(dd)")} ~{" "}
+        {dayjs(penalty.endDate).format("YY년 MM월 DD일(dd)")}
+      </span>
+      <span>
+        {penalty.assetName === "hanul"
+          ? "한울관 B119호"
+          : penalty.assetName === "hwado"
+          ? "화도관 302호"
+          : penalty.assetName}
+      </span>
       <span>{rentalStatus[penalty.reason]}</span>
       <span>
         <p onClick={open}>삭제</p>
@@ -64,5 +77,5 @@ export default function StateListComp({ penalty, handleGetPenaltyHistory }) {
         </div>
       </Modal>
     </S.ItemLi>
-  )
+  );
 }

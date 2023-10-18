@@ -30,17 +30,17 @@ export default function EquipmentDetail() {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const product = useSelector((state) => state.modifyEquip.equip);
-  const titleUpdater = useTitle("Loading...")
+  const titleUpdater = useTitle("Loading...");
 
   useEffect(() => {
     if (product.modelName) {
-      let timer = setTimeout(() => titleUpdater(`${product.modelName}`), 200)
+      let timer = setTimeout(() => titleUpdater(`${product.modelName}`), 200);
 
-      return (() => {
+      return () => {
         clearTimeout(timer);
-      })
+      };
     }
-  }, [product])
+  }, [product]);
 
   const getProduct = async () => {
     const response = await getProductDetail(params.id);
@@ -57,11 +57,11 @@ export default function EquipmentDetail() {
   const handleDeleteProduct = async () => {
     const response = await deleteEquipment(params.id);
     if (response === 204) {
-      close()
-      navigate("/equipment")
+      close();
+      navigate("/equipment");
     } else {
-      close()
-      alert(response.data)
+      close();
+      alert(response.data);
     }
   };
 
@@ -85,7 +85,7 @@ export default function EquipmentDetail() {
         <>
           <S.NavDiv>
             <S.SimpleDesc>
-              <span onClick={() => navigate('/equipment')}>기자재 조회</span>
+              <span onClick={() => navigate("/equipment")}>기자재 조회</span>
               <span>
                 {category.map(
                   (value) => value.value === product.category && value.label
@@ -95,7 +95,9 @@ export default function EquipmentDetail() {
             </S.SimpleDesc>
             {isAuth ? (
               <div>
-                <button onClick={() => navigate(`/equipment/${params.id}/edit`)}>
+                <button
+                  onClick={() => navigate(`/equipment/${params.id}/edit`)}
+                >
                   수정
                 </button>
                 <button onClick={() => open()}>삭제</button>

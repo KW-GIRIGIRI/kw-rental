@@ -16,7 +16,7 @@ export default function SignUp() {
   });
   const navigate = useNavigate();
   const pwRef = useRef();
-  useTitle('회원가입')
+  useTitle("회원가입");
 
   const {
     register,
@@ -65,9 +65,9 @@ export default function SignUp() {
       alert("값을 입력해주세요");
     else {
       const res = await userSignup(JSON.stringify(data));
-      res === 201 ?
-        navigate("/success", { state: { isSignup: true } })
-        : alert(res.data)
+      res === 201
+        ? navigate("/success", { state: { isSignup: true } })
+        : alert(res.data);
     }
   };
 
@@ -76,7 +76,9 @@ export default function SignUp() {
       <h2>회원가입</h2>
       <S.Form onSubmit={handleSubmit(handleSignUp)}>
         <label htmlFor="name">이름</label>
-        <S.Input autoFocus id="name"
+        <S.Input
+          autoFocus
+          id="name"
           placeholder="홍길동"
           {...register("name", {
             required: {
@@ -96,7 +98,8 @@ export default function SignUp() {
         {errors.name && <S.ErrText>{errors.name.message}</S.ErrText>}
         <label htmlFor="birth">생년월일</label>
         <S.InpWrap>
-          <S.Input id="birth"
+          <S.Input
+            id="birth"
             type="number"
             placeholder="000429"
             {...register("birthDate", {
@@ -124,7 +127,8 @@ export default function SignUp() {
         {errors.birthDate && <S.ErrText>{errors.birthDate.message}</S.ErrText>}
 
         <label htmlFor="classNum">학번(아이디)</label>
-        <S.Input id="classNum"
+        <S.Input
+          id="classNum"
           defaultValue={memberNumber}
           {...register("memberNumber")}
           placeholder="이름과 생년월일을 인증해주세요"
@@ -133,7 +137,8 @@ export default function SignUp() {
 
         <label htmlFor="pw">비밀번호</label>
         <S.InpWrap>
-          <S.Input id="pw"
+          <S.Input
+            id="pw"
             type={showPw.password ? "password" : "text"}
             placeholder="8자 이상 작성해주세요"
             {...register("password", {
@@ -158,7 +163,8 @@ export default function SignUp() {
 
         <label htmlFor="checkPw">비밀번호 확인</label>
         <S.InpWrap>
-          <S.Input id="checkPw"
+          <S.Input
+            id="checkPw"
             type={showPw.passwordCheck ? "password" : "text"}
             {...register("passwordConfirm", {
               required: {
@@ -186,7 +192,8 @@ export default function SignUp() {
 
         <label htmlFor="email">이메일</label>
         <S.InpWrap className="email">
-          <S.Input id="email"
+          <S.Input
+            id="email"
             {...register("emailF", {
               required: {
                 value: true,
@@ -194,7 +201,8 @@ export default function SignUp() {
               },
             })}
           />
-          <S.Input id=""
+          <S.Input
+            id=""
             {...register("emailS", {
               required: {
                 value: true,
@@ -215,7 +223,8 @@ export default function SignUp() {
         )}
 
         <label htmlFor="phoneNumber">연락처(전화번호)</label>
-        <S.Input id="phoneNumber"
+        <S.Input
+          id="phoneNumber"
           placeholder="공백, - 제외 숫자만 작성해주세요."
           {...register("phoneNum", {
             required: {

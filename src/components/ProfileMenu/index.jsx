@@ -4,22 +4,22 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userLogout } from "../../api/api";
 import { AuthContext } from "../../context/Context";
-import iconProfileMenu from "../../assets/icon-profile-menu.svg"
+import iconProfileMenu from "../../assets/icon-profile-menu.svg";
 import SVGIcon from "../../modules/SVGIcon";
 
 export default function ProfileMenu({ setVisible }) {
   const modalRef = useRef();
   const navigate = useNavigate();
-  const { isAuth } = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext);
 
   const handleClose = (e) => {
     if (!modalRef.current?.contains(e.target)) setVisible(false);
   };
 
   const handleLogout = async () => {
-    const res = await userLogout()
-    res === 204 && navigate('/')
-  }
+    const res = await userLogout();
+    res === 204 && navigate("/");
+  };
 
   useEffect(() => {
     window.addEventListener("click", handleClose);
@@ -41,17 +41,25 @@ export default function ProfileMenu({ setVisible }) {
       </S.Li>
       <S.Li
         onClick={() => {
-          window.open('https://www.kwmedia.info/notice/raebsilgongjisahang', '_blank');
-          setVisible(false)
+          window.open(
+            "https://www.kwmedia.info/notice/raebsilgongjisahang",
+            "_blank"
+          );
+          setVisible(false);
         }}
       >
         <SVGIcon iconUrl={iconProfileMenu} id="icon-notice" size="22" />
         <p>공지사항</p>
       </S.Li>
       <S.Li
-       onClick={() => {
-          window.open(isAuth ? 'https://blyhry.notion.site/MEDIA-LAB-Admin-de66a69c22324a108ff840e32524deb9' : 'https://blyhry.notion.site/blyhry/MEDIA-LAB-8f1a67a171024f668c87470bb705fa01', '_blank');
-          setVisible(false)
+        onClick={() => {
+          window.open(
+            isAuth
+              ? "https://blyhry.notion.site/MEDIA-LAB-Admin-de66a69c22324a108ff840e32524deb9"
+              : "https://blyhry.notion.site/blyhry/MEDIA-LAB-8f1a67a171024f668c87470bb705fa01",
+            "_blank"
+          );
+          setVisible(false);
         }}
       >
         <SVGIcon iconUrl={iconProfileMenu} id="icon-help" size="22" />

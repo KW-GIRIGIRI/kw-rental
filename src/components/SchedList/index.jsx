@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import weekOfYear from "dayjs/plugin/weekOfYear"
+import weekOfYear from "dayjs/plugin/weekOfYear";
 import { useState } from "react";
 import { createRental, getRentalPurpose } from "../../api/api";
 import useModal from "../../hook/useModal";
@@ -7,12 +7,12 @@ import Button from "../../modules/Button";
 import ReturnModal from "../EquipSched/ReturnModal";
 import SchedListComp from "./SchedListComp";
 import * as S from "./style";
-import iconMsg from "../../assets/icon-msg.svg"
+import iconMsg from "../../assets/icon-msg.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetReceived } from "../../store/reducer/authReceiveSlice";
 import PurposeModal from "../PurposeModal";
 
-dayjs.extend(weekOfYear)
+dayjs.extend(weekOfYear);
 
 export default function SchedList({ user, receive }) {
   const [returnModal, setReturnModal] = useState(false);
@@ -24,25 +24,25 @@ export default function SchedList({ user, receive }) {
   const dispatch = useDispatch();
   const [purpose, setPurpose] = useState({
     visible: false,
-    text: '',
+    text: "",
     top: 0,
-    left: 0
-  })
+    left: 0,
+  });
 
   const handleGetPurpose = async (e, id) => {
     const position = e.target.getBoundingClientRect();
     const top = position.top,
       left = position.right;
-    
-    const res = await getRentalPurpose(id)
-    setPurpose(prev => ({
+
+    const res = await getRentalPurpose(id);
+    setPurpose((prev) => ({
       ...prev,
       visible: true,
       text: res.purpose,
       top: top,
       left: left,
-    }))
-  }
+    }));
+  };
 
   const handleCreateRental = async (reserveId) => {
     const sendData = receiveCheckList.find(
@@ -56,18 +56,20 @@ export default function SchedList({ user, receive }) {
   };
 
   const handleDateValid = () => {
-    let result = 
+    let result =
       !receiveCheckList
         .filter((value) => value.reservationId === user.reservationId)[0]
         .rentalSpecsRequests.flatMap((item) => item.propertyNumbers)
-        .includes(undefined) && dayjs().format('YYYY-MM-DD') >= selectDate
+        .includes(undefined) && dayjs().format("YYYY-MM-DD") >= selectDate;
 
     return result;
-  }
+  };
 
   return (
     <S.SchedLi key={user.memberNumber}>
-      { purpose.visible && <PurposeModal purpose={purpose} setPurpose={setPurpose} /> }
+      {purpose.visible && (
+        <PurposeModal purpose={purpose} setPurpose={setPurpose} />
+      )}
       <S.Renter>
         <S.PurposeBtn onClick={(e) => handleGetPurpose(e, user.reservationId)}>
           <img src={iconMsg} alt="대여목적 확인하기" />
@@ -75,8 +77,14 @@ export default function SchedList({ user, receive }) {
         <p>{user.name}</p>
         <p>{user.memberNumber}</p>
         {!receive && user.overdueAcceptDateTime && (
-          <S.WarnCont>반납일 초과 <br /> D+{ (dayjs(selectDate).diff(dayjs(user.overdueAcceptDateTime), 'days')) - ((dayjs(selectDate).week() - dayjs(user.overdueAcceptDateTime).week()) * 3) }</S.WarnCont>
-        )} 
+          <S.WarnCont>
+            반납일 초과 <br /> D+
+            {dayjs(selectDate).diff(dayjs(user.overdueAcceptDateTime), "days") -
+              (dayjs(selectDate).week() -
+                dayjs(user.overdueAcceptDateTime).week()) *
+                3}
+          </S.WarnCont>
+        )}
         {receive && user.acceptDateTime ? (
           <S.TimeCont>
             {user.acceptDateTime.split("T")[1].slice(0, 5)}
@@ -84,7 +92,7 @@ export default function SchedList({ user, receive }) {
         ) : (
           <Button
             disabled={!handleDateValid()}
-            className={ handleDateValid() ? "main shadow" : "gray shadow" }
+            className={handleDateValid() ? "main shadow" : "gray shadow"}
             text={receive ? "수령확인" : "반납확인"}
             borderRadius="20px"
             padding="5.5px 7.5px"
@@ -95,7 +103,12 @@ export default function SchedList({ user, receive }) {
       </S.Renter>
       <S.RentalUl>
         {user.reservationSpecs?.map((id) => (
-          <SchedListComp acceptDateTime={user.acceptDateTime} id={id} key={id} receive={receive} />
+          <SchedListComp
+            acceptDateTime={user.acceptDateTime}
+            id={id}
+            key={id}
+            receive={receive}
+          />
         ))}
       </S.RentalUl>
       {!receive && (

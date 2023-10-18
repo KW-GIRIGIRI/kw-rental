@@ -2,28 +2,33 @@ import * as S from "./style";
 import Button from "../../modules/Button";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LabSchedList from './LabSchedList';
-import { asyncGetLabReceived, asyncGetLabReturned } from "../../store/reducer/authReceiveSlice";
-import EmptyData from '../EmptyData';
+import LabSchedList from "./LabSchedList";
+import {
+  asyncGetLabReceived,
+  asyncGetLabReturned,
+} from "../../store/reducer/authReceiveSlice";
+import EmptyData from "../EmptyData";
 
 export default function LabSched() {
   const [receive, setReceive] = useState(true);
   const selectDate = useSelector((state) => state.datePicker.singularDate);
-  const dispatch = useDispatch()
-  const rentalList = useSelector(state => state.authReceive.labReceiveList)
+  const dispatch = useDispatch();
+  const rentalList = useSelector((state) => state.authReceive.labReceiveList);
 
   const handleGetLabRentalList = (date) => {
-    dispatch(asyncGetLabReceived(date))
-  }
+    dispatch(asyncGetLabReceived(date));
+  };
 
   const handleGetLabReturnedList = (date) => {
-    dispatch(asyncGetLabReturned(date))
-  }
+    dispatch(asyncGetLabReturned(date));
+  };
 
   useEffect(() => {
     if (selectDate)
-      receive ? handleGetLabRentalList(selectDate) : handleGetLabReturnedList(selectDate)
-  }, [selectDate, receive])
+      receive
+        ? handleGetLabRentalList(selectDate)
+        : handleGetLabReturnedList(selectDate);
+  }, [selectDate, receive]);
 
   return (
     <>
@@ -45,7 +50,7 @@ export default function LabSched() {
         onClick={() => setReceive(false)}
       />
 
-      {rentalList.length ?
+      {rentalList.length ? (
         <>
           <S.SchedWrap>
             <S.Header>
@@ -54,16 +59,25 @@ export default function LabSched() {
               <span>인원</span>
               <span>연락처</span>
             </S.Header>
-            {
-              rentalList.map(lab =>
-                <LabSchedList acceptTime={lab.acceptTime} key={lab.labRoomName} lab={lab.labRoomName} renterList={lab.specsWithMemberNumber} receive={receive} />
-              )
-            }
+            {rentalList.map((lab) => (
+              <LabSchedList
+                acceptTime={lab.acceptTime}
+                key={lab.labRoomName}
+                lab={lab.labRoomName}
+                renterList={lab.specsWithMemberNumber}
+                receive={receive}
+              />
+            ))}
           </S.SchedWrap>
         </>
-        :
-        <EmptyData content={["조회한 일자의", `${receive ? "수령" : "반납"} 예정이 없습니다.`]} />
-      }
+      ) : (
+        <EmptyData
+          content={[
+            "조회한 일자의",
+            `${receive ? "수령" : "반납"} 예정이 없습니다.`,
+          ]}
+        />
+      )}
     </>
   );
 }

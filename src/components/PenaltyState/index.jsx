@@ -1,29 +1,28 @@
-import * as S from "./style"
-import { useEffect, useState } from "react"
-import EmptyData from '../EmptyData'
-import { getPenaltyHistory } from "../../api/api"
-import Pagination from "../Pagination"
-import StateListComp from "./StateListComp"
+import * as S from "./style";
+import { useEffect, useState } from "react";
+import EmptyData from "../EmptyData";
+import { getPenaltyHistory } from "../../api/api";
+import Pagination from "../Pagination";
+import StateListComp from "./StateListComp";
 
 export default function PenaltyState() {
-  const [penaltyList, setPenaltyList] = useState([])
-  const [pageArray, setPageArray] = useState([])
-  const [page, setPage] = useState(0)
+  const [penaltyList, setPenaltyList] = useState([]);
+  const [pageArray, setPageArray] = useState([]);
+  const [page, setPage] = useState(0);
 
   const handleGetPenaltyHistory = async () => {
-    const res = await getPenaltyHistory(15, page)
+    const res = await getPenaltyHistory(15, page);
 
-    setPenaltyList(res.penalties)
-    setPageArray(res.endPoints)
-  }
+    setPenaltyList(res.penalties);
+    setPageArray(res.endPoints);
+  };
 
   useEffect(() => {
-    handleGetPenaltyHistory()
-  }, [])
+    handleGetPenaltyHistory();
+  }, []);
 
-  return (
-    penaltyList.length ?
-      <>
+  return penaltyList.length ? (
+    <>
       <S.ItemUl>
         <S.Header>
           <span>대여자</span>
@@ -33,18 +32,19 @@ export default function PenaltyState() {
           <span>사유</span>
           <span></span>
         </S.Header>
-          {penaltyList.map((penalty) => 
-            <StateListComp penalty={penalty} key={penalty.id} handleGetPenaltyHistory={handleGetPenaltyHistory} />
-          )}
-        </S.ItemUl>
-        {pageArray && (
-          <Pagination
-            page={page}
-            setPage={setPage}
-            pageArray={pageArray}
+        {penaltyList.map((penalty) => (
+          <StateListComp
+            penalty={penalty}
+            key={penalty.id}
+            handleGetPenaltyHistory={handleGetPenaltyHistory}
           />
-        )}
-      </>
-      : <EmptyData content={["페널티 받은 대여자가 없습니다."]} />
-  )
+        ))}
+      </S.ItemUl>
+      {pageArray && (
+        <Pagination page={page} setPage={setPage} pageArray={pageArray} />
+      )}
+    </>
+  ) : (
+    <EmptyData content={["페널티 받은 대여자가 없습니다."]} />
+  );
 }

@@ -12,18 +12,21 @@ export default function CancelModal({
   setCancelModal,
 }) {
   const { Modal, open, close } = useModal();
-  const amountRef = useRef()
-  const dispatch = useDispatch()
-  const date = useSelector(state => state.datePicker.singularDate)
+  const amountRef = useRef();
+  const dispatch = useDispatch();
+  const date = useSelector((state) => state.datePicker.singularDate);
 
   const handleCancelRental = async () => {
     const data = {
-      "amount" : amountRef.current.value
-    }
+      amount: amountRef.current.value,
+    };
 
-    const res = await cancelRentalSpec(receiveItem.reservationSpecId, JSON.stringify(data))
+    const res = await cancelRentalSpec(
+      receiveItem.reservationSpecId,
+      JSON.stringify(data)
+    );
     res === 204 && setCancelModal(false);
-    dispatch(asyncGetReceived(date))
+    dispatch(asyncGetReceived(date));
     close();
   };
 
