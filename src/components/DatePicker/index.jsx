@@ -25,6 +25,8 @@ export default function DatePicker({
   calendar,
   setCalendar,
 }) {
+  console.log(calendar.date)
+
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef();
@@ -162,10 +164,9 @@ export default function DatePicker({
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth ||
-              getDate(d).day() > operationDay[operationDay.length - 1] ||
-              getDate(d).day() < operationDay[0] ||
-              (className === "user" && getDate(d) < dayjs()) ||
-              (className === "user" && getDate(d) > dayjs().add(31, "days"))
+                !operationDay.includes(getDate(d).day()) ||
+                (className === "user" && getDate(d) < dayjs()) ||
+                (className === "user" && getDate(d) > dayjs().add(31, "days"))
                 ? "disabled"
                 : ""
             }

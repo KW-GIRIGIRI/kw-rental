@@ -44,17 +44,17 @@ export default function DualDatePicker({
 
     bool
       ? setFirstCalendar((prev) => ({
-          ...prev,
-          visible: true,
-          top: top,
-          left: left,
-        }))
+        ...prev,
+        visible: true,
+        top: top,
+        left: left,
+      }))
       : setLastCalendar((prev) => ({
-          ...prev,
-          visible: true,
-          top: top,
-          left: left,
-        }));
+        ...prev,
+        visible: true,
+        top: top,
+        left: left,
+      }));
   };
 
   useEffect(() => {
@@ -83,7 +83,9 @@ export default function DualDatePicker({
         date: dayjs(firstCalendar.date.add(1, "days")),
       }));
     }
+
     dispatch(setDualFirstDate(dayjs(firstCalendar.date).format("YYYY-MM-DD")));
+
     if (className === "user") {
       let sendDate = dayjs(firstCalendar.date);
 
@@ -127,7 +129,7 @@ export default function DualDatePicker({
         dispatch(setDualLastDate(lastInitialDate.format("YYYY-MM-DD")));
       else dispatch(setDualLastDate(dayjs().format("YYYY-MM-DD")));
     };
-  }, []);
+  }, [dispatch, firstInitial, initialMonth, lastInitial]);
 
   return (
     operationDay && (
@@ -161,9 +163,9 @@ export default function DualDatePicker({
               ? dayjs(firstCalendar.date).day() >=
                 operationDay[operationDay.length - 1]
                 ? dayjs(firstCalendar.date)
-                    .add(1, "week")
-                    .day(operationDay[0])
-                    .format("M월 D일(dd)")
+                  .add(1, "week")
+                  .day(operationDay[0])
+                  .format("M월 D일(dd)")
                 : dayjs(firstCalendar.date).add(1, "days").format("M월 D일(dd)")
               : dayjs(lastCalendar.date).format("YY년 M월 D일(dd)")}
           </span>
