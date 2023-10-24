@@ -94,7 +94,23 @@ export default function DualDatePicker({
         sendDate = sendDate.add(1, "week").day(operationDay[0]);
       else sendDate = sendDate.add(1, "days");
 
-      dispatch(setDualLastDate(sendDate.format("YYYY-MM-DD")));
+      const first = firstCalendar.date.day();
+      let last = first + 1;
+      let week = 0;
+
+      while (!operationDay.includes(last)) {
+        if (last > 5) {
+          last = 1;
+          week += 1;
+        }
+
+        last += 1;
+      }
+
+      setLastCalendar((prev) => ({
+        ...prev,
+        date: prev.date.add(week, "week").day(last),
+      }));
     }
   }, [firstCalendar.date]);
 
@@ -121,15 +137,13 @@ export default function DualDatePicker({
       ? dayjs().add(lastInitial || 0, "month")
       : dayjs().add(lastInitial || 0, "days");
 
-    return () => {
-      if (firstInitial)
-        dispatch(setDualFirstDate(firstInitialDate.format("YYYY-MM-DD")));
-      else dispatch(setDualFirstDate(dayjs().format("YYYY-MM-DD")));
+    if (firstInitial)
+      dispatch(setDualFirstDate(firstInitialDate.format("YYYY-MM-DD")));
+    else dispatch(setDualFirstDate(dayjs().format("YYYY-MM-DD")));
 
-      if (lastInitial)
-        dispatch(setDualLastDate(lastInitialDate.format("YYYY-MM-DD")));
-      else dispatch(setDualLastDate(dayjs().format("YYYY-MM-DD")));
-    };
+    if (lastInitial)
+      dispatch(setDualLastDate(lastInitialDate.format("YYYY-MM-DD")));
+    else dispatch(setDualLastDate(dayjs().format("YYYY-MM-DD")));
   }, [dispatch, firstInitial, initialMonth, lastInitial]);
 
   return (
