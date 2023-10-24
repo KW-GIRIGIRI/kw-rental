@@ -14,7 +14,7 @@ export default function UserHist() {
   return (
     <>
       {(isEquipmentPath || isLabPath) && (
-        <DualDatePicker firstInitial={-3} initialMonth={true} />
+        <DualDatePicker firstInitial={-3} initialMonth={true} allDaysEnabled={true} />
       )}
       <S.Div>
         {isEquipmentPath && <UserEquipHist />}

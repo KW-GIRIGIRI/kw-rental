@@ -38,6 +38,7 @@ export default function EquipmentRentalHistory() {
               lastInitial={0}
               className="authHistory"
               initialMonth={true}
+              allDaysEnabled={true}
             />
           </S.Wrap>
           <S.RentalWrap>
