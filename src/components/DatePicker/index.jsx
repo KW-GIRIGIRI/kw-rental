@@ -24,9 +24,8 @@ export default function DatePicker({
   checkWeek,
   calendar,
   setCalendar,
+  allDaysEnabled,
 }) {
-  console.log(calendar.date)
-
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [arrayOfDays, setArrayOfDays] = useState([]);
   const WrapRef = useRef();
@@ -158,15 +157,31 @@ export default function DatePicker({
     let days = [];
     arrayOfDays.forEach((week, index) => {
       week.dates.forEach((d, i) => {
+        if (allDaysEnabled) {
+          const isWeekday = [1, 2, 3, 4, 5].includes(getDate(d).day());
+
+          days.push(
+            <S.CellWrap
+              checkWeek={checkWeek}
+              onClick={() => handleGetDay(d)}
+              className={!d.isCurrentMonth || !isWeekday ? "disabled" : ""}
+              key={i}
+            >
+              {d.day}
+            </S.CellWrap>
+          );
+          return;
+        }
+
         days.push(
           <S.CellWrap
             checkWeek={checkWeek}
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth ||
-                !operationDay.includes(getDate(d).day()) ||
-                (className === "user" && getDate(d) < dayjs()) ||
-                (className === "user" && getDate(d) > dayjs().add(31, "days"))
+              !operationDay.includes(getDate(d).day()) ||
+              (className === "user" && getDate(d) < dayjs()) ||
+              (className === "user" && getDate(d) > dayjs().add(31, "days"))
                 ? "disabled"
                 : ""
             }

@@ -14,6 +14,7 @@ export default function DualDatePicker({
   lastInitial,
   className,
   initialMonth,
+  allDaysEnabled,
 }) {
   const [firstCalendar, setFirstCalendar] = useState({
     visible: false,
@@ -150,6 +151,7 @@ export default function DualDatePicker({
             className={className}
             calendar={firstCalendar}
             setCalendar={setFirstCalendar}
+            allDaysEnabled={allDaysEnabled}
           />
         )}
         <span>~</span>
@@ -171,7 +173,11 @@ export default function DualDatePicker({
           </span>
         </S.DateCont>
         {className !== "user" && lastCalendar && (
-          <DatePicker calendar={lastCalendar} setCalendar={setLastCalendar} />
+          <DatePicker
+            calendar={lastCalendar}
+            setCalendar={setLastCalendar}
+            allDaysEnabled={allDaysEnabled}
+          />
         )}
       </S.InpWrapper>
     )
