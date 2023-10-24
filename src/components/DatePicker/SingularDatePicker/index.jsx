@@ -35,20 +35,27 @@ export default function SingularDatePicker({
   };
 
   useEffect(() => {
-    if (!!operationDay.length) {
-      if (calendar.date.day() < operationDay[0]) {
+    if (operationDay.length) {
+      let day = calendar.date.day();
+      let week = 0;
+
+      if (!operationDay.includes(calendar.date.day())) {
+        while (!operationDay.includes(day)) {
+          day += 1;
+
+          if (day > 5) {
+            day = 1;
+            week += 1;
+          }
+        }
+
         setCalendar((prev) => ({
           ...prev,
-          date: prev.date.day(operationDay[0]),
-        }));
-      } else if (calendar.date.day() > operationDay[operationDay.length - 1]) {
-        setCalendar((prev) => ({
-          ...prev,
-          date: prev.date.add(1, "week").day(operationDay[0]),
+          date: prev.date.add(week, "week").day(day),
         }));
       }
     }
-  }, [operationDay]);
+  }, [calendar.date, operationDay]);
 
   useEffect(() => {
     dispatch(setSingularDate(dayjs(calendar.date).format("YYYY-MM-DD")));

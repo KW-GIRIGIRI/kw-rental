@@ -179,9 +179,9 @@ export default function DatePicker({
             onClick={() => handleGetDay(d)}
             className={
               !d.isCurrentMonth ||
-              !operationDay.includes(getDate(d).day()) ||
-              (className === "user" && getDate(d) < dayjs()) ||
-              (className === "user" && getDate(d) > dayjs().add(31, "days"))
+                !operationDay.includes(getDate(d).day()) ||
+                (className === "user" && getDate(d) < dayjs()) ||
+                (className === "user" && getDate(d) > dayjs().add(31, "days"))
                 ? "disabled"
                 : ""
             }
