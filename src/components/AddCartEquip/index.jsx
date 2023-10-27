@@ -51,7 +51,7 @@ export default function AddCartEquip({ modify, setModal }) {
       <S.Form>
         <S.DescCont>기자재 수령일 ~ 반납일</S.DescCont>
         <S.InpWrapper>
-          <DualDatePicker firstInitial={1} lastInitial={2} className="user" />
+          <DualDatePicker firstInitial={1} className="user" />
         </S.InpWrapper>
         <S.DescCont>대여 기자재 개수</S.DescCont>
         <S.InpWrapper>

@@ -6,7 +6,11 @@ import * as S from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { setSingularDate } from "../../../store/reducer/datePickerSlice";
 
-export default function SingularDatePicker({ initial, className }) {
+export default function SingularDatePicker({
+  initial,
+  className,
+  allDaysEnabled,
+}) {
   const [calendar, setCalendar] = useState({
     visible: false,
     top: 0,
@@ -31,20 +35,27 @@ export default function SingularDatePicker({ initial, className }) {
   };
 
   useEffect(() => {
-    if (!!operationDay.length) {
-      if (calendar.date.day() < operationDay[0]) {
+    if (operationDay.length) {
+      let day = calendar.date.day();
+      let week = 0;
+
+      if (!operationDay.includes(calendar.date.day())) {
+        while (!operationDay.includes(day)) {
+          day += 1;
+
+          if (day > 5) {
+            day = 1;
+            week += 1;
+          }
+        }
+
         setCalendar((prev) => ({
           ...prev,
-          date: prev.date.day(operationDay[0]),
-        }));
-      } else if (calendar.date.day() > operationDay[operationDay.length - 1]) {
-        setCalendar((prev) => ({
-          ...prev,
-          date: prev.date.add(1, "week").day(operationDay[0]),
+          date: prev.date.add(week, "week").day(day),
         }));
       }
     }
-  }, [operationDay]);
+  }, [calendar.date, operationDay]);
 
   useEffect(() => {
     dispatch(setSingularDate(dayjs(calendar.date).format("YYYY-MM-DD")));
@@ -62,6 +73,7 @@ export default function SingularDatePicker({ initial, className }) {
           initial={initial}
           calendar={calendar}
           setCalendar={setCalendar}
+          allDaysEnabled={allDaysEnabled}
         />
       )}
     </>

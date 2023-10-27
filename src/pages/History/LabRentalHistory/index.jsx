@@ -28,6 +28,7 @@ export default function LabRentalHistory() {
           lastInitial={0}
           className="authHistory"
           initialMonth={true}
+          allDaysEnabled={true}
         />
       </S.Wrap>
       <S.ButtonWrap>
