@@ -79,8 +79,6 @@ export default function EquipmentDetail() {
     setItem(data);
   }, [data]);
 
-  // console.log(product.description.replaceAll('\n', <br/>));
-
   return (
     <S.Wrapper>
       {product && (
