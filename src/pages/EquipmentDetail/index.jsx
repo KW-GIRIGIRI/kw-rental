@@ -79,6 +79,8 @@ export default function EquipmentDetail() {
     setItem(data);
   }, [data]);
 
+  // console.log(product.description.replaceAll('\n', <br/>));
+
   return (
     <S.Wrapper>
       {product && (
@@ -139,7 +141,11 @@ export default function EquipmentDetail() {
           </S.DetailWrapper>
           <S.SubTitle>안내사항</S.SubTitle>
           <S.NoticeWrap>
-            <S.NoticeText>{product.description}</S.NoticeText>
+            {
+              product.description && product.description.split('\n').map((line, idx) =>
+                <S.NoticeText key={idx}>{line}<br /></S.NoticeText>
+              )
+            }
           </S.NoticeWrap>
           {isAuth ? (
             <>
