@@ -85,6 +85,12 @@ export const Input = styled.input`
   &.err {
     border: 1px solid ${(props) => props.theme.color.primary.red};
   }
+
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const Textarea = styled.textarea`

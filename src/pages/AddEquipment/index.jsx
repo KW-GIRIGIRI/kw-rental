@@ -81,7 +81,7 @@ export default function AddEquipment() {
           maker: methods.watch("maker"),
           purpose: methods.watch("purpose"),
           rentalPlace: "한울관 B120호",
-          maxRentalDays: 1,
+          maxRentalDays: methods.watch("maxRentalDays"),
           description: addEqRef.current.value,
         },
         items: item,
@@ -133,7 +133,7 @@ export default function AddEquipment() {
         purpose: methods.watch("purpose"),
         rentalPlace: "한울관 B120호",
         description: addEqRef.current.value,
-        maxRentalDays: 1,
+        maxRentalDays: methods.watch("maxRentalDays"),
       };
 
       if (item.items.length !== itemData.items.length) {
