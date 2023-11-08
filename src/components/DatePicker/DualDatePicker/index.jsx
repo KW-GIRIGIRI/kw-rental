@@ -37,6 +37,7 @@ export default function DualDatePicker({
   const operationDay = useSelector(
     (state) => state.operationDay.operationDayArr
   );
+  const classList = String(className)
 
   const handleGetDatePicker = (e, bool) => {
     const position = e.target.getBoundingClientRect();
@@ -76,7 +77,7 @@ export default function DualDatePicker({
     }
 
     if (
-      className !== "user" &&
+      !classList.includes("user") &&
       lastCalendar.date.valueOf() < firstCalendar.date.valueOf()
     ) {
       setLastCalendar((prev) => ({
@@ -87,29 +88,23 @@ export default function DualDatePicker({
 
     dispatch(setDualFirstDate(dayjs(firstCalendar.date).format("YYYY-MM-DD")));
 
-    if (className === "user") {
-      let sendDate = dayjs(firstCalendar.date);
-
-      if (sendDate.day() >= operationDay[operationDay.length - 1])
-        sendDate = sendDate.add(1, "week").day(operationDay[0]);
-      else sendDate = sendDate.add(1, "days");
-
+    if (classList.includes("user")) {
       const first = firstCalendar.date.day();
       let last = first + 1;
       let week = 0;
 
       while (!operationDay.includes(last)) {
         if (last > 5) {
-          last = 1;
+          last = 0;
           week += 1;
         }
-
+        
         last += 1;
       }
 
       setLastCalendar((prev) => ({
         ...prev,
-        date: prev.date.add(week, "week").day(last),
+        date: firstCalendar.date.add(week, "week").day(last),
       }));
     }
   }, [firstCalendar.date]);
@@ -117,10 +112,10 @@ export default function DualDatePicker({
   useEffect(() => {
     if (
       !initialMonth &&
-      className !== "user" &&
+      !classList.includes("user") &&
       lastCalendar.date.valueOf() < firstCalendar.date.valueOf()
-    ) {
-      setFirstCalendar((prev) => ({
+      ) {
+        setFirstCalendar((prev) => ({
         ...prev,
         date: dayjs(lastCalendar.date.subtract(1, "days")),
       }));
@@ -156,7 +151,7 @@ export default function DualDatePicker({
           <img src={iconCalendar} alt="" />
           <span>
             {dayjs(firstCalendar.date).format(
-              className !== "user" ? "YY년 M월 D일(dd)" : "M월 D일(dd)"
+              !classList.includes("user") ? "YY년 M월 D일(dd)" : "M월 D일(dd)"
             )}
           </span>
         </S.DateCont>
@@ -173,21 +168,24 @@ export default function DualDatePicker({
           onClick={(e) => handleGetDatePicker(e, 0)}
           className={className}
         >
-          {className !== "user" && <img src={iconCalendar} alt="" />}
+          {!classList.includes("user") && <img src={iconCalendar} alt="" />}
           <span>
-            {className === "user"
-              ? dayjs(firstCalendar.date).day() >=
-                operationDay[operationDay.length - 1]
-                ? dayjs(firstCalendar.date)
-                  .add(1, "week")
-                  .day(operationDay[0])
-                  .format("M월 D일(dd)")
-                : dayjs(firstCalendar.date).add(1, "days").format("M월 D일(dd)")
+            {classList.includes("user")
+              ?
+              dayjs(lastCalendar.date).format("M월 D일(dd)")
+              // dayjs(firstCalendar.date).day() >=
+              //   operationDay[operationDay.length - 1]
+              //   ? dayjs(lastCalendar.date)
+              //     .add(1, "week")
+              //     .day(operationDay[0])
+              //     .format("M월 D일(dd)")
+              //   : dayjs(lastCalendar.date).add(1, "days").format("M월 D일(dd)")
               : dayjs(lastCalendar.date).format("YY년 M월 D일(dd)")}
           </span>
         </S.DateCont>
-        {className !== "user" && lastCalendar && (
+        {lastCalendar && (
           <DatePicker
+            className={classList.includes('user') && 'user select'}
             calendar={lastCalendar}
             setCalendar={setLastCalendar}
             allDaysEnabled={allDaysEnabled}
