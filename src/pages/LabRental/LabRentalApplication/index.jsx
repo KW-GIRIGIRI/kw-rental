@@ -23,7 +23,7 @@ export default function LabRentalApplication() {
   const handlePostReservation = async () => {
     if (dataRef.current.check && dataRef.current.purpose.value.length > 10) {
       let endDate = dayjs(selectDate).add(1, "days").format("YYYY-MM-DD");
-      if (dayjs(endDate).day() >= operationDay[operationDay.length - 1])
+      if (dayjs(endDate).day() > operationDay[operationDay.length - 1])
         endDate = dayjs(endDate)
           .add(1, "week")
           .day(operationDay[0])

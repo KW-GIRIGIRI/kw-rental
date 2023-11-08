@@ -42,6 +42,7 @@ export const NoticeWrap = styled.div`
 export const NoticeText = styled.span`
   list-style: inside;
   margin: 15px 0;
+  white-space: pre-line;
   font-size: 14px;
   color: ${(props) => props.theme.color.text.gray};
 `;

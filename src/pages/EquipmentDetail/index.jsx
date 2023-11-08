@@ -139,11 +139,7 @@ export default function EquipmentDetail() {
           </S.DetailWrapper>
           <S.SubTitle>안내사항</S.SubTitle>
           <S.NoticeWrap>
-            {
-              product.description && product.description.split('\n').map((line, idx) =>
-                <S.NoticeText key={idx}>{line}<br /></S.NoticeText>
-              )
-            }
+            <S.NoticeText>{product.description}</S.NoticeText>
           </S.NoticeWrap>
           {isAuth ? (
             <>
