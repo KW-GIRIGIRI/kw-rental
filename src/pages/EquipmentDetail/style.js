@@ -44,6 +44,7 @@ export const NoticeText = styled.span`
   margin: 15px 0;
   white-space: pre-line;
   font-size: 14px;
+  line-height: 1.2rem;
   color: ${(props) => props.theme.color.text.gray};
 `;
 
