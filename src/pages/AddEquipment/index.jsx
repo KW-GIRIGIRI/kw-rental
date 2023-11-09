@@ -124,7 +124,7 @@ export default function AddEquipment() {
       };
 
       const sendData = {
-        imgUrl: product.imgUrl || imgFile,
+        imgUrl: imgFile,
         totalQuantity: data.length,
         category: methods.watch("category"),
         modelName: methods.watch("modelName"),
