@@ -19,18 +19,26 @@ export const ProductTitle = styled.p`
   margin: 6px 0 30px;
 `;
 
+export const ProductUl = styled.ul`
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+`;
+
 export const ProductLi = styled.li`
   margin-bottom: 15px;
-  line-height: 180%;
   font-size: 14px;
   display: flex;
+  line-height: 1.2rem;
   & > p {
     min-width: 120px;
-    line-height: 2;
   }
   & > span {
     color: ${(props) => props.theme.color.text.gray};
     word-break: keep-all;
+  }
+  & > div > p:first-child {
+    min-width: 120px;
   }
 `;
 
@@ -84,6 +92,12 @@ export const Input = styled.input`
 
   &.err {
     border: 1px solid ${(props) => props.theme.color.primary.red};
+  }
+
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `;
 

@@ -36,7 +36,7 @@ export default function UserLabHist() {
         <S.HistList className="lab" key={i}>
           <span>{`${dayjs(lab.startDate).format(
             "YY년 MM월 DD일(dd)"
-          )} ~ ${dayjs(lab.startDate).format("YY년 MM월 DD일(dd)")}`}</span>
+          )} ~ ${dayjs(lab.endDate).format("YY년 MM월 DD일(dd)")}`}</span>
           <span>{lab.name === "hanul" ? "한울관" : "화도관"}</span>
           <span>{lab.amount}</span>
           <span>{rentalStatus[lab.rentalSpecStatus]}</span>

@@ -19,6 +19,10 @@ export const InpWrapper = styled.div`
       font-size: 13px;
     }
   }
+
+   &.modify-modal {
+    gap: 8px;
+   }
 `;
 
 export const DateCont = styled.div`
@@ -53,5 +57,18 @@ export const DateCont = styled.div`
     border-radius: ${(props) => props.theme.borderRadius.circle};
     border: 1px solid ${(props) => props.theme.color.primary.main};
     color: ${(props) => props.theme.color.primary.main};
+  }
+
+  &.modify-modal {
+    padding: 4px 0;
+    width: 97px;
+    font-size: 12px;
+    line-height: normal;
+
+    & > img {
+    width: 13px;
+    margin-right: -5px;
+    pointer-events: none;
+  }
   }
 `;

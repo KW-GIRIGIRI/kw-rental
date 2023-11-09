@@ -94,9 +94,8 @@ const DetailDescInput = ({ itemLength }) => {
         </S.ProductLi>
         <S.ProductLi>
           <p>최대 대여 가능일</p>
-          <S.Input
+          <S.Input type="number"
             {...register("maxRentalDays")}
-            disabled
             placeholder="ex. 1"
             defaultValue={product?.maxRentalDays || 1}
           />

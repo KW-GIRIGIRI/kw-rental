@@ -19,7 +19,7 @@ export default function UserLabState() {
   return myRental.length ? (
     <S.HistWrap>
       <S.Header className="lab">
-        <span>사용 기간</span>
+        <span>키 수령일 ~ 키 반납일</span>
         <span>랩실</span>
         <span>사용 인원</span>
         <span>상태</span>

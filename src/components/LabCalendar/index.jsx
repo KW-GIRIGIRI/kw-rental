@@ -83,8 +83,7 @@ const LabCalendar = forwardRef((props, ref) => {
     const selectDate = dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`);
 
     if (isAuth) {
-      selectDate.day() <= operationDay[operationDay.length - 1] &&
-        selectDate.day() >= operationDay[0] &&
+      if (selectDate.day() <= operationDay[operationDay.length - 1] && selectDate.day() >= operationDay[0]) {
         dispatch(
           setLabDate(
             dayjs(`${thisYear}-${thisMonth + 1}-${e.target.value}`).format(
@@ -92,6 +91,7 @@ const LabCalendar = forwardRef((props, ref) => {
             )
           )
         );
+      }
     } else {
       if (
         selectDate.day() <= operationDay[operationDay.length - 1] &&
@@ -132,10 +132,13 @@ const LabCalendar = forwardRef((props, ref) => {
     let date = dayjs();
 
     if (!!operationDay.length) {
-      if (dayjs().day() <= operationDay[0])
+      if (dayjs().day() <= operationDay[0]) {
         date = dayjs().day(operationDay[0]).add(1, "days");
-      else if (dayjs().day() >= operationDay[operationDay.length - 1])
+      } else if (dayjs().day() >= operationDay[operationDay.length - 1]) {
         date = dayjs().add(1, "week").day(operationDay[0]);
+      } else {
+        date = dayjs().add(1, 'days')
+      }
     }
 
     setDayObj(date);

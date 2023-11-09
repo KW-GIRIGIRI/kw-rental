@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import DualDatePicker from "../DatePicker/DualDatePicker";
 import dayjs from "dayjs";
 
-export default function AddCartEquip({ modify, setModal }) {
+export default function AddCartEquip() {
   const amountRef = useRef();
   const navigate = useNavigate();
   const params = useParams();

@@ -39,10 +39,12 @@ export const NoticeWrap = styled.div`
   margin-bottom: 40px;
 `;
 
-export const NoticeText = styled.p`
+export const NoticeText = styled.span`
   list-style: inside;
   margin: 15px 0;
+  white-space: pre-line;
   font-size: 14px;
+  line-height: 1.2rem;
   color: ${(props) => props.theme.color.text.gray};
 `;
 

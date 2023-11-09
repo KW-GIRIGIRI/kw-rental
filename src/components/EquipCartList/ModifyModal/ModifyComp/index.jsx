@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../../modules/Button";
-import iconCalendar from "../../../../assets/icon-calendar-black.svg";
 import * as S from "../style";
-import { InpWrapper } from "../../../AddCartEquip/style";
 import { getProductAmountFromDate, modifyCartEquip } from "../../../../api/api";
-import DatePicker from "../../../DatePicker";
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncGetCartList } from "../../../../store/reducer/cartListSlice";
+import DualDatePicker from "../../../DatePicker/DualDatePicker";
 
 dayjs.extend(updateLocale);
 
@@ -16,44 +14,30 @@ dayjs.updateLocale("en", {
   weekdays: ["일", "월", "화", "수", "목", "금", "토"],
 });
 
-export default function ModifyComp({ cart, close, modal, setModal }) {
-  const [calendar, setCalendar] = useState({
-    visible: false,
-    top: 0,
-    left: 0,
-    date: dayjs(cart.rentalStartDate),
-  });
+export default function ModifyComp({ cart, close, setModal }) {
   const [rentalAmount, setRentalAmount] = useState();
   const amountRef = useRef();
   const dispatch = useDispatch();
-  const operationDay = useSelector(
-    (state) => state.operationDay.operationDayArr
-  );
-
-  const handleGetDatePicker = (e) => {
-    e.preventDefault();
-    const position = e.target.getBoundingClientRect();
-    const top = position.top + position.height,
-      left = position.left;
-    setCalendar((prev) => ({
-      ...prev,
-      visible: true,
-      top: top,
-      left: left,
-    }));
-  };
+  const dualDate = useSelector(state => state.datePicker.dualDate)
+  const rentalStartDate = dayjs(cart.rentalStartDate).dayOfYear() - dayjs().dayOfYear()
+  const rentalEndDate = dayjs(cart.rentalEndDate).dayOfYear() - dayjs().dayOfYear()
 
   const handleGetProductAmount = async () => {
-    const startDate = calendar.date.format("YYYY-MM-DD");
-    const endDate = calendar.date.add(1, "days").format("YYYY-MM-DD");
+    const startDate = dayjs(dualDate.firstDate).format("YYYY-MM-DD");
+    const endDate = dayjs(dualDate.lastDate).format("YYYY-MM-DD");
 
-    const res = await getProductAmountFromDate(
-      cart.equipmentId,
-      startDate,
-      endDate
-    );
-    res.remainQuantities.length &&
-      setRentalAmount(res.remainQuantities[0].remainQuantity);
+    const start = dayjs(dualDate.firstDate).dayOfYear()
+    const end = dayjs(dualDate.lastDate).dayOfYear()
+
+    if (end > start) {
+      const res = await getProductAmountFromDate(
+        cart.equipmentId,
+        startDate,
+        endDate
+      );
+      res.remainQuantities.length &&
+        setRentalAmount(res.remainQuantities[0].remainQuantity);
+    }
   };
 
   const handleClose = () => {
@@ -62,16 +46,12 @@ export default function ModifyComp({ cart, close, modal, setModal }) {
   };
 
   const handleModifyCartEquip = async () => {
-    let endDate = calendar.date.add(1, "days");
-    if (calendar.date.day() >= operationDay[operationDay.length - 1])
-      endDate = endDate.add(1, "week").day(operationDay[0]);
-
-    const data = {
-      rentalStartDate: calendar.date
+     const data = {
+      rentalStartDate: dayjs(dualDate.firstDate)
         .format("YYYY-MM-DD")
         .split("-")
         .map((i) => parseInt(i)),
-      rentalEndDate: endDate
+      rentalEndDate: dayjs(dualDate.lastDate)
         .format("YYYY-MM-DD")
         .split("-")
         .map((i) => parseInt(i)),
@@ -88,36 +68,14 @@ export default function ModifyComp({ cart, close, modal, setModal }) {
 
   useEffect(() => {
     handleGetProductAmount();
-  }, [calendar.date]);
+  }, [dualDate.firstDate, dualDate.lastDate]);
 
   return (
     <>
       <p>기자재 수령일~반납일</p>
-      {calendar && (
-        <DatePicker
-          calendar={calendar}
-          setCalendar={setCalendar}
-          className="user"
-        />
-      )}
-      <InpWrapper className="item">
-        <S.DateCont onClick={handleGetDatePicker}>
-          <S.DateImg src={iconCalendar} alt="" />
-          <span>{calendar.date.format("M월 D일(dd)")} </span>
-        </S.DateCont>
-        <span>~</span>
-        <S.DateCont>
-          <span>
-            {calendar.date.day() >= operationDay[operationDay.length - 1]
-              ? calendar.date
-                  .add(1, "week")
-                  .day(operationDay[0])
-                  .format("M월 D일(dd)")
-              : calendar.date.add(1, "days").format("M월 D일(dd)")}
-          </span>
-        </S.DateCont>
-      </InpWrapper>
-
+      <div className="item">
+        <DualDatePicker firstInitial={rentalStartDate} lastInitial={rentalEndDate} className="user modify-modal"/>
+      </div>
       <p>대여 기자재 수정</p>
       <S.SelectCount name="" id="" ref={amountRef} defaultValue={cart.amount}>
         {Array(rentalAmount)

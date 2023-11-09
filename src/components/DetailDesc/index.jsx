@@ -13,7 +13,7 @@ export default function DetailDesc() {
         )}
       </S.ProductSpan>
       <S.ProductTitle>{product.modelName}</S.ProductTitle>
-      <ol>
+      <S.ProductUl>
         <S.ProductLi>
           <p>제조사</p>
           <span>{product.maker}</span>
@@ -35,10 +35,13 @@ export default function DetailDesc() {
           <span>{product.rentalPlace}</span>
         </S.ProductLi>
         <S.ProductLi>
-          <p>최대 대여 가능일</p>
+          <div>
+            <p>최대 대여 가능일</p>
+            <p>(운영일 기준)</p>
+          </div>
           <span>{product.maxRentalDays}일</span>
         </S.ProductLi>
-      </ol>
+      </S.ProductUl>
     </S.Div>
   );
 }

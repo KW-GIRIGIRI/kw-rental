@@ -1,18 +1,19 @@
 import * as S from "./style";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useRef } from "react";
 import dayjs from "dayjs";
 import weekdayPlugin from "dayjs/plugin/weekday";
 import objectPlugin from "dayjs/plugin/toObject";
+import dayOfYear from "dayjs/plugin/dayOfYear"
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import iconRightArrow from "../../assets/icon-rightArrow-gray.svg";
 import iconLeftArrow from "../../assets/icon-leftArrow-gray.svg";
-import { useRef } from "react";
 import updateLocale from "dayjs/plugin/updateLocale";
 import { useSelector } from "react-redux";
 
 dayjs.extend(objectPlugin);
 dayjs.extend(weekdayPlugin);
 dayjs.extend(weekOfYear);
+dayjs.extend(dayOfYear);
 dayjs.extend(updateLocale);
 
 dayjs.updateLocale("en", {
@@ -32,6 +33,9 @@ export default function DatePicker({
   const operationDay = useSelector(
     (state) => state.operationDay.operationDayArr
   );
+  const equipment = useSelector((state) => state.modifyEquip.equip);
+  const dualDate = useSelector((state) => state.datePicker.dualDate);
+  const classList = String(className)
 
   const handleOutsideClick = (e) => {
     if (WrapRef.current === e.target) {
@@ -91,7 +95,7 @@ export default function DatePicker({
       <S.Header>
         <button
           disabled={
-            className === "user" && currentMonth.month() === dayjs().month()
+            classList.includes("user") && currentMonth.month() === dayjs().month()
           }
           onClick={() => prevMonth()}
         >
@@ -100,7 +104,7 @@ export default function DatePicker({
         <span>{currentMonth.format("YY년 MM월")}</span>
         <button
           disabled={
-            className === "user" && currentMonth.month() === dayjs().month() + 1
+            classList.includes("user") && currentMonth.month() === dayjs().month() + 1
           }
           onClick={() => nextMonth()}
         >
@@ -152,6 +156,19 @@ export default function DatePicker({
     setArrayOfDays(allDates);
   };
 
+  const handleSelectDate = (d) => {
+    const plusDay =
+      getDate(d).week() <= dayjs(dualDate.firstDate).week()
+      ? equipment.maxRentalDays : 7 - operationDay.length + equipment.maxRentalDays
+    
+    const date = getDate(d).dayOfYear();
+    const prevDate = date <= dayjs(dualDate.firstDate).add(plusDay, 'days').dayOfYear()
+    const nextDate = date > dayjs(dualDate.firstDate).dayOfYear()
+
+    if (classList.includes('select') && equipment.maxRentalDays) return !prevDate || !nextDate
+    return false
+  }
+
   const renderCells = () => {
     const rows = [];
     let days = [];
@@ -180,8 +197,9 @@ export default function DatePicker({
             className={
               !d.isCurrentMonth ||
                 !operationDay.includes(getDate(d).day()) ||
-                (className === "user" && getDate(d) < dayjs()) ||
-                (className === "user" && getDate(d) > dayjs().add(31, "days"))
+                handleSelectDate(d) ||
+                (classList.includes("user") && getDate(d) < dayjs()) ||
+                (classList.includes("user") && getDate(d) > dayjs().add(31, "days"))
                 ? "disabled"
                 : ""
             }
