@@ -70,7 +70,7 @@ export default function WeekPicker({ modify, equipId }) {
     }
 
     return calendar.date.format(
-      `YY년 ${calendar.date.month() + num}월 ${weekNo}째 주`
+      `YY년 ${calendar.date.month() + num}월 ${typeof weekNo === 'string' ? 1 : weekNo}째 주`
     );
   };
 

@@ -31,27 +31,3 @@ export const SelectCount = styled.select`
   outline: none;
   margin-bottom: 26px;
 `;
-
-export const DateCont = styled.label`
-  position: relative;
-  border: 1px solid #000000;
-  font-size: 14px;
-  border-radius: ${(props) => props.theme.borderRadius.lv1};
-  box-sizing: border-box;
-  line-height: normal;
-  padding: 4px 0;
-  width: 97px;
-  font-size: 12px;
-  text-align: center;
-
-  & > span {
-    pointer-events: none;
-  }
-`;
-
-export const DateImg = styled.img`
-  width: 13px;
-  vertical-align: text-top;
-  pointer-events: none;
-  margin-right: 5px;
-`;

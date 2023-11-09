@@ -168,18 +168,11 @@ export default function DualDatePicker({
           onClick={(e) => handleGetDatePicker(e, 0)}
           className={className}
         >
-          {!classList.includes("user") && <img src={iconCalendar} alt="" />}
+          <img src={iconCalendar} alt="" />
           <span>
             {classList.includes("user")
               ?
               dayjs(lastCalendar.date).format("M월 D일(dd)")
-              // dayjs(firstCalendar.date).day() >=
-              //   operationDay[operationDay.length - 1]
-              //   ? dayjs(lastCalendar.date)
-              //     .add(1, "week")
-              //     .day(operationDay[0])
-              //     .format("M월 D일(dd)")
-              //   : dayjs(lastCalendar.date).add(1, "days").format("M월 D일(dd)")
               : dayjs(lastCalendar.date).format("YY년 M월 D일(dd)")}
           </span>
         </S.DateCont>
