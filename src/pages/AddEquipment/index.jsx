@@ -119,10 +119,6 @@ export default function AddEquipment() {
         })
       );
 
-      const itemData = {
-        items: sendItem,
-      };
-
       const sendData = {
         imgUrl: imgFile,
         totalQuantity: data.length,
@@ -134,25 +130,16 @@ export default function AddEquipment() {
         rentalPlace: "한울관 B120호",
         description: addEqRef.current.value,
         maxRentalDays: methods.watch("maxRentalDays"),
+        items: sendItem,
       };
 
-      if (item.items.length !== itemData.items.length) {
-        const itemRes = await changeItems(params.id, JSON.stringify(itemData));
-        const eqRes = await modifyEquipment(
-          params.id,
-          JSON.stringify(sendData)
-        );
-
-        itemRes === 204 &&
-          eqRes &&
-          navigate(`/equipment/${eqRes.split("/")[3]}`);
-      } else {
-        const eqRes = await modifyEquipment(
-          params.id,
-          JSON.stringify(sendData)
-        );
-        eqRes && navigate(`/equipment/${eqRes.split("/")[3]}`);
-      }
+      const eqRes = await modifyEquipment(
+        params.id,
+        JSON.stringify(sendData)
+      );
+      
+      if (eqRes.includes('/api')) navigate(`/equipment/${eqRes.split("/")[3]}`);
+      else alert(eqRes);
     }
   };
 
