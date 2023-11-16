@@ -81,6 +81,7 @@ export const modifyEquipment = async (id, data) => {
     return response.headers.get("Location");
   } catch (err) {
     console.error(err.response);
+    return err.response.data
   }
 };
 
