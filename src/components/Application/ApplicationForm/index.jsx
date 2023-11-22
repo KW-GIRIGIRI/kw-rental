@@ -89,7 +89,7 @@ const ApplicationForm = forwardRef((props, dataRef) => {
             <TextareaStyle
               {...purposeInp}
               ref={(el) => (dataRef.current.purpose = el)}
-              placeholder="최소 10자 이상 입력하세요."
+              placeholder="대여목적, 대여시간, 반납시간을 반드시 적어주세요. *운영시간 확인 필수&#13;&#10;예시) 대여목적: 전공수업 팀프로젝트를 위해 필요 / 대여시간(12:00) / 반납시간(16:30)"
               rows="4"
               maxLength="50"
             ></TextareaStyle>
