@@ -37,6 +37,7 @@ export const NoticeWrap = styled.div`
   border: 1px solid ${(props) => props.theme.color.primary.sub};
   border-radius: 10px;
   margin-bottom: 40px;
+  overflow-wrap: break-word;
 `;
 
 export const NoticeText = styled.span`
