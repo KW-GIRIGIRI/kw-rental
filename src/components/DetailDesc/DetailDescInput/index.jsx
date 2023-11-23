@@ -15,9 +15,8 @@ const DetailDescInput = ({ itemLength }) => {
   } = useFormContext({ mode: "onBlur" });
 
   const handleSelectWidth = (e) => {
-    e.target.style.padding = `5px ${
-      selectRef.current.value.length + 10
-    }px 5px ${selectRef.current.value.length + 5}px`;
+    e.target.style.padding = `5px ${selectRef.current.value.length + 10
+      }px 5px ${selectRef.current.value.length + 5}px`;
   };
 
   return (
@@ -95,6 +94,7 @@ const DetailDescInput = ({ itemLength }) => {
         <S.ProductLi>
           <p>최대 대여 가능일</p>
           <S.Input type="number"
+            onWheel={(e) => e.target.blur()}
             {...register("maxRentalDays")}
             placeholder="ex. 1"
             defaultValue={product?.maxRentalDays || 1}

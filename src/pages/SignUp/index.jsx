@@ -101,6 +101,7 @@ export default function SignUp() {
           <S.Input
             id="birth"
             type="number"
+            onWheel={(e) => e.target.blur()}
             placeholder="000429"
             {...register("birthDate", {
               required: {

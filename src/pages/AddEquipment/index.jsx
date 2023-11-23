@@ -137,8 +137,8 @@ export default function AddEquipment() {
         params.id,
         JSON.stringify(sendData)
       );
-      
-      if (eqRes.includes('/api')) navigate(`/equipment/${eqRes.split("/")[3]}`);
+
+      if (eqRes.includes('/api')) navigate(`/equipment/${eqRes.split("/")[3]}`, { replace: true });
       else alert(eqRes);
     }
   };
@@ -254,7 +254,7 @@ export default function AddEquipment() {
             borderRadius="5px"
             fontSize="14px"
             onClick={() => {
-              navigate("/equipment");
+              navigate("/equipment", { replace: true });
               close();
             }}
           />
