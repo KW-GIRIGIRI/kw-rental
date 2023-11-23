@@ -36,6 +36,7 @@ export default function ForgotPassword() {
         <Input
           id="classNum"
           type="number"
+          onWheel={(e) => e.target.blur()}
           autoFocus
           {...register("memberNumber", { required: true })}
         />
